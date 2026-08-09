@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Posterior state",
+  "description": "The model's current belief about Liverpool's tactical identity under Iraola, as of a given matchweek. Same shape as manager_prior.schema.json (continuous_metrics, formation_prior) plus an update_log showing how each matchweek moved the belief -- this log is what makes the 'model learning over the season' story visible and auditable.",
+  "type": "object",
+  "required": ["as_of_matchweek", "continuous_metrics", "formation_prior", "update_log"],
+  "properties": {
+    "as_of_matchweek": { "type": "integer" },
+    "continuous_metrics": {
+      "type": "object",
+      "description": "Same structure as the prior, but these are POSTERIOR values after folding in observed matches via Normal-Normal conjugate updates:  posterior_mean = (obs_var * prior_mean + prior_var * observed_value) / (obs_var + prior_var);  posterior_var shrinks with each update.",
+      "patternProperties": {
+        "^[a-z_]+$": {
+          "type": "object",
+          "properties": {
+            "mean": { "type": "number" },
+            "variance": { "type": "number" },
+            "effective_n": { "type": "number", "description": "pseudo_n + matches observed so far -- grows every matchweek, which is what makes the prior's influence shrink automatically." }
+          }
+        }
+      }
+    },
+    "formation_prior": {
+      "type": "object",
+      "description": "Dirichlet posterior: prior alpha counts + observed formation counts this season."
+    },
+    "update_log": {
+      "type": "array",
+      "description": "One entry per matchweek update. This is the audit trail -- what changed and why -- that a recruiter could actually read.",
+      "items": {
+        "type": "object",
+        "required": ["matchweek", "date", "opponent", "result", "metrics_observed", "notable_shifts"],
+        "properties": {
+          "matchweek": { "type": "integer" },
+          "date": { "type": "string", "format": "date" },
+          "opponent": { "type": "string" },
+          "result": { "type": "string" },
+          "metrics_observed": {
+            "type": "object",
+            "description": "Raw observed values that fed into this update, e.g. {'possession': 47.2, 'ppda': 8.1}"
+          },
+          "notable_shifts": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Plain-language notes, e.g. 'possession posterior mean dropped 2.1pts toward Bournemouth prior after two consecutive low-possession wins'"
+          }
+        }
+      }
+    }
+  }
+}

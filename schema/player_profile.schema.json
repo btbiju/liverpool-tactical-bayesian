@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Player profile",
+  "description": "Career-spanning profile for one player. Position assignment follows a three-layer rule: (1) recency-weighted actual position from Liverpool minutes if any exist, else recency-weighted position from prior club(s); (2) overlaid with the manager's positional-deployment prior for that player archetype; (3) updated by actual observed 2026/27 lineups as they happen, using the same posterior-update mechanism as the tactical metrics.",
+  "type": "object",
+  "required": ["player_id", "name", "fotmob_id", "current_squad_number", "position_estimate", "career_stints", "playstyle_metrics"],
+  "properties": {
+    "player_id": { "type": "string" },
+    "name": { "type": "string" },
+    "fotmob_id": { "type": "string" },
+    "current_squad_number": { "type": ["integer", "null"] },
+    "listed_positions": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Raw position tags as listed by the source (e.g. FotMob's 'AM, DM, RW, RB, CM, LW' for Szoboszlai)."
+    },
+    "position_estimate": {
+      "type": "object",
+      "description": "The derived, recency-weighted position estimate actually used by the model -- distinct from listed_positions, which is just raw source data.",
+      "required": ["primary", "basis", "confidence"],
+      "properties": {
+        "primary": { "type": "string" },
+        "secondary": { "type": ["string", "null"] },
+        "basis": {
+          "type": "string",
+          "enum": ["liverpool_recent_minutes", "prior_club_recent_minutes", "manager_overlay_adjusted", "in_season_observed"],
+          "description": "Which layer of the three-layer rule produced this estimate."
+        },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+        "last_updated": { "type": "string", "format": "date" }
+      }
+    },
+    "has_liverpool_minutes": { "type": "boolean" },
+    "career_stints": {
+      "type": "array",
+      "description": "Ordered oldest-to-newest. Each stint's positions/minutes are what feed the recency weighting -- most recent stint weighted highest.",
+      "items": {
+        "type": "object",
+        "required": ["club", "period", "positions_played", "appearances"],
+        "properties": {
+          "club": { "type": "string" },
+          "period": { "type": "string" },
+          "positions_played": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "position": { "type": "string" },
+                "share_of_minutes": { "type": "number" }
+              }
+            }
+          },
+          "appearances": { "type": "integer" },
+          "goals": { "type": "integer" },
+          "assists": { "type": "integer" }
+        }
+      }
+    },
+    "playstyle_metrics": {
+      "type": "object",
+      "description": "Per-90 stats from the most recent complete season available, used as the individual-level input into squad projections. Sparse by design -- fields absent if the source didn't have them (e.g. a young academy player with few minutes).",
+      "properties": {
+        "source_season": { "type": "string" },
+        "source_club": { "type": "string" },
+        "minutes": { "type": "number" },
+        "shots_per90": { "type": ["number", "null"] },
+        "xg_per90": { "type": ["number", "null"] },
+        "pass_accuracy_pct": { "type": ["number", "null"] },
+        "progressive_passes_per90": { "type": ["number", "null"] },
+        "touches_per90": { "type": ["number", "null"] },
+        "duels_won_pct": { "type": ["number", "null"] }
+      }
+    },
+    "injury_status": {
+      "type": ["object", "null"],
+      "properties": {
+        "description": { "type": "string" },
+        "expected_return": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

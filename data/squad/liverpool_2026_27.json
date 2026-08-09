@@ -1,0 +1,50 @@
+{
+  "club": "Liverpool",
+  "season": "2026/27",
+  "manager": "Andoni Iraola",
+  "source": "fotmob.com/teams/8650/squad/liverpool",
+  "source_fetched_at": "2026-08-08",
+  "players": [
+    { "name": "Alisson Becker", "fotmob_id": "319784", "squad_number": null, "listed_positions": ["GK"], "nationality": "Brazil" },
+    { "name": "Vítezslav Jaros", "fotmob_id": "1068920", "squad_number": null, "listed_positions": ["GK"], "nationality": "Czech Republic" },
+    { "name": "Giorgi Mamardashvili", "fotmob_id": "948800", "squad_number": 25, "listed_positions": ["GK"], "nationality": "Georgia" },
+    { "name": "Freddie Woodman", "fotmob_id": "582276", "squad_number": 28, "listed_positions": ["GK"], "nationality": "England" },
+    { "name": "Harvey Davies", "fotmob_id": "1236818", "squad_number": 95, "listed_positions": ["GK"], "nationality": "England" },
+
+    { "name": "Jérémy Jacquet", "fotmob_id": "1473534", "squad_number": null, "listed_positions": ["CB"], "nationality": "France" },
+    { "name": "Joseph Gomez", "fotmob_id": "568571", "squad_number": 2, "listed_positions": ["CB", "RB"], "nationality": "England" },
+    { "name": "Virgil van Dijk", "fotmob_id": "209405", "squad_number": 4, "listed_positions": ["CB"], "nationality": "Netherlands", "captain": true },
+    { "name": "Milos Kerkez", "fotmob_id": "1195281", "squad_number": 6, "listed_positions": ["LB"], "nationality": "Hungary" },
+    { "name": "Conor Bradley", "fotmob_id": "1113690", "squad_number": 12, "listed_positions": ["RB", "RM"], "nationality": "Northern Ireland",
+      "injury_status": { "description": "Knee injury", "expected_return": "Late September 2026" } },
+    { "name": "Giovanni Leoni", "fotmob_id": "1609209", "squad_number": 15, "listed_positions": ["CB"], "nationality": "Italy",
+      "injury_status": { "description": "Cruciate ligament injury", "expected_return": "Doubtful" } },
+    { "name": "Jeremie Frimpong", "fotmob_id": "966018", "squad_number": 30, "listed_positions": ["RB", "RW"], "nationality": "Netherlands" },
+    { "name": "Calvin Ramsay", "fotmob_id": "1076952", "squad_number": 47, "listed_positions": ["RB", "RWB"], "nationality": "Scotland" },
+    { "name": "Konstantinos Tsimikas", "fotmob_id": "671529", "squad_number": 21, "listed_positions": ["LWB", "LB", "LM"], "nationality": "Greece" },
+
+    { "name": "Wataru Endo", "fotmob_id": "202643", "squad_number": 3, "listed_positions": ["DM"], "nationality": "Japan" },
+    { "name": "Alexis Mac Allister", "fotmob_id": "831489", "squad_number": 10, "listed_positions": ["DM", "CM", "AM", "LM"], "nationality": "Argentina" },
+    { "name": "Curtis Jones", "fotmob_id": "933768", "squad_number": 17, "listed_positions": ["DM", "RB", "AM", "CM"], "nationality": "England" },
+    { "name": "Ryan Gravenberch", "fotmob_id": "956683", "squad_number": 38, "listed_positions": ["DM", "CM"], "nationality": "Netherlands" },
+    { "name": "Trey Nyoni", "fotmob_id": "1436258", "squad_number": 42, "listed_positions": ["DM", "CM"], "nationality": "England" },
+    { "name": "Stefan Bajcetic", "fotmob_id": "1310118", "squad_number": 43, "listed_positions": ["CM"], "nationality": "Spain",
+      "injury_status": { "description": "Hamstring injury", "expected_return": "Doubtful" } },
+    { "name": "Dominik Szoboszlai", "fotmob_id": "846005", "squad_number": 8, "listed_positions": ["AM", "DM", "RW", "RB", "CM", "LW"], "nationality": "Hungary" },
+    { "name": "Harvey Elliott", "fotmob_id": "963964", "squad_number": 19, "listed_positions": ["AM"], "nationality": "England" },
+
+    { "name": "Federico Chiesa", "fotmob_id": "784510", "squad_number": 14, "listed_positions": ["RW", "ST"], "nationality": "Italy" },
+    { "name": "Florian Wirtz", "fotmob_id": "1152455", "squad_number": 7, "listed_positions": ["LW", "AM", "ST"], "nationality": "Germany" },
+    { "name": "Cody Gakpo", "fotmob_id": "806552", "squad_number": 18, "listed_positions": ["LW", "ST", "LM"], "nationality": "Netherlands" },
+    { "name": "Víctor Muñoz", "fotmob_id": "1553105", "squad_number": 23, "listed_positions": ["LW", "RW", "AM", "ST", "LM"], "nationality": "Spain" },
+    { "name": "Rio Ngumoha", "fotmob_id": "1597668", "squad_number": 73, "listed_positions": ["LW"], "nationality": "England" },
+    { "name": "Alexander Isak", "fotmob_id": "690107", "squad_number": 9, "listed_positions": ["ST"], "nationality": "Sweden" },
+    { "name": "Hugo Ekitiké", "fotmob_id": "1197030", "squad_number": 22, "listed_positions": ["ST", "LW"], "nationality": "France",
+      "injury_status": { "description": "Achilles tendon injury", "expected_return": "Early January 2027" } }
+  ],
+  "departures_summer_2026": [
+    { "name": "Mohamed Salah", "reason": "Contract expiry, free transfer" },
+    { "name": "Andy Robertson", "reason": "Contract expiry, free transfer" },
+    { "name": "Ibrahima Konaté", "reason": "Contract expiry, free transfer" }
+  ]
+}

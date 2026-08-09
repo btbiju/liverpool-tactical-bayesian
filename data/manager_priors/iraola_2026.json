@@ -1,0 +1,74 @@
+{
+  "manager": "Andoni Iraola",
+  "source_seasons": [
+    { "club": "Bournemouth", "season": "2023/24", "competition": "Premier League", "finish": "12th", "source": "transferhub summary + fotmob" },
+    { "club": "Bournemouth", "season": "2024/25", "competition": "Premier League", "finish": "9th", "source": "fotmob team stats + jobsinfootball PPDA analysis" },
+    { "club": "Bournemouth", "season": "2025/26", "competition": "Premier League", "finish": "6th (first European qualification)", "source": "fotmob team stats + totalfootballanalysis PPDA analysis" }
+  ],
+  "continuous_metrics": {
+    "possession_pct": {
+      "mean": 50.55,
+      "variance": 4.0,
+      "pseudo_n": 10,
+      "unit": "percent",
+      "notes": "Averaged from 50.5% and 50.6% across the two most recent Bournemouth seasons. Notably NOT a possession-dominant identity -- Liverpool ran 60-62% last season, so this is a meaningful expected shift toward a more balanced/direct approach."
+    },
+    "ppda": {
+      "mean": 9.45,
+      "variance": 1.5,
+      "pseudo_n": 10,
+      "unit": "opposition passes allowed per defensive action",
+      "notes": "~9.9 in 2024/25 (best in Premier League), ~9.0-10.5 in 2025/26 depending on point in season. Elite, extreme pressing identity, consistent across both seasons -- this is Iraola's clearest signature metric."
+    },
+    "shots_on_target_per_match": {
+      "mean": 4.55,
+      "variance": 0.3,
+      "pseudo_n": 10,
+      "unit": "shots on target per match",
+      "notes": "4.5 and 4.6 across the two most recent seasons -- stable."
+    },
+    "goals_conceded_per_match": {
+      "mean": 1.4,
+      "variance": 0.15,
+      "pseudo_n": 10,
+      "unit": "goals per match",
+      "notes": "1.6 (2025/26 partial-season snapshot) vs 1.2 (2024/25). Wide variance intentionally set higher here since these two figures disagree more than other metrics -- reflects real uncertainty."
+    },
+    "accurate_passes_per_match": {
+      "mean": 341.25,
+      "variance": 100.0,
+      "pseudo_n": 10,
+      "unit": "completed passes per match",
+      "notes": "342.8 and 339.7 -- consistent with the ~50% possession figure, i.e. moderate, not possession-monopoly buildup volume."
+    },
+    "accurate_crosses_per_match": {
+      "mean": 2.65,
+      "variance": 0.3,
+      "pseudo_n": 10,
+      "unit": "completed crosses per match",
+      "notes": "Low relative to league (ranked 17th-19th both seasons) -- supports the 'through the middle, not width-and-crosses' read."
+    }
+  },
+  "formation_prior": {
+    "alpha": {
+      "4-2-3-1": 30,
+      "4-1-4-1": 4,
+      "4-3-3": 1,
+      "other": 1
+    },
+    "notes": "4-2-3-1 was the clear base across all three Bournemouth seasons. Briefly experimented with 4-1-4-1 for the first two matches of 2025/26 before reverting. Alpha counts are illustrative pseudo-weights, not literal match counts -- calibrated so 4-2-3-1 dominates but isn't treated as absolute certainty."
+  },
+  "season_xg_totals": {
+    "2023/24": { "value": 32.9, "confidence": "confirmed", "source": "fotmob team stats, cross-checked against season attendance figure to confirm full-season (not partial) snapshot" },
+    "2024/25": { "value": null, "confidence": "unconfirmed", "note": "FotMob search snippets returned partial-season snapshots that couldn't be reliably distinguished from final totals. Qualitative source (fantasyfootballscout) confirms Bournemouth ranked 5th in the league for xG this season, but no clean numeric total was verifiable. To be pulled via football-data.org once the pipeline is live." },
+    "2025/26": { "value": null, "confidence": "unconfirmed", "note": "Same issue as 2024/25 -- flagged as a known gap rather than guessed." }
+  },
+  "style_notes": [
+    "Direct, vertical attacking buildup rather than patient possession retention",
+    "One of the weakest teams in the league at retaining possession under opposition pressure -- a real vulnerability, not just an attacking choice",
+    "Highest foul count in the league both recent seasons -- a side effect of the aggressive press",
+    "Progressive year-on-year improvement: 12th (48pts) -> 9th (56pts) -> 6th (57pts, first European qualification in club history)",
+    "High-risk, high-reward: centre-backs instructed to aggressively mark dropping forwards, leaving space in behind"
+  ],
+  "generated_at": "2026-08-08T00:00:00Z"
+}

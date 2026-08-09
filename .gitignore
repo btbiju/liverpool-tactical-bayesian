@@ -1,0 +1,21 @@
+__pycache__/
+*.pyc
+.env
+.env.*
+*.egg-info/
+.venv/
+venv/
+.DS_Store
+.claude/settings.local.json
+
+# Cut 2015/16 StatsBomb/Understat historical module -- kept locally for
+# reference, not part of the Bayesian project's data flow, too large to
+# ship in the portfolio repo (see CLAUDE.md "How we got here" #4).
+archive/
+data/events/
+data/lineups/
+data/pl_1516_matches.json
+data/cl_1819_matches.json
+data/sample_network_3754208.json
+data/liverpool_match_ids.txt
+data/competitions.json

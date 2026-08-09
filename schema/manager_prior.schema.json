@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Manager tactical prior",
+  "description": "A manager's pre-season statistical fingerprint, expressed as Bayesian priors. Continuous metrics use Normal-Normal conjugate priors (mean, variance, pseudo-observation count). Formation preference uses a Dirichlet-Multinomial prior (counts per formation). This same structure is reused for the POSTERIOR after evidence updates -- prior and posterior share a shape, only the numbers move.",
+  "type": "object",
+  "required": ["manager", "source_seasons", "continuous_metrics", "formation_prior", "generated_at"],
+  "properties": {
+    "manager": { "type": "string" },
+    "source_seasons": {
+      "type": "array",
+      "description": "Which prior-club seasons fed this prior, for traceability. Each entry cites the club, season, and where the numbers came from.",
+      "items": {
+        "type": "object",
+        "required": ["club", "season", "competition", "source"],
+        "properties": {
+          "club": { "type": "string" },
+          "season": { "type": "string" },
+          "competition": { "type": "string" },
+          "finish": { "type": ["string", "null"] },
+          "source": { "type": "string", "description": "e.g. 'fotmob team stats page', 'totalfootballanalysis PPDA article'" }
+        }
+      }
+    },
+    "continuous_metrics": {
+      "type": "object",
+      "description": "Each key is a tracked metric. mean/variance define a Normal prior N(mean, variance). pseudo_n is the prior's 'weight' in virtual matches -- how many observed matches of evidence the prior counts as. Lower pseudo_n means real 2026/27 results overtake the prior faster.",
+      "patternProperties": {
+        "^[a-z_]+$": {
+          "type": "object",
+          "required": ["mean", "variance", "pseudo_n", "unit"],
+          "properties": {
+            "mean": { "type": "number" },
+            "variance": { "type": "number" },
+            "pseudo_n": { "type": "number", "description": "Prior confidence, in equivalent match count. Default convention: 10." },
+            "unit": { "type": "string" },
+            "notes": { "type": "string" }
+          }
+        }
+      }
+    },
+    "formation_prior": {
+      "type": "object",
+      "description": "Dirichlet prior over formations: pseudo-counts per formation observed at the prior club. A formation with near-zero count is treated as near-impossible until evidence says otherwise.",
+      "properties": {
+        "alpha": {
+          "type": "object",
+          "patternProperties": {
+            "^[0-9-]+$": { "type": "number" }
+          }
+        }
+      }
+    },
+    "style_notes": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Qualitative descriptors that don't reduce to a single number but matter for the Game Plan narrative (e.g. 'direct/vertical buildup', 'weak at retaining possession under press')."
+    },
+    "generated_at": { "type": "string", "format": "date-time" }
+  }
+}
