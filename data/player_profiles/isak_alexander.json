@@ -1,0 +1,60 @@
+{
+  "player_id": "isak_alexander",
+  "name": "Alexander Isak",
+  "fotmob_id": "690107",
+  "current_squad_number": 9,
+  "listed_positions": ["ST"],
+  "position_estimate": {
+    "primary": "ST",
+    "secondary": null,
+    "basis": "liverpool_recent_minutes",
+    "confidence": 0.75,
+    "last_updated": "2026-08-09"
+  },
+  "has_liverpool_minutes": true,
+  "career_stints": [
+    {
+      "club": "Real Sociedad",
+      "period": "2019-2022",
+      "positions_played": [{ "position": "ST", "share_of_minutes": 1.0 }],
+      "appearances": 132,
+      "goals": 44,
+      "note": "All-competitions totals. League-only split: 105 apps, 33 goals. Assists total not reliably verifiable, omitted rather than guessed."
+    },
+    {
+      "club": "Newcastle United",
+      "period": "2022/23-2024/25",
+      "positions_played": [{ "position": "ST", "share_of_minutes": 1.0 }],
+      "appearances": 86,
+      "goals": 54,
+      "assists": 9,
+      "note": "Premier League only (all-competitions career total at Newcastle not reliably verifiable across sources checked)."
+    },
+    {
+      "club": "Liverpool",
+      "period": "2025/26",
+      "positions_played": [{ "position": "ST", "share_of_minutes": 1.0 }],
+      "appearances": 14,
+      "goals": 3,
+      "assists": 1,
+      "note": "Premier League only. Debut season heavily interrupted -- 702 minutes across 14 apps, a fraction of a full season."
+    }
+  ],
+  "playstyle_metrics": {
+    "source_season": "2024/25",
+    "source_club": "Newcastle United",
+    "shots_per90": null,
+    "xg_per90": null,
+    "pass_accuracy_pct": null,
+    "progressive_passes_per90": null,
+    "touches_per90": null,
+    "duels_won_pct": null
+  },
+  "injury_status": null,
+  "notes": [
+    "Used Newcastle 2024/25 (23 goals, 6 assists, 34 PL apps -- his last full healthy season) as playstyle_metrics source_season rather than the injury-disrupted 2025/26 Liverpool debut, since a 702-minute sample is too thin to be representative. Per-90 advanced metrics (shots/90, xG/90, pass accuracy, progressive passes, touches, duels won%) could not be verified from a source giving both the stat and reliable per-90-normalized minutes for that season -- left null rather than guessed. Raw 2024/25 season shot data found but not usable without confirmed minutes: 228 shots, 114 on target (50% on-target rate), scope (PL-only vs all-comp) unclear across sources.",
+    "Sofascore listed Isak's profile status as 'Injured' as of 2026-08-09 research, but no specific injury description or expected-return date was verifiable -- flagged here rather than fabricated into injury_status.",
+    "Originally assumed to have 'no Liverpool history' per early project notes; corrected 2026-08-09 -- he joined Liverpool in September 2025, so he already has partial-season LFC data. See BACKLOG.md.",
+    "Sources: liverpoolfc.com (transfer confirmation), transfermarkt.us, fbref.com (player index page only, detail pages 403-blocked), goal.com, statmuse.com aggregation via web search 2026-08-09."
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "player_id": "chiesa_federico",
+  "name": "Federico Chiesa",
+  "fotmob_id": "784510",
+  "current_squad_number": 14,
+  "listed_positions": ["RW", "ST"],
+  "position_estimate": {
+    "primary": "RW",
+    "secondary": "ST",
+    "basis": "liverpool_recent_minutes",
+    "confidence": 0.5,
+    "last_updated": "2026-08-09"
+  },
+  "has_liverpool_minutes": true,
+  "career_stints": [
+    {
+      "club": "Fiorentina",
+      "period": "2016-2020",
+      "positions_played": [{ "position": "RW", "share_of_minutes": 1.0 }],
+      "appearances": 153,
+      "goals": 34,
+      "note": "All-competitions totals, senior career start through his move to Juventus (initially on loan, Oct 2020). Assists total not reliably verifiable, omitted rather than guessed."
+    },
+    {
+      "club": "Juventus",
+      "period": "2020-2024",
+      "positions_played": [{ "position": "RW", "share_of_minutes": 1.0 }],
+      "appearances": 131,
+      "goals": 32,
+      "note": "All-competitions totals across the loan (2020-2022) and permanent spell (2022-2024, after Juventus exercised a ~€40m purchase option). Serie A-only split: 98 apps, 21 goals, 17 assists."
+    },
+    {
+      "club": "Liverpool",
+      "period": "2024/25-2025/26",
+      "positions_played": [{ "position": "RW", "share_of_minutes": 0.7 }, { "position": "ST", "share_of_minutes": 0.3 }],
+      "appearances": 50,
+      "goals": 5,
+      "assists": 4,
+      "note": "All-competitions total across parts of two seasons since his September 2024 debut. Premier League-only split: 32 apps, 2 goals, 1 assist. Reported as heavily used off the bench (41 of 50 appearances as a substitute per one source) rather than as a regular starter."
+    }
+  ],
+  "playstyle_metrics": {
+    "source_season": "2025/26",
+    "source_club": "Liverpool",
+    "minutes": 318,
+    "shots_per90": null,
+    "xg_per90": null,
+    "pass_accuracy_pct": null,
+    "progressive_passes_per90": null,
+    "touches_per90": null,
+    "duels_won_pct": null
+  },
+  "injury_status": null,
+  "notes": [
+    "IMPORTANT SQUAD-STATUS FLAG: as of 2026-08-09, Chiesa is reported in an active, unresolved transfer saga -- linked with a move away from Liverpool (Napoli, and earlier Juventus/Como interest), described as a 'Liverpool outcast' with no decision made as the transfer window nears its close. His inclusion in data/squad/liverpool_2026_27.json (fetched 2026-08-08) may already be stale. Worth re-checking squad status before relying on this profile for 2026/27 projections.",
+    "2025/26 minutes (318) is a small, injury/rotation-affected sample -- per-90 advanced metrics were not found from an accessible source and were left null rather than derived from this thin, uncertain base.",
+    "Originally assumed to have 'no Liverpool history' per early project notes; corrected 2026-08-09 -- he actually joined Liverpool in summer 2024, so he already has two seasons of LFC data, not zero. See BACKLOG.md.",
+    "Sources: skysports.com, goal.com (Juventus permanent transfer terms), liverpoolfc.com, thisisanfield.com, empireofthekop.com, blackwhitereadallover.com (transfer-saga reporting) -- via web search 2026-08-09."
+  ]
+}

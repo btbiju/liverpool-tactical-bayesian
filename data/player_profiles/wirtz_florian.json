@@ -1,0 +1,52 @@
+{
+  "player_id": "wirtz_florian",
+  "name": "Florian Wirtz",
+  "fotmob_id": "1152455",
+  "current_squad_number": 7,
+  "listed_positions": ["LW", "AM", "ST"],
+  "position_estimate": {
+    "primary": "AM",
+    "secondary": "LW",
+    "basis": "liverpool_recent_minutes",
+    "confidence": 0.7,
+    "last_updated": "2026-08-09"
+  },
+  "has_liverpool_minutes": true,
+  "career_stints": [
+    {
+      "club": "Bayer Leverkusen",
+      "period": "2020-2025",
+      "positions_played": [{ "position": "AM", "share_of_minutes": 1.0 }],
+      "appearances": 186,
+      "goals": 53,
+      "assists": 59,
+      "note": "All-competitions career totals. Bundesliga-only split: 140 apps, 35 goals, 45 assists. No reliable finer positional-minutes breakdown (AM/LW/ST) was verifiable, so a single AM entry is used -- he is squad-listed as LW/AM/ST."
+    },
+    {
+      "club": "Liverpool",
+      "period": "2025/26",
+      "positions_played": [{ "position": "AM", "share_of_minutes": 1.0 }],
+      "appearances": 48,
+      "goals": 7,
+      "assists": 7,
+      "note": "All-competitions season total (per Bundesliga.com retrospective). Premier League-only split: 33 apps, 5 goals, 3 assists, 2389 minutes."
+    }
+  ],
+  "playstyle_metrics": {
+    "source_season": "2025/26",
+    "source_club": "Liverpool",
+    "touches_per90": 81.9,
+    "duels_won_pct": 45.5,
+    "shots_per90": null,
+    "xg_per90": null,
+    "pass_accuracy_pct": null,
+    "progressive_passes_per90": null
+  },
+  "injury_status": null,
+  "notes": [
+    "touches_per90 and duels_won_pct are from theanalyst.com (Opta-sourced), specifically his 'last 12 games' 2025/26 form split rather than a first-20-games split (63.9 touches/90, 36.2% duels) -- chosen as the more current/representative form, since the article frames his season as a slow start followed by improvement. For comparison, his final Leverkusen season averaged 83.6 touches/90 and ~43.3% combined duel success.",
+    "shots_per90, xg_per90, pass_accuracy_pct, and progressive_passes_per90 could not be verified from an accessible source (FBref/FotMob detail pages blocked or client-rendered) -- left null rather than guessed.",
+    "Originally assumed to have 'no Liverpool history' per early project notes; corrected 2026-08-09 -- he joined Liverpool July 1, 2025, so he already has a full 2025/26 LFC season. See BACKLOG.md.",
+    "Sources: liverpoolfc.com (transfer confirmation), bundesliga.com (Leverkusen career totals), theanalyst.com (Opta per-90 splits), transfermarkt.us, sportbusy.com -- via web search 2026-08-09."
+  ]
+}

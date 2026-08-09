@@ -1,0 +1,62 @@
+{
+  "player_id": "munoz_victor",
+  "name": "Víctor Muñoz",
+  "fotmob_id": "1553105",
+  "current_squad_number": 23,
+  "listed_positions": ["LW", "RW", "AM", "ST", "LM"],
+  "position_estimate": {
+    "primary": "LW",
+    "secondary": "RW",
+    "basis": "prior_club_recent_minutes",
+    "confidence": 0.6,
+    "last_updated": "2026-08-09"
+  },
+  "has_liverpool_minutes": false,
+  "career_stints": [
+    {
+      "club": "Real Madrid Castilla",
+      "period": "2024/25",
+      "positions_played": [{ "position": "LW", "share_of_minutes": 1.0 }],
+      "appearances": 34,
+      "goals": 11,
+      "assists": 7,
+      "note": "Primera Federación. Sources disagreed materially here -- one gave 34 apps/11 goals/7 assists, another 48 games/9 goals, another '10 goals as of May 2025'. Used the most specific single-source figure (34/11/7) rather than averaging or picking the highest; flagged as uncertain."
+    },
+    {
+      "club": "Osasuna",
+      "period": "2025/26",
+      "positions_played": [{ "position": "LW", "share_of_minutes": 1.0 }],
+      "appearances": 36,
+      "goals": 7,
+      "assists": 5,
+      "note": "All-competitions totals, on loan/transfer from Real Madrid (€6m, confirmed July 10 2025). La Liga-only split: 34 apps, 6 goals, 2668 minutes. His full and only season before the Liverpool move."
+    },
+    {
+      "club": "Liverpool",
+      "period": "2026/27",
+      "positions_played": [{ "position": "LW", "share_of_minutes": 1.0 }],
+      "appearances": 0,
+      "goals": 0,
+      "assists": 0,
+      "note": "Iraola's first Liverpool signing, summer 2026. No minutes played yet as of this profile's creation -- the genuine 'no prior-club-relative-to-Liverpool history' test case for the positional-logic rules."
+    }
+  ],
+  "playstyle_metrics": {
+    "source_season": "2025/26",
+    "source_club": "Osasuna",
+    "minutes": 2668,
+    "shots_per90": null,
+    "xg_per90": null,
+    "pass_accuracy_pct": null,
+    "progressive_passes_per90": null,
+    "touches_per90": null,
+    "duels_won_pct": null
+  },
+  "injury_status": null,
+  "notes": [
+    "The one player of the original four-player priority list whose 'no Liverpool history' framing actually holds -- verified 2026-08-09. See BACKLOG.md's correction note re: Isak/Wirtz/Chiesa.",
+    "Only one professional season of starter-level data exists (Osasuna 2025/26) -- inherently a thinner individual prior than the other three players, by nature of being a fresh breakout talent rather than an established veteran. This is expected, not a data-collection gap.",
+    "Advanced per-90 metrics (shots, xG, pass accuracy, progressive passes, touches, duels won%) not found from an accessible source -- left null rather than guessed.",
+    "Sources: realmadrid.com (official academy/debut announcements), espn.co.uk (Liverpool transfer report, Osasuna season stats), liverpoolfc.com, sportsdunia.com, bllog.co.uk -- via web search 2026-08-09."
+  ]
+}

@@ -60,8 +60,8 @@
   },
   "season_xg_totals": {
     "2023/24": { "value": 32.9, "confidence": "confirmed", "source": "fotmob team stats, cross-checked against season attendance figure to confirm full-season (not partial) snapshot" },
-    "2024/25": { "value": null, "confidence": "unconfirmed", "note": "FotMob search snippets returned partial-season snapshots that couldn't be reliably distinguished from final totals. Qualitative source (fantasyfootballscout) confirms Bournemouth ranked 5th in the league for xG this season, but no clean numeric total was verifiable. To be pulled via football-data.org once the pipeline is live." },
-    "2025/26": { "value": null, "confidence": "unconfirmed", "note": "Same issue as 2024/25 -- flagged as a known gap rather than guessed." }
+    "2024/25": { "value": null, "confidence": "unconfirmed", "note": "FotMob search snippets returned partial-season snapshots that couldn't be reliably distinguished from final totals. Qualitative source (fantasyfootballscout) confirms Bournemouth ranked 5th in the league for xG this season, but no clean numeric total was verifiable. football-data.org confirmed NOT viable (live-tested 2026-08-09: fixtures/results/odds only, no xG field at any tier). Direct-fetch retry against FotMob/FBref/footystats (2026-08-09) also failed: FotMob's stats pages are client-rendered JS (fetch returns 'stats not available'), FBref and footystats both return HTTP 403 (bot-blocked, consistent with the block CLAUDE.md already documents). Remains a genuine gap -- needs either a paid tactical-stats API or a manual pull from a logged-in browser session." },
+    "2025/26": { "value": null, "confidence": "unconfirmed", "note": "Same issue as 2024/25. One WebFetch against a guessed FotMob season-stats URL returned 61.9, but the page's own text described the season as 'still underway' -- inconsistent with 2025/26 having already concluded by the current date (2026-08-09), so this number is not trustworthy and was NOT recorded. Flagged as a known gap rather than guessed." }
   },
   "style_notes": [
     "Direct, vertical attacking buildup rather than patient possession retention",
