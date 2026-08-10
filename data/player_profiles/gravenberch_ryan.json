@@ -1,0 +1,59 @@
+{
+  "player_id": "gravenberch_ryan",
+  "name": "Ryan Gravenberch",
+  "fotmob_id": "956683",
+  "current_squad_number": 38,
+  "listed_positions": ["DM", "CM"],
+  "position_estimate": {
+    "primary": "DM",
+    "secondary": "CM",
+    "basis": "liverpool_recent_minutes",
+    "confidence": 0.8,
+    "last_updated": "2026-08-10"
+  },
+  "has_liverpool_minutes": true,
+  "career_stints": [
+    {
+      "club": "Ajax",
+      "period": "2020-2022",
+      "positions_played": [{ "position": "CM", "share_of_minutes": 1.0 }],
+      "appearances": 103,
+      "goals": 12,
+      "assists": 13,
+      "note": "All-competitions totals across his Ajax first-team career (3 Eredivisie titles, 2 Dutch cups) before his July 2022 move to Bayern Munich. Deployed as a more advanced central midfielder at Ajax; converted into a deeper defensive-midfield role after joining Liverpool."
+    },
+    {
+      "club": "Bayern Munich",
+      "period": "2022-2023",
+      "positions_played": [{ "position": "CM", "share_of_minutes": 1.0 }],
+      "appearances": 24,
+      "note": "Single season, fringe squad role (Bundesliga: 24 appearances but reportedly as few as 3-4 starts, ~576-711 minutes by some in-season counts). Goals/assists across all competitions not reliably verifiable, omitted rather than guessed."
+    },
+    {
+      "club": "Liverpool",
+      "period": "2025/26",
+      "positions_played": [{ "position": "DM", "share_of_minutes": 1.0 }],
+      "appearances": 35,
+      "goals": 5,
+      "assists": 3,
+      "note": "Premier League only, 2025/26 season -- the most recent complete season with a clean, cross-checked figure. Joined Liverpool September 2023 for a reported €40m; a fully reliable cumulative all-competitions total across all three Liverpool seasons to date could not be resolved (one search aggregation suggested roughly 99 appearances / 8 goals / 14 assists since joining, but this could not be cross-verified against a second independent source, so it is flagged here rather than used directly as a stint entry)."
+    }
+  ],
+  "playstyle_metrics": {
+    "source_season": "2025/26",
+    "source_club": "Liverpool",
+    "shots_per90": 1.14,
+    "xg_per90": 0.17,
+    "pass_accuracy_pct": null,
+    "progressive_passes_per90": null,
+    "touches_per90": 76.0,
+    "duels_won_pct": null
+  },
+  "injury_status": null,
+  "notes": [
+    "touches_per90 (76.0, up from 69.9 the prior season) is from theanalyst.com's 2025/26 Premier League coverage. The same article gives 'carries per 90' at 18.5 (up from 14.4) -- carries is a distinct Opta metric from this schema's progressive_passes_per90, so it was not mapped into that field; progressive_passes_per90 left null rather than substituted.",
+    "playstyle_metrics.minutes omitted: no reliable exact 2025/26 minutes total was found (he was a near-ever-present starter across 35 Premier League appearances per multiple sources, but no source gave a precise minutes figure), so the key was left out rather than estimated.",
+    "pass_accuracy_pct and duels_won_pct: no reliable season-specific per-90/percentage figure found (only isolated single-match examples, e.g. 'won 7 of 10 duels vs Atlético') -- left null rather than generalized from one match.",
+    "Sources: bundesliga.com, fcbayern.com, thisisanfield.com, theanalyst.com, transfermarkt.us, sportbusy.com, premierleague.com -- via web search 2026-08-10."
+  ]
+}

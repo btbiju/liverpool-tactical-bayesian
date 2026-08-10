@@ -1,0 +1,49 @@
+{
+  "player_id": "nyoni_trey",
+  "name": "Trey Nyoni",
+  "fotmob_id": "1436258",
+  "current_squad_number": 42,
+  "listed_positions": ["DM", "CM"],
+  "position_estimate": {
+    "primary": "CM",
+    "secondary": "DM",
+    "basis": "manager_overlay_adjusted",
+    "confidence": 0.3,
+    "last_updated": "2026-08-10"
+  },
+  "has_liverpool_minutes": true,
+  "career_stints": [
+    {
+      "club": "Leicester City",
+      "period": "2022-2023",
+      "positions_played": [{ "position": "CM", "share_of_minutes": 1.0 }],
+      "appearances": 13,
+      "goals": 2,
+      "note": "Leicester City U18s only, not senior team, at ages 15-16. Left for Liverpool's academy in September 2023 before making any senior Leicester appearance."
+    },
+    {
+      "club": "Liverpool",
+      "period": "2023/24-2025/26",
+      "positions_played": [{ "position": "CM", "share_of_minutes": 1.0 }],
+      "appearances": 6,
+      "note": "Senior debut 28 Feb 2024 (FA Cup vs Southampton, aged 16, as a late substitute -- Liverpool's third-youngest ever player in the competition). Became Liverpool's youngest-ever Champions League player in January 2025 (substitute vs PSV). As of May 2025 he had made 'six appearances' for Liverpool across all competitions; a separately sourced figure for the 2025/26 Premier League season alone also states '6 appearances, 14 minutes,' which may or may not be counting the same appearances -- this ambiguity was not resolved from available sources, so the single figure of 6 is used here rather than summed, to avoid double-counting. Goals/assists at senior level: none found. Liverpool blocked a proposed loan exit in January 2026; a summer 2026 loan was under discussion as of pre-season, with Nyoni also given a chance to impress new manager Andoni Iraola."
+    }
+  ],
+  "playstyle_metrics": {
+    "source_season": "2025/26",
+    "source_club": "Liverpool",
+    "shots_per90": null,
+    "xg_per90": null,
+    "pass_accuracy_pct": null,
+    "progressive_passes_per90": null,
+    "touches_per90": null,
+    "duels_won_pct": null
+  },
+  "injury_status": null,
+  "notes": [
+    "Extremely sparse senior data by design -- Nyoni is an 18-year-old academy midfielder with only a handful of senior cameo appearances (largest reported single-season Premier League sample: 14 minutes). No per-90 advanced metrics exist at a meaningful sample size; all left null rather than derived from a near-zero-minute sample.",
+    "position_estimate.basis is 'manager_overlay_adjusted' rather than 'liverpool_recent_minutes' because his actual first-team minutes are too thin to be a meaningful positional sample; the CM/DM estimate instead reflects his squad-listed positions and academy role, overlaid with an assumption about how Iraola's system would most likely use a progressive young double-pivot/8 profile if given minutes. Confidence is intentionally low (0.3).",
+    "Squad status is unresolved as of 2026-08-09 squad-file fetch: multiple mid-2026 reports describe Liverpool weighing a loan move for Nyoni for 2026/27 (Championship or European interest), with no final decision confirmed at time of writing. Worth re-checking before relying on this profile for in-season projections.",
+    "Sources: liverpoolfc.com, empireofthekop.com, rousingthekop.com, thisisanfield.com, transfermarkt.us, transferfeed.com, wikipedia.org (career-history cross-check only, not used as primary citation) -- via web search 2026-08-10."
+  ]
+}

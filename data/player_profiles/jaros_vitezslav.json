@@ -1,0 +1,59 @@
+{
+  "player_id": "jaros_vitezslav",
+  "name": "Vítězslav Jaroš",
+  "fotmob_id": "1068920",
+  "current_squad_number": null,
+  "listed_positions": ["GK"],
+  "position_estimate": {
+    "primary": "GK",
+    "secondary": null,
+    "basis": "prior_club_recent_minutes",
+    "confidence": 0.45,
+    "last_updated": "2026-08-10"
+  },
+  "has_liverpool_minutes": true,
+  "career_stints": [
+    {
+      "club": "Sturm Graz (loan)",
+      "period": "2023/24",
+      "positions_played": [{ "position": "GK", "share_of_minutes": 1.0 }],
+      "appearances": 21,
+      "note": "Austrian Bundesliga loan; helped the club to a league and cup double. Goals/assists not applicable/not reported for a goalkeeper -- omitted."
+    },
+    {
+      "club": "Liverpool",
+      "period": "2024/25",
+      "positions_played": [{ "position": "GK", "share_of_minutes": 1.0 }],
+      "appearances": 2,
+      "note": "First senior Liverpool appearances: Premier League substitute vs Crystal Palace (5 Oct 2024, replacing an injured Alisson) and a Carabao Cup start vs Brighton (Oct 2024). Very thin sample -- well below a full-season threshold."
+    },
+    {
+      "club": "Ajax (loan)",
+      "period": "2025/26",
+      "positions_played": [{ "position": "GK", "share_of_minutes": 1.0 }],
+      "appearances": 26,
+      "note": "Season-long loan (reuniting with ex-Liverpool assistant John Heitinga); 19 Eredivisie starts plus all 6 Champions League group/league-phase matches, 5 clean sheets. Cut short by a serious knee injury sustained in training, February 2026 -- required surgery. Interrupted season, not a full campaign."
+    }
+  ],
+  "playstyle_metrics": {
+    "source_season": "2025/26",
+    "source_club": "Ajax",
+    "shots_per90": null,
+    "xg_per90": null,
+    "pass_accuracy_pct": null,
+    "progressive_passes_per90": null,
+    "touches_per90": null,
+    "duels_won_pct": null
+  },
+  "injury_status": {
+    "description": "Serious knee injury (reported as an ACL-type injury), sustained in training while on loan at Ajax, February 2026; underwent surgery",
+    "expected_return": "Late 2026, per Liverpool FC/Ajax statements as of June 2026 research (also missed the Czech Republic's 2026 World Cup squad because of it)"
+  },
+  "notes": [
+    "IMPORTANT for BACKLOG.md: the squad file (data/squad/liverpool_2026_27.json, fetched 2026-08-08) lists no injury_status for Jaros, but live research on 2026-08-10 found a well-documented, still-active injury (knee surgery Feb 2026, expected return late 2026). Included here despite the squad file's silence -- worth flagging as a possible squad-file gap.",
+    "Basis is prior_club_recent_minutes rather than liverpool_recent_minutes: his only Liverpool senior minutes (2 appearances, Oct-Nov 2024) are far below the ~900-minute/10-start threshold, so the interrupted 2025/26 Ajax loan (19 league starts before injury) is used as the more representative recent sample instead.",
+    "Earlier loan spells (St Patrick's Athletic 2021, Notts County 2021/22, Stockport County 2022/23) are documented in his career history but no appearance counts could be confirmed from accessible sources this session -- omitted from career_stints rather than guessed.",
+    "Confidence score kept low (0.45) given he is currently sidelined by a serious injury with a return date extending well into the 2026/27 season -- his positional/role projection is unusually uncertain right now.",
+    "Sources: liverpoolfc.com, thisisanfield.com, empireofthekop.com, liverpool.com, tribuna.com, bbc.co.uk (feeds.bbci.co.uk), liverpoolfc.fandom.com (fan wiki, used only for one general career-timeline detail corroborated elsewhere) -- via web search 2026-08-10."
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "player_id": "mamardashvili_giorgi",
+  "name": "Giorgi Mamardashvili",
+  "fotmob_id": "948800",
+  "current_squad_number": 25,
+  "listed_positions": ["GK"],
+  "position_estimate": {
+    "primary": "GK",
+    "secondary": null,
+    "basis": "liverpool_recent_minutes",
+    "confidence": 0.6,
+    "last_updated": "2026-08-10"
+  },
+  "has_liverpool_minutes": true,
+  "career_stints": [
+    {
+      "club": "FC Rustavi (loan)",
+      "period": "2019",
+      "positions_played": [{ "position": "GK", "share_of_minutes": 1.0 }],
+      "appearances": 28,
+      "note": "Loan from Dinamo Tbilisi, Georgian top flight; helped the club avoid relegation."
+    },
+    {
+      "club": "Valencia",
+      "period": "2021-2025",
+      "positions_played": [{ "position": "GK", "share_of_minutes": 1.0 }],
+      "appearances": 127,
+      "note": "La Liga aggregate across all Valencia seasons (initial loan from 7 June 2021, later made permanent), per Transfermarkt career-by-competition fetch 2026-08-10. That same fetch returned a goals-conceded figure ('10 goals conceded' across 127 games) that is almost certainly a data-extraction artifact -- implausible for the sample size -- so it was not used. His final Valencia season (2024/25) is separately confirmed at 34 La Liga appearances, 8 clean sheets, 92 saves."
+    },
+    {
+      "club": "Liverpool",
+      "period": "2025/26",
+      "positions_played": [{ "position": "GK", "share_of_minutes": 1.0 }],
+      "appearances": 20,
+      "note": "All-competitions: 19 starts + 1 substitute appearance, 3 clean sheets, 34 goals conceded. Premier League split specifically: 10 apps, 868 minutes, 2 clean sheets, 17 conceded, 65.4% save percentage -- rotation/backup role behind Alisson."
+    }
+  ],
+  "playstyle_metrics": {
+    "source_season": "2024/25",
+    "source_club": "Valencia",
+    "shots_per90": null,
+    "xg_per90": null,
+    "pass_accuracy_pct": null,
+    "progressive_passes_per90": null,
+    "touches_per90": null,
+    "duels_won_pct": null
+  },
+  "injury_status": null,
+  "notes": [
+    "Liverpool's summer-2025 signing from Valencia. His 2025/26 Liverpool season was a genuine backup/rotation role (10 PL starts, 868 minutes) that falls short of a clean single-competition 900+ minute sample, but the full-season body of work across all competitions (19-20 starts total) was judged substantial enough to use liverpool_recent_minutes rather than reaching back to Valencia -- flagged as a borderline call, hence the moderate (0.6) confidence.",
+    "2024/25 Valencia season (34 La Liga apps, 8 clean sheets, 92 saves, last season as an undisputed #1) used as playstyle_metrics.source_season instead of the Liverpool backup season, following the same judgment-call precedent used for Isak's profile (see data/player_profiles/isak_alexander.json). Season minutes for that Valencia campaign were not confirmed from an accessible source, so playstyle_metrics.minutes is omitted rather than estimated from apps x 90.",
+    "Georgian academy/parent-club stint at Dinamo Tbilisi and a subsequent Locomotive Tbilisi loan (approx. 2019/20-2021, including a notable Europa League run that drew Valencia's scouting interest) are documented but no appearance counts were confirmed -- omitted from career_stints rather than guessed.",
+    "No current injury found as of 2026-08-10 research.",
+    "Sources: transfermarkt.us (career-by-competition fetch 2026-08-10), footystats.org, livescore.com, thisisanfield.com, teamtalk.com, valenciacf.com -- via web search/fetch 2026-08-10."
+  ]
+}

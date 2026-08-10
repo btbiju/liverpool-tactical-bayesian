@@ -1,0 +1,50 @@
+{
+  "player_id": "ngumoha_rio",
+  "name": "Rio Ngumoha",
+  "fotmob_id": "1597668",
+  "current_squad_number": 73,
+  "listed_positions": ["LW"],
+  "position_estimate": {
+    "primary": "LW",
+    "secondary": null,
+    "basis": "liverpool_recent_minutes",
+    "confidence": 0.5,
+    "last_updated": "2026-08-10"
+  },
+  "has_liverpool_minutes": true,
+  "career_stints": [
+    {
+      "club": "Chelsea",
+      "period": "2016-2024",
+      "positions_played": [{ "position": "LW", "share_of_minutes": 1.0 }],
+      "appearances": 0,
+      "note": "Academy career only, joined age 8, considered Chelsea's top prospect in his age group with reported first-team training exposure under Mauricio Pochettino -- but no senior Chelsea appearance before his July 2024 move to Liverpool (age 15). Transfer was contested; a tribunal set Liverpool's fee at an initial £2.8m, rising by up to £4m in add-ons."
+    },
+    {
+      "club": "Liverpool",
+      "period": "2024/25-2025/26",
+      "positions_played": [{ "position": "LW", "share_of_minutes": 1.0 }],
+      "appearances": 29,
+      "goals": 2,
+      "note": "First-team appearances since his senior debut (Jan 2025 FA Cup start vs Accrington Stanley, Liverpool's youngest-ever starter). 2025/26 Premier League split: 17 appearances, 952 minutes, 2 goals -- the most first-team minutes of any Premier League player aged 17 or under that season. His first PL goal was a 100th-minute winner at Newcastle on his top-flight debut (age 16 years 361 days), Liverpool's youngest-ever Premier League scorer. Won the Premier League Debutant of the Season and a Scholar of the Year award for 2025/26. Assists total not reliably verifiable, omitted rather than guessed."
+    }
+  ],
+  "playstyle_metrics": {
+    "source_season": "2025/26",
+    "source_club": "Liverpool",
+    "minutes": 952,
+    "shots_per90": null,
+    "xg_per90": null,
+    "pass_accuracy_pct": null,
+    "progressive_passes_per90": null,
+    "touches_per90": null,
+    "duels_won_pct": null
+  },
+  "injury_status": null,
+  "notes": [
+    "All per-90 advanced metrics left null: no reliable per-90 figures were found for his actual senior 2025/26 Liverpool sample. Scouting reports (Total Football Analysis, ScoutingStats) describe him qualitatively as a high-volume, high-completion dribbler and explosive 1v1 threat, and one source gives 12.91 dribbles/90 at 64% completion -- but that figure is explicitly from England U16 level, not his Liverpool senior sample, so it was not used here to avoid misrepresenting an U16 stat as a current playstyle metric.",
+    "career_stints[0].appearances is 0 by design (not a placeholder/guess) -- it records a true fact: he had zero senior Chelsea appearances despite six years in their academy. Included for transfer-chronology context per the project's convention of keeping career_stints honest even when sparse for young players.",
+    "position_estimate.basis is 'liverpool_recent_minutes' since 952 minutes clears the roughly-900-minute threshold used elsewhere in this project, though confidence is kept moderate (0.5) given he is still a 17-year-old with under a full season of senior football and only became a regular starter from January 2026 onward.",
+    "Sources: liverpoolfc.com, tribuna.com, si.com, aol.com, totalfootballanalysis.com, footystats.org (via search), thisisanfield.com, empireofthekop.com -- via web search 2026-08-10."
+  ]
+}

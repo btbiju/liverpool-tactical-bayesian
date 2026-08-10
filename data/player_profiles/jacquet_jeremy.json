@@ -1,0 +1,68 @@
+{
+  "player_id": "jacquet_jeremy",
+  "name": "Jérémy Jacquet",
+  "fotmob_id": "1473534",
+  "current_squad_number": null,
+  "listed_positions": ["CB"],
+  "position_estimate": {
+    "primary": "CB",
+    "secondary": null,
+    "basis": "prior_club_recent_minutes",
+    "confidence": 0.55,
+    "last_updated": "2026-08-10"
+  },
+  "has_liverpool_minutes": false,
+  "career_stints": [
+    {
+      "club": "Stade Rennais (Rennes)",
+      "period": "2023/24",
+      "positions_played": [{ "position": "CB", "share_of_minutes": 1.0 }],
+      "appearances": 6,
+      "goals": 0,
+      "assists": 1,
+      "note": "Professional debut 13 Jan 2024 vs Nice (as a substitute); limited first-team minutes before departing on loan to Clermont Foot on 29 Jan 2024."
+    },
+    {
+      "club": "Clermont Foot (loan)",
+      "period": "2024-2025",
+      "positions_played": [{ "position": "CB", "share_of_minutes": 1.0 }],
+      "appearances": 24,
+      "note": "Ligue 2, season-long-plus loan (late Jan 2024 - Feb 2025), recalled early by Rennes in February 2025. Spans parts of both the 2023/24 and 2024/25 French seasons and could not be split cleanly by season from available sources, so kept as one combined stint. Goals/assists not confirmed for this specific stint -- omitted rather than assumed zero."
+    },
+    {
+      "club": "Stade Rennais (Rennes)",
+      "period": "2025/26",
+      "positions_played": [{ "position": "CB", "share_of_minutes": 1.0 }],
+      "appearances": 21,
+      "goals": 0,
+      "assists": 0,
+      "note": "Ligue 1 first-team run following recall from Clermont (1,673 minutes, 4 yellow cards, 1 red card per FotMob-derived stat line). Season cut short by a left shoulder injury sustained 7 Feb 2026 (vs Lens), which required surgery. Liverpool's deal for him was agreed in January 2026 while he was still a Rennes player."
+    },
+    {
+      "club": "Liverpool",
+      "period": "2026/27",
+      "positions_played": [{ "position": "CB", "share_of_minutes": 1.0 }],
+      "appearances": 0,
+      "note": "Contract began 1 July 2026 after recovering from the Rennes shoulder injury ahead of pre-season. No competitive Liverpool minutes yet as of this profile's creation (2026-08-10)."
+    }
+  ],
+  "playstyle_metrics": {
+    "source_season": "2025/26",
+    "source_club": "Stade Rennais",
+    "minutes": 1673,
+    "shots_per90": null,
+    "xg_per90": null,
+    "pass_accuracy_pct": null,
+    "progressive_passes_per90": null,
+    "touches_per90": null,
+    "duels_won_pct": null
+  },
+  "injury_status": null,
+  "notes": [
+    "20-year-old France U21 international; genuinely no Liverpool history, a real test case for the positional-logic rules similar to Muñoz's profile.",
+    "Transfer fee reporting varies slightly across sources (£55m per Sky Sports' initial report in January 2026, up to £60m including add-ons per other outlets) -- not fully reconciled; not part of this schema's fields anyway, so not asserted as a single number.",
+    "No current injury as of 2026-08-10 research -- the Rennes shoulder injury (surgery, Feb 2026) is reported as resolved ('recovered ahead of pre-season with Liverpool'), so injury_status is left null rather than carried forward as active.",
+    "Position listed as CB only in both the squad file and every source checked; no secondary position found.",
+    "Sources: liverpoolfc.com, skysports.com, thisisanfield.com, goal.com, transfermarkt.us, fotmob.com, whoscored.com, aol.com -- via web search 2026-08-10."
+  ]
+}

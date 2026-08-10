@@ -1,0 +1,58 @@
+{
+  "player_id": "gomez_joseph",
+  "name": "Joseph Gomez",
+  "fotmob_id": "568571",
+  "current_squad_number": 2,
+  "listed_positions": ["CB", "RB"],
+  "position_estimate": {
+    "primary": "CB",
+    "secondary": "RB",
+    "basis": "liverpool_recent_minutes",
+    "confidence": 0.45,
+    "last_updated": "2026-08-10"
+  },
+  "has_liverpool_minutes": true,
+  "career_stints": [
+    {
+      "club": "Charlton Athletic",
+      "period": "2013-2015",
+      "positions_played": [{ "position": "CB", "share_of_minutes": 1.0 }],
+      "appearances": 21,
+      "note": "Championship first-team breakthrough before his July 2015 move to Liverpool, per a Transfermarkt competition breakdown. The combined '1 assist/goal' figure attached to this stint in the fetched source text was ambiguous (unclear whether it means a goal or an assist), so goals/assists are omitted here rather than guessed."
+    },
+    {
+      "club": "Liverpool",
+      "period": "2015-2026",
+      "positions_played": [
+        { "position": "CB", "share_of_minutes": 0.7 },
+        { "position": "RB", "share_of_minutes": 0.3 }
+      ],
+      "appearances": 308,
+      "goals": 1,
+      "assists": 13,
+      "note": "All-competitions Liverpool totals per Transfermarkt (fetched 2026-08-10, current through the completed 2025/26 season): 20,254 minutes since joining 1 July 2015. Competition breakdown: Premier League 170 apps/7 assists, Champions League 46 apps/2 assists, FA Cup 21 apps, EFL Cup 22 apps, Europa League 12 apps/3 assists. The positions_played split (70% CB / 30% RB) is an approximate characterization based on his listed positions and long-standing rotational CB/RB usage, not a source-confirmed per-position minutes split -- flagged as an estimate."
+    }
+  ],
+  "playstyle_metrics": {
+    "source_season": "2025/26",
+    "source_club": "Liverpool",
+    "minutes": 597,
+    "shots_per90": null,
+    "xg_per90": null,
+    "pass_accuracy_pct": null,
+    "progressive_passes_per90": null,
+    "touches_per90": null,
+    "duels_won_pct": null
+  },
+  "injury_status": {
+    "description": "Muscular injury sustained in the opening 10 minutes of Liverpool's pre-season friendly win over Sunderland (Nashville), late July 2026",
+    "expected_return": "Manager Iraola estimated 'some weeks'; confirmed to miss the Premier League season-opener vs Newcastle United on 23 August 2026. No firmer date given as of 2026-08-10 research."
+  },
+  "notes": [
+    "IMPORTANT for BACKLOG.md: squad file (data/squad/liverpool_2026_27.json, fetched 2026-08-08) lists no injury_status for Gomez, but live research on 2026-08-10 found a current, sourced pre-season muscle injury that will keep him out of the season opener. Included here despite the squad file's silence.",
+    "Basis is liverpool_recent_minutes despite a thin recent sample (21 PL apps but only 597 minutes in 2025/26 -- heavy late-cameo/impact-sub usage, well below the schema's ~900-minute 'substantial sample' guidance) because there is no viable alternative: his last club before Liverpool was over a decade ago. Confidence kept low (0.45) to reflect this mismatch rather than presenting the estimate as solid.",
+    "Liverpool's longest-serving outfield player, but game time has shrunk sharply in recent seasons (just 6 Premier League starts in each of the last two campaigns, per reporting) as the club's defensive pecking order shifted around him.",
+    "His Liverpool future is genuinely uncertain: contract runs to 30 June 2027; as of 2026-08-10 research he has publicly said 'anything can happen' regarding a summer exit, with reported interest from AC Milan, Newcastle, Crystal Palace and Aston Villa. He remains on the books per the squad file, and England's transfer window doesn't close until 1 September 2026, so this could still change before the season is fully underway -- worth re-checking.",
+    "Sources: transfermarkt.us (profile fetched 2026-08-10), liverpool.com, goal.com, foxsports.com, anfieldwatch.co.uk, sportsmole.co.uk, espn.com, lastwordonsports.com, beinsports.com, newsx.com -- via web search/fetch 2026-08-10."
+  ]
+}

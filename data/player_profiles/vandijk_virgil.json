@@ -1,0 +1,69 @@
+{
+  "player_id": "vandijk_virgil",
+  "name": "Virgil van Dijk",
+  "fotmob_id": "209405",
+  "current_squad_number": 4,
+  "listed_positions": ["CB"],
+  "position_estimate": {
+    "primary": "CB",
+    "secondary": null,
+    "basis": "liverpool_recent_minutes",
+    "confidence": 0.95,
+    "last_updated": "2026-08-10"
+  },
+  "has_liverpool_minutes": true,
+  "career_stints": [
+    {
+      "club": "FC Groningen",
+      "period": "2011-2013",
+      "positions_played": [{ "position": "CB", "share_of_minutes": 1.0 }],
+      "appearances": 57,
+      "goals": 5,
+      "note": "All-competitions total per a single aggregator source (via web search 2026-08-10); not independently cross-verified against a second source."
+    },
+    {
+      "club": "Celtic",
+      "period": "2013-2015",
+      "positions_played": [{ "position": "CB", "share_of_minutes": 1.0 }],
+      "appearances": 115,
+      "goals": 15,
+      "note": "All-competitions total; won two Scottish league titles and a League Cup across the two seasons. Per-season breakdown not independently reconciled (first-season league split reported separately as 3 goals in 38 league appearances)."
+    },
+    {
+      "club": "Southampton",
+      "period": "2015-2018",
+      "positions_played": [{ "position": "CB", "share_of_minutes": 1.0 }],
+      "appearances": 67,
+      "goals": 4,
+      "note": "All-competitions total, covering 2015/16 through his January 2018 departure. Assists not reported for this stint."
+    },
+    {
+      "club": "Liverpool",
+      "period": "2018-2026",
+      "positions_played": [{ "position": "CB", "share_of_minutes": 1.0 }],
+      "appearances": 339,
+      "goals": 31,
+      "assists": 9,
+      "note": "Premier League-specific totals per Transfermarkt (fetched 2026-08-10, current through the completed 2025/26 season). Captain. Career all-competitions total across every club combined (Groningen+Celtic+Southampton+Liverpool), per the same source: 639 appearances, 66 goals, 28 assists -- a Liverpool-only all-competitions split was not separately itemized on the fetched page. His 2025/26 season-specific goal tally is disputed across sources checked (3 per one aggregator, 5 per LFChistory, 6 per another), though Premier League appearances for that season converge on 38 (ever-present) across two independent sources -- used the career-aggregate PL figures here instead of picking one of the disputed single-season numbers."
+    }
+  ],
+  "playstyle_metrics": {
+    "source_season": "2025/26",
+    "source_club": "Liverpool",
+    "minutes": 3420,
+    "shots_per90": null,
+    "xg_per90": null,
+    "pass_accuracy_pct": null,
+    "progressive_passes_per90": null,
+    "touches_per90": null,
+    "duels_won_pct": null
+  },
+  "injury_status": null,
+  "notes": [
+    "Captain, undisputed first-choice CB and ever-present through 2025/26 (38 Premier League appearances, 3,420 minutes per SportBusy, via web search 2026-08-10).",
+    "2025/26 season goal tally genuinely disputed across sources (3 vs 5 vs 6, depending on aggregator/competition scope) -- not reconciled; the Liverpool career_stint entry uses the Transfermarkt career-to-date PL aggregate (31 goals, 9 assists across 339 apps) instead of asserting one of the contested single-season figures.",
+    "Earlier-career (Groningen/Celtic/Southampton) appearance and goal totals came from a single aggregator search summary rather than Transfermarkt's detailed season-by-season page, which did not return usable per-club data on this attempt -- flagged as a lower-confidence source than the Liverpool-era Transfermarkt-fetched numbers.",
+    "No current injury found as of 2026-08-10 research.",
+    "Sources: transfermarkt.us (fetched 2026-08-10), lfchistory.net, premierleague.com, sportskeeda.com, thesportreview.com, statmuse.com, footystats.org -- via web search/fetch 2026-08-10."
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "player_id": "tsimikas_konstantinos",
+  "name": "Konstantinos Tsimikas",
+  "fotmob_id": "671529",
+  "current_squad_number": 21,
+  "listed_positions": ["LWB", "LB", "LM"],
+  "position_estimate": {
+    "primary": "LB",
+    "secondary": "LWB",
+    "basis": "prior_club_recent_minutes",
+    "confidence": 0.45,
+    "last_updated": "2026-08-10"
+  },
+  "has_liverpool_minutes": true,
+  "career_stints": [
+    {
+      "club": "Liverpool",
+      "period": "2020-2025",
+      "positions_played": [{ "position": "LB", "share_of_minutes": 1.0 }],
+      "appearances": 114,
+      "goals": 0,
+      "note": "All competitions total across five seasons (2020-2025) as backup/rotation left-back behind Andy Robertson. Premier League-only split: 66 apps, 10 assists. Won Premier League 2024/25, FA Cup 2021/22, two EFL Cups (2021/22, 2023/24), Community Shield 2022/23. Assists not reliably split by competition beyond the PL figure, omitted at the all-comp level rather than guessed. Olympiacos-era stats (2015-2020, including loan spells at Esbjerg and Willem II) were not reliably verifiable from an accessible source and are omitted rather than guessed."
+    },
+    {
+      "club": "AS Roma",
+      "period": "2025/26",
+      "positions_played": [{ "position": "LB", "share_of_minutes": 1.0 }],
+      "appearances": 25,
+      "goals": 0,
+      "assists": 1,
+      "note": "Season-long loan (fell down the pecking order after Kerkez's arrival; Liverpool had initially favoured a sale). All competitions: 25 apps (11 starts), 1 assist, 11 key passes, 65 crosses (15 accurate), 20 tackles. Serie A-only split: 17 matches, 6 starts, 0 goals, 0 assists, 16 clearances. One source's claim of '18 Serie A starts' is inconsistent with the more corroborated 6-start figure across two other sources and was not used. Returned to Liverpool's squad for 2026/27 per data/squad/liverpool_2026_27.json."
+    }
+  ],
+  "playstyle_metrics": {
+    "source_season": "2025/26",
+    "source_club": "AS Roma",
+    "shots_per90": null,
+    "xg_per90": null,
+    "pass_accuracy_pct": null,
+    "progressive_passes_per90": null,
+    "touches_per90": null,
+    "duels_won_pct": null
+  },
+  "injury_status": null,
+  "notes": [
+    "basis is prior_club_recent_minutes, not liverpool_recent_minutes, because his entire 2025/26 season was spent on loan at Roma -- he has zero Liverpool minutes in the most recent completed season, despite 114 career Liverpool appearances overall.",
+    "Raw Roma totals (crosses, key passes, tackles) were found but not normalized to per-90 rates because total minutes for the season were not verifiable from an accessible source -- left as raw counts in the stint note rather than converted with a guessed minutes figure.",
+    "No injury currently listed in data/squad/liverpool_2026_27.json for 2026/27; reporting from thisisanfield.com (April/May 2026) discusses him wanting to stay and a possible Liverpool return, consistent with his presence in the current squad file.",
+    "Sources: liverpoolfc.com, liverpool.com, thisisanfield.com, statmuse.com, sportsdunia.com, en.wikipedia.org -- via web search 2026-08-10."
+  ]
+}

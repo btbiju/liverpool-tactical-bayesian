@@ -20,7 +20,7 @@
       "appearances": 34,
       "goals": 11,
       "assists": 7,
-      "note": "Primera Federación. Sources disagreed materially here -- one gave 34 apps/11 goals/7 assists, another 48 games/9 goals, another '10 goals as of May 2025'. Used the most specific single-source figure (34/11/7) rather than averaging or picking the highest; flagged as uncertain."
+      "note": "Primera Federación, 2742 minutes. Originally flagged as disputed (one source gave 34 apps/11 goals/7 assists, another 48 games/9 goals, another '10 goals as of May 2025') -- resolved 2026-08-09 via two further independent sources (besoccer.com, a separate web search), both corroborating 34 apps/11 goals/7 assists exactly. Treated as confirmed."
     },
     {
       "club": "Osasuna",
@@ -56,7 +56,8 @@
   "notes": [
     "The one player of the original four-player priority list whose 'no Liverpool history' framing actually holds -- verified 2026-08-09. See BACKLOG.md's correction note re: Isak/Wirtz/Chiesa.",
     "Only one professional season of starter-level data exists (Osasuna 2025/26) -- inherently a thinner individual prior than the other three players, by nature of being a fresh breakout talent rather than an established veteran. This is expected, not a data-collection gap.",
-    "Advanced per-90 metrics (shots, xG, pass accuracy, progressive passes, touches, duels won%) not found from an accessible source -- left null rather than guessed.",
-    "Sources: realmadrid.com (official academy/debut announcements), espn.co.uk (Liverpool transfer report, Osasuna season stats), liverpoolfc.com, sportsdunia.com, bllog.co.uk -- via web search 2026-08-09."
+    "Advanced per-90 metrics (shots, xG, pass accuracy, progressive passes, touches, duels won%) not found from an accessible source, including a direct attempt against his Opta Analyst (theanalyst.com) player page, which only showed his (all-zero) Liverpool 2026/27 stats, not his Osasuna history -- left null rather than guessed.",
+    "2026-08-09 follow-up: Castilla 2024/25 stats dispute resolved (see stint note above) via besoccer.com and an independent web search, both matching the 34/11/7 figure already used here.",
+    "Sources: realmadrid.com (official academy/debut announcements), espn.co.uk (Liverpool transfer report, Osasuna season stats), liverpoolfc.com, sportsdunia.com, bllog.co.uk, besoccer.com, theanalyst.com -- via web search 2026-08-09."
   ]
 }

@@ -1,0 +1,61 @@
+{
+  "player_id": "kerkez_milos",
+  "name": "Milos Kerkez",
+  "fotmob_id": "1195281",
+  "current_squad_number": 6,
+  "listed_positions": ["LB"],
+  "position_estimate": {
+    "primary": "LB",
+    "secondary": null,
+    "basis": "liverpool_recent_minutes",
+    "confidence": 0.75,
+    "last_updated": "2026-08-10"
+  },
+  "has_liverpool_minutes": true,
+  "career_stints": [
+    {
+      "club": "AZ Alkmaar",
+      "period": "2021-2023",
+      "positions_played": [{ "position": "LB", "share_of_minutes": 1.0 }],
+      "appearances": 52,
+      "goals": 5,
+      "assists": 7,
+      "note": "2022/23 season totals (all competitions) -- his one full breakout season before the Bournemouth move; AZ finished 4th and reached the Europa Conference League semi-final. A separately reported partial-season split (22 games/3 goals/6 assists at age 18) reflects an earlier, different sub-period and was not used to avoid double counting."
+    },
+    {
+      "club": "Bournemouth",
+      "period": "2024/25",
+      "positions_played": [{ "position": "LB", "share_of_minutes": 1.0 }],
+      "appearances": 38,
+      "goals": 2,
+      "assists": 6,
+      "note": "Premier League only. Featured in all 38 PL fixtures under Iraola -- his final and most Iraola-relevant Bournemouth season, directly overlapping with the manager prior used elsewhere in this project. A separately reported 'career total before Liverpool' figure (100 apps/4 goals/7 assists, combining AZ + Bournemouth) is inconsistent with this season alone plus the AZ figure above and was not used -- flagged in notes rather than reconciled by guesswork."
+    },
+    {
+      "club": "Liverpool",
+      "period": "2025/26",
+      "positions_played": [{ "position": "LB", "share_of_minutes": 1.0 }],
+      "appearances": 28,
+      "goals": 2,
+      "assists": 1,
+      "note": "Debut Liverpool season, reuniting with Iraola from Bournemouth. 8 shots, 2 on target reported for the season, but total minutes were not verifiable from an accessible source, so per-90 figures were not derived from this."
+    }
+  ],
+  "playstyle_metrics": {
+    "source_season": "2025/26",
+    "source_club": "Liverpool",
+    "shots_per90": null,
+    "xg_per90": null,
+    "pass_accuracy_pct": null,
+    "progressive_passes_per90": null,
+    "touches_per90": null,
+    "duels_won_pct": null
+  },
+  "injury_status": null,
+  "notes": [
+    "£40m transfer from Bournemouth to Liverpool confirmed June 2025 (Sky Sports, liverpoolfc.com) -- his Bournemouth spell under Iraola is the direct individual/manager overlap case for this project's Bayesian prior.",
+    "A 'career total before Liverpool' figure of 100 apps/4 goals/7 assists (combining AZ + Bournemouth) appeared in one source but is arithmetically inconsistent with the season-level AZ (52/5/7) and Bournemouth 2024/25 (38/2/6) figures used here -- not used, flagged as a disagreement rather than picked or averaged.",
+    "No advanced per-90 metrics (shots, xG, pass accuracy, progressive passes, touches, duels won%) were verifiable for either the Bournemouth or Liverpool seasons from an accessible source (FBref/FotMob detail pages blocked or client-rendered) -- left null rather than guessed.",
+    "Sources: skysports.com, liverpoolfc.com, afcb.co.uk, transfermarkt.us, sofascore.com, fbref.com (index only), sportbusy.com, foottheball.com -- via web search 2026-08-10."
+  ]
+}

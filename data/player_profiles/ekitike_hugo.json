@@ -1,0 +1,81 @@
+{
+  "player_id": "ekitike_hugo",
+  "name": "Hugo Ekitiké",
+  "fotmob_id": "1197030",
+  "current_squad_number": 22,
+  "listed_positions": ["ST", "LW"],
+  "position_estimate": {
+    "primary": "ST",
+    "secondary": null,
+    "basis": "liverpool_recent_minutes",
+    "confidence": 0.55,
+    "last_updated": "2026-08-10"
+  },
+  "has_liverpool_minutes": true,
+  "career_stints": [
+    {
+      "club": "Reims",
+      "period": "2020-2022",
+      "positions_played": [{ "position": "ST", "share_of_minutes": 1.0 }],
+      "appearances": 24,
+      "goals": 10,
+      "note": "Ligue 1 only, his 2021/22 breakout season specifically -- the season that established him at senior level before his July 2022 move to PSG. Earlier fringe 2020/21 appearances not itemized, omitted rather than guessed."
+    },
+    {
+      "club": "Paris Saint-Germain",
+      "period": "2022-2024",
+      "positions_played": [{ "position": "ST", "share_of_minutes": 1.0 }],
+      "appearances": 33,
+      "goals": 4,
+      "note": "Largely cameo/bench outings; joined on an initial loan (July 2022) that converted to a permanent ~€35m transfer. Won two Ligue 1 titles (2022/23, 2023/24)."
+    },
+    {
+      "club": "Eintracht Frankfurt",
+      "period": "2023/24 (second half)",
+      "positions_played": [{ "position": "ST", "share_of_minutes": 1.0 }],
+      "appearances": 14,
+      "goals": 4,
+      "note": "Bundesliga only, joined on loan from PSG for the second half of the season."
+    },
+    {
+      "club": "Eintracht Frankfurt",
+      "period": "2024/25",
+      "positions_played": [{ "position": "ST", "share_of_minutes": 1.0 }],
+      "appearances": 48,
+      "goals": 22,
+      "assists": 12,
+      "note": "All-competitions, career-best season (43 starts, 5 sub appearances): 15 Bundesliga goals, 4 in the Europa League, 3 in the DFB Cup; 12 assists including 8 in the league. Loan converted to a permanent transfer during/after this season. Sold to Liverpool summer 2025 for a fee reported around £69m guaranteed plus £10m in add-ons (some sources cite a higher total deal value near €95m)."
+    },
+    {
+      "club": "Liverpool",
+      "period": "2025/26",
+      "positions_played": [{ "position": "ST", "share_of_minutes": 1.0 }],
+      "appearances": 28,
+      "goals": 11,
+      "assists": 4,
+      "note": "Premier League only: 1810 minutes, 65 shots (20 on target), before his season ended early. He suffered a ruptured Achilles tendon in a Champions League match vs his former club PSG (a non-contact slip), with roughly six Premier League games still remaining -- he was Liverpool's Premier League top scorer at the time. A separate source describing him as Liverpool's second-highest all-competitions scorer behind only Szoboszlai implies an all-comp total near 17 club goals for the season (a related source's combined 'club and country' figure of 19 is consistent with 17 club + international goals for France); this all-comp figure is noted for context but the Premier-League-only numbers above are what's used as the sourced stint totals."
+    }
+  ],
+  "playstyle_metrics": {
+    "source_season": "2025/26",
+    "source_club": "Liverpool",
+    "minutes": 1810,
+    "shots_per90": 3.23,
+    "xg_per90": 0.56,
+    "pass_accuracy_pct": null,
+    "progressive_passes_per90": null,
+    "touches_per90": 37.6,
+    "duels_won_pct": null
+  },
+  "injury_status": {
+    "description": "Achilles tendon injury",
+    "expected_return": "Early January 2027"
+  },
+  "notes": [
+    "injury_status taken directly from data/squad/liverpool_2026_27.json as instructed. Context found in research: ruptured Achilles suffered in a Champions League match vs PSG at Anfield (initial reports described it as a slip/non-contact injury), confirmed to end his 2025/26 season and rule him out of the 2026 World Cup with France; one April-2026 source raised the possibility of him being out 'until 2027,' consistent with the squad file's 'Early January 2027' return estimate.",
+    "touches_per90 (37.6) and shots_per90/xg_per90 are 2025/26 Premier League Opta figures from theanalyst.com search coverage; his non-penalty xG/90 (0.56) was described as outperforming his actual goal return in some framing (11 goals from 7.6 npxG for the season), i.e. he was finishing above his underlying chance quality.",
+    "pass_accuracy_pct, progressive_passes_per90, duels_won_pct: no reliable figure found -- left null rather than guessed.",
+    "This is the one player in this batch with a genuinely tangled multi-source goal/appearance picture (a search aggregation claimed 'record of 32 goals, 17 assists in 99 appearances' summed across Reims+PSG+Frankfurt combined, which is inconsistent with the more detailed club-by-club figures used above -- e.g. Frankfurt alone in 2024/25 was already 22 goals in 48 apps per a specific, detailed source). The detailed per-club, per-season figures were used and the conflicting aggregate was deliberately not used.",
+    "Sources: skysports.com, espn.com, liverpoolfc.com, bundesliga.com, en.eintracht.de, premierleague.com, thisisanfield.com, theanalyst.com, statmuse.com, transfermarkt.us, wikipedia.org (cross-check only, not primary) -- via web search 2026-08-10."
+  ]
+}

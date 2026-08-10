@@ -1,0 +1,43 @@
+{
+  "player_id": "jones_curtis",
+  "name": "Curtis Jones",
+  "fotmob_id": "933768",
+  "current_squad_number": 17,
+  "listed_positions": ["DM", "RB", "AM", "CM"],
+  "position_estimate": {
+    "primary": "CM",
+    "secondary": "AM",
+    "basis": "liverpool_recent_minutes",
+    "confidence": 0.65,
+    "last_updated": "2026-08-10"
+  },
+  "has_liverpool_minutes": true,
+  "career_stints": [
+    {
+      "club": "Liverpool",
+      "period": "2019/20-2025/26",
+      "positions_played": [{ "position": "CM", "share_of_minutes": 1.0 }],
+      "appearances": 222,
+      "goals": 22,
+      "note": "Liverpool academy graduate (debut April 2019); no other senior club, so this is his entire senior career, all-competitions totals to date. Assists total not reliably verifiable across sources, omitted rather than guessed. Squad-listed as DM/RB/AM/CM but no reliable per-position minutes breakdown was found -- 2025/26 reporting (Premier League site, footballinsider247) consistently describes him as Liverpool's most progressive central midfielder this season, occasionally covering right-back in squad emergencies, so a single CM entry is used here."
+    }
+  ],
+  "playstyle_metrics": {
+    "source_season": "2025/26",
+    "source_club": "Liverpool",
+    "minutes": 1930,
+    "shots_per90": 1.03,
+    "xg_per90": 0.11,
+    "pass_accuracy_pct": null,
+    "progressive_passes_per90": null,
+    "touches_per90": null,
+    "duels_won_pct": null
+  },
+  "injury_status": null,
+  "notes": [
+    "2025/26 Premier League season: 34 appearances, 1930 minutes, 1 goal, 2 assists. All-competitions 2025/26: 48 appearances (20 off the bench), 3 goals, 2 assists.",
+    "shots_per90 (1.03) and xg_per90 (0.11, non-penalty) are 2025/26 Premier League figures sourced via a footystats.org search snippet (22 shots in 34 matches); the underlying FootyStats page itself returns HTTP 403 to direct fetch, consistent with known access issues for that site in this project.",
+    "pass_accuracy_pct, progressive_passes_per90, touches_per90, duels_won_pct could not be pinned to a specific, reliable per-90 number. TheAnalyst.com coverage mentions he 'leads his EPL peers with an average of nine passes into the final third per 90' and cites '>90% passing accuracy since 2019-20' and '68% duel success' from a 231-minute sample -- these are directionally informative but not clean, single-season, schema-matching per-90 figures, so left null rather than force-fit.",
+    "Sources: premierleague.com, statmuse.com, lfchistory.net, footystats.org (via search), footballinsider247.com, theanalyst.com -- via web search 2026-08-10."
+  ]
+}

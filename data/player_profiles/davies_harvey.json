@@ -1,0 +1,49 @@
+{
+  "player_id": "davies_harvey",
+  "name": "Harvey Davies",
+  "fotmob_id": "1236818",
+  "current_squad_number": 95,
+  "listed_positions": ["GK"],
+  "position_estimate": {
+    "primary": "GK",
+    "secondary": null,
+    "basis": "prior_club_recent_minutes",
+    "confidence": 0.35,
+    "last_updated": "2026-08-10"
+  },
+  "has_liverpool_minutes": false,
+  "career_stints": [
+    {
+      "club": "Crewe Alexandra (loan)",
+      "period": "2023/24",
+      "positions_played": [{ "position": "GK", "share_of_minutes": 1.0 }],
+      "appearances": 32,
+      "note": "League Two loan, all competitions."
+    },
+    {
+      "club": "Crawley Town (loan)",
+      "period": "2025/26",
+      "positions_played": [{ "position": "GK", "share_of_minutes": 1.0 }],
+      "appearances": 19,
+      "note": "League Two loan after signing a new Liverpool contract in June 2025. Strong start to the campaign but was dropped amid a poor run of results, and Liverpool exercised an option to recall him early in February 2026 (deadline day). Not called upon by Liverpool's first team after the recall."
+    }
+  ],
+  "playstyle_metrics": {
+    "source_season": "2025/26",
+    "source_club": "Crawley Town",
+    "shots_per90": null,
+    "xg_per90": null,
+    "pass_accuracy_pct": null,
+    "progressive_passes_per90": null,
+    "touches_per90": null,
+    "duels_won_pct": null
+  },
+  "injury_status": null,
+  "notes": [
+    "has_liverpool_minutes set to false: the only 'Liverpool debut' found in sources was a 2022 pre-season friendly (vs Crystal Palace, Singapore tour) plus unused first-team squad/bench inclusions (Champions League squad vs RB Leipzig/Real Madrid 2021, Community Shield bench 2022) -- none of these are senior competitive minutes, so they are not counted as has_liverpool_minutes or included as a career_stint.",
+    "Academy player at Liverpool since age nine; no confirmed senior competitive Liverpool appearances as of this profile's creation (2026-08-10), hence basis is prior_club_recent_minutes using his most recent loan (Crawley Town 2025/26) rather than liverpool_recent_minutes.",
+    "Reported as 'expected to' sign a new Liverpool contract extension as of early August 2026 (empireofthekop.com) -- not yet confirmed finalized at time of writing, not treated as fact here.",
+    "Confidence kept low (0.35): third/fourth-choice depth goalkeeper with no senior top-level appearances and a below-par loan spell that ended in an early recall.",
+    "Sources: liverpoolfc.com, thisisanfield.com, liverpool.com, anfieldwatch.co.uk, empireofthekop.com, onefootball.com, theoneglove.com -- via web search 2026-08-10."
+  ]
+}

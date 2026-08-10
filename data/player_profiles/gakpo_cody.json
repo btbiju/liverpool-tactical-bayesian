@@ -1,0 +1,52 @@
+{
+  "player_id": "gakpo_cody",
+  "name": "Cody Gakpo",
+  "fotmob_id": "806552",
+  "current_squad_number": 18,
+  "listed_positions": ["LW", "ST", "LM"],
+  "position_estimate": {
+    "primary": "LW",
+    "secondary": "ST",
+    "basis": "liverpool_recent_minutes",
+    "confidence": 0.7,
+    "last_updated": "2026-08-10"
+  },
+  "has_liverpool_minutes": true,
+  "career_stints": [
+    {
+      "club": "PSV Eindhoven",
+      "period": "2016-2023",
+      "positions_played": [{ "position": "LW", "share_of_minutes": 1.0 }],
+      "appearances": 159,
+      "goals": 55,
+      "assists": 55,
+      "note": "All-competitions career total through his January 2023 move to Liverpool (~£44m). Came through PSV's youth academy, debuted 2016; breakout 2021/22 Eredivisie season alone was 21 goals and 15 assists, earning him the Dutch Footballer of the Year award."
+    },
+    {
+      "club": "Liverpool",
+      "period": "2025/26",
+      "positions_played": [{ "position": "LW", "share_of_minutes": 0.7 }, { "position": "ST", "share_of_minutes": 0.3 }],
+      "appearances": 41,
+      "goals": 8,
+      "assists": 4,
+      "note": "All-competitions, 2025/26 season. Premier League-only split: 36 matches, 2747 minutes, 7 goals, 5 assists, 87 shots (21 on target). Joined Liverpool January 2023; earlier seasons (2022/23 debut half-season: 21 PL apps/7 goals/3 assists; 2023/24: 35 league apps/8 goals/5 assists) are not combined into a single cumulative Liverpool total here, since a fully reliable cross-season all-competitions sum could not be resolved without risking double-counting -- the most recent complete season is used instead, consistent with this project's convention against guessing at aggregates. positions_played shares are a qualitative estimate (predominantly left wing, with striker minutes when deployed centrally), not a source-verified split."
+    }
+  ],
+  "playstyle_metrics": {
+    "source_season": "2025/26",
+    "source_club": "Liverpool",
+    "minutes": 2747,
+    "shots_per90": 2.85,
+    "xg_per90": 0.35,
+    "pass_accuracy_pct": null,
+    "progressive_passes_per90": null,
+    "touches_per90": null,
+    "duels_won_pct": null
+  },
+  "injury_status": null,
+  "notes": [
+    "shots_per90 and xg_per90 (non-penalty) are 2025/26 Premier League figures via an xgstat.com search snippet (87 shots in 36 matches, 9.3 npxG, 0.85 xG+xA/90 -- he outperformed his npxG, scoring 7 goals from 9.3 npxG).",
+    "pass_accuracy_pct, progressive_passes_per90, touches_per90, duels_won_pct: no reliable season-specific figure found -- left null rather than guessed.",
+    "Sources: liverpoolfc.com, sportbusy.com, xgstat.com (via search), givemesport.com, fieldinsider.com, grokipedia.com (cross-check only, not primary), transfermarkt.us -- via web search 2026-08-10."
+  ]
+}

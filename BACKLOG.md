@@ -6,18 +6,20 @@ let items live only in chat history.
 
 ## Known data gaps (flagged, not guessed)
 
-- [ ] **Bournemouth full-season xG totals for 2024/25 and 2025/26** --
-      2023/24 confirmed (32.9). football-data.org ruled out as a source
-      (2026-08-09 -- live-tested, no xG field at any tier, see below).
-      Also retried direct-fetching FotMob/FBref/footystats the same day:
-      FotMob's stats pages are client-rendered JS and return "stats not
-      available" over a plain fetch, FBref and footystats both 403
-      (bot-blocked). A FotMob season-stats URL guessed from a search
-      snippet returned 61.9 for "2025/26" but self-described the season as
-      still in progress, which contradicts the season already having ended
-      by 2026-08-09 -- not recorded, not trustworthy. Needs either a paid
-      tactical-stats API (Opta/StatsBomb-backed) or a manual pull from a
-      logged-in browser session. (`data/manager_priors/iraola_2026.json`)
+- [ ] **Advanced per-90 metrics null for almost the entire squad** -- of all
+      29 player profiles now built, only Wirtz (`touches_per90`,
+      `duels_won_pct`), Gravenberch (`touches_per90`), and Ekitiké
+      (`touches_per90`) have any advanced per-90 field populated. Every
+      other player has `shots_per90`, `xg_per90`, `pass_accuracy_pct`,
+      `progressive_passes_per90`, `touches_per90`, and `duels_won_pct` all
+      null. This is a systemic, structural gap, not a one-off: FBref and
+      footystats return HTTP 403 (bot-blocked), FotMob's stats pages are
+      client-rendered JS, and even theanalyst.com's (Opta) per-player stats
+      sub-pages are subscription/full-page-load gated over a fetch --
+      only occasionally does a written article happen to quote the numbers
+      directly (that's how Wirtz/Gravenberch/Ekitiké's partial data came
+      through). Needs a paid tactical-stats API or manual browser-session
+      pulls to actually resolve, not more search attempts.
 - [ ] **Formation prior alpha counts are illustrative, not exact** --
       current values (4-2-3-1: 30, 4-1-4-1: 4, etc.) are calibrated to
       reflect "4-2-3-1 dominant but not certain," not a literal per-match
@@ -25,38 +27,113 @@ let items live only in chat history.
       with real match-by-match formation logs if a source for that surfaces.
 - [ ] **football-data.org free tier has no tactical stats** -- confirmed
       from the pricing page: free tier gives fixtures/results/tables only,
-      no possession%, PPDA, or formation. `extract_match_observation()` in
+      no possession%, PPDA, or formation, and (separately confirmed
+      2026-08-09) no xG at any tier either -- it's a fixtures/results/odds
+      API, not a stats provider. `extract_match_observation()` in
       `pipeline/fixtures_client.py` fills only score/opponent/date --
       metrics and formation must still come from FotMob per match before
-      calling the Bayesian update. Not a blocker, just means the weekly
-      update process has a manual/semi-manual layering step, not a single
-      clean API call.
-- [ ] **football-data.org does not provide xG at all, confirmed live** --
-      inspected both `/teams/{id}/matches` and `/matches/{id}` response
-      bodies directly (2026-08-09, real API call against a finished
-      Bournemouth match) -- fields present are score/venue/referees/odds
-      upsell, no expected-goals metric at any tier. This is a fixtures/
-      results/odds API, not a stats provider (that's Opta/StatsBomb/
-      Understat/FBref territory).
-- [ ] **Player profile advanced per-90 metrics mostly null** -- for all four
-      profiles built 2026-08-09 (Isak, Wirtz, Muñoz, Chiesa), FBref/FotMob
-      detail pages were blocked or client-rendered, so `shots_per90`,
-      `xg_per90`, `pass_accuracy_pct`, `progressive_passes_per90` are null
-      across the board. Wirtz has `touches_per90`/`duels_won_pct` from an
-      Opta-sourced article (theanalyst.com) -- that's the one exception and
-      a model for what a "resolved" profile looks like. Needs either a paid
-      stats API or manual browser-session pulls per player.
-- [ ] **Víctor Muñoz's Real Madrid Castilla 2024/25 stats are disputed
-      across sources** -- 34 apps/11 goals/7 assists vs. 48 games/9 goals vs.
-      "10 goals as of May 2025" depending on source. Used the most specific
-      single figure (34/11/7) with the disagreement flagged in the profile
-      note rather than silently picking one. (`data/player_profiles/munoz_victor.json`)
+      calling the Bayesian update.
+- [ ] **`goals_conceded_per_match` in the Iraola manager prior may be using
+      a stale partial-season number** -- while cross-verifying Bournemouth's
+      2025/26 xG (see "Resolved" below), the real full-season goals-conceded
+      figure came out to 54/38 = **1.42**, not the "1.6 (2025/26
+      partial-season snapshot)" currently used in the mean/variance
+      calculation in `data/manager_priors/iraola_2026.json`. This is a live
+      model input, not just a reference field, so it wasn't changed without
+      checking first -- still open, needs a decision.
 - [ ] **Federico Chiesa's squad status may already be stale** -- as of
-      2026-08-09 he's reported in an active, unresolved transfer saga
+      2026-08-09/10 he's reported in an active, unresolved transfer saga
       (Napoli links, "Liverpool outcast" framing) that could see him leave
-      before the season starts. `data/squad/liverpool_2026_27.json` (fetched
-      2026-08-08) still lists him with no departure flag. Worth re-checking
-      before relying on his profile for 2026/27 projections.
+      before the season starts. Per instruction, he stays listed as a
+      current Liverpool player (with the transfer-saga flag already in his
+      profile notes) until the window closes or a departure is confirmed --
+      re-check then, not before.
+- [ ] **Joseph Gomez's Liverpool future is also uncertain** -- found
+      2026-08-10 during profile research: contract runs to 30 June 2027, but
+      he's publicly said "anything can happen" re: a summer exit, with
+      reported interest from AC Milan, Newcastle, Crystal Palace, Aston
+      Villa. England's transfer window doesn't close until 1 September
+      2026. Same treatment as Chiesa -- stays listed as current, re-check
+      once the window closes.
+- [ ] **`data/squad/liverpool_2026_27.json` was missing two current
+      injuries**, caught only through live player-profile research on
+      2026-08-10, not from the original squad fetch (2026-08-08) -- now
+      added directly to the squad file:
+  - **Vítezslav Jaroš**: serious knee injury (ACL-type), Ajax loan training
+        accident Feb 2026, surgery, expected back late 2026.
+  - **Joseph Gomez**: pre-season muscle injury (vs Sunderland, late July
+        2026), confirmed to miss the Aug 23 season opener, no firmer
+        return date yet.
+  - Worth treating the squad file as due for a general refresh rather than
+        assuming it's still fully current -- it's now over two weeks stale
+        relative to some of what the player-profile research turned up.
+- [ ] **A cluster of source disagreements were resolved by using the more
+      specific/corroborated figure rather than picking arbitrarily** --
+      flagged in each profile's notes, listed here for visibility:
+  - **Kerkez**: a "100 apps/4g/7a pre-Liverpool" aggregate was arithmetically
+        inconsistent with season-level AZ + Bournemouth numbers -- not used.
+  - **Ramsay**: worst data quality in the squad -- no substantial minutes
+        anywhere since Aberdeen 2021/22 (4 years stale), every loan since
+        thin/injury-cut-short. playstyle_metrics confidence set very low
+        (0.35) as a result. Wigan Athletic 2024/25 app counts also disagree
+        across sources.
+  - **Tsimikas**: Serie A start-count disagreement (18 vs 6 starts) while on
+        loan at Roma -- used the more corroborated figure.
+  - **Endo**: two sources gave conflicting 2025/26 totals (12 apps/455 min
+        vs 8 apps/170 min) -- used the more specific PL-only figure; his
+        2025/26 minutes were judged too thin either way, so a combined
+        2023/24-2024/25 Liverpool aggregate was used for playstyle_metrics
+        instead (flagged as a judgment call).
+  - **Szoboszlai**: an unsupported "5G/5A" 2025/26 snippet conflicted with a
+        better-sourced 13G/12A all-competitions figure -- the snippet wasn't
+        used.
+  - **Ekitiké**: a "32 goals/17 assists in 99 apps across 3 clubs" aggregate
+        contradicted more detailed club-by-club data (e.g. 22 goals in 48
+        Frankfurt apps alone, 2024/25) -- the detailed figures were used,
+        the aggregate wasn't.
+  - **Gravenberch**: a ~99-apps Liverpool career aggregate surfaced but
+        couldn't be cross-verified -- not used; his 2025/26 PL-only apps
+        (35/5G/3A) used instead.
+  - **Van Dijk**: his 2025/26 goal tally is disputed (3 vs 5 vs 6 across
+        sources) -- resolved by using Transfermarkt's career-aggregate PL
+        figures rather than picking one of the three.
+- [ ] **A few players have genuinely thin/low-confidence data, which is
+      itself a finding, not a gap to force-fill:**
+  - **Nyoni**: 6 career senior appearances total, largest single-season
+        sample 14 minutes. `basis: manager_overlay_adjusted`,
+        confidence 0.3. Reports of a possible 2026/27 loan are unresolved.
+  - **Davies**: `has_liverpool_minutes: false` -- his only "Liverpool debut"
+        found was a 2022 preseason friendly, not senior competitive
+        minutes. Confidence 0.35.
+  - **Leoni**: only 1 Liverpool minute ever (injured on debut) -- basis
+        fell back to a single Parma season (17 apps), confidence 0.45.
+  - **Ngumoha**: correctly shows 0 senior Chelsea appearances (academy
+        only, a true fact) before his Liverpool breakthrough.
+
+## Resolved this session (2026-08-09/10)
+
+- [x] **Bournemouth full-season xG for 2024/25 and 2025/26** --
+      **2024/25: 67.25. 2025/26: 62.93.** Found via statmuse.com;
+      corroborated (not just single-sourced) by cross-checking the season
+      records bundled with each figure against independently-run searches
+      -- both matched exactly (2024/25: 58 goals/46 conceded/15W-11D-12L/9th;
+      2025/26: 58 goals/54 conceded/13W-18D-7L/6th/57pts). Recorded as
+      `"confidence": "corroborated"` rather than `"confirmed"` like 2023/24,
+      since no second source confirmed the xG number itself directly.
+      (`data/manager_priors/iraola_2026.json`)
+- [x] **Víctor Muñoz's Castilla 2024/25 stats dispute** -- resolved. Two
+      further independent sources (besoccer.com, a separate web search)
+      both confirmed the 34 apps/11 goals/7 assists figure already in use.
+      Now treated as confirmed rather than disputed.
+      (`data/player_profiles/munoz_victor.json`)
+- [x] **All 29 squad player profiles built** -- full squad coverage as of
+      2026-08-10 (was 4/29 as of the previous session). Built via 3
+      parallel background agents split by position group; every profile
+      schema-validated (required fields present, no null values in
+      strictly-typed fields, `basis` within the enum) and cross-checked
+      against `data/squad/liverpool_2026_27.json` for fotmob_id/
+      squad_number/name consistency -- 29/29 clean. See "Known data gaps"
+      above for what's still null/uncertain per player.
 
 ## Not started
 
@@ -64,17 +141,12 @@ let items live only in chat history.
       football-data.org client is confirmed working (live-tested
       2026-08-09, real fixture list returned) but nothing has been pulled
       into this directory yet.
-- [ ] **Remaining squad player profiles** -- 4 of ~28 squad players now have
-      profiles (Isak, Wirtz, Muñoz, Chiesa -- the ones with no/thin
-      Liverpool history, chosen to stress-test the positional-logic rules
-      first). The rest of the squad still needs profiles.
 - [ ] **Dashboard build** -- three tabs discussed: Fixtures, Squad + player
       stats, Game Plan (prior vs. posterior vs. next-match projection). Not
       started.
 - [ ] **GitHub Actions weekly automation** -- workflow file that pulls new
       results, runs `pipeline/bayesian_update.py`, commits the updated
-      posterior. Repo now exists and is set up (see below) -- this can
-      start any time.
+      posterior. Repo exists and is set up -- this can start any time.
 - [ ] **GitHub Secrets setup** -- once Actions is being built, the
       football-data.org key goes into repo secrets, never into a committed
       file.
@@ -82,62 +154,26 @@ let items live only in chat history.
       as prose in `style_notes`, not as a structured model. The three-layer
       positional logic (Liverpool minutes -> prior club minutes -> Iraola
       overlay) needs layer 3 actually implemented, not just described. The
-      player_profile schema's `basis` enum (`liverpool_recent_minutes`,
-      `prior_club_recent_minutes`, `manager_overlay_adjusted`,
-      `in_season_observed`) already anticipates this -- `manager_overlay_adjusted`
-      isn't used by any profile yet.
-
-## In progress / built this session (2026-08-09)
-
-- [x] football-data.org API live-tested and confirmed working (real
-      fixture list returned) -- the earlier `host_not_allowed` sandbox
-      issue is resolved now that this runs in Claude Code on real network
-      access.
-- [x] Git repo initialized, `.gitignore` and MIT `LICENSE` added, pushed to
-      https://github.com/btbiju/liverpool-tactical-bayesian . Excluded the
-      un-archived StatsBomb/Understat raw data (113MB+171MB) from git via
-      `.gitignore` rather than committing it -- kept locally, not part of
-      the Bayesian project's data flow. Also excluded `.claude/settings.local.json`
-      (Claude Code's own permission-allowlist file briefly captured the
-      football-data.org API key in plaintext when a command was approved --
-      never made it into git, but worth knowing this file needs to stay
-      gitignored going forward).
-- [x] Four player profiles built (`data/player_profiles/`): Isak, Wirtz,
-      Muñoz, Chiesa -- schema-validated. See "Known data gaps" above for
-      what's still null/uncertain in each.
-- [x] Manager prior populated (Iraola / Bournemouth) -- 6 continuous metrics,
-      formation prior, style notes, source citations
-- [x] Squad confirmed via FotMob (28 players, injuries, summer departures)
-- [x] Bayesian update engine (`pipeline/bayesian_update.py`) -- built and
-      smoke-tested, Normal-Normal + Dirichlet-Multinomial
-- [x] Three JSON schemas (manager prior, player profile, posterior state)
-- [x] Source hierarchy documented in README after the Wikipedia staleness issue
-- [x] Full-season xG for 2023/24 confirmed (32.9)
-- [x] Fixtures client built (`pipeline/fixtures_client.py`) -- reads API key
-      from environment variable, live-tested and working
+      player_profile schema's `basis` enum already anticipates this --
+      `manager_overlay_adjusted` is now used by one profile (Nyoni, for
+      lack of any real data rather than a deliberate overlay application),
+      but no profile has layer 3 actually computed yet.
 
 ## Correction to a prior assumption (2026-08-09)
 
 - **"Isak, Wirtz, Muñoz, Chiesa have no Liverpool history" was wrong for 3
       of the 4** -- discovered while researching their profiles. This
       session's knowledge cutoff is January 2026, so anything after that
-      had to be checked live, not recalled. Real transfer history:
-  - **Isak**: joined Liverpool September 2025 -- already ~1 season of LFC
-        minutes by now.
-  - **Wirtz**: joined Liverpool July 1, 2025 (official, liverpoolfc.com) --
-        already a full 2025/26 LFC season.
-  - **Chiesa**: joined Liverpool summer **2024** (BBC/Goal.com confirmed) --
-        already two LFC seasons, and is currently in an active transfer saga
-        (Napoli/Juventus links) as of August 2026 -- may not stay on the
-        squad.
-  - **Muñoz**: this one checks out -- genuinely Iraola's first Liverpool
-        signing, arrived from Osasuna summer 2026, no Liverpool history.
-  - The original "no Liverpool history, tests the positional-logic rules"
-        framing only actually holds for Muñoz. User decision (2026-08-09):
-        build all 4 profiles anyway, giving Isak/Wirtz/Chiesa a real
-        Liverpool `career_stint` using the schema's existing
-        `liverpool_recent_minutes` basis -- the schema was already designed
-        to handle this case, so no schema change needed, just correct data.
+      had to be checked live, not recalled. Real transfer history: Isak
+      joined Sept 2025, Wirtz joined July 2025, Chiesa joined summer 2024
+      (all already had real LFC minutes); only Muñoz (Osasuna, summer 2026)
+      genuinely had none. All 4 profiles were built with real data
+      regardless, using the schema's existing `liverpool_recent_minutes`
+      basis for the three who needed it -- no schema change was needed.
+      Same live-verification discipline was applied throughout the
+      25-profile squad-wide build that followed, specifically to avoid
+      repeating this mistake (see agent reports folded into "Known data
+      gaps" above).
 
 ## Decisions made (for reference, not action items)
 
@@ -151,5 +187,11 @@ let items live only in chat history.
 - Historical 2015/16 StatsBomb passing-network module cut from the main project --
   no data-flow connection to the Bayesian model, dilutes the project's focus.
   Kept locally in `archive/` for reference, not deleted, but excluded from
-  git (see "In progress" above) since it's not part of this story and is
-  too large for a portfolio repo.
+  git since it's not part of this story and is too large for a portfolio repo.
+- Git repo initialized, `.gitignore` and MIT `LICENSE` added, pushed to
+  https://github.com/btbiju/liverpool-tactical-bayesian . Un-archived
+  StatsBomb/Understat raw data (113MB+171MB) excluded from git via
+  `.gitignore` rather than committed. `.claude/settings.local.json` also
+  gitignored (Claude Code's own permission-allowlist file briefly captured
+  the football-data.org API key in plaintext when a command was approved --
+  never made it into git, but needs to stay gitignored going forward).

@@ -1,0 +1,84 @@
+{
+  "player_id": "endo_wataru",
+  "name": "Wataru Endo",
+  "fotmob_id": "202643",
+  "current_squad_number": 3,
+  "listed_positions": ["DM"],
+  "position_estimate": {
+    "primary": "DM",
+    "secondary": null,
+    "basis": "liverpool_recent_minutes",
+    "confidence": 0.45,
+    "last_updated": "2026-08-10"
+  },
+  "has_liverpool_minutes": true,
+  "career_stints": [
+    {
+      "club": "Shonan Bellmare",
+      "period": "2010-2015",
+      "positions_played": [{ "position": "DM", "share_of_minutes": 1.0 }],
+      "appearances": 167,
+      "goals": 23,
+      "note": "J2/J1 League, six seasons. J2 League Monthly MVP 2014 as Shonan won promotion to J1."
+    },
+    {
+      "club": "Urawa Red Diamonds",
+      "period": "2016-2018",
+      "positions_played": [{ "position": "DM", "share_of_minutes": 1.0 }],
+      "appearances": 73,
+      "goals": 5,
+      "note": "Won the J.League YBC Levain Cup, the 2017 AFC Champions League, and the Suruga Bank Championship."
+    },
+    {
+      "club": "Sint-Truiden",
+      "period": "2018/19",
+      "positions_played": [{ "position": "DM", "share_of_minutes": 1.0 }],
+      "appearances": 26,
+      "goals": 2,
+      "note": "Belgian First Division A, league-only total. Single season before an initial loan to Stuttgart."
+    },
+    {
+      "club": "VfB Stuttgart",
+      "period": "2019-2023",
+      "positions_played": [{ "position": "DM", "share_of_minutes": 1.0 }],
+      "appearances": 122,
+      "goals": 13,
+      "note": "Bundesliga league-only total across an initial loan (from 2019) plus a permanent spell through 2023. Became Japan's national team captain during this period and played at the 2022 World Cup."
+    },
+    {
+      "club": "Liverpool",
+      "period": "2023/24-2024/25",
+      "positions_played": [{ "position": "DM", "share_of_minutes": 1.0 }],
+      "appearances": 87,
+      "goals": 2,
+      "assists": 2,
+      "note": "All competitions combined across his first two Liverpool seasons since an August 2023 move. Premier League-only split: 57 apps, 1 goal, 1 assist. Backup defensive midfielder role, playing time reduced further in 2024/25."
+    },
+    {
+      "club": "Liverpool",
+      "period": "2025/26",
+      "positions_played": [{ "position": "DM", "share_of_minutes": 1.0 }],
+      "appearances": 8,
+      "goals": 0,
+      "assists": 1,
+      "note": "Premier League only, 170 minutes. Squad role diminished sharply under Slot; sidelined the final three months of the season with a foot injury, describing himself as in a 'difficult moment' out of starting contention. One source separately cited 12 total appearances / 455 minutes across all competitions for the season -- kept the more specific 8-app / 170-minute Premier League figure rather than merge inconsistent totals."
+    }
+  ],
+  "playstyle_metrics": {
+    "source_season": "2023/24-2024/25",
+    "source_club": "Liverpool",
+    "shots_per90": null,
+    "xg_per90": null,
+    "pass_accuracy_pct": null,
+    "progressive_passes_per90": null,
+    "touches_per90": null,
+    "duels_won_pct": null
+  },
+  "injury_status": null,
+  "notes": [
+    "basis reasoning: his single most recent season (2025/26, 170 PL minutes) is too thin to be representative -- comparable to the Isak precedent -- so playstyle_metrics instead draws on the combined 2023/24-2024/25 Liverpool sample (87 apps, well above the ~900-minute/10-start threshold), classified as liverpool_recent_minutes since it is still Liverpool data, just a two-season aggregate rather than a single clean season. Confidence kept low (0.45) given the steep recent decline in his role.",
+    "No injury currently listed in data/squad/liverpool_2026_27.json for 2026/27. Reporting from thisisanfield.com (May 2026) describes him as 'close to making a full return' from the 2025/26 foot injury heading into the US pre-season tour -- treated as recovering/fit rather than currently injured, consistent with the squad file.",
+    "No advanced per-90 metrics (shots, xG, pass accuracy, progressive passes, touches, duels won%) were verifiable for the combined 2023/24-2024/25 Liverpool sample from an accessible source -- left null rather than guessed. Some raw 2025/26 figures were found (50.82 passes/game, 83.33% pass completion, 1.06 fouls/90) but were not used as they describe the too-thin 2025/26 sample, not the source season chosen above.",
+    "Sources: sportsbrief.com, lfchistory.net, sofascore.com, en.wikipedia.org, statmuse.com, thisisanfield.com, fotmob.com (index only) -- via web search 2026-08-10."
+  ]
+}

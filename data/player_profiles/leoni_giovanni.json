@@ -1,0 +1,62 @@
+{
+  "player_id": "leoni_giovanni",
+  "name": "Giovanni Leoni",
+  "fotmob_id": "1609209",
+  "current_squad_number": 15,
+  "listed_positions": ["CB"],
+  "position_estimate": {
+    "primary": "CB",
+    "secondary": null,
+    "basis": "prior_club_recent_minutes",
+    "confidence": 0.45,
+    "last_updated": "2026-08-10"
+  },
+  "has_liverpool_minutes": true,
+  "career_stints": [
+    {
+      "club": "Sampdoria",
+      "period": "2023/24 (Feb-Jun 2024)",
+      "positions_played": [{ "position": "CB", "share_of_minutes": 1.0 }],
+      "appearances": 12,
+      "goals": 1,
+      "note": "Serie B, loan from Padova (his youth academy club, via Vigontina/Cittadella) with an option to buy that Sampdoria exercised. Padova first-team stats before this loan were not reliably verifiable and are omitted rather than guessed."
+    },
+    {
+      "club": "Parma",
+      "period": "2024/25",
+      "positions_played": [{ "position": "CB", "share_of_minutes": 1.0 }],
+      "appearances": 17,
+      "goals": 1,
+      "note": "Serie A breakout season after a permanent transfer from Sampdoria (Aug 2024, reported ~€5m + €3.5m in bonuses). First goal for Parma 9 Feb 2025, a header vs Cagliari."
+    },
+    {
+      "club": "Liverpool",
+      "period": "2025/26",
+      "positions_played": [{ "position": "CB", "share_of_minutes": 1.0 }],
+      "appearances": 1,
+      "goals": 0,
+      "note": "Signed permanently from Parma 15 August 2025 (£26m, contract to June 2031). Suffered an ACL rupture during his Liverpool debut, a League Cup tie vs Southampton, 23 September 2025 -- effectively a single-minute sample, not usable for the positional/playstyle estimate. See injury_status."
+    }
+  ],
+  "playstyle_metrics": {
+    "source_season": "2024/25",
+    "source_club": "Parma",
+    "shots_per90": null,
+    "xg_per90": null,
+    "pass_accuracy_pct": null,
+    "progressive_passes_per90": null,
+    "touches_per90": null,
+    "duels_won_pct": null
+  },
+  "injury_status": {
+    "description": "Cruciate ligament injury",
+    "expected_return": "Doubtful"
+  },
+  "notes": [
+    "Injury description and expected return taken directly from data/squad/liverpool_2026_27.json as instructed, not re-researched -- corroborated independently: Slot confirmed an approximate one-year absence after the Sept 2025 ACL tear, and as of Aug 2026 reporting describes him as still not fit for full team training, though 'seeing light at the end of the tunnel' during individual rehab work.",
+    "has_liverpool_minutes is true (he did play his debut before injury), but basis is prior_club_recent_minutes rather than liverpool_recent_minutes -- a single-appearance sample cut short by a season-ending injury is not representative, per the same judgment call used for Isak's Newcastle fallback.",
+    "Only 19 years old with a thin overall senior sample (Sampdoria loan + one Parma season) even before the injury -- confidence kept low (0.45) accordingly.",
+    "No advanced per-90 metrics (shots, xG, pass accuracy, progressive passes, touches, duels won%) were verifiable for the Parma season from an accessible source -- left null rather than guessed.",
+    "Sources: liverpool.com, espn.com, footballtransfers.com, beinsports.com, liverpoolfc.com, sampdoria.it, transferfeed.com -- via web search 2026-08-10."
+  ]
+}

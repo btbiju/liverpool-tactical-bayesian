@@ -1,0 +1,61 @@
+{
+  "player_id": "frimpong_jeremie",
+  "name": "Jeremie Frimpong",
+  "fotmob_id": "966018",
+  "current_squad_number": 30,
+  "listed_positions": ["RB", "RW"],
+  "position_estimate": {
+    "primary": "RB",
+    "secondary": "RW",
+    "basis": "liverpool_recent_minutes",
+    "confidence": 0.6,
+    "last_updated": "2026-08-10"
+  },
+  "has_liverpool_minutes": true,
+  "career_stints": [
+    {
+      "club": "Celtic",
+      "period": "2019-2021",
+      "positions_played": [{ "position": "RB", "share_of_minutes": 1.0 }],
+      "appearances": 51,
+      "goals": 3,
+      "assists": 8,
+      "note": "All competitions. Came through Manchester City's academy before a permanent move to Celtic in Sept 2019; won Young Player of the Year 2019/20 and part of a domestic treble-winning side."
+    },
+    {
+      "club": "Bayer Leverkusen",
+      "period": "2021-2025",
+      "positions_played": [{ "position": "RB", "share_of_minutes": 0.8 }, { "position": "RW", "share_of_minutes": 0.2 }],
+      "appearances": 190,
+      "goals": 30,
+      "assists": 44,
+      "note": "All competitions across four and a half seasons. Frequently deployed as an advanced/inverted wing-back under Xabi Alonso rather than a conventional right-back -- share_of_minutes between RB/RW is an estimate, not a sourced split. Won the Bundesliga 2023/24 (unbeaten domestic treble year); 53 apps in 2024/25 as Leverkusen finished 2nd."
+    },
+    {
+      "club": "Liverpool",
+      "period": "2025/26",
+      "positions_played": [{ "position": "RB", "share_of_minutes": 1.0 }],
+      "appearances": 33,
+      "goals": 2,
+      "assists": 2,
+      "note": "All competitions, debut Liverpool season after Liverpool triggered his ~€35m/£29.5m release clause. Missed roughly 20 games (5th-most of any Liverpool player) due to two separate hamstring injuries during the season."
+    }
+  ],
+  "playstyle_metrics": {
+    "source_season": "2025/26",
+    "source_club": "Liverpool",
+    "shots_per90": null,
+    "xg_per90": null,
+    "pass_accuracy_pct": null,
+    "progressive_passes_per90": null,
+    "touches_per90": null,
+    "duels_won_pct": null
+  },
+  "injury_status": null,
+  "notes": [
+    "Not currently listed with an injury in data/squad/liverpool_2026_27.json, and Iraola downplayed an Aug 2026 pre-season knock (vs Leeds, 4-2 defeat) as 'overload... I don't think it's an injury' rather than a new injury -- worth re-checking closer to the season opener (Newcastle, 23 Aug 2026) given his recurrent hamstring history in 2025/26. Not fabricated into injury_status since it was explicitly described as not-yet-confirmed.",
+    "The Leverkusen RB/RW share_of_minutes split (0.8/0.2) is this profile's own estimate based on his known usage as an advanced wing-back under Alonso, not a directly sourced figure -- flagged rather than presented as precise.",
+    "theanalyst.com has a 2025/26 Frimpong stats page (Opta-sourced) but it renders client-side JS and returned no usable per-90 data via WebFetch -- shots/xG/pass accuracy/progressive passes/touches/duels left null rather than guessed.",
+    "Sources: bundesliga.com, liverpoolfc.com, skysports.com, bbc.co.uk, thisisanfield.com, sportsmole.co.uk -- via web search 2026-08-10."
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "player_id": "becker_alisson",
+  "name": "Alisson Becker",
+  "fotmob_id": "319784",
+  "current_squad_number": null,
+  "listed_positions": ["GK"],
+  "position_estimate": {
+    "primary": "GK",
+    "secondary": null,
+    "basis": "liverpool_recent_minutes",
+    "confidence": 0.95,
+    "last_updated": "2026-08-10"
+  },
+  "has_liverpool_minutes": true,
+  "career_stints": [
+    {
+      "club": "Internacional",
+      "period": "2013-2016",
+      "positions_played": [{ "position": "GK", "share_of_minutes": 1.0 }],
+      "appearances": 115,
+      "note": "All-competitions total per source (thesportreview.com biography, via web search 2026-08-10). Goals/assists not reported for this stint; omitted rather than assumed."
+    },
+    {
+      "club": "AS Roma",
+      "period": "2016-2018",
+      "positions_played": [{ "position": "GK", "share_of_minutes": 1.0 }],
+      "appearances": 37,
+      "note": "Serie A only, per Transfermarkt profile fetch 2026-08-10 (37 apps, 28 goals conceded, 17 clean sheets, 3,330 minutes). All-competitions Roma total not separately confirmed. Was second-choice keeper his first season before becoming first choice in 2017/18, when he won Serie A Goalkeeper of the Year."
+    },
+    {
+      "club": "Liverpool",
+      "period": "2018-2026",
+      "positions_played": [{ "position": "GK", "share_of_minutes": 1.0 }],
+      "appearances": 255,
+      "note": "Premier League appearances only, per Transfermarkt (fetched 2026-08-10, current through the completed 2025/26 season): 255 apps, 106 clean sheets, 22,874 minutes. All-competitions Liverpool total per the same source: 499 appearances, 213 clean sheets, 44,792 minutes since joining 19 July 2018. Scored the first-ever goalkeeper goal in Liverpool's history (95th-minute header vs West Brom, 17 May 2021) -- a career goals total beyond that single well-documented instance was not independently confirmed, so the 'goals' field is omitted here rather than guessed."
+    }
+  ],
+  "playstyle_metrics": {
+    "source_season": "2025/26",
+    "source_club": "Liverpool",
+    "shots_per90": null,
+    "xg_per90": null,
+    "pass_accuracy_pct": null,
+    "progressive_passes_per90": null,
+    "touches_per90": null,
+    "duels_won_pct": null
+  },
+  "injury_status": null,
+  "notes": [
+    "2025/26 season box score (sources: matchbingo.co.uk, sportbusy.com, footystats.org, via web search 2026-08-10): 26 Premier League appearances, 24 goals conceded, 8 clean sheets, 64.77% save percentage; also 6 Champions League appearances, 4 clean sheets. Season-specific minutes could not be cleanly separated from the career PL minutes total (22,874), so playstyle_metrics.minutes is omitted rather than estimated.",
+    "Advanced outfield-style per-90 metrics (shots/xG/pass accuracy/progressive passes/touches/duels won%) not applicable or not found for a goalkeeper from accessible sources -- left null.",
+    "Career stint appearance totals for Internacional and Roma are all-competitions and Serie A-only respectively (scope noted per stint); not independently cross-verified against a second source.",
+    "No current injury reported as of 2026-08-10 research.",
+    "Sources: liverpoolfc.com, transfermarkt.us (profile fetched 2026-08-10), thesportreview.com, sportskeeda.com, skysports.com, matchbingo.co.uk, sportbusy.com, footystats.org -- via web search/fetch 2026-08-10."
+  ]
+}

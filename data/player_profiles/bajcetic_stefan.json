@@ -1,0 +1,60 @@
+{
+  "player_id": "bajcetic_stefan",
+  "name": "Stefan Bajcetic",
+  "fotmob_id": "1310118",
+  "current_squad_number": 43,
+  "listed_positions": ["CM"],
+  "position_estimate": {
+    "primary": "CM",
+    "secondary": null,
+    "basis": "prior_club_recent_minutes",
+    "confidence": 0.35,
+    "last_updated": "2026-08-10"
+  },
+  "has_liverpool_minutes": true,
+  "career_stints": [
+    {
+      "club": "Liverpool",
+      "period": "2022-2024",
+      "positions_played": [{ "position": "CM", "share_of_minutes": 1.0 }],
+      "appearances": 22,
+      "goals": 1,
+      "note": "Senior Liverpool first-team appearances since his August 2022 debut. Last first-team appearance was May 2024, before a series of loan moves and a long-term hamstring injury kept him out of the squad ever since."
+    },
+    {
+      "club": "Red Bull Salzburg",
+      "period": "2024/25 (first half)",
+      "positions_played": [{ "position": "CM", "share_of_minutes": 1.0 }],
+      "appearances": 19,
+      "note": "Season-long loan (from Aug 2024) cut short by a recall; includes 6 Champions League appearances. Reunited with former Liverpool assistant Pepijn Lijnders, then Salzburg's head coach. Goals/assists not reliably verifiable, omitted rather than guessed."
+    },
+    {
+      "club": "Las Palmas",
+      "period": "2024/25 (second half)",
+      "positions_played": [{ "position": "CM", "share_of_minutes": 1.0 }],
+      "appearances": 21,
+      "goals": 1,
+      "note": "La Liga loan from 31 January 2025 (12 starts of 21 appearances); scored his only goal for the club 16 Feb 2025 vs Mallorca. One earlier-dated source gave a much smaller in-progress figure ('four appearances, one goal') -- treated as a stale mid-loan snapshot rather than the final total, since the 21-appearance figure comes from a more complete end-of-window source. A hamstring injury in the closing weeks of this loan (May 2025) ended his season and required surgery."
+    }
+  ],
+  "playstyle_metrics": {
+    "source_season": "2024/25",
+    "source_club": "Las Palmas",
+    "shots_per90": null,
+    "xg_per90": null,
+    "pass_accuracy_pct": null,
+    "progressive_passes_per90": null,
+    "touches_per90": null,
+    "duels_won_pct": null
+  },
+  "injury_status": {
+    "description": "Hamstring injury",
+    "expected_return": "Doubtful"
+  },
+  "notes": [
+    "injury_status taken directly from data/squad/liverpool_2026_27.json as instructed, not independently re-derived. Context found in research: the hamstring injury originated at the end of his Las Palmas loan (May 2025), required surgery, kept him out of the entirety of the 2025/26 season, and as of late July 2026 he was still not training with the first team -- consistent with the 'Doubtful' status in the squad file.",
+    "playstyle_metrics left entirely null: his most recent action (Las Palmas, first half of 2025) is over a year old at the time of writing and no per-90 advanced stats for that loan spell were found in an accessible source. Given the long injury layoff, no in-season 2025/26 or 2026/27 data exists to use instead.",
+    "position_estimate.basis is 'prior_club_recent_minutes' using the Las Palmas loan as the most recent (though now stale) playing sample, since he has no current-season Liverpool minutes and his return timeline is unresolved ('Doubtful'). Confidence is low (0.35) given the long layoff and uncertainty about his role/fitness on eventual return.",
+    "Sources: liverpool.com, empireofthekop.com, thisisanfield.com, tribuna.com, liverpoolfc.com, punchng.com, 90min.com, thehardtackle.com, sportsmole.co.uk, bbc.co.uk (feeds) -- via web search 2026-08-10."
+  ]
+}

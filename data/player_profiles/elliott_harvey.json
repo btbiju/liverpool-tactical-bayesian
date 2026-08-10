@@ -1,0 +1,66 @@
+{
+  "player_id": "elliott_harvey",
+  "name": "Harvey Elliott",
+  "fotmob_id": "963964",
+  "current_squad_number": 19,
+  "listed_positions": ["AM"],
+  "position_estimate": {
+    "primary": "AM",
+    "secondary": null,
+    "basis": "liverpool_recent_minutes",
+    "confidence": 0.45,
+    "last_updated": "2026-08-10"
+  },
+  "has_liverpool_minutes": true,
+  "career_stints": [
+    {
+      "club": "Fulham",
+      "period": "2018/19",
+      "positions_played": [{ "position": "AM", "share_of_minutes": 1.0 }],
+      "appearances": 3,
+      "note": "Debut season only (EFL Cup and Premier League cameos), aged 15-16 -- he became the youngest player in Premier League history at the time. Left for Liverpool in July 2019. No goals or assists recorded in this brief debut season."
+    },
+    {
+      "club": "Blackburn Rovers",
+      "period": "2020/21",
+      "positions_played": [{ "position": "AM", "share_of_minutes": 1.0 }],
+      "appearances": 41,
+      "goals": 7,
+      "assists": 11,
+      "note": "Season-long Championship loan from Liverpool; nominated for EFL Young Player of the Season."
+    },
+    {
+      "club": "Liverpool",
+      "period": "2019/20-2024/25",
+      "positions_played": [{ "position": "AM", "share_of_minutes": 1.0 }],
+      "appearances": 143,
+      "goals": 15,
+      "note": "All-competitions Liverpool career total through 2024/25 (excludes the 2020/21 Blackburn loan season, itemized separately above), before his September 2025 loan to Aston Villa. Assists total not reliably verifiable across sources, omitted rather than guessed. In 2023/24 specifically (his last full Liverpool season): 53 all-comp appearances, 2783 minutes, 4 goals, 11 assists (34 PL apps, 3 goals, 6 assists), used as playstyle_metrics.source_season below."
+    },
+    {
+      "club": "Aston Villa",
+      "period": "2025/26",
+      "positions_played": [{ "position": "AM", "share_of_minutes": 1.0 }],
+      "appearances": 9,
+      "note": "Season-long loan with an obligation-to-buy clause (~$47m/£35m), reported motivation being World Cup contention. Villa's manager did not want to sign him permanently and he featured sparingly; Premier League split: 4 appearances, 211 minutes, 0 goals, 0 assists. The obligation was not triggered and he returned to Liverpool for 2026/27 pre-season under new manager Andoni Iraola."
+    }
+  ],
+  "playstyle_metrics": {
+    "source_season": "2023/24",
+    "source_club": "Liverpool",
+    "minutes": 2783,
+    "shots_per90": null,
+    "xg_per90": null,
+    "pass_accuracy_pct": null,
+    "progressive_passes_per90": null,
+    "touches_per90": null,
+    "duels_won_pct": null
+  },
+  "injury_status": null,
+  "notes": [
+    "Used his 2023/24 Liverpool season (his last full, healthy, non-loan season: 53 apps, 2783 minutes, 4 goals, 11 assists all-comp) as playstyle_metrics.source_season rather than the unproductive 2025/26 Aston Villa loan, since 211 Premier League minutes on loan at a club that ultimately declined to sign him permanently is too thin and unrepresentative to be a meaningful positional/style sample -- the same judgment call made for Isak's 2024/25 Newcastle season vs. his injury-disrupted Liverpool debut (see data/player_profiles/isak_alexander.json).",
+    "No per-90 advanced metrics (shots/90, xG/90, pass accuracy, progressive passes, touches, duels won%) could be verified from an accessible source for the 2023/24 season -- left null rather than guessed.",
+    "2023/24 positional note: reporting from that season describes him used mainly as a central midfielder (23 apps) but also as a right winger and impact substitute (9 starts from 22 appearances) -- consistent with his current single squad-listed position of AM but worth flagging as more fluid than a single tag suggests.",
+    "Sources: liverpoolfc.com, thisisanfield.com, anfieldwatch.co.uk, liverpool.com, sports.yahoo.com, statmuse.com, anfieldindex.com, theanalyst.com, sportskeeda.com, transfermarkt.us -- via web search 2026-08-10."
+  ]
+}

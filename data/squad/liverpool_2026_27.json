@@ -6,13 +6,15 @@
   "source_fetched_at": "2026-08-08",
   "players": [
     { "name": "Alisson Becker", "fotmob_id": "319784", "squad_number": null, "listed_positions": ["GK"], "nationality": "Brazil" },
-    { "name": "Vítezslav Jaros", "fotmob_id": "1068920", "squad_number": null, "listed_positions": ["GK"], "nationality": "Czech Republic" },
+    { "name": "Vítezslav Jaros", "fotmob_id": "1068920", "squad_number": null, "listed_positions": ["GK"], "nationality": "Czech Republic",
+      "injury_status": { "description": "Serious knee injury (reported as an ACL-type injury), sustained in training while on loan at Ajax, February 2026; underwent surgery. Not in the original squad fetch (2026-08-08) -- added 2026-08-10 after being caught during player-profile research.", "expected_return": "Late 2026, per Liverpool FC/Ajax statements as of June 2026 research" } },
     { "name": "Giorgi Mamardashvili", "fotmob_id": "948800", "squad_number": 25, "listed_positions": ["GK"], "nationality": "Georgia" },
     { "name": "Freddie Woodman", "fotmob_id": "582276", "squad_number": 28, "listed_positions": ["GK"], "nationality": "England" },
     { "name": "Harvey Davies", "fotmob_id": "1236818", "squad_number": 95, "listed_positions": ["GK"], "nationality": "England" },
 
     { "name": "Jérémy Jacquet", "fotmob_id": "1473534", "squad_number": null, "listed_positions": ["CB"], "nationality": "France" },
-    { "name": "Joseph Gomez", "fotmob_id": "568571", "squad_number": 2, "listed_positions": ["CB", "RB"], "nationality": "England" },
+    { "name": "Joseph Gomez", "fotmob_id": "568571", "squad_number": 2, "listed_positions": ["CB", "RB"], "nationality": "England",
+      "injury_status": { "description": "Muscular injury sustained in the opening 10 minutes of Liverpool's pre-season friendly win over Sunderland (Nashville), late July 2026. Not in the original squad fetch (2026-08-08) -- added 2026-08-10 after being caught during player-profile research.", "expected_return": "Manager Iraola estimated 'some weeks'; confirmed to miss the Premier League season-opener vs Newcastle United on 23 August 2026. No firmer date given as of 2026-08-10." } },
     { "name": "Virgil van Dijk", "fotmob_id": "209405", "squad_number": 4, "listed_positions": ["CB"], "nationality": "Netherlands", "captain": true },
     { "name": "Milos Kerkez", "fotmob_id": "1195281", "squad_number": 6, "listed_positions": ["LB"], "nationality": "Hungary" },
     { "name": "Conor Bradley", "fotmob_id": "1113690", "squad_number": 12, "listed_positions": ["RB", "RM"], "nationality": "Northern Ireland",

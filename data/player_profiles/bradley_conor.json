@@ -1,0 +1,69 @@
+{
+  "player_id": "bradley_conor",
+  "name": "Conor Bradley",
+  "fotmob_id": "1113690",
+  "current_squad_number": 12,
+  "listed_positions": ["RB", "RM"],
+  "position_estimate": {
+    "primary": "RB",
+    "secondary": "RM",
+    "basis": "liverpool_recent_minutes",
+    "confidence": 0.6,
+    "last_updated": "2026-08-10"
+  },
+  "has_liverpool_minutes": true,
+  "career_stints": [
+    {
+      "club": "Bolton Wanderers",
+      "period": "2022/23",
+      "positions_played": [{ "position": "RB", "share_of_minutes": 1.0 }],
+      "appearances": 43,
+      "note": "Season-long loan from the Liverpool academy; named both Bolton Player of the Year and Players' Player of the Year. Goals/assists totals not reliably verifiable, omitted rather than guessed."
+    },
+    {
+      "club": "Liverpool",
+      "period": "2023/24",
+      "positions_played": [{ "position": "RB", "share_of_minutes": 1.0 }],
+      "appearances": 23,
+      "goals": 1,
+      "note": "All competitions. Missed the first four months with a back injury, then established himself deputising for the injured Trent Alexander-Arnold, including a solo goal vs Chelsea (31 Jan 2024). Assists not reliably verifiable for this season split, omitted rather than guessed."
+    },
+    {
+      "club": "Liverpool",
+      "period": "2024/25",
+      "positions_played": [{ "position": "RB", "share_of_minutes": 1.0 }],
+      "appearances": 19,
+      "note": "All competitions. A mixed campaign -- playing time limited by injuries and Alexander-Arnold's continued use in the role that season. Goals/assists not reliably verifiable for this specific season split, omitted rather than guessed."
+    },
+    {
+      "club": "Liverpool",
+      "period": "2025/26",
+      "positions_played": [{ "position": "RB", "share_of_minutes": 1.0 }],
+      "appearances": 21,
+      "goals": 0,
+      "assists": 1,
+      "note": "All competitions (8 as substitute). Premier League-only split: 15 apps, 935 minutes. Season ended early due to a serious knee injury sustained during the campaign -- see injury_status."
+    }
+  ],
+  "playstyle_metrics": {
+    "source_season": "2025/26",
+    "source_club": "Liverpool",
+    "minutes": 935,
+    "shots_per90": null,
+    "xg_per90": null,
+    "pass_accuracy_pct": null,
+    "progressive_passes_per90": null,
+    "touches_per90": null,
+    "duels_won_pct": null
+  },
+  "injury_status": {
+    "description": "Knee injury",
+    "expected_return": "Late September 2026"
+  },
+  "notes": [
+    "Injury description and expected return date taken directly from data/squad/liverpool_2026_27.json as instructed, not re-researched -- consistent with reporting found independently ('ligament damage... rendering his campaign over').",
+    "Bradley has a substantial multi-season Liverpool track record (three prior seasons, 65 combined apps 2023/24-2024/25 plus this season's 21) even though his most recent sample is truncated by injury -- basis kept as liverpool_recent_minutes rather than falling back to the 2022/23 Bolton loan, which predates his established Liverpool role.",
+    "No advanced per-90 metrics (shots, xG, pass accuracy, progressive passes, touches, duels won%) were verifiable from an accessible source -- left null rather than guessed.",
+    "Sources: anfield-online.co.uk, lfchistory.net, soccerbase.com, premierleague.com, sportbusy.com, espn.com -- via web search 2026-08-10."
+  ]
+}

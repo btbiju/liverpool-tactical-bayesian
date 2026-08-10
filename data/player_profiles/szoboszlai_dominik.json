@@ -1,0 +1,62 @@
+{
+  "player_id": "szoboszlai_dominik",
+  "name": "Dominik Szoboszlai",
+  "fotmob_id": "846005",
+  "current_squad_number": 8,
+  "listed_positions": ["AM", "DM", "RW", "RB", "CM", "LW"],
+  "position_estimate": {
+    "primary": "CM",
+    "secondary": "AM",
+    "basis": "liverpool_recent_minutes",
+    "confidence": 0.6,
+    "last_updated": "2026-08-10"
+  },
+  "has_liverpool_minutes": true,
+  "career_stints": [
+    {
+      "club": "Red Bull Salzburg",
+      "period": "2018-2021",
+      "positions_played": [{ "position": "AM", "share_of_minutes": 1.0 }],
+      "appearances": 83,
+      "goals": 26,
+      "assists": 34,
+      "note": "All-competitions totals across two seasons before his January 2021 move to RB Leipzig."
+    },
+    {
+      "club": "RB Leipzig",
+      "period": "2021-2023",
+      "positions_played": [{ "position": "AM", "share_of_minutes": 1.0 }],
+      "appearances": 91,
+      "goals": 20,
+      "assists": 22,
+      "note": "All-competitions totals across two and a half seasons before his July 2023 move to Liverpool (Liverpool paid his release clause, ~€70m)."
+    },
+    {
+      "club": "Liverpool",
+      "period": "2025/26",
+      "positions_played": [{ "position": "CM", "share_of_minutes": 0.7 }, { "position": "RB", "share_of_minutes": 0.15 }, { "position": "AM", "share_of_minutes": 0.15 }],
+      "appearances": 53,
+      "goals": 13,
+      "assists": 12,
+      "note": "All-competitions, 2025/26 -- his most productive Liverpool season to date; voted Liverpool Men's Player of the Season. He was the club's second-top scorer (13, behind only Hugo Ekitike) and leading assist-maker (12). Premier League-only split: 36 appearances (all starts), 3233 minutes, 6 goals, 7 assists, including a joint-league-high 4 goals from outside the box and the most successful crosses (69) in the competition. Joined Liverpool July 2023; a full multi-season cumulative Liverpool total (2023/24 through 2025/26) was not itemized here because cross-source aggregation figures conflicted (one snippet suggested a much lower '5 goals, 5 assists' for 2025/26 that contradicts the more detailed and internally consistent Player-of-the-Season sourcing used above) -- the single most recent, best-corroborated season is used instead of a guessed multi-season sum. positions_played shares are a qualitative estimate based on his known primary central-midfield role plus reported use as an emergency right-back and advanced attacking outlet, not a source-verified minutes split."
+    }
+  ],
+  "playstyle_metrics": {
+    "source_season": "2025/26",
+    "source_club": "Liverpool",
+    "minutes": 3233,
+    "shots_per90": 1.98,
+    "xg_per90": 0.23,
+    "pass_accuracy_pct": null,
+    "progressive_passes_per90": null,
+    "touches_per90": null,
+    "duels_won_pct": null
+  },
+  "injury_status": null,
+  "notes": [
+    "shots_per90 and xg_per90 (non-penalty) are 2025/26 Premier League figures sourced via search snippets referencing xgstat.com/FootyStats-style aggregation (71 shots in 36 matches, 32.39% shooting accuracy, 0.23 npxG/90); the underlying detailed pages were not independently confirmed by direct fetch.",
+    "pass_accuracy_pct, progressive_passes_per90, touches_per90, duels_won_pct: no reliable season-specific number found -- left null rather than guessed.",
+    "There is a genuine cross-source conflict on his 2025/26 goal/assist totals (13G/12A all-comp per a detailed Player-of-the-Season retrospective vs. an unsupported '5G/5A' figure from a separate search snippet with no context). The higher, more detailed figure was used and the discrepancy flagged rather than silently resolved.",
+    "Sources: thisisanfield.com (Player of the Season award), premierleague.com, bundesliga.com, redbull.com, transfermarkt.us, wikipedia.org (career cross-check only) -- via web search 2026-08-10."
+  ]
+}

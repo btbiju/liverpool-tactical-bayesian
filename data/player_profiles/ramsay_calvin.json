@@ -1,0 +1,78 @@
+{
+  "player_id": "ramsay_calvin",
+  "name": "Calvin Ramsay",
+  "fotmob_id": "1076952",
+  "current_squad_number": 47,
+  "listed_positions": ["RB", "RWB"],
+  "position_estimate": {
+    "primary": "RB",
+    "secondary": "RWB",
+    "basis": "prior_club_recent_minutes",
+    "confidence": 0.35,
+    "last_updated": "2026-08-10"
+  },
+  "has_liverpool_minutes": true,
+  "career_stints": [
+    {
+      "club": "Aberdeen",
+      "period": "2019-2022",
+      "positions_played": [{ "position": "RB", "share_of_minutes": 1.0 }],
+      "appearances": 37,
+      "goals": 1,
+      "assists": 9,
+      "note": "All competitions, academy through first team. 2021/22 was his one full senior season (22 Scottish Premiership apps of the 37 total) and won him the SFWA Young Player of the Year award, prompting an initial ~£4m transfer to Liverpool in June 2022."
+    },
+    {
+      "club": "Preston North End",
+      "period": "2023/24",
+      "positions_played": [{ "position": "RB", "share_of_minutes": 1.0 }],
+      "appearances": 2,
+      "note": "Loan spell; recalled by Liverpool 15 Jan 2024 after a very thin sample. Goals/assists not applicable at this sample size."
+    },
+    {
+      "club": "Bolton Wanderers",
+      "period": "2023/24",
+      "positions_played": [{ "position": "RB", "share_of_minutes": 1.0 }],
+      "appearances": 3,
+      "note": "Loan spell (rest of the 2023/24 season); 69 minutes across three substitute/late appearances -- injury-disrupted."
+    },
+    {
+      "club": "Wigan Athletic",
+      "period": "2024/25",
+      "positions_played": [{ "position": "RB", "share_of_minutes": 1.0 }],
+      "appearances": 8,
+      "note": "League One, loan cut short -- returned to Liverpool 3 Jan 2025. One source specifies 8 League One appearances (3 starts, 302 minutes); another frames it as '12 total appearances across all competitions in the first half of the season' / 'three league starts' -- kept the more specific 8-app/302-minute figure rather than merge the two."
+    },
+    {
+      "club": "Kilmarnock",
+      "period": "2024/25 (Jan-Jun 2025)",
+      "positions_played": [{ "position": "RB", "share_of_minutes": 1.0 }],
+      "appearances": 8,
+      "note": "Scottish Premiership loan, all appearances reported as from the bench. Detailed minutes/goals not reliably verifiable, omitted rather than guessed."
+    },
+    {
+      "club": "Liverpool",
+      "period": "2025/26",
+      "positions_played": [{ "position": "RB", "share_of_minutes": 1.0 }],
+      "appearances": 2,
+      "note": "Returned to Liverpool's first-team picture: a League Cup start vs Crystal Palace (Oct 2025, 90 minutes) and an FA Cup substitute appearance vs Brighton. A planned mid-season loan was reportedly shelved after Conor Bradley's season-ending injury increased his value as emergency full-back cover."
+    }
+  ],
+  "playstyle_metrics": {
+    "source_season": "2021/22",
+    "source_club": "Aberdeen",
+    "shots_per90": null,
+    "xg_per90": null,
+    "pass_accuracy_pct": null,
+    "progressive_passes_per90": null,
+    "touches_per90": null,
+    "duels_won_pct": null
+  },
+  "injury_status": null,
+  "notes": [
+    "IMPORTANT DATA-QUALITY FLAG: Ramsay has not had a single season of substantial senior minutes since Aberdeen 2021/22 (now four years stale) -- every stint since (Preston, Bolton, Wigan, Kilmarnock, and his current Liverpool return) is fragmented, injury-affected, or bench-heavy. playstyle_metrics is sourced from Aberdeen 2021/22 as the least-bad option under the 'no guessing' rule, but this should be treated as a low-confidence, dated signal, not a real reflection of his current level -- confidence set to 0.35 accordingly, well below the other profiles in this batch.",
+    "No injury currently listed in data/squad/liverpool_2026_27.json, though his career to date has been repeatedly injury-affected (a documented factor in why loans were cut short) -- not fabricated into injury_status since nothing current was found.",
+    "No advanced per-90 metrics were verifiable for the Aberdeen 2021/22 season from an accessible source -- left null rather than guessed.",
+    "Sources: en.wikipedia.org, lfchistory.net, thisisanfield.com, liverpoolfc.com, bbc.co.uk, wiganathletic.com, kilmarnockfc.co.uk, grokipedia.com -- via web search 2026-08-10."
+  ]
+}

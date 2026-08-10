@@ -1,0 +1,63 @@
+{
+  "player_id": "woodman_freddie",
+  "name": "Freddie Woodman",
+  "fotmob_id": "582276",
+  "current_squad_number": 28,
+  "listed_positions": ["GK"],
+  "position_estimate": {
+    "primary": "GK",
+    "secondary": null,
+    "basis": "prior_club_recent_minutes",
+    "confidence": 0.4,
+    "last_updated": "2026-08-10"
+  },
+  "has_liverpool_minutes": true,
+  "career_stints": [
+    {
+      "club": "Newcastle United",
+      "period": "2013-2022",
+      "positions_played": [{ "position": "GK", "share_of_minutes": 1.0 }],
+      "appearances": 9,
+      "note": "Senior first-team Newcastle appearances only, per source. Spent most of this period out on loan (Hartlepool United, Crawley Town, Kilmarnock, Aberdeen, Swansea City, AFC Bournemouth) before permanently transferring away in 2022; loan-club appearances not included in this figure."
+    },
+    {
+      "club": "Swansea City (loan)",
+      "period": "2019-2021",
+      "positions_played": [{ "position": "GK", "share_of_minutes": 1.0 }],
+      "appearances": 43,
+      "note": "Two-season Championship loan from Newcastle; helped Swansea reach the 2019/20 play-off semi-finals and won the Championship Golden Glove in 2020/21 (21 league clean sheets that season)."
+    },
+    {
+      "club": "Preston North End",
+      "period": "2022/23-2024/25",
+      "positions_played": [{ "position": "GK", "share_of_minutes": 1.0 }],
+      "appearances": 128,
+      "note": "Permanent transfer June 2022; established as first-choice keeper. Figure is a sum of three separately-reported season totals (46 apps 2022/23, 45 apps 2023/24, 37 apps 2024/25, the latter including 12 clean sheets) rather than a single reconciled source -- some risk of scope inconsistency (all-competitions vs league-only) across the three season figures, flagged rather than presented as fully verified. Won Sir Tom Finney Player of the Year in his first season."
+    },
+    {
+      "club": "Liverpool",
+      "period": "2025/26",
+      "positions_played": [{ "position": "GK", "share_of_minutes": 1.0 }],
+      "appearances": 3,
+      "note": "Free transfer from Preston (contract expiry), summer 2025. Third-choice keeper; debuted in a Carabao Cup tie vs Crystal Palace, then a Premier League substitute appearance in the Merseyside derby (on from the 58th minute after Mamardashvili was stretchered off), then a first PL start vs Crystal Palace deputizing for absent/injured keepers. Very thin senior sample."
+    }
+  ],
+  "playstyle_metrics": {
+    "source_season": "2024/25",
+    "source_club": "Preston North End",
+    "shots_per90": null,
+    "xg_per90": null,
+    "pass_accuracy_pct": null,
+    "progressive_passes_per90": null,
+    "touches_per90": null,
+    "duels_won_pct": null
+  },
+  "injury_status": null,
+  "notes": [
+    "Basis is prior_club_recent_minutes: his Liverpool senior sample (3 appearances) is far below the ~900-minute threshold, so his last season as an established #1 (Preston 2024/25, 37 games, 12 clean sheets) is used as the more representative playstyle source instead.",
+    "A knee 'got stuck in the ground' during his Crystal Palace start in April 2026 (his own description, per liverpool.com) was reported as an injury scare, but he played through it and completed the match -- not treated as a current injury_status entry since it does not appear to be an ongoing issue.",
+    "Preston North End's 128-appearance career total is a sum of three independently-reported season figures rather than one aggregated source; flagged as a minor scope-consistency risk rather than a fully cross-verified number.",
+    "No current injury found as of 2026-08-10 research.",
+    "Sources: liverpoolfc.com, transfermarkt.us, thisisanfield.com, jackarmy.net, liverpool.com, onefootball.com, grokipedia.com (used only for the corroborated Newcastle appearance-count detail) -- via web search 2026-08-10."
+  ]
+}
