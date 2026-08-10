@@ -33,14 +33,6 @@ let items live only in chat history.
       `pipeline/fixtures_client.py` fills only score/opponent/date --
       metrics and formation must still come from FotMob per match before
       calling the Bayesian update.
-- [ ] **`goals_conceded_per_match` in the Iraola manager prior may be using
-      a stale partial-season number** -- while cross-verifying Bournemouth's
-      2025/26 xG (see "Resolved" below), the real full-season goals-conceded
-      figure came out to 54/38 = **1.42**, not the "1.6 (2025/26
-      partial-season snapshot)" currently used in the mean/variance
-      calculation in `data/manager_priors/iraola_2026.json`. This is a live
-      model input, not just a reference field, so it wasn't changed without
-      checking first -- still open, needs a decision.
 - [ ] **Federico Chiesa's squad status may already be stale** -- as of
       2026-08-09/10 he's reported in an active, unresolved transfer saga
       (Napoli links, "Liverpool outcast" framing) that could see him leave
@@ -126,6 +118,13 @@ let items live only in chat history.
       both confirmed the 34 apps/11 goals/7 assists figure already in use.
       Now treated as confirmed rather than disputed.
       (`data/player_profiles/munoz_victor.json`)
+- [x] **`goals_conceded_per_match` corrected** -- was using a stale 2025/26
+      partial-season snapshot (1.6). Real full-season totals: 1.21 (2024/25,
+      46/38) and 1.42 (2025/26, 54/38), both corroborated alongside the xG
+      work above. Mean corrected 1.4 -> 1.32, variance lowered 0.15 -> 0.08
+      (the wide variance was specifically compensating for the old pairing's
+      larger, wrong disagreement -- no longer warranted with two solid
+      full-season figures). (`data/manager_priors/iraola_2026.json`)
 - [x] **All 29 squad player profiles built** -- full squad coverage as of
       2026-08-10 (was 4/29 as of the previous session). Built via 3
       parallel background agents split by position group; every profile

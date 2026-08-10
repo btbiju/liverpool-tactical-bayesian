@@ -28,11 +28,11 @@
       "notes": "4.5 and 4.6 across the two most recent seasons -- stable."
     },
     "goals_conceded_per_match": {
-      "mean": 1.4,
-      "variance": 0.15,
+      "mean": 1.32,
+      "variance": 0.08,
       "pseudo_n": 10,
       "unit": "goals per match",
-      "notes": "1.6 (2025/26 partial-season snapshot) vs 1.2 (2024/25). Wide variance intentionally set higher here since these two figures disagree more than other metrics -- reflects real uncertainty."
+      "notes": "Corrected 2026-08-10: previously used a stale 2025/26 partial-season snapshot (1.6). Real full-season totals are 46 conceded/38 = 1.21 (2024/25) and 54 conceded/38 = 1.42 (2025/26) -- both now corroborated (see season_xg_totals notes for the cross-verification). Mean recomputed as (1.21+1.42)/2 = 1.32 (previously 1.4). Variance lowered from 0.15 to 0.08: the original wide variance was set specifically because the two figures disagreed more than other metrics under the old (wrong) 1.6 vs 1.2 pairing (spread 0.4); the corrected pairing has a tighter spread (~0.21) and both values are now full-season rather than one being a partial snapshot, so the extra uncertainty inflation is no longer warranted."
     },
     "accurate_passes_per_match": {
       "mean": 341.25,
