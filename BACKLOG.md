@@ -133,16 +133,33 @@ let items live only in chat history.
       against `data/squad/liverpool_2026_27.json` for fotmob_id/
       squad_number/name consistency -- 29/29 clean. See "Known data gaps"
       above for what's still null/uncertain per player.
+- [x] **Dashboard built** -- React + Vite, three tabs (Fixtures, Squad &
+      Stats, Game Plan), all reading `data/` directly via
+      `dashboard/scripts/sync-data.mjs` (copies committed JSON into
+      `dashboard/public/data/` on every dev/build -- no data duplicated,
+      no second source of truth). Chose React over plain HTML/JS
+      specifically for resume purposes (2026-08-10 discussion) even though
+      the app itself doesn't need a framework at this scale. Verified in
+      browser: all 3 tabs render with real data, light + dark mode, mobile
+      responsive (375px), player detail modal, production build (`npm run
+      build`) compiles clean, no console errors. `vite.config.js` sets
+      `base: '/liverpool-tactical-bayesian/'` for GitHub Pages on build.
+      Not yet deployed -- see "Not started" below.
 
 ## Not started
 
 - [ ] **Fixtures data** -- `data/fixtures/` is an empty directory. The
       football-data.org client is confirmed working (live-tested
       2026-08-09, real fixture list returned) but nothing has been pulled
-      into this directory yet.
-- [ ] **Dashboard build** -- three tabs discussed: Fixtures, Squad + player
-      stats, Game Plan (prior vs. posterior vs. next-match projection). Not
-      started.
+      into this directory yet. The dashboard's Fixtures tab already has a
+      normalizer for the raw football-data.org match shape and a graceful
+      empty state, so this should mostly just work once fixtures exist --
+      worth a spot-check after the first real pull.
+- [ ] **GitHub Pages deployment for the dashboard** -- builds clean locally
+      but there's no deploy workflow yet. Natural to bundle with the
+      GitHub Actions weekly automation below (one workflow: pull results ->
+      run bayesian_update.py -> commit -> rebuild dashboard -> deploy to
+      Pages), rather than two separate workflows.
 - [ ] **GitHub Actions weekly automation** -- workflow file that pulls new
       results, runs `pipeline/bayesian_update.py`, commits the updated
       posterior. Repo exists and is set up -- this can start any time.

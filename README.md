@@ -85,10 +85,14 @@ over the season.
 schema/                 JSON Schemas for prior, player profile, posterior state
 data/manager_priors/    Iraola's Bournemouth-derived prior (populated)
 data/squad/             Current Liverpool squad, FotMob as source of truth
-data/player_profiles/   Per-player career + playstyle data (to be populated)
-data/fixtures/          Upcoming/played fixtures (to be populated via API)
+data/player_profiles/   Per-player career + playstyle data (all 29 players populated)
+data/fixtures/          Upcoming/played fixtures (client built, not yet pulled)
 data/posteriors/        Weekly posterior snapshots (grows over the season)
-pipeline/               Bayesian update engine
+pipeline/               Bayesian update engine + football-data.org fixtures client
+dashboard/              React (Vite) dashboard -- Fixtures / Squad & Stats / Game
+                         Plan tabs, reads the data/ JSON files directly (see
+                         dashboard/scripts/sync-data.mjs). Deploys to GitHub
+                         Pages as a static site.
 archive/                Historical 2015/16 StatsBomb passing-network work --
                          kept for reference, deliberately excluded from the
                          main project. Different era, no data-flow connection
@@ -103,9 +107,11 @@ known data gaps -- kept up to date as the single source of truth so nothing
 gets lost across sessions.
 
 - [x] Manager prior populated (Iraola / Bournemouth, 6 metrics + formation)
-- [x] Squad confirmed (FotMob, 28 players + summer departures logged)
+- [x] Squad confirmed (FotMob, 29 players + summer departures logged)
 - [x] Bayesian update engine built and smoke-tested
-- [ ] Player-level career profiles (per the schema, per player)
-- [ ] football-data.org fixtures integration
-- [ ] Dashboard: Fixtures / Squad+Stats / Game Plan tabs
+- [x] Player-level career profiles (all 29 squad players)
+- [x] football-data.org fixtures client (live-tested, working)
+- [x] Dashboard: Fixtures / Squad & Stats / Game Plan tabs (React + Vite)
+- [ ] Fixtures data actually pulled into `data/fixtures/`
 - [ ] GitHub Actions weekly automation
+- [ ] GitHub Pages deployment workflow for the dashboard
