@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Badge } from '../components/Badge.jsx';
+import { splitNotesAndSources } from '../lib/parseSources.js';
 
 const METRIC_LABELS = {
   minutes: 'Minutes',
@@ -18,7 +19,7 @@ const BASIS_LABELS = {
   in_season_observed: '2026/27 in-season observation',
 };
 
-export function PlayerDetail({ player, onClose }) {
+export function PlayerDetail({ player, onClose, roleProjection, slotLabel }) {
   useEffect(() => {
     function onKey(e) {
       if (e.key === 'Escape') onClose();
@@ -52,8 +53,8 @@ export function PlayerDetail({ player, onClose }) {
           <div>
             <h2>{player.name}</h2>
             <p className="modal-panel__subtitle">
-              {player.position_estimate?.primary}
-              {player.position_estimate?.secondary ? ` / ${player.position_estimate.secondary}` : ''}
+              {slotLabel ?? player.position_estimate?.primary}
+              {!slotLabel && player.position_estimate?.secondary ? ` / ${player.position_estimate.secondary}` : ''}
             </p>
           </div>
         </div>
@@ -63,6 +64,18 @@ export function PlayerDetail({ player, onClose }) {
           {!player.has_liverpool_minutes && <Badge tone="neutral">No Liverpool history</Badge>}
           <Badge tone="neutral">Confidence {Math.round((player.position_estimate?.confidence ?? 0) * 100)}%</Badge>
         </div>
+
+        {roleProjection && (
+          <section className="modal-panel__section modal-panel__section--role">
+            <h3>Projected role under Iraola</h3>
+            <p className="role-projection__headline">{roleProjection.headline}</p>
+            <p>{roleProjection.role}</p>
+            <p className="modal-panel__muted">
+              Model projection synthesized from this player's real career data and Iraola's tactical prior — not
+              confirmed team news.
+            </p>
+          </section>
+        )}
 
         {player.injury_status && (
           <section className="modal-panel__section">
@@ -124,16 +137,39 @@ export function PlayerDetail({ player, onClose }) {
           </section>
         )}
 
-        {player.notes?.length > 0 && (
-          <section className="modal-panel__section">
-            <h3>Notes &amp; sourcing</h3>
-            <ul className="notes-list">
-              {player.notes.map((note, i) => (
-                <li key={i}>{note}</li>
-              ))}
-            </ul>
-          </section>
-        )}
+        {player.notes?.length > 0 &&
+          (() => {
+            const { notes: methodNotes, sources } = splitNotesAndSources(player.notes);
+            return (
+              <>
+                {methodNotes.length > 0 && (
+                  <section className="modal-panel__section">
+                    <h3>Methodology &amp; data-quality notes</h3>
+                    <ul className="notes-list">
+                      {methodNotes.map((note, i) => (
+                        <li key={i}>{note}</li>
+                      ))}
+                    </ul>
+                  </section>
+                )}
+                {sources && (
+                  <section className="modal-panel__section">
+                    <h3>Sources{sources.via ? <span className="modal-panel__muted"> — {sources.via}</span> : null}</h3>
+                    <table className="sources-table">
+                      <tbody>
+                        {sources.entries.map((s, i) => (
+                          <tr key={i}>
+                            <td className="sources-table__name">{s.name}</td>
+                            <td className="sources-table__context">{s.context ?? ''}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </section>
+                )}
+              </>
+            );
+          })()}
       </div>
     </div>
   );

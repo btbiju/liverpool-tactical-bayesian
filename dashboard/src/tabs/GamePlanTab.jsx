@@ -1,7 +1,8 @@
 import { useAsync } from '../hooks/useAsync.js';
-import { loadManagerPrior, loadPosteriors } from '../lib/dataLoaders.js';
+import { loadManagerPrior, loadPosteriors, loadPlayerProfiles } from '../lib/dataLoaders.js';
 import { LoadingState, ErrorState, EmptyState } from '../components/StatusStates.jsx';
 import { StatTile } from '../components/StatTile.jsx';
+import { PredictedLineup } from './PredictedLineup.jsx';
 
 const METRIC_DISPLAY = {
   possession_pct: { label: 'Possession', unit: '%', decimals: 1 },
@@ -65,6 +66,7 @@ function XgTrend({ seasonXg }) {
 export function GamePlanTab() {
   const { data: prior, error, loading } = useAsync(loadManagerPrior);
   const { data: posteriors } = useAsync(loadPosteriors);
+  const { data: players, loading: playersLoading } = useAsync(loadPlayerProfiles);
 
   if (loading) return <LoadingState label="Loading manager prior…" />;
   if (error) return <ErrorState error={error} />;
@@ -77,6 +79,14 @@ export function GamePlanTab() {
       <div className="section-heading">
         <h2>Game Plan — {prior.manager}'s Tactical Prior</h2>
         <span className="section-heading__meta">from {prior.source_seasons?.length ?? 0} Bournemouth seasons</span>
+      </div>
+
+      <div style={{ marginBottom: 32 }}>
+        {playersLoading || !players ? (
+          <LoadingState label="Projecting lineup…" />
+        ) : (
+          <PredictedLineup players={players} formationPrior={prior.formation_prior} />
+        )}
       </div>
 
       <div className="stat-grid" style={{ marginBottom: 28 }}>

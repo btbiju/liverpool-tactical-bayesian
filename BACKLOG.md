@@ -154,6 +154,44 @@ let items live only in chat history.
       build`) compiles clean, no console errors. `vite.config.js` sets
       `base: '/liverpool-tactical-bayesian/'` for GitHub Pages on build.
       Not yet deployed -- see "Not started" below.
+- [x] **Game Plan tab: predicted starting XI** (2026-08-11, user-requested)
+      -- `dashboard/src/lib/predictLineup.js` computes a most-likely 4-2-3-1
+      XI from real data: formation_prior's dominant formation, each
+      player's `position_estimate` (primary/secondary/confidence), and
+      current `injury_status` (injured players excluded from selection
+      entirely). Rendered as a clickable pitch graphic
+      (`PredictedLineup.jsx`); clicking a player opens the existing
+      `PlayerDetail` modal extended with a new "Projected role under
+      Iraola" section. This is genuinely the manager positional-deployment
+      overlay item below, arrived at from the UI side rather than the data
+      side -- worth reconciling if layer 3 gets built into the schema
+      later.
+  - The algorithm surfaces a real, honest squad problem rather than
+        hiding it: with Gomez and Leoni both injured, the only fit
+        centre-back partner for Van Dijk is Jérémy Jacquet -- a
+        2026/27 debutant with zero senior Liverpool minutes and the
+        lowest confidence (55%) of any starter. Chiesa (50% confidence,
+        transfer-saga flagged) is similarly the RW pick only by
+        elimination. Both are called out explicitly in their role
+        projections rather than presented as confident picks.
+  - Role/specialization text for the 11 selected players is hand-authored
+        (`dashboard/src/lib/roleProjections.js`), grounded in each
+        player's real profile data and Iraola's real tactical prior
+        (PPDA, possession%, cross volume, style_notes) -- explicitly
+        labeled in the UI as "a model projection... not confirmed team
+        news," consistent with the project's honesty conventions. If the
+        algorithm ever selects a player not in that lookup (injury
+        reshuffle, new signing), the UI shows a generic fallback message
+        rather than breaking or silently showing nothing.
+  - Only 4-2-3-1 has a visualized layout (the dominant formation at 83%);
+        4-1-4-1/4-3-3/other aren't built out. Fine for now given the
+        probability gap, but worth knowing if formation_prior ever shifts.
+- [x] **Notes & Sourcing reorganized** (2026-08-11, user-requested) -- was
+      a single flat bulleted list mixing methodology caveats and citations.
+      `dashboard/src/lib/parseSources.js` splits the "Sources: ..." note
+      (present in all 29 profiles) into a proper two-column table (source
+      name + parenthetical context), separate from a "Methodology &
+      data-quality notes" list for everything else.
 
 ## Not started
 
@@ -168,14 +206,19 @@ let items live only in chat history.
 - [ ] **GitHub Secrets setup** -- once Actions is being built, the
       football-data.org key goes into repo secrets, never into a committed
       file.
-- [ ] **Manager positional-deployment overlay** -- currently only captured
-      as prose in `style_notes`, not as a structured model. The three-layer
-      positional logic (Liverpool minutes -> prior club minutes -> Iraola
-      overlay) needs layer 3 actually implemented, not just described. The
-      player_profile schema's `basis` enum already anticipates this --
-      `manager_overlay_adjusted` is now used by one profile (Nyoni, for
-      lack of any real data rather than a deliberate overlay application),
-      but no profile has layer 3 actually computed yet.
+- [ ] **Manager positional-deployment overlay, data-model side** -- the
+      dashboard's predicted-XI feature (above) implements a version of this
+      at the presentation layer (JS-computed selection + hand-authored role
+      text), but the underlying data model still doesn't have it: layer 3
+      of the three-layer positional logic (Liverpool minutes -> prior club
+      minutes -> Iraola overlay) is still just prose in `style_notes`, not
+      structured data on each player_profile. The schema's `basis` enum
+      already anticipates this -- `manager_overlay_adjusted` is used by one
+      profile (Nyoni) but only for lack of real data, not a deliberate
+      overlay computation. Worth deciding whether the dashboard's role
+      projections should eventually move into the data layer (per-player
+      JSON) instead of living in dashboard source code, once this gets
+      built properly.
 
 ## Correction to a prior assumption (2026-08-09)
 
