@@ -28,6 +28,11 @@ function normalizeFixture(raw) {
   return { id: raw.id ?? `${opponent}-${date}`, opponent, isHome, date, status, competition, result };
 }
 
+// SCHEDULED (date set, kickoff time not yet confirmed) and TIMED (kickoff
+// confirmed) are both just "normal upcoming fixture" -- showing a badge for
+// either is redundant next to the date/time already in the row.
+const NORMAL_UPCOMING_STATUSES = new Set(['SCHEDULED', 'TIMED']);
+
 function statusTone(status) {
   if (status === 'FINISHED') return 'good';
   if (status === 'IN_PLAY' || status === 'LIVE' || status === 'PAUSED') return 'critical';
@@ -49,6 +54,10 @@ function FixtureRow({ fixture }) {
         {fixture.result ? (
           <span className="tabular-nums">
             {fixture.result.home}–{fixture.result.away}
+          </span>
+        ) : NORMAL_UPCOMING_STATUSES.has(fixture.status) ? (
+          <span className="fixture-row__kickoff-set" aria-label="Kickoff confirmed">
+            —
           </span>
         ) : (
           <Badge tone={statusTone(fixture.status)}>{fixture.status.replace('_', ' ')}</Badge>

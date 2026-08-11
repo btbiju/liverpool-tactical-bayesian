@@ -104,6 +104,15 @@ let items live only in chat history.
 
 ## Resolved this session (2026-08-09/10)
 
+- [x] **Fixtures data pulled** -- `pipeline/pull_fixtures.py` (new) calls
+      the existing `fixtures_client.get_liverpool_fixtures()` and writes
+      each match as its own file in `data/fixtures/` (38 fixtures, full
+      2026/27 Premier League season, all `TIMED` since the season hasn't
+      started). Also fixed a small dashboard UX issue this surfaced: the
+      Fixtures tab was showing a redundant gray "TIMED" badge on every
+      upcoming row next to the already-shown kickoff time -- `SCHEDULED`/
+      `TIMED` now render a plain "—" instead, badges reserved for actually
+      notable statuses (finished, live, postponed).
 - [x] **Bournemouth full-season xG for 2024/25 and 2025/26** --
       **2024/25: 67.25. 2025/26: 62.93.** Found via statmuse.com;
       corroborated (not just single-sourced) by cross-checking the season
@@ -148,13 +157,6 @@ let items live only in chat history.
 
 ## Not started
 
-- [ ] **Fixtures data** -- `data/fixtures/` is an empty directory. The
-      football-data.org client is confirmed working (live-tested
-      2026-08-09, real fixture list returned) but nothing has been pulled
-      into this directory yet. The dashboard's Fixtures tab already has a
-      normalizer for the raw football-data.org match shape and a graceful
-      empty state, so this should mostly just work once fixtures exist --
-      worth a spot-check after the first real pull.
 - [ ] **GitHub Pages deployment for the dashboard** -- builds clean locally
       but there's no deploy workflow yet. Natural to bundle with the
       GitHub Actions weekly automation below (one workflow: pull results ->

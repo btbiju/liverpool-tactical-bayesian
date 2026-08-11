@@ -112,6 +112,6 @@ gets lost across sessions.
 - [x] Player-level career profiles (all 29 squad players)
 - [x] football-data.org fixtures client (live-tested, working)
 - [x] Dashboard: Fixtures / Squad & Stats / Game Plan tabs (React + Vite)
-- [ ] Fixtures data actually pulled into `data/fixtures/`
+- [x] Fixtures data pulled (38 fixtures, full 2026/27 PL season)
 - [ ] GitHub Actions weekly automation
 - [ ] GitHub Pages deployment workflow for the dashboard

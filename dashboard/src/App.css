@@ -342,6 +342,11 @@
   text-align: right;
 }
 
+.fixture-row__kickoff-set {
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
 /* Squad tab */
 
 .filter-chips {
