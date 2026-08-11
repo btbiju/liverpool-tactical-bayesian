@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { Badge } from '../components/Badge.jsx';
 import { splitNotesAndSources } from '../lib/parseSources.js';
+import { PLAYING_STYLE } from '../lib/playingStyle.js';
 
 const METRIC_LABELS = {
   minutes: 'Minutes',
@@ -65,11 +66,35 @@ export function PlayerDetail({ player, onClose, roleProjection, slotLabel }) {
           <Badge tone="neutral">Confidence {Math.round((player.position_estimate?.confidence ?? 0) * 100)}%</Badge>
         </div>
 
+        {PLAYING_STYLE[player.player_id] && (
+          <section className="modal-panel__section">
+            <h3>Playing style</h3>
+            <p>{PLAYING_STYLE[player.player_id]}</p>
+          </section>
+        )}
+
         {roleProjection && (
           <section className="modal-panel__section modal-panel__section--role">
             <h3>Projected role under Iraola</h3>
             <p className="role-projection__headline">{roleProjection.headline}</p>
-            <p>{roleProjection.role}</p>
+            {roleProjection.zone && (
+              <div className="role-projection__field">
+                <span className="role-projection__label">Zone</span>
+                <p>{roleProjection.zone}</p>
+              </div>
+            )}
+            {roleProjection.reasoning && (
+              <div className="role-projection__field">
+                <span className="role-projection__label">Why</span>
+                <p>{roleProjection.reasoning}</p>
+              </div>
+            )}
+            {roleProjection.outlook && (
+              <div className="role-projection__field">
+                <span className="role-projection__label">Outlook</span>
+                <p>{roleProjection.outlook}</p>
+              </div>
+            )}
             <p className="modal-panel__muted">
               Model projection synthesized from this player's real career data and Iraola's tactical prior — not
               confirmed team news.
@@ -144,23 +169,31 @@ export function PlayerDetail({ player, onClose, roleProjection, slotLabel }) {
               <>
                 {methodNotes.length > 0 && (
                   <section className="modal-panel__section">
-                    <h3>Methodology &amp; data-quality notes</h3>
-                    <ul className="notes-list">
-                      {methodNotes.map((note, i) => (
-                        <li key={i}>{note}</li>
-                      ))}
-                    </ul>
+                    <details className="methodology-details">
+                      <summary>Methodology &amp; data-quality notes ({methodNotes.length})</summary>
+                      <ul className="notes-list">
+                        {methodNotes.map((note, i) => (
+                          <li key={i}>{note}</li>
+                        ))}
+                      </ul>
+                    </details>
                   </section>
                 )}
                 {sources && (
                   <section className="modal-panel__section">
                     <h3>Sources{sources.via ? <span className="modal-panel__muted"> — {sources.via}</span> : null}</h3>
                     <table className="sources-table">
+                      <thead>
+                        <tr>
+                          <th>Source</th>
+                          <th>Note</th>
+                        </tr>
+                      </thead>
                       <tbody>
                         {sources.entries.map((s, i) => (
                           <tr key={i}>
                             <td className="sources-table__name">{s.name}</td>
-                            <td className="sources-table__context">{s.context ?? ''}</td>
+                            <td className="sources-table__context">{s.context ?? '—'}</td>
                           </tr>
                         ))}
                       </tbody>

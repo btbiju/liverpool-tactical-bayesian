@@ -604,16 +604,51 @@
   margin-bottom: 8px;
 }
 
+.methodology-details summary {
+  cursor: pointer;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--text-muted);
+  list-style: revert;
+}
+
+.methodology-details summary:hover {
+  color: var(--text-secondary);
+}
+
+.methodology-details .notes-list {
+  margin-top: 10px;
+}
+
 .sources-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.82rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.sources-table thead th {
+  text-align: left;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  background: var(--page);
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--border);
 }
 
 .sources-table td {
-  padding: 5px 8px 5px 0;
+  padding: 6px 10px;
   border-bottom: 1px solid var(--gridline);
   vertical-align: top;
+}
+
+.sources-table tbody tr:nth-child(even) {
+  background: var(--page);
 }
 
 .sources-table tr:last-child td {
@@ -642,7 +677,28 @@
   font-weight: 700;
   font-size: 0.95rem;
   color: var(--text-primary);
-  margin: 0 0 6px;
+  margin: 0 0 10px;
+}
+
+.role-projection__field {
+  margin-bottom: 10px;
+}
+
+.role-projection__field:last-of-type {
+  margin-bottom: 8px;
+}
+
+.role-projection__field p {
+  margin: 2px 0 0;
+}
+
+.role-projection__label {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent);
 }
 
 /* Predicted lineup pitch */

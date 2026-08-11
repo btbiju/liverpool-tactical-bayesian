@@ -186,12 +186,39 @@ let items live only in chat history.
   - Only 4-2-3-1 has a visualized layout (the dominant formation at 83%);
         4-1-4-1/4-3-3/other aren't built out. Fine for now given the
         probability gap, but worth knowing if formation_prior ever shifts.
-- [x] **Notes & Sourcing reorganized** (2026-08-11, user-requested) -- was
-      a single flat bulleted list mixing methodology caveats and citations.
-      `dashboard/src/lib/parseSources.js` splits the "Sources: ..." note
-      (present in all 29 profiles) into a proper two-column table (source
-      name + parenthetical context), separate from a "Methodology &
-      data-quality notes" list for everything else.
+- [x] **Notes & Sourcing reorganized, twice** (2026-08-11, user-requested)
+      -- was a single flat bulleted list mixing methodology caveats and
+      citations. `dashboard/src/lib/parseSources.js` splits the
+      "Sources: ..." note (present in all 29 profiles) into a proper
+      two-column table (source name + parenthetical context, with a header
+      row and card borders so it reads as a table even when the context
+      column is empty). The methodology/data-quality notes are now
+      collapsed behind a `<details>` disclosure rather than shown open by
+      default -- still there for the project's sourcing-rigor story, just
+      not the first thing you see.
+- [x] **Playing Style section added for all 29 players** (2026-08-11,
+      user-requested -- the modal "felt like a stat board") --
+      `dashboard/src/lib/playingStyle.js`, a qualitative "how do they
+      actually play" description per player, grounded in facts already
+      present in their `career_stints` notes and `playstyle_metrics`
+      (nothing new researched, just synthesized into narrative form).
+      Shown prominently near the top of the player detail modal, ahead of
+      the career table.
+- [x] **Role projections deepened into real tactical analysis**
+      (2026-08-11, user-requested -- the first pass was just a career
+      recap, not analysis). `roleProjections.js` rewritten with a
+      structured `{ zone, reasoning, outlook }` shape per player instead
+      of one flowing paragraph, reasoning from three real inputs: the
+      player's own sourced skills/stats, Iraola's actual tactical
+      signature (9.45 PPDA elite press, 2.65 accurate crosses/match --
+      "through the middle, not width-and-crosses", direct vertical
+      buildup, centre-backs instructed to aggressively step and man-mark),
+      and standard 4-2-3-1 zonal geometry. `outlook` is a hedged,
+      reasoned expectation grounded in real trend data (e.g. Wirtz's
+      in-season touches/90 and duel-win% climb) -- never a fabricated
+      specific stat prediction. Rendered as labeled Zone/Why/Outlook
+      fields in the UI so the analytical structure is visible, not buried
+      in prose.
 
 ## Not started
 

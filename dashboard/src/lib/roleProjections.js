@@ -1,61 +1,112 @@
-// Hand-written role projections for the players the predictLineup.js
-// algorithm actually selects into the most-likely XI. Grounded in each
-// player's real profile data (data/player_profiles/) and Iraola's real
-// tactical prior (data/manager_priors/iraola_2026.json) -- not fabricated,
-// but explicitly a synthesized projection, not reported team news. Flagged
-// clearly in the UI (see PredictedLineup.jsx).
+// In-depth tactical projections for the players predictLineup.js actually
+// selects into the most-likely XI. Each entry reasons from three real
+// inputs: (1) the player's own sourced skillset/stats (data/player_profiles/),
+// (2) Iraola's real tactical signature (data/manager_priors/iraola_2026.json
+// -- PPDA 9.45 elite press, 50.5% possession/not dominant, 2.65 accurate
+// crosses/match ("through the middle, not width-and-crosses"), direct
+// vertical buildup, centre-backs instructed to aggressively step and
+// man-mark dropping forwards), and (3) standard 4-2-3-1 zonal geometry.
+// The `outlook` field is a hedged, reasoned expectation grounded in real
+// trend data where it exists -- never a fabricated specific stat.
 //
 // If predictLineup.js ever selects a player_id not listed here (a new
 // signing, an injury reshuffle), the UI falls back to a generic message
 // rather than silently showing nothing -- see PredictedLineup.jsx.
 export const ROLE_PROJECTIONS = {
   becker_alisson: {
-    headline: 'The last line of an extreme press',
-    role: "Alisson has been Liverpool's undisputed #1 since 2018 and remains it here (95% confidence) over Mamardashvili's backup role. Iraola's Bournemouth sides pressed at an elite 9.45 PPDA -- among the most aggressive in the league both recent seasons -- which pushes the defensive line high and leans on a keeper comfortable sweeping behind it and playing out under pressure. That's a long-standing strength of Alisson's game, not a new ask.",
+    headline: 'The outlet when the press gets bypassed',
+    zone: 'Sweeper-keeper, operating well off his line behind an elite-press back four.',
+    reasoning:
+      "Iraola's Bournemouth pressed at an elite 9.45 PPDA -- among the most aggressive in the league both recent seasons -- which pushes the whole defensive line high up the pitch. That leaves a large space in behind that only works if the keeper can sweep it and distribute quickly under pressure. Alisson's long, accurate distribution is exactly the tool that made Liverpool's own high-press system function from 2018 onward.",
+    outlook:
+      "Expect a more advanced starting position and more first-time long diagonals than a keeper under a deeper, more conservative buildup scheme would need to play.",
   },
   kerkez_milos: {
-    headline: 'Already knows this manager',
-    role: "The one player in this XI with a direct, first-hand relationship with Iraola: Kerkez started all 38 Premier League games at left-back for Iraola's Bournemouth in 2024/25 before both moved to Liverpool. Iraola's system wants front-foot, overlapping full-backs supporting a direct, vertical attack rather than sitting deep -- exactly the role Kerkez was already playing under this manager a year ago.",
+    headline: 'The one role that needs no translation',
+    zone: 'High, overlapping left flank -- functionally an auxiliary winger once Liverpool have the ball in the final third.',
+    reasoning:
+      "This is the one player in the XI whose fit isn't inferred -- it's observed. Kerkez started all 38 Premier League games at left-back for Iraola's Bournemouth in 2024/25, the exact overlapping, front-foot role this system asks of its full-backs in a direct, vertical attack.",
+    outlook:
+      "Of anyone in this projected XI, his output should be the most predictable -- not an adaptation to a new idea, just a continuation of a job he already excelled in under this specific manager.",
   },
   vandijk_virgil: {
-    headline: 'A different kind of responsibility',
-    role: "Liverpool's captain and an ever-present at centre-back (38 PL appearances, 3,420 minutes in 2025/26) is the clearest name on the team sheet. But Iraola's centre-backs are coached to aggressively step out and man-mark dropping forwards -- a high-risk, high-reward instruction that trades defensive shape for pressure, and leaves space in behind when it doesn't come off. That's a real adaptation for a defender built on positional discipline, not just a continuation of his Liverpool role under previous managers.",
+    headline: 'Elite discipline, redeployed against its instinct',
+    zone: 'Still the defensive organizer, but required to step 10-15 yards out of the back line to man-mark forwards dropping into midfield.',
+    reasoning:
+      "Iraola's centre-backs are explicitly coached to aggressively step out and mark dropping forwards -- a named 'high-risk, high-reward' instruction in the manager's own tactical profile, not a standard positionally-disciplined CB job. Van Dijk's entire reputation is built on elite timing and reading the game from a settled position, which is nearly the opposite skill to repeatedly abandoning the line on a trigger.",
+    outlook:
+      "Worth watching for real tactical friction here, not a seamless fit -- a defender built on discipline being asked to gamble more than he ever has under previous managers.",
   },
   jacquet_jeremy: {
-    headline: "The gap this XI can't hide",
-    role: "This slot is the honest weak point of the projected lineup, not a vote of confidence. With Joseph Gomez and Giovanni Leoni both injured, the only fit alternative next to Van Dijk is a 21-year-old with zero senior Liverpool minutes, a first Ligue 1 season at Rennes that was itself cut short by a shoulder injury, and the lowest position-estimate confidence (55%) of any starter in this XI. He's selected by elimination, not merit -- worth watching closely once Gomez or Leoni return.",
+    headline: 'The same demanding job, with no margin for error',
+    zone: 'Same aggressive stepping requirement as Van Dijk, but alongside a partner he has zero shared match minutes with.',
+    reasoning:
+      "The CB stepping instruction is already the highest-risk job in the defense -- it specifically punishes hesitation or miscommunication, since the space it leaves in behind is only covered if both centre-backs are reading the trigger together. A 21-year-old with a single injury-shortened Ligue 1 season and zero senior Liverpool minutes is about as untested a partner for that specific job as the current squad has.",
+    outlook:
+      "The most live tactical risk in the projected side -- expect Liverpool to look most exposed in behind specifically through his side of the defense until he settles in or a fit alternative (Gomez, Leoni) returns.",
   },
   frimpong_jeremie: {
-    headline: 'An inverted wing-back, redeployed',
-    role: "Frimpong spent four and a half seasons at Bayer Leverkusen frequently used as an advanced, inverted wing-back rather than a conventional right-back -- attacking-minded, comfortable high up the pitch. That profile lines up naturally with Iraola's front-foot, direct approach. His debut Liverpool season was interrupted by missing roughly 20 games, which is reflected in a moderate 60% confidence rather than a clear-cut certainty.",
+    headline: 'An inside passer, not a touchline crosser',
+    zone: 'Inverts into central midfield once Liverpool have possession, rather than holding the right touchline.',
+    reasoning:
+      "Frimpong was frequently deployed as an advanced, inverted wing-back under Xabi Alonso at Leverkusen -- tucking infield to become an auxiliary central passer rather than a conventional overlapping full-back. That maps directly onto Iraola's own service pattern: Bournemouth ranked 17th-19th in the league for crosses both recent seasons, so a right-back who adds passing options centrally is a better fit for how this team actually creates chances than a traditional wide crosser would be.",
+    outlook:
+      "Expect his influence to show up in central possession and combination play more than in cross counts -- a continuation of the Leverkusen pattern, not a reversion to orthodox full-back play.",
   },
   gravenberch_ryan: {
-    headline: 'The press-resistant pivot',
-    role: "Gravenberch's 2025/26 data (76 touches/90, a live 1.14 shots/90 for a deep midfielder) points to a mobile, ball-carrying #6 comfortable receiving under pressure -- which matters given Bournemouth-under-Iraola's own style_notes flag them as 'one of the weakest teams in the league at retaining possession under opposition pressure.' At 80% confidence, this is the most secure midfield slot in the projected XI outside the back line.",
+    headline: 'The pivot licensed to break lines himself',
+    zone: 'Deep double-pivot, but with license to carry the ball forward rather than just recycle it sideways.',
+    reasoning:
+      "His 2025/26 data -- 76 touches/90 and an unusually high 1.14 shots/90 for a holding midfielder -- describes a mobile, ball-carrying #6, not a stationary shield. That matters specifically here: Iraola's own style_notes flag his team as 'one of the weakest in the league at retaining possession under opposition pressure.' A pivot who can dribble out of pressure himself, rather than only recycling under it, directly compensates for a documented team weakness.",
+    outlook:
+      "Likely the midfielder most trusted to break lines under his own steam when the double pivot is pressed, rather than just the safe out-ball.",
   },
   macallister_alexis: {
-    headline: 'Pushed deeper, by design',
-    role: "Reporting on Mac Allister's 2025/26 season describes a deliberate shift into a deeper, more controlling midfield role compared to his first two Liverpool seasons -- which fits neatly alongside Gravenberch in Iraola's double pivot ahead of the back four. A proven Premier League and World Cup-winning midfielder, already with a domestic cup in Liverpool colours.",
+    headline: 'The base the carrier plays in front of',
+    zone: 'Deeper half of the double pivot, covering the space Gravenberch vacates when he carries forward.',
+    reasoning:
+      "Reporting on his 2025/26 season already describes a deliberate shift into a deeper, more controlling role compared to his earlier attacking-midfielder profile at Brighton and his first two Liverpool seasons. Paired with a partner (Gravenberch) licensed to drive forward, the standard pivot logic is that one half holds the base -- Mac Allister's own real-world redeployment already points that way independent of this pairing.",
+    outlook:
+      "Expect his goal/assist numbers to stay modest -- his 2025/26 season produced just 2 goals and 4 assists -- because the job here is protecting the space behind Gravenberch, not arriving in the box himself.",
   },
   gakpo_cody: {
-    headline: 'A shooter, not a crosser',
-    role: "Gakpo's 2025/26 numbers (2.85 shots/90, 0.35 xG/90) describe a player who cuts inside and shoots rather than one who lives out wide crossing into the box -- which matches Iraola's team identity almost exactly: Bournemouth ranked 17th-19th in the league for crosses both recent seasons, described in the manager's own prior as playing 'through the middle, not width-and-crosses.' A stylistically clean fit for the left-wing role in this system.",
+    headline: 'A shooter in a system with no crosses to swing',
+    zone: 'Left wing but cuts inside into central, shooting positions rather than staying out on the touchline.',
+    reasoning:
+      "Gakpo's 2025/26 season (2.85 shots/90, 0.35 xG/90, 87 shots across the campaign) already describes a player who shoots rather than crosses. That fits Iraola's actual service pattern almost exactly: at 2.65 accurate crosses per match, ranked 17th-19th in the league both recent seasons, this team does not create chances by getting to the byline and whipping balls in -- it's build through the middle. A winger who takes the shot himself is a far better system fit than a traditional wide provider.",
+    outlook:
+      "His shot volume, not his cross count, is the number worth tracking -- crossing metrics would be measuring the wrong thing entirely for this role.",
   },
   wirtz_florian: {
-    headline: 'Still finding his level',
-    role: "The marquee #10 signing, but the honest read of his debut Liverpool season is a player still adapting: Opta's own form split shows real in-season improvement (touches/90 rising from 63.9 to 81.9, duel success from 36.2% to 45.5% across his first 20 vs. last 12 games), not immediate world-class certainty. That trajectory, not the reputation alone, is why he holds this slot at a moderate 70% confidence.",
+    headline: 'The free man in the pocket, still growing into it',
+    zone: "The #10 pocket between the double pivot and the striker -- central, not tied to a flank, receiving between the lines.",
+    reasoning:
+      "35 goals and 45 assists across 140 Bundesliga appearances at Leverkusen already mark him as a scorer-creator hybrid, not a pure playmaker. His in-season Liverpool data shows real growth into a more involved, more defensively engaged version of that: touches/90 rose from 63.9 to 81.9 and duel-win rate from 36.2% to 45.5% across the season. In a system built on direct, vertical buildup rather than patient wide combination, service into the box comes through central combination and late box-arrivals rather than cutbacks from crosses -- a #10 who already scores as often as he creates arguably fits that pattern better than a pure creator would.",
+    outlook:
+      "Worth watching whether his shot involvement climbs relative to his assist-heavy Leverkusen split, given this system feeds the box more directly than patient wide buildup ever would.",
   },
   chiesa_federico: {
-    headline: 'The most fragile projection in the XI',
-    role: "Chiesa is selected here mainly because no other specialist right winger exists on the fit roster -- not because the underlying data supports it strongly. His 2025/26 season is a thin 318-minute sample, heavily used off the bench, and as of this data he's reported in an active, unresolved transfer saga that could see him leave Liverpool before this projected XI ever takes the pitch. Lowest confidence of any starter (50%).",
+    headline: 'The same system logic, on almost no evidence',
+    zone: 'Mirrors Gakpo on the opposite flank -- theoretically another inside-cutting threat rather than a byline crosser.',
+    reasoning:
+      "The same 'low crosses, cut inside, shoot' logic that fits Gakpo's real data applies in theory to Chiesa's profile (RW with ST as a secondary position) too. The difference is evidence: Gakpo's inside-cutting tendency shows up directly in his own shot data, while Chiesa's 2025/26 season is a 318-minute sample, heavily used off the bench, nowhere near enough to confirm the same pattern actually holds for him in this team.",
+    outlook:
+      "The honest read is that this is a projection built on system logic, not on observed Chiesa-specific evidence -- treat it as the most speculative slot in the entire lineup, compounded by his unresolved transfer situation.",
   },
   isak_alexander: {
-    headline: "Undisputed on ability, uncertain on fitness",
-    role: "On pure output there's no competition for the striker slot -- 23 goals in 34 Premier League games for Newcastle in 2024/25 is elite production. But his British-record-fee Liverpool debut season was badly interrupted (just 14 appearances, 702 minutes), and the most recent research pass still found his status flagged 'Injured.' The ability that earns him this slot and the fitness question that shadows it are both real at the same time.",
+    headline: 'The finisher a direct system is built to feed',
+    zone: 'The point of attack in behind the double pivot -- the target for line-breaking passes, not for crosses into a crowded box.',
+    reasoning:
+      "23 goals in 34 Premier League games for Newcastle in 2024/25 is elite penalty-box finishing output from a natural in-behind striker, not a target-man or hold-up #9. That's close to the ideal profile for 'direct, vertical attacking buildup' -- a system that isn't trying to work the ball into wide crossing positions is, by construction, trying to find exactly this kind of forward with passes through the middle instead.",
+    outlook:
+      "On ability alone this is the cleanest system fit in the entire XI -- an elite finisher paired with a team built to feed him directly. The only real question is fitness, given how badly his Liverpool debut season was interrupted, not tactical suitability.",
   },
 };
 
 export const GENERIC_ROLE_FALLBACK = {
   headline: 'Role projection not yet written',
-  role: "This player wasn't part of the most-likely XI when the role projections were last authored (a squad or injury change since then). The position-estimate basis and confidence above still reflect the current data -- open the full player profile from the Squad & Stats tab for career and playstyle detail.",
+  zone: null,
+  reasoning:
+    "This player wasn't part of the most-likely XI when the role projections were last authored (a squad or injury change since then). The position-estimate basis and confidence above still reflect the current data -- open the full player profile from the Squad & Stats tab for career and playstyle detail.",
+  outlook: null,
 };
