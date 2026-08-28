@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Reviewed tactical match observation",
+  "description": "A sourced, human-reviewed match record that is safe to feed into the Bayesian update pipeline. Missing tactical values remain absent or null; they must never be guessed.",
+  "type": "object",
+  "required": ["match_id", "matchweek", "date", "opponent", "result", "metrics", "formation", "sources", "metric_sources", "reviewed_at"],
+  "properties": {
+    "match_id": { "type": "integer" },
+    "matchweek": { "type": "integer", "minimum": 1, "maximum": 38 },
+    "date": { "type": "string", "format": "date" },
+    "opponent": { "type": "string" },
+    "result": { "type": "string" },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "possession_pct": { "type": ["number", "null"], "minimum": 0, "maximum": 100 },
+        "ppda": { "type": ["number", "null"], "minimum": 0 },
+        "shots_on_target_per_match": { "type": ["number", "null"], "minimum": 0 },
+        "goals_conceded_per_match": { "type": ["number", "null"], "minimum": 0 },
+        "accurate_passes_per_match": { "type": ["number", "null"], "minimum": 0 },
+        "accurate_crosses_per_match": { "type": ["number", "null"], "minimum": 0 }
+      }
+    },
+    "observation_variances": {
+      "type": "object",
+      "description": "Optional reviewed per-match noise overrides. Normally omitted so the manager prior's documented calibration is used.",
+      "patternProperties": {
+        "^[a-z_]+$": { "type": "number", "minimum": 0 }
+      }
+    },
+    "formation": { "type": ["string", "null"] },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "url", "accessed_at"],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "url": { "type": "string" },
+          "accessed_at": { "type": "string", "format": "date" },
+          "notes": { "type": "string" }
+        }
+      }
+    },
+    "metric_sources": {
+      "type": "object",
+      "description": "Maps every non-null metric and formation to one or more IDs from sources.",
+      "patternProperties": {
+        "^[a-z_]+$": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "reviewed_at": { "type": "string", "format": "date-time" },
+    "notes": { "type": "array", "items": { "type": "string" } }
+  }
+}

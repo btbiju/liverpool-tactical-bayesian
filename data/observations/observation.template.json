@@ -1,0 +1,20 @@
+{
+  "match_id": 0,
+  "matchweek": 1,
+  "date": "YYYY-MM-DD",
+  "opponent": "Opponent (H/A)",
+  "result": "W/D/L GF-GA",
+  "metrics": {
+    "possession_pct": null,
+    "ppda": null,
+    "shots_on_target_per_match": null,
+    "goals_conceded_per_match": null,
+    "accurate_passes_per_match": null,
+    "accurate_crosses_per_match": null
+  },
+  "formation": null,
+  "sources": [],
+  "metric_sources": {},
+  "reviewed_at": "YYYY-MM-DDTHH:MM:SSZ",
+  "notes": []
+}

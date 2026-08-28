@@ -2,7 +2,7 @@
   "player_id": "becker_alisson",
   "name": "Alisson Becker",
   "fotmob_id": "319784",
-  "current_squad_number": null,
+  "current_squad_number": 1,
   "listed_positions": ["GK"],
   "position_estimate": {
     "primary": "GK",

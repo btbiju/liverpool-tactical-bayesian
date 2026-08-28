@@ -2,16 +2,16 @@
   "player_id": "jacquet_jeremy",
   "name": "Jérémy Jacquet",
   "fotmob_id": "1473534",
-  "current_squad_number": null,
+  "current_squad_number": 5,
   "listed_positions": ["CB"],
   "position_estimate": {
     "primary": "CB",
     "secondary": null,
-    "basis": "prior_club_recent_minutes",
-    "confidence": 0.55,
-    "last_updated": "2026-08-10"
+    "basis": "in_season_observed",
+    "confidence": 0.75,
+    "last_updated": "2026-08-24"
   },
-  "has_liverpool_minutes": false,
+  "has_liverpool_minutes": true,
   "career_stints": [
     {
       "club": "Stade Rennais (Rennes)",
@@ -42,8 +42,10 @@
       "club": "Liverpool",
       "period": "2026/27",
       "positions_played": [{ "position": "CB", "share_of_minutes": 1.0 }],
-      "appearances": 0,
-      "note": "Contract began 1 July 2026 after recovering from the Rennes shoulder injury ahead of pre-season. No competitive Liverpool minutes yet as of this profile's creation (2026-08-10)."
+      "appearances": 1,
+      "goals": 0,
+      "assists": 0,
+      "note": "Contract began 1 July 2026. Made his competitive debut from the start at Newcastle on 23 August and was replaced by Ronald Araujo after 70 minutes."
     }
   ],
   "playstyle_metrics": {
@@ -59,10 +61,10 @@
   },
   "injury_status": null,
   "notes": [
-    "20-year-old France U21 international; genuinely no Liverpool history, a real test case for the positional-logic rules similar to Muñoz's profile.",
+    "20-year-old France U21 international whose first competitive Liverpool start came at Newcastle on 23 August 2026.",
     "Transfer fee reporting varies slightly across sources (£55m per Sky Sports' initial report in January 2026, up to £60m including add-ons per other outlets) -- not fully reconciled; not part of this schema's fields anyway, so not asserted as a single number.",
     "No current injury as of 2026-08-10 research -- the Rennes shoulder injury (surgery, Feb 2026) is reported as resolved ('recovered ahead of pre-season with Liverpool'), so injury_status is left null rather than carried forward as active.",
     "Position listed as CB only in both the squad file and every source checked; no secondary position found.",
-    "Sources: liverpoolfc.com, skysports.com, thisisanfield.com, goal.com, transfermarkt.us, fotmob.com, whoscored.com, aol.com -- via web search 2026-08-10."
+    "Sources: liverpoolfc.com (transfer, squad number and Newcastle debut), skysports.com, thisisanfield.com, goal.com, transfermarkt.us, fotmob.com, whoscored.com, aol.com -- researched 2026-08-10 and refreshed 2026-08-24."
   ]
 }

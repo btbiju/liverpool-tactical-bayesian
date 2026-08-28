@@ -8,12 +8,9 @@ never hardcoded, never committed. Set it locally with:
 
 In GitHub Actions, this comes from a repo secret (see BACKLOG.md).
 
-NOTE: as of this writing, this has not been live-tested against the real
-API from within the development sandbox, because that environment's network
-allowlist doesn't include api.football-data.org (unrelated to the key
-itself). It's structurally correct per the documented API and will run in
-any environment with normal internet access (GitHub Actions, a local
-machine, etc.). Flagged in BACKLOG.md until confirmed with a real response.
+The client has previously received a successful live response and populated
+the committed fixture data. Routine validation must remain offline; use a live
+request only when intentionally refreshing fixtures with a configured key.
 """
 import os
 import json
@@ -108,8 +105,8 @@ def extract_match_observation(match, matchweek):
 
 
 if __name__ == "__main__":
-    # Structural check only -- will raise RuntimeError with a clear message
-    # if run somewhere without network access to api.football-data.org.
+    # Explicit live check. Routine validation should import and test helpers
+    # without invoking this entry point.
     try:
         fixtures = get_liverpool_fixtures(status="SCHEDULED")
         print(f"Fetched {len(fixtures)} upcoming fixtures")

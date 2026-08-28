@@ -69,26 +69,28 @@ Ranked by trust, used in this order when sources disagree:
 | StatsBomb open data | 2015/16 historical event data (separate module) | Free, full event-level, but no coverage post-2015/16 for the Premier League |
 | Understat (GitHub-archived) | 2020/21 shot-level xG data | Live site blocks automated access; archived dataset stops at 2021/22 |
 | FotMob | Current squad (source of truth), career stints, current-season stats | ToS disallows automated/systematic scraping -- data pulled sparingly to seed/refresh, never polled live in a loop |
-| football-data.org (planned) | Fixtures, results feed for weekly updates | Free tier, built for this use case -- the stable backbone for the actual update pipeline |
+| football-data.org | Fixtures and results feed for weekly updates | Free tier is the stable fixture backbone, but supplies no tactical metrics |
 
 ## Update cadence
 
-Weekly, via GitHub Actions (free scheduled workflows on a public repo --
-no server cost). Each run pulls the week's results, applies
-`pipeline/bayesian_update.py`, and commits the updated posterior back to the
-repo. The commit history itself becomes a visible log of the model learning
-over the season.
+Weekly, via GitHub Actions (free scheduled workflows on a public repo, with no
+always-on server). Automation refreshes and commits raw fixture/result records.
+It does not invent tactical evidence: a reviewed, source-mapped observation must
+be added before `pipeline/build_posteriors.py` deterministically rebuilds the
+posterior series. The commit history then becomes a visible audit log of both
+the evidence and the model learning from it.
 
 ## Structure
 
 ```
-schema/                 JSON Schemas for prior, player profile, posterior state
+schema/                 JSON Schemas for prior, player, observation, posterior
 data/manager_priors/    Iraola's Bournemouth-derived prior (populated)
 data/squad/             Current Liverpool squad, FotMob as source of truth
-data/player_profiles/   Per-player career + playstyle data (all 29 players populated)
-data/fixtures/          Upcoming/played fixtures (client built, not yet pulled)
+data/player_profiles/   Per-player career + playstyle data (all 30 players populated)
+data/fixtures/          Upcoming/played fixtures (38 league fixtures populated)
+data/observations/      Reviewed, source-mapped tactical match observations
 data/posteriors/        Weekly posterior snapshots (grows over the season)
-pipeline/               Bayesian update engine + football-data.org fixtures client
+pipeline/               Fixture client, validation, update and posterior rebuild
 dashboard/              React (Vite) dashboard -- Fixtures / Squad & Stats / Game
                          Plan tabs, reads the data/ JSON files directly (see
                          dashboard/scripts/sync-data.mjs). Deploys to GitHub
@@ -107,11 +109,14 @@ known data gaps -- kept up to date as the single source of truth so nothing
 gets lost across sessions.
 
 - [x] Manager prior populated (Iraola / Bournemouth, 6 metrics + formation)
-- [x] Squad confirmed (FotMob, 29 players + summer departures logged)
+- [x] Squad confirmed (official club + FotMob, 30 players + summer departures logged)
 - [x] Bayesian update engine built and smoke-tested
-- [x] Player-level career profiles (all 29 squad players)
+- [x] Player-level career profiles (all 30 squad players)
 - [x] football-data.org fixtures client (live-tested, working)
 - [x] Dashboard: Fixtures / Squad & Stats / Game Plan tabs (React + Vite)
 - [x] Fixtures data pulled (38 fixtures, full 2026/27 PL season)
-- [ ] GitHub Actions weekly automation
-- [ ] GitHub Pages deployment workflow for the dashboard
+- [x] Reviewed observation contract and deterministic posterior rebuild
+- [x] Offline tests, schema/data validation, and posterior reproducibility checks
+- [x] GitHub Actions CI, weekly fixture refresh, secret scan, and Pages workflows
+- [ ] First production match observation and posterior
+- [ ] GitHub Pages activation/deployment after review and merge

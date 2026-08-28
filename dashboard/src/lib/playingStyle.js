@@ -20,7 +20,9 @@ export const PLAYING_STYLE = {
   vandijk_virgil:
     "One of the most positionally disciplined, aerially dominant centre-backs in the world -- reads the game to defend from a settled position rather than reacting to it, with genuine passing range to start attacks himself. Still ever-present at 38 Premier League appearances and 3,420 minutes in 2025/26.",
   jacquet_jeremy:
-    "Genuinely unproven at this level. A single, injury-shortened Ligue 1 season at Rennes (1,673 minutes) is the entirety of his senior first-team experience -- there isn't yet enough first-team data to describe a settled defensive style, only raw tools and potential.",
+    "Still unproven at this level. A single, injury-shortened Ligue 1 season at Rennes (1,673 minutes) preceded his competitive Liverpool debut from the start at Newcastle in August 2026 -- enough to begin observing his role, but not enough to claim a settled Premier League style.",
+  araujo_ronald:
+    "An experienced, aerially aggressive centre-back who can cover right-back. Liverpool's official Opta-derived factfile recorded 3.31 aerial duels won per 90 and 92% completion from 71 open-play passes per 90 in La Liga 2025/26 -- a defender comfortable contesting early and circulating possession, now adapting on a season-long loan.",
   gomez_joseph:
     "Liverpool's longest-serving outfield player (since 2015, 20,254 minutes for the club) -- a versatile, positionally sound defender comfortable at centre-back or right-back. His role has shrunk to squad depth in recent seasons (597 minutes in 2025/26), used in short bursts rather than as a first-choice starter.",
   leoni_giovanni:
