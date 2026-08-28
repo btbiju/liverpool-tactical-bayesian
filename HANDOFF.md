@@ -7,8 +7,8 @@ The repository contains a complete preseason manager prior, a 30-player squad,
 for 2026/27. The React dashboard is implemented and reads committed JSON through
 a generated static-data directory. The observation contract and deterministic
 posterior builder are implemented, but no production observation/posterior is
-committed yet. CI, weekly fixture refresh, and GitHub Pages workflows are ready
-for review and activation.
+committed yet. CI and weekly fixture refresh are active, and the dashboard is
+deployed through GitHub Pages.
 
 ## Existing data flow
 
@@ -60,6 +60,8 @@ ignored rather than converted into evidence.
 - JSON Schemas for prior, player, and posterior data.
 - football-data.org fixture client and 38 committed fixture files.
 - React/Vite dashboard with Fixtures, Squad & Stats, and Game Plan tabs.
+- Expanded played-match result cards containing the complete useful metadata
+  supplied by football-data.org, with explicit unavailable-field labels.
 - Player cards, player detail views, playing-style descriptions, and sourcing
   presentation.
 - Projected 4-2-3-1 starting XI with injury exclusion and role analysis.
@@ -92,27 +94,25 @@ ignored rather than converted into evidence.
 - Only the 4-2-3-1 pitch layout is supported.
 - Role projections and playing-style descriptions are hand-authored from
   sourced inputs; they are not generated posterior predictions.
-- The raw matchweek-one fixture still says `TIMED`. It must be refreshed through
-  football-data.org before the reviewed 2-2 Newcastle observation is committed.
-- Workflows are implemented locally but have not run on GitHub. Pages must be
-  configured to use GitHub Actions, and the rotated API key must be added as the
-  `FOOTBALL_DATA_API_KEY` repository secret.
+- Matchweek one is now a verified `FINISHED` API record. It can support the
+  reviewed 2-2 Newcastle observation, but tactical metrics still require
+  separate field-level sources.
+- The football-data.org credential is configured as the encrypted
+  `FOOTBALL_DATA_API_KEY` repository secret. The exposed original should still
+  be rotated when the provider offers a supported replacement path.
 
 See `BACKLOG.md` for player-specific uncertainty and source disagreements.
 
 ## Recommended next steps
 
-1. Rotate the exposed football-data.org key and configure the replacement as a
-   GitHub Actions repository secret.
-2. Review and merge the handover branch, then enable Pages with GitHub Actions
-   as its publishing source.
-3. Run the fixture refresh workflow and confirm matchweek one becomes final.
-4. Create the reviewed Newcastle observation using the official result and
+1. Rotate the exposed football-data.org key when the provider supplies a
+   supported rotation path, then update the existing repository secret.
+2. Create the reviewed Newcastle observation using the official result and
    compatible tactical-stat sources; leave PPDA/passing/crossing fields null
    unless they can be sourced precisely.
-5. Rebuild and review the first production posterior.
-6. Continue reviewing transfer and injury changes through the window close.
-7. Replace provisional observation-variance hyperparameters only when a
+3. Rebuild and review the first production posterior.
+4. Continue reviewing transfer and injury changes through the window close.
+5. Replace provisional observation-variance hyperparameters only when a
    documented match-level calibration dataset is available.
 
 ## Verification checklist
