@@ -16,16 +16,16 @@
     "id": 2502,
     "startDate": "2026-08-21",
     "endDate": "2027-05-30",
-    "currentMatchday": 1,
+    "currentMatchday": 2,
     "winner": null
   },
   "id": 560550,
   "utcDate": "2026-08-23T15:30:00Z",
-  "status": "TIMED",
+  "status": "FINISHED",
   "matchday": 1,
   "stage": "REGULAR_SEASON",
   "group": null,
-  "lastUpdated": "2026-08-11T05:20:18Z",
+  "lastUpdated": "2026-08-28T10:20:37Z",
   "homeTeam": {
     "id": 67,
     "name": "Newcastle United FC",
@@ -41,19 +41,26 @@
     "crest": "https://crests.football-data.org/64.png"
   },
   "score": {
-    "winner": null,
+    "winner": "DRAW",
     "duration": "REGULAR",
     "fullTime": {
-      "home": null,
-      "away": null
+      "home": 2,
+      "away": 2
     },
     "halfTime": {
-      "home": null,
-      "away": null
+      "home": 1,
+      "away": 0
     }
   },
   "odds": {
     "msg": "Activate Odds-Package in User-Panel to retrieve odds."
   },
-  "referees": []
+  "referees": [
+    {
+      "id": 11494,
+      "name": "Stuart Attwell",
+      "type": "REFEREE",
+      "nationality": "England"
+    }
+  ]
 }
