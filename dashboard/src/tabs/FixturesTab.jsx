@@ -208,21 +208,8 @@ export function FixturesTab() {
 
   return (
     <section>
-      {upcoming.length > 0 && (
-        <div style={{ marginBottom: 28 }}>
-          <div className="section-heading">
-            <h2>Upcoming</h2>
-            <span className="section-heading__meta">{upcoming.length} fixtures</span>
-          </div>
-          <ul className="fixture-list card">
-            {upcoming.map((f) => (
-              <FixtureRow key={f.id} fixture={f} />
-            ))}
-          </ul>
-        </div>
-      )}
       {finished.length > 0 && (
-        <div>
+        <div style={{ marginBottom: 28 }}>
           <div className="section-heading">
             <h2>Results</h2>
             <span className="section-heading__meta">{finished.length} played</span>
@@ -232,6 +219,19 @@ export function FixturesTab() {
               <FinishedFixtureCard key={f.id} fixture={f} />
             ))}
           </div>
+        </div>
+      )}
+      {upcoming.length > 0 && (
+        <div>
+          <div className="section-heading">
+            <h2>Upcoming</h2>
+            <span className="section-heading__meta">{upcoming.length} fixtures</span>
+          </div>
+          <ul className="fixture-list card">
+            {upcoming.map((f) => (
+              <FixtureRow key={f.id} fixture={f} />
+            ))}
+          </ul>
         </div>
       )}
     </section>

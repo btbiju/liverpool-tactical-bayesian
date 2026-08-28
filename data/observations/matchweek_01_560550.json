@@ -1,0 +1,58 @@
+{
+  "match_id": 560550,
+  "matchweek": 1,
+  "date": "2026-08-23",
+  "opponent": "Newcastle United (A)",
+  "result": "D 2-2",
+  "metrics": {
+    "possession_pct": 60.8,
+    "ppda": null,
+    "shots_on_target_per_match": 7,
+    "goals_conceded_per_match": 2,
+    "accurate_passes_per_match": null,
+    "accurate_crosses_per_match": null
+  },
+  "formation": null,
+  "sources": [
+    {
+      "id": "premier-league-match-stats",
+      "name": "Premier League — Newcastle United vs Liverpool match statistics",
+      "url": "https://www.premierleague.com/en/match/2645203/newcastle-united-vs-liverpool/stats",
+      "accessed_at": "2026-08-28",
+      "notes": "Official league page reports the 2-2 score, 60.8% Liverpool possession, seven Liverpool shots on target, and match metadata."
+    },
+    {
+      "id": "liverpool-match-report",
+      "name": "Liverpool FC — Szoboszlai scores late penalty to rescue point at Newcastle",
+      "url": "https://lfcbeta.liverpoolfc.com/it/notizia/szoboszlai-scores-late-penalty-rescue-point-liverpool-season-opener-newcastle",
+      "accessed_at": "2026-08-28",
+      "notes": "Official club report confirms the away fixture and 2-2 result."
+    },
+    {
+      "id": "tnt-match-stats-review",
+      "name": "TNT Sports — earlier conflicting possession listing (not used)",
+      "url": "https://www.tntsports.co.uk/football/premier-league/2026-2027/live-newcastle-united-liverpool_mtc21883335/live-stats.shtml",
+      "accessed_at": "2026-08-24",
+      "notes": "An earlier review recorded 58% Liverpool possession. The page was region-blocked on 2026-08-28 and the value disagrees with the official league page, so it is documented but not used."
+    }
+  ],
+  "metric_sources": {
+    "possession_pct": [
+      "premier-league-match-stats"
+    ],
+    "shots_on_target_per_match": [
+      "premier-league-match-stats"
+    ],
+    "goals_conceded_per_match": [
+      "premier-league-match-stats",
+      "liverpool-match-report"
+    ]
+  },
+  "reviewed_at": "2026-08-28T19:55:14Z",
+  "notes": [
+    "The committed football-data.org record is FINISHED and agrees on matchweek, date, result, and two goals conceded.",
+    "The official Premier League page reports 445 total passes at 84% completion, but not an exact completed-pass count; accurate_passes_per_match remains null rather than deriving a value from a rounded percentage.",
+    "The official Premier League page reports 27 total crosses at 26% completion, but not an exact completed-cross count; accurate_crosses_per_match remains null rather than deriving a value from a rounded percentage.",
+    "No compatible PPDA source was found, and the starting formation was not selected without an explicit formation label; both remain null."
+  ]
+}

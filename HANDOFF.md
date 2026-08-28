@@ -6,9 +6,9 @@ The repository contains a complete preseason manager prior, a 30-player squad,
 30 corresponding player profiles, and all 38 Liverpool Premier League fixtures
 for 2026/27. The React dashboard is implemented and reads committed JSON through
 a generated static-data directory. The observation contract and deterministic
-posterior builder are implemented, but no production observation/posterior is
-committed yet. CI and weekly fixture refresh are active, and the dashboard is
-deployed through GitHub Pages.
+posterior builder are implemented. Matchweek one now has a reviewed production
+observation and deterministic posterior snapshot. CI and weekly fixture refresh
+are active, and the dashboard is deployed through GitHub Pages.
 
 ## Existing data flow
 
@@ -72,6 +72,9 @@ ignored rather than converted into evidence.
 - Dependency-free offline schema and squad/profile consistency validation.
 - Reviewed match-observation schema, sourcing workflow, deterministic posterior
   rebuild/check command, and a controlled end-to-end integration fixture.
+- First production observation and posterior snapshot, using official Premier
+  League/Liverpool evidence for the Newcastle 2-2 draw and leaving unsupported
+  metrics null.
 - Dashboard posterior summary, metric deltas, formation belief, evidence log,
   and source links (replacing the raw JSON presentation).
 - CI, weekly football-data.org fixture refresh, history-aware secret scanning,
@@ -81,7 +84,9 @@ ignored rather than converted into evidence.
 
 ## Known gaps
 
-- No posterior snapshots or end-to-end matchweek update have been produced.
+- Only one posterior snapshot exists; early-season conclusions must remain
+  strongly qualified because the manager prior still carries ten virtual
+  matches of weight.
 - No reliable automated source is defined for tactical match observations.
 - Most advanced player per-90 fields remain null because accessible sources are
   blocked, client-rendered, or subscription-gated.
@@ -107,12 +112,11 @@ See `BACKLOG.md` for player-specific uncertainty and source disagreements.
 
 1. Rotate the exposed football-data.org key when the provider supplies a
    supported rotation path, then update the existing repository secret.
-2. Create the reviewed Newcastle observation using the official result and
-   compatible tactical-stat sources; leave PPDA/passing/crossing fields null
-   unless they can be sourced precisely.
-3. Rebuild and review the first production posterior.
-4. Continue reviewing transfer and injury changes through the window close.
-5. Replace provisional observation-variance hyperparameters only when a
+2. Continue the reviewed observation workflow after each finished match,
+   leaving PPDA/passing/crossing or formation fields null unless they can be
+   sourced precisely.
+3. Continue reviewing transfer and injury changes through the window close.
+4. Replace provisional observation-variance hyperparameters only when a
    documented match-level calibration dataset is available.
 
 ## Verification checklist

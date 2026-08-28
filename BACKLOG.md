@@ -336,11 +336,18 @@ let items live only in chat history.
       2026-08-28 Actions run changed match `560550` from `TIMED` to `FINISHED`
       and supplied the 2-2 full-time score, 1-0 half-time score, referee Stuart
       Attwell, and a fresh source timestamp. The raw response was committed by
-      automation as `b625bc7`; it was not hand-edited. The reviewed tactical
-      observation remains the next modeling step. Available corroborated inputs
-      include Liverpool's official result report and TNT's 58% possession/7
-      shots-on-target figures; PPDA, accurate passes, and accurate crosses remain
-      unavailable and must stay null unless sourced.
+      automation as `b625bc7`; it was not hand-edited.
+- [x] **First production observation and posterior completed.** The reviewed
+      Newcastle observation selects the official Premier League values of 60.8%
+      possession and seven shots on target, plus two goals conceded from the
+      verified result. An earlier TNT review reported 58% possession; that
+      disagreement is preserved in the observation and the official league
+      source wins under the repository hierarchy. PPDA, exact completed passes,
+      exact completed crosses, and formation remain null because the accessible
+      evidence does not expose compatible exact values. The deterministic
+      matchweek-one posterior shifts possession 50.55 -> 51.48, shots on target
+      4.55 -> 4.77, and goals conceded 1.32 -> 1.38 while leaving unsupported
+      metrics and formation unchanged.
 - [x] **Played-match details expanded in the dashboard.** Finished fixtures now
       render dedicated result cards containing the complete useful metadata
       supplied by football-data.org: full-time and half-time score, Liverpool
