@@ -418,6 +418,108 @@
   font-weight: 400;
 }
 
+.result-list {
+  display: grid;
+  gap: 16px;
+}
+
+.result-card {
+  padding: 18px;
+}
+
+.result-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--gridline);
+}
+
+.result-card__date,
+.result-card__competition {
+  display: block;
+}
+
+.result-card__date {
+  color: var(--text-primary);
+  font-size: 0.88rem;
+  font-weight: 650;
+}
+
+.result-card__competition {
+  margin-top: 3px;
+  color: var(--text-muted);
+  font-size: 0.76rem;
+}
+
+.result-card__scoreboard {
+  display: grid;
+  gap: 10px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--gridline);
+}
+
+.result-card__team {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+}
+
+.result-card__crest {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+.result-card__team-name {
+  display: block;
+  font-size: 0.94rem;
+  font-weight: 650;
+}
+
+.result-card__team-code {
+  display: block;
+  margin-top: 1px;
+  color: var(--text-muted);
+  font-size: 0.68rem;
+}
+
+.result-card__score {
+  min-width: 1.5ch;
+  font-size: 1.5rem;
+  line-height: 1;
+  text-align: right;
+}
+
+.result-card__details {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px 20px;
+  margin: 16px 0 0;
+}
+
+.result-card__detail {
+  min-width: 0;
+}
+
+.result-card__detail dt {
+  margin-bottom: 3px;
+  color: var(--text-muted);
+  font-size: 0.68rem;
+  font-weight: 650;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.result-card__detail dd {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  overflow-wrap: anywhere;
+}
+
 /* Squad tab */
 
 .filter-chips {
@@ -898,6 +1000,18 @@
 }
 
 @media (max-width: 640px) {
+  .fixture-row {
+    grid-template-columns: 1fr auto;
+  }
+
+  .fixture-row__date {
+    grid-column: 1 / -1;
+  }
+
+  .result-card__details {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .gameplan-columns {
     grid-template-columns: 1fr;
   }

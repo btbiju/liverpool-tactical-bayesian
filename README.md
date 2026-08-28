@@ -118,5 +118,5 @@ gets lost across sessions.
 - [x] Reviewed observation contract and deterministic posterior rebuild
 - [x] Offline tests, schema/data validation, and posterior reproducibility checks
 - [x] GitHub Actions CI, weekly fixture refresh, secret scan, and Pages workflows
+- [x] GitHub Pages deployment and first automated fixture/result refresh
 - [ ] First production match observation and posterior
-- [ ] GitHub Pages activation/deployment after review and merge

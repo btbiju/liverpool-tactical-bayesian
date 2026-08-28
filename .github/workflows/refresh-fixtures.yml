@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: fixture-refresh
@@ -32,9 +33,11 @@ jobs:
           python3 pipeline/validate_data.py
           python3 pipeline/build_posteriors.py --check
       - name: Commit fixture changes when needed
+        id: fixture-commit
         run: |
           if test -z "$(git status --porcelain -- data/fixtures)"; then
             echo "No fixture changes returned by football-data.org."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           git config user.name "github-actions[bot]"
@@ -42,3 +45,9 @@ jobs:
           git add data/fixtures
           git commit -m "Refresh Liverpool fixtures"
           git push
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+      - name: Deploy refreshed fixture data
+        if: steps.fixture-commit.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy-pages.yml --ref main

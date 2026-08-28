@@ -154,7 +154,8 @@ let items live only in chat history.
       responsive (375px), player detail modal, production build (`npm run
       build`) compiles clean, no console errors. `vite.config.js` sets
       `base: '/liverpool-tactical-bayesian/'` for GitHub Pages on build.
-      Not yet deployed -- see "Not started" below.
+      Deployed through GitHub Actions to
+      `https://btbiju.github.io/liverpool-tactical-bayesian/` on 2026-08-28.
 - [x] **Game Plan tab: predicted starting XI** (2026-08-11)
       -- `dashboard/src/lib/predictLineup.js` computes a most-likely 4-2-3-1
       XI from real data: formation_prior's dominant formation, each
@@ -221,19 +222,8 @@ let items live only in chat history.
       fields in the UI so the analytical structure is visible, not buried
       in prose.
 
-## Not started
+## Remaining work
 
-- [ ] **GitHub Pages deployment for the dashboard** -- builds clean locally
-      but there's no deploy workflow yet. Natural to bundle with the
-      GitHub Actions weekly automation below (one workflow: pull results ->
-      run bayesian_update.py -> commit -> rebuild dashboard -> deploy to
-      Pages), rather than two separate workflows.
-- [ ] **GitHub Actions weekly automation** -- workflow file that pulls new
-      results, runs `pipeline/bayesian_update.py`, commits the updated
-      posterior. Repo exists and is set up -- this can start any time.
-- [ ] **GitHub Secrets setup** -- once Actions is being built, the
-      football-data.org key goes into repo secrets, never into a committed
-      file.
 - [ ] **Manager positional-deployment overlay, data-model side** -- the
       dashboard's predicted-XI feature (above) implements a version of this
       at the presentation layer (JS-computed selection + hand-authored role
@@ -316,12 +306,18 @@ let items live only in chat history.
       and a synthetic end-to-end integration fixture that never enters production
       data. The dashboard now renders posterior deltas and an evidence log rather
       than dumping raw JSON.
-- [x] **Automation workflows prepared.** CI runs tests, schema/data validation,
+- [x] **Automation workflows activated.** CI runs tests, schema/data validation,
       posterior reproducibility, lint/build, and Gitleaks v3. A Monday fixture
       refresh workflow commits only football-data.org response changes. A Pages
-      workflow validates and deploys the static Vite artifact. These remain
-      unactivated until the branch is reviewed/merged, Pages is configured for
-      Actions, and the rotated API key is stored as `FOOTBALL_DATA_API_KEY`.
+      workflow validates and deploys the static Vite artifact. The handover was
+      merged through PR #1 on 2026-08-28, Pages was configured for Actions, and
+      the repository secret is stored under `FOOTBALL_DATA_API_KEY`. The first
+      manual refresh completed successfully and committed the raw API changes as
+      `b625bc7`; the weekly schedule remains enabled.
+      The refresh workflow explicitly dispatches the Pages workflow after a
+      fixture commit because ordinary pushes made with `GITHUB_TOKEN` do not
+      trigger other workflows. This keeps the published data current without a
+      personal access token or recursive workflow chain.
 - [x] **Neutral project handoff documentation added.** Durable operating
       instructions now live in `AGENTS.md`; implementation status and the
       verification checklist live in `HANDOFF.md`.
@@ -336,13 +332,18 @@ let items live only in chat history.
       Alisson No.1, Jaroš No.56, and Jacquet No.5. Jacquet's profile now records
       his competitive start at Newcastle, while Araujo's records his 20-minute
       debut. Current coverage is 30 squad players and 30 profiles.
-- [ ] **Refresh the raw matchweek-one fixture through football-data.org.** The
-      Newcastle match finished 2-2 on 2026-08-23, confirmed by Liverpool FC and
-      multiple match-stat sources, but the committed raw API record still says
-      `TIMED` because no live credential was used during offline handover work.
-      Do not hand-edit an API response to resemble a fresh pull. Rotate/configure
-      the API key, run `pipeline/pull_fixtures.py`, then add the reviewed tactical
-      observation. Available corroborated inputs include Liverpool's official
-      result report and TNT's 58% possession/7 shots-on-target figures; PPDA,
-      accurate passes, and accurate crosses remain unavailable and must stay
-      null unless sourced.
+- [x] **Raw matchweek-one fixture refreshed through football-data.org.** The
+      2026-08-28 Actions run changed match `560550` from `TIMED` to `FINISHED`
+      and supplied the 2-2 full-time score, 1-0 half-time score, referee Stuart
+      Attwell, and a fresh source timestamp. The raw response was committed by
+      automation as `b625bc7`; it was not hand-edited. The reviewed tactical
+      observation remains the next modeling step. Available corroborated inputs
+      include Liverpool's official result report and TNT's 58% possession/7
+      shots-on-target figures; PPDA, accurate passes, and accurate crosses remain
+      unavailable and must stay null unless sourced.
+- [x] **Played-match details expanded in the dashboard.** Finished fixtures now
+      render dedicated result cards containing the complete useful metadata
+      supplied by football-data.org: full-time and half-time score, Liverpool
+      outcome, teams and crests, competition, matchweek, stage, duration,
+      referee, match ID, and API update time. Missing fields are labeled `Not
+      supplied`; no tactical statistic is inferred from the fixture feed.
