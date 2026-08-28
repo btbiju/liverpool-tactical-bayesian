@@ -1,0 +1,66 @@
+{
+  "player_id": "araujo_ronald",
+  "name": "Ronald Araujo",
+  "fotmob_id": "921253",
+  "current_squad_number": 33,
+  "listed_positions": ["CB", "RB"],
+  "position_estimate": {
+    "primary": "CB",
+    "secondary": "RB",
+    "basis": "in_season_observed",
+    "confidence": 0.9,
+    "last_updated": "2026-08-24"
+  },
+  "has_liverpool_minutes": true,
+  "career_stints": [
+    {
+      "club": "Boston River",
+      "period": "2017-2018",
+      "positions_played": [{ "position": "CB", "share_of_minutes": 1.0 }],
+      "appearances": 31,
+      "goals": 0
+    },
+    {
+      "club": "Barcelona B",
+      "period": "2018-2020",
+      "positions_played": [{ "position": "CB", "share_of_minutes": 1.0 }],
+      "appearances": 45,
+      "goals": 6
+    },
+    {
+      "club": "Barcelona",
+      "period": "2019-2026",
+      "positions_played": [{ "position": "CB", "share_of_minutes": 1.0 }],
+      "appearances": 213,
+      "goals": 14,
+      "note": "Recorded as CB because no reliable minute-by-minute CB/RB split was available. Official Liverpool reporting separately confirms his right-back capability."
+    },
+    {
+      "club": "Liverpool (loan)",
+      "period": "2026/27",
+      "positions_played": [{ "position": "CB", "share_of_minutes": 1.0 }],
+      "appearances": 1,
+      "goals": 0,
+      "assists": 0,
+      "note": "Competitive debut as a centre-back substitute at Newcastle on 23 August 2026; 20 minutes recorded by FotMob."
+    }
+  ],
+  "playstyle_metrics": {
+    "source_season": "2025/26",
+    "source_club": "Barcelona",
+    "minutes": 1061,
+    "shots_per90": null,
+    "xg_per90": null,
+    "pass_accuracy_pct": null,
+    "progressive_passes_per90": null,
+    "touches_per90": null,
+    "duels_won_pct": null
+  },
+  "injury_status": null,
+  "notes": [
+    "Liverpool confirmed a season-long loan from Barcelona on 10 August 2026 and shirt number 33. He made his competitive debut from the bench at Newcastle on 23 August.",
+    "The official club factfile reports 71 open-play passes per 90 with 92% completion, 4.92 aerial duels contested per 90 and 3.31 won per 90 in La Liga 2025/26. These scopes do not map exactly to the current general pass-accuracy or total-duel fields, so they remain in notes rather than being forced into incompatible fields.",
+    "FotMob reports 1,061 La Liga minutes in 2025/26 and 20 Liverpool minutes in the opening 2026/27 league match.",
+    "Sources: liverpoolfc.com (loan confirmation, role, shirt number, Opta-derived 2025/26 factfile and Newcastle debut), fotmob.com (career totals, season minutes and Liverpool appearance) -- accessed 2026-08-24."
+  ]
+}

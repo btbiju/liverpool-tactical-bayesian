@@ -1,0 +1,51 @@
+name: Validate and build
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+      - name: Run Python tests
+        run: python3 -m unittest discover -s tests -v
+      - name: Validate project data
+        run: python3 pipeline/validate_data.py
+      - name: Check posterior snapshots are reproducible
+        run: python3 pipeline/build_posteriors.py --check
+      - name: Compile Python sources
+        run: python3 -m compileall -q pipeline tests
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: dashboard/package-lock.json
+      - name: Install dashboard dependencies
+        working-directory: dashboard
+        run: npm ci --ignore-scripts
+      - name: Lint dashboard
+        working-directory: dashboard
+        run: npm run lint
+      - name: Build dashboard
+        working-directory: dashboard
+        run: npm run build
+
+  secrets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -2,7 +2,7 @@
   "player_id": "jaros_vitezslav",
   "name": "Vítězslav Jaroš",
   "fotmob_id": "1068920",
-  "current_squad_number": null,
+  "current_squad_number": 56,
   "listed_positions": ["GK"],
   "position_estimate": {
     "primary": "GK",
@@ -50,7 +50,7 @@
     "expected_return": "Late 2026, per Liverpool FC/Ajax statements as of June 2026 research (also missed the Czech Republic's 2026 World Cup squad because of it)"
   },
   "notes": [
-    "IMPORTANT for BACKLOG.md: the squad file (data/squad/liverpool_2026_27.json, fetched 2026-08-08) lists no injury_status for Jaros, but live research on 2026-08-10 found a well-documented, still-active injury (knee surgery Feb 2026, expected return late 2026). Included here despite the squad file's silence -- worth flagging as a possible squad-file gap.",
+    "The original 2026-08-08 squad snapshot omitted his active knee injury; it was added to the squad record after corroboration on 2026-08-10.",
     "Basis is prior_club_recent_minutes rather than liverpool_recent_minutes: his only Liverpool senior minutes (2 appearances, Oct-Nov 2024) are far below the ~900-minute/10-start threshold, so the interrupted 2025/26 Ajax loan (19 league starts before injury) is used as the more representative recent sample instead.",
     "Earlier loan spells (St Patrick's Athletic 2021, Notts County 2021/22, Stockport County 2022/23) are documented in his career history but no appearance counts could be confirmed from accessible sources this session -- omitted from career_stints rather than guessed.",
     "Confidence score kept low (0.45) given he is currently sidelined by a serious injury with a return date extending well into the 2026/27 season -- his positional/role projection is unusually uncertain right now.",

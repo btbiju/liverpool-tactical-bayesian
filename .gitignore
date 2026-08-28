@@ -6,11 +6,11 @@ __pycache__/
 .venv/
 venv/
 .DS_Store
-.claude/settings.local.json
+**/settings.local.json
 
 # Cut 2015/16 StatsBomb/Understat historical module -- kept locally for
 # reference, not part of the Bayesian project's data flow, too large to
-# ship in the portfolio repo (see CLAUDE.md "How we got here" #4).
+# ship in the portfolio repo (see HANDOFF.md and BACKLOG.md).
 archive/
 data/events/
 data/lineups/

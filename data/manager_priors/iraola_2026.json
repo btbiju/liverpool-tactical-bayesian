@@ -10,6 +10,7 @@
       "mean": 50.55,
       "variance": 4.0,
       "pseudo_n": 10,
+      "observation_variance": 40.0,
       "unit": "percent",
       "notes": "Averaged from 50.5% and 50.6% across the two most recent Bournemouth seasons. Notably NOT a possession-dominant identity -- Liverpool ran 60-62% last season, so this is a meaningful expected shift toward a more balanced/direct approach."
     },
@@ -17,6 +18,7 @@
       "mean": 9.45,
       "variance": 1.5,
       "pseudo_n": 10,
+      "observation_variance": 15.0,
       "unit": "opposition passes allowed per defensive action",
       "notes": "~9.9 in 2024/25 (best in Premier League), ~9.0-10.5 in 2025/26 depending on point in season. Elite, extreme pressing identity, consistent across both seasons -- this is Iraola's clearest signature metric."
     },
@@ -24,6 +26,7 @@
       "mean": 4.55,
       "variance": 0.3,
       "pseudo_n": 10,
+      "observation_variance": 3.0,
       "unit": "shots on target per match",
       "notes": "4.5 and 4.6 across the two most recent seasons -- stable."
     },
@@ -31,6 +34,7 @@
       "mean": 1.32,
       "variance": 0.08,
       "pseudo_n": 10,
+      "observation_variance": 0.8,
       "unit": "goals per match",
       "notes": "Corrected 2026-08-10: previously used a stale 2025/26 partial-season snapshot (1.6). Real full-season totals are 46 conceded/38 = 1.21 (2024/25) and 54 conceded/38 = 1.42 (2025/26) -- both now corroborated (see season_xg_totals notes for the cross-verification). Mean recomputed as (1.21+1.42)/2 = 1.32 (previously 1.4). Variance lowered from 0.15 to 0.08: the original wide variance was set specifically because the two figures disagreed more than other metrics under the old (wrong) 1.6 vs 1.2 pairing (spread 0.4); the corrected pairing has a tighter spread (~0.21) and both values are now full-season rather than one being a partial snapshot, so the extra uncertainty inflation is no longer warranted."
     },
@@ -38,6 +42,7 @@
       "mean": 341.25,
       "variance": 100.0,
       "pseudo_n": 10,
+      "observation_variance": 1000.0,
       "unit": "completed passes per match",
       "notes": "342.8 and 339.7 -- consistent with the ~50% possession figure, i.e. moderate, not possession-monopoly buildup volume."
     },
@@ -45,6 +50,7 @@
       "mean": 2.65,
       "variance": 0.3,
       "pseudo_n": 10,
+      "observation_variance": 3.0,
       "unit": "completed crosses per match",
       "notes": "Low relative to league (ranked 17th-19th both seasons) -- supports the 'through the middle, not width-and-crosses' read."
     }

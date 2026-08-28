@@ -21,35 +21,54 @@ schedule required. That's the actual point of using conjugate priors instead
 of a hand-rolled weighted average.
 """
 import json
-from datetime import date
+from pathlib import Path
+
+
+def _validate_positive_number(name, value):
+    if isinstance(value, bool) or not isinstance(value, (int, float)) or value <= 0:
+        raise ValueError(f"{name} must be a positive number")
+
+
+def _resolve_observation_variance(prior_variance, pseudo_n, observation_variance):
+    """Return explicit match noise or infer it from the virtual-match prior."""
+    _validate_positive_number("prior_variance", prior_variance)
+    _validate_positive_number("pseudo_n", pseudo_n)
+    if observation_variance is None:
+        return prior_variance * pseudo_n
+    _validate_positive_number("observation_variance", observation_variance)
+    return observation_variance
 
 
 def update_normal_normal(prior_mean, prior_variance, pseudo_n, observed_value, observation_variance=None):
     """
     Fold one new observed match value into a Normal-Normal conjugate prior.
 
-    prior_mean, prior_variance : current belief, N(prior_mean, prior_variance)
+    prior_mean, prior_variance : current belief about the metric's mean,
+                                 N(prior_mean, prior_variance)
     pseudo_n                   : the prior's weight in equivalent 'virtual matches'
     observed_value              : the new match's actual value for this metric
     observation_variance        : how noisy a single match's reading is.
-                                   Defaults to prior_variance if not given --
-                                   i.e. assume one match is about as
-                                   informative as the prior's per-match unit.
+                                   Defaults to prior_variance * pseudo_n. This
+                                   treats the current belief as pseudo_n equally
+                                   noisy virtual matches and makes the default
+                                   mean update a transparent rolling average.
 
     Returns (posterior_mean, posterior_variance, new_pseudo_n).
     new_pseudo_n increases by 1 each call -- this is what makes the prior's
     grip loosen automatically as the season goes on, with no decay schedule
     to hand-tune.
     """
-    if observation_variance is None:
-        observation_variance = prior_variance
+    if isinstance(observed_value, bool) or not isinstance(observed_value, (int, float)):
+        raise ValueError("observed_value must be a number")
 
-    posterior_mean = (
-        observation_variance * prior_mean + prior_variance * observed_value
-    ) / (observation_variance + prior_variance)
-
-    posterior_variance = (prior_variance * observation_variance) / (
-        prior_variance + observation_variance
+    observation_variance = _resolve_observation_variance(
+        prior_variance, pseudo_n, observation_variance
+    )
+    prior_precision = 1 / prior_variance
+    observation_precision = 1 / observation_variance
+    posterior_variance = 1 / (prior_precision + observation_precision)
+    posterior_mean = posterior_variance * (
+        prior_mean * prior_precision + observed_value * observation_precision
     )
 
     return posterior_mean, posterior_variance, pseudo_n + 1
@@ -67,6 +86,8 @@ def update_dirichlet(alpha_counts, observed_formation):
     get an 'other' bucket rather than being impossible.
     """
     updated = dict(alpha_counts)
+    if not observed_formation:
+        return updated
     key = observed_formation if observed_formation in updated else "other"
     updated[key] = updated.get(key, 0) + 1
     return updated
@@ -91,12 +112,25 @@ def apply_matchweek(prior_state, match_observation):
     """
     new_metrics = {}
     shifts = []
+    metrics_observed = match_observation.get("metrics", {})
+    observation_variances = match_observation.get("observation_variances", {})
 
     for name, dist in prior_state["continuous_metrics"].items():
-        if name in match_observation.get("metrics", {}):
-            observed = match_observation["metrics"][name]
+        observed = metrics_observed.get(name)
+        if observed is not None:
+            effective_n = dist.get("effective_n", dist.get("pseudo_n"))
+            observation_variance = observation_variances.get(
+                name, dist.get("observation_variance")
+            )
+            resolved_observation_variance = _resolve_observation_variance(
+                dist["variance"], effective_n, observation_variance
+            )
             new_mean, new_var, new_n = update_normal_normal(
-                dist["mean"], dist["variance"], dist.get("effective_n", dist.get("pseudo_n")), observed
+                dist["mean"],
+                dist["variance"],
+                effective_n,
+                observed,
+                resolved_observation_variance,
             )
             shift = new_mean - dist["mean"]
             if abs(shift) > 0.01:
@@ -105,40 +139,57 @@ def apply_matchweek(prior_state, match_observation):
                     f"{name}: {dist['mean']:.2f} -> {new_mean:.2f} ({direction} {abs(shift):.2f}, "
                     f"observed {observed})"
                 )
-            new_metrics[name] = {"mean": round(new_mean, 3), "variance": round(new_var, 4), "effective_n": new_n}
+            new_metrics[name] = {
+                "mean": round(new_mean, 3),
+                "variance": round(new_var, 4),
+                "effective_n": new_n,
+                "observation_variance": round(resolved_observation_variance, 4),
+            }
         else:
             new_metrics[name] = dist
 
     new_formation_alpha = prior_state["formation_prior"]["alpha"]
-    if "formation" in match_observation:
-        new_formation_alpha = update_dirichlet(new_formation_alpha, match_observation["formation"])
+    formation = match_observation.get("formation")
+    if formation:
+        new_formation_alpha = update_dirichlet(new_formation_alpha, formation)
 
     log_entry = {
         "matchweek": match_observation["matchweek"],
         "date": match_observation["date"],
         "opponent": match_observation["opponent"],
         "result": match_observation["result"],
-        "metrics_observed": match_observation.get("metrics", {}),
+        "metrics_observed": {
+            name: value for name, value in metrics_observed.items() if value is not None
+        },
+        "sources": match_observation.get("sources", []),
         "notable_shifts": shifts,
     }
 
     return {
         "as_of_matchweek": match_observation["matchweek"],
         "continuous_metrics": new_metrics,
-        "formation_prior": {"alpha": new_formation_alpha},
+        "formation_prior": {**prior_state["formation_prior"], "alpha": new_formation_alpha},
         "update_log": prior_state.get("update_log", []) + [log_entry],
     }
 
 
 if __name__ == "__main__":
     # Smoke test using the real Iraola prior + one hypothetical observed match
-    with open("/home/claude/liverpool-analytics/data/manager_priors/iraola_2026.json") as f:
+    repo_root = Path(__file__).resolve().parent.parent
+    with (repo_root / "data" / "manager_priors" / "iraola_2026.json").open() as f:
         prior = json.load(f)
 
     state = {
         "as_of_matchweek": 0,
         "continuous_metrics": {
-            k: {"mean": v["mean"], "variance": v["variance"], "effective_n": v["pseudo_n"]}
+            k: {
+                "mean": v["mean"],
+                "variance": v["variance"],
+                "effective_n": v["pseudo_n"],
+                "observation_variance": v.get(
+                    "observation_variance", v["variance"] * v["pseudo_n"]
+                ),
+            }
             for k, v in prior["continuous_metrics"].items()
         },
         "formation_prior": prior["formation_prior"],
@@ -152,6 +203,14 @@ if __name__ == "__main__":
         "result": "TBD",
         "metrics": {"possession_pct": 46.5, "ppda": 8.9, "goals_conceded_per_match": 1},
         "formation": "4-2-3-1",
+        "sources": [
+            {
+                "id": "controlled-example",
+                "name": "Controlled smoke-test input",
+                "url": "https://example.invalid/not-a-real-match-source",
+                "accessed_at": "2026-08-23",
+            }
+        ],
     }
 
     new_state = apply_matchweek(state, hypothetical_match)

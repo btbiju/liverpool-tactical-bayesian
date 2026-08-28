@@ -1,0 +1,33 @@
+{
+  "match_id": 999001,
+  "matchweek": 1,
+  "date": "2026-08-23",
+  "opponent": "Controlled Example FC (H)",
+  "result": "W 2-1",
+  "metrics": {
+    "possession_pct": 48.0,
+    "ppda": null,
+    "shots_on_target_per_match": 5,
+    "goals_conceded_per_match": 1,
+    "accurate_passes_per_match": null,
+    "accurate_crosses_per_match": null
+  },
+  "formation": "4-2-3-1",
+  "sources": [
+    {
+      "id": "controlled-fixture",
+      "name": "Controlled test fixture — not real match data",
+      "url": "https://example.invalid/controlled-test-fixture",
+      "accessed_at": "2026-08-24",
+      "notes": "Used only by offline integration tests."
+    }
+  ],
+  "metric_sources": {
+    "possession_pct": ["controlled-fixture"],
+    "shots_on_target_per_match": ["controlled-fixture"],
+    "goals_conceded_per_match": ["controlled-fixture"],
+    "formation": ["controlled-fixture"]
+  },
+  "reviewed_at": "2026-08-24T12:00:00Z",
+  "notes": ["Synthetic values for deterministic pipeline verification only."]
+}

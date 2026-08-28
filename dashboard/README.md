@@ -1,16 +1,27 @@
-# React + Vite
+# Liverpool tactical dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Static React/Vite presentation for the repository's committed squad, fixture,
+manager-prior, player-profile, and posterior JSON.
 
-Currently, two official plugins are available:
+## Local commands
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```bash
+npm ci --ignore-scripts
+npm run dev
+npm run lint
+npm run build
+npm run preview
+```
 
-## React Compiler
+`predev` and `prebuild` run `scripts/sync-data.mjs`, which replaces the ignored
+`public/data/` directory with a copy of the repository's committed project data.
+The production build is written to ignored `dist/`.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Deployment
 
-## Expanding the Oxlint configuration
+The production base path is `/liverpool-tactical-bayesian/` for the repository's
+GitHub Pages project site. `.github/workflows/deploy-pages.yml` validates the
+model/data, lints and builds the dashboard, uploads `dist/`, and deploys it with
+the official Pages actions.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+Do not edit `public/data/` or `dist/` directly; both are reproducible artifacts.

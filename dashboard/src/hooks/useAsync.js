@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 // Runs `loader()` once on mount and exposes { data, error, loading }.
-export function useAsync(loader, deps = []) {
+export function useAsync(loader) {
   const [state, setState] = useState({ data: null, error: null, loading: true });
 
   useEffect(() => {
@@ -17,8 +17,7 @@ export function useAsync(loader, deps = []) {
     return () => {
       cancelled = true;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, deps);
+  }, [loader]);
 
   return state;
 }

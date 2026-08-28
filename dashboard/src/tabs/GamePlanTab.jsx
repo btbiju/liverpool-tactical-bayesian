@@ -63,6 +63,89 @@ function XgTrend({ seasonXg }) {
   );
 }
 
+function PosteriorPanel({ posteriors, prior }) {
+  const latest = [...posteriors].sort((a, b) => b.as_of_matchweek - a.as_of_matchweek)[0];
+  const updatedMetrics = Object.entries(latest.continuous_metrics ?? {});
+  const updates = latest.update_log ?? [];
+
+  return (
+    <div className="posterior-panel">
+      <div className="posterior-panel__summary card">
+        <div>
+          <span className="posterior-panel__eyebrow">Current model state</span>
+          <strong>After matchweek {latest.as_of_matchweek}</strong>
+        </div>
+        <span className="section-heading__meta">{updates.length} reviewed observation{updates.length === 1 ? '' : 's'}</span>
+      </div>
+
+      <div className="stat-grid posterior-panel__metrics">
+        {updatedMetrics.map(([key, metric]) => {
+          const display = METRIC_DISPLAY[key] ?? { label: key, unit: '', decimals: 2 };
+          const priorMean = prior.continuous_metrics?.[key]?.mean;
+          const delta = priorMean == null ? null : metric.mean - priorMean;
+          const deltaLabel = delta == null
+            ? null
+            : `${delta >= 0 ? '+' : ''}${delta.toFixed(display.decimals)} from preseason prior`;
+          return (
+            <StatTile
+              key={key}
+              label={display.label}
+              value={fmt(metric.mean, display.decimals)}
+              unit={display.unit}
+              sub={deltaLabel}
+            />
+          );
+        })}
+      </div>
+
+      <div className="gameplan-columns posterior-panel__details">
+        <div>
+          <div className="section-heading">
+            <h2 style={{ fontSize: '0.95rem' }}>Updated formation belief</h2>
+          </div>
+          <div className="card" style={{ padding: '4px 16px' }}>
+            <FormationBars formationPrior={latest.formation_prior} />
+          </div>
+        </div>
+        <div>
+          <div className="section-heading">
+            <h2 style={{ fontSize: '0.95rem' }}>Evidence log</h2>
+          </div>
+          <ol className="posterior-log">
+            {updates.map((update) => (
+              <li className="card posterior-log__item" key={`${update.matchweek}-${update.date}`}>
+                <div className="posterior-log__header">
+                  <strong>MW{update.matchweek} · {update.opponent}</strong>
+                  <span className="tabular-nums">{update.result}</span>
+                </div>
+                <div className="posterior-log__date">{update.date}</div>
+                {update.notable_shifts?.length > 0 ? (
+                  <ul className="posterior-log__shifts">
+                    {update.notable_shifts.map((shift) => <li key={shift}>{shift}</li>)}
+                  </ul>
+                ) : (
+                  <p className="modal-panel__muted">No material tracked-metric shift.</p>
+                )}
+                {update.sources?.length > 0 && (
+                  <div className="posterior-log__sources">
+                    Sources:{' '}
+                    {update.sources.map((source, index) => (
+                      <span key={source.id}>
+                        {index > 0 ? ', ' : ''}
+                        <a href={source.url} target="_blank" rel="noreferrer">{source.name}</a>
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </li>
+            ))}
+          </ol>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function GamePlanTab() {
   const { data: prior, error, loading } = useAsync(loadManagerPrior);
   const { data: posteriors } = useAsync(loadPosteriors);
@@ -143,14 +226,12 @@ export function GamePlanTab() {
           <h2 style={{ fontSize: '0.95rem' }}>Posterior (updated from real 2026/27 results)</h2>
         </div>
         {posteriors && posteriors.length > 0 ? (
-          <pre className="card" style={{ padding: 16, overflow: 'auto', fontSize: '0.8rem' }}>
-            {JSON.stringify(posteriors, null, 2)}
-          </pre>
+          <PosteriorPanel posteriors={posteriors} prior={prior} />
         ) : (
           <EmptyState>
-            No posterior yet — the 2026/27 season hasn't kicked off. Everything above is the prior alone. Once
-            matchday 1 is played and <code>pipeline/bayesian_update.py</code> runs, the updated belief will appear
-            here alongside the original prior.
+            No reviewed match observation has produced a posterior yet. Everything above is the preseason prior.
+            After a final match is sourced and validated through <code>pipeline/build_posteriors.py</code>, the
+            updated belief and its evidence log will appear here.
           </EmptyState>
         )}
       </div>

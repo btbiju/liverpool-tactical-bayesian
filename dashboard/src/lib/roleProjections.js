@@ -45,6 +45,14 @@ export const ROLE_PROJECTIONS = {
     outlook:
       "The most live tactical risk in the projected side -- expect Liverpool to look most exposed in behind specifically through his side of the defense until he settles in or a fit alternative (Gomez, Leoni) returns.",
   },
+  araujo_ronald: {
+    headline: 'A proven aggressive defender for the system’s riskiest trigger',
+    zone: 'Right centre-back, stepping into forwards early while Van Dijk organizes the cover behind him.',
+    reasoning:
+      "Iraola asks his centre-backs to leave the line and engage dropping forwards. Araujo arrives with substantially more senior evidence for that kind of front-foot defending than the preseason alternatives: 213 Barcelona appearances, strong aerial involvement, and enough passing security to recycle possession after the duel. His right-back experience also gives him familiarity defending wider channels when the press opens space outside.",
+    outlook:
+      "His fit is stronger on paper than an untested young partner, but it remains a loan-season adaptation after only a 20-minute Liverpool debut. The first question to monitor is coordination with Van Dijk, not individual pedigree.",
+  },
   frimpong_jeremie: {
     headline: 'An inside passer, not a touchline crosser',
     zone: 'Inverts into central midfield once Liverpool have possession, rather than holding the right touchline.',

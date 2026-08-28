@@ -23,7 +23,7 @@
     },
     "continuous_metrics": {
       "type": "object",
-      "description": "Each key is a tracked metric. mean/variance define a Normal prior N(mean, variance). pseudo_n is the prior's 'weight' in virtual matches -- how many observed matches of evidence the prior counts as. Lower pseudo_n means real 2026/27 results overtake the prior faster.",
+      "description": "Each key is a tracked metric. mean/variance define uncertainty in the Normal prior for the metric mean. pseudo_n is the prior's weight in virtual matches. Unless observation_variance is supplied explicitly, one match's variance is inferred as variance * pseudo_n, so the default update is equivalent to adding one equally noisy observation to pseudo_n virtual observations.",
       "patternProperties": {
         "^[a-z_]+$": {
           "type": "object",
@@ -32,6 +32,7 @@
             "mean": { "type": "number" },
             "variance": { "type": "number" },
             "pseudo_n": { "type": "number", "description": "Prior confidence, in equivalent match count. Default convention: 10." },
+            "observation_variance": { "type": "number", "description": "Optional explicit single-match noise variance. If omitted, the update engine infers variance * pseudo_n and persists the inferred value in posterior state." },
             "unit": { "type": "string" },
             "notes": { "type": "string" }
           }

@@ -7,7 +7,7 @@ let items live only in chat history.
 ## Known data gaps (flagged, not guessed)
 
 - [ ] **Advanced per-90 metrics null for almost the entire squad** -- of all
-      29 player profiles now built, only Wirtz (`touches_per90`,
+      30 player profiles now built, only Wirtz (`touches_per90`,
       `duels_won_pct`), Gravenberch (`touches_per90`), and Ekitiké
       (`touches_per90`) have any advanced per-90 field populated. Every
       other player has `shots_per90`, `xg_per90`, `pass_accuracy_pct`,
@@ -102,7 +102,7 @@ let items live only in chat history.
   - **Ngumoha**: correctly shows 0 senior Chelsea appearances (academy
         only, a true fact) before his Liverpool breakthrough.
 
-## Resolved this session (2026-08-09/10)
+## Completed work (2026-08-09 onward)
 
 - [x] **Fixtures data pulled** -- `pipeline/pull_fixtures.py` (new) calls
       the existing `fixtures_client.get_liverpool_fixtures()` and writes
@@ -134,13 +134,14 @@ let items live only in chat history.
       (the wide variance was specifically compensating for the old pairing's
       larger, wrong disagreement -- no longer warranted with two solid
       full-season figures). (`data/manager_priors/iraola_2026.json`)
-- [x] **All 29 squad player profiles built** -- full squad coverage as of
-      2026-08-10 (was 4/29 as of the previous session). Built via 3
-      parallel background agents split by position group; every profile
+- [x] **Initial 29-player squad fully profiled** -- full coverage of the
+      2026-08-10 squad snapshot (up from the initial four priority profiles).
+      Ronald Araujo became the 30th profile after his August loan. Research was
+      divided by position group; every profile
       schema-validated (required fields present, no null values in
       strictly-typed fields, `basis` within the enum) and cross-checked
       against `data/squad/liverpool_2026_27.json` for fotmob_id/
-      squad_number/name consistency -- 29/29 clean. See "Known data gaps"
+      squad_number/name consistency. See "Known data gaps"
       above for what's still null/uncertain per player.
 - [x] **Dashboard built** -- React + Vite, three tabs (Fixtures, Squad &
       Stats, Game Plan), all reading `data/` directly via
@@ -154,7 +155,7 @@ let items live only in chat history.
       build`) compiles clean, no console errors. `vite.config.js` sets
       `base: '/liverpool-tactical-bayesian/'` for GitHub Pages on build.
       Not yet deployed -- see "Not started" below.
-- [x] **Game Plan tab: predicted starting XI** (2026-08-11, user-requested)
+- [x] **Game Plan tab: predicted starting XI** (2026-08-11)
       -- `dashboard/src/lib/predictLineup.js` computes a most-likely 4-2-3-1
       XI from real data: formation_prior's dominant formation, each
       player's `position_estimate` (primary/secondary/confidence), and
@@ -186,18 +187,18 @@ let items live only in chat history.
   - Only 4-2-3-1 has a visualized layout (the dominant formation at 83%);
         4-1-4-1/4-3-3/other aren't built out. Fine for now given the
         probability gap, but worth knowing if formation_prior ever shifts.
-- [x] **Notes & Sourcing reorganized, twice** (2026-08-11, user-requested)
+- [x] **Notes & Sourcing reorganized, twice** (2026-08-11)
       -- was a single flat bulleted list mixing methodology caveats and
       citations. `dashboard/src/lib/parseSources.js` splits the
-      "Sources: ..." note (present in all 29 profiles) into a proper
+      "Sources: ..." note (present in every profile) into a proper
       two-column table (source name + parenthetical context, with a header
       row and card borders so it reads as a table even when the context
       column is empty). The methodology/data-quality notes are now
       collapsed behind a `<details>` disclosure rather than shown open by
       default -- still there for the project's sourcing-rigor story, just
       not the first thing you see.
-- [x] **Playing Style section added for all 29 players** (2026-08-11,
-      user-requested -- the modal "felt like a stat board") --
+- [x] **Playing Style section added for the full squad** (2026-08-11) --
+      the original modal read primarily as a stat board, so
       `dashboard/src/lib/playingStyle.js`, a qualitative "how do they
       actually play" description per player, grounded in facts already
       present in their `career_stints` notes and `playstyle_metrics`
@@ -205,8 +206,8 @@ let items live only in chat history.
       Shown prominently near the top of the player detail modal, ahead of
       the career table.
 - [x] **Role projections deepened into real tactical analysis**
-      (2026-08-11, user-requested -- the first pass was just a career
-      recap, not analysis). `roleProjections.js` rewritten with a
+      (2026-08-11) -- the first pass was primarily a career recap rather than
+      analysis. `roleProjections.js` was rewritten with a
       structured `{ zone, reasoning, outlook }` shape per player instead
       of one flowing paragraph, reasoning from three real inputs: the
       player's own sourced skills/stats, Iraola's actual tactical
@@ -250,9 +251,9 @@ let items live only in chat history.
 ## Correction to a prior assumption (2026-08-09)
 
 - **"Isak, Wirtz, Muñoz, Chiesa have no Liverpool history" was wrong for 3
-      of the 4** -- discovered while researching their profiles. This
-      session's knowledge cutoff is January 2026, so anything after that
-      had to be checked live, not recalled. Real transfer history: Isak
+      of the 4** -- discovered while researching their profiles. Time-sensitive
+      transfer history was verified against live sources rather than prior
+      knowledge. Real transfer history: Isak
       joined Sept 2025, Wirtz joined July 2025, Chiesa joined summer 2024
       (all already had real LFC minutes); only Muñoz (Osasuna, summer 2026)
       genuinely had none. All 4 profiles were built with real data
@@ -260,8 +261,8 @@ let items live only in chat history.
       basis for the three who needed it -- no schema change was needed.
       Same live-verification discipline was applied throughout the
       25-profile squad-wide build that followed, specifically to avoid
-      repeating this mistake (see agent reports folded into "Known data
-      gaps" above).
+      repeating this mistake (see the findings folded into "Known data gaps"
+      above).
 
 ## Decisions made (for reference, not action items)
 
@@ -279,7 +280,69 @@ let items live only in chat history.
 - Git repo initialized, `.gitignore` and MIT `LICENSE` added, pushed to
   https://github.com/btbiju/liverpool-tactical-bayesian . Un-archived
   StatsBomb/Understat raw data (113MB+171MB) excluded from git via
-  `.gitignore` rather than committed. `.claude/settings.local.json` also
-  gitignored (Claude Code's own permission-allowlist file briefly captured
-  the football-data.org API key in plaintext when a command was approved --
-  never made it into git, but needs to stay gitignored going forward).
+  `.gitignore` rather than committed. A local development-tool permission file
+  briefly captured the football-data.org API key in plaintext. It never entered
+  Git history; the file was removed during the neutral handoff and the key must
+  be rotated manually.
+
+## Handoff findings (2026-08-24)
+
+- [x] **Continuous Bayesian update implementation corrected.** The engine now
+      uses precision-weighted Normal-Normal conjugacy. Default single-match
+      variance is inferred from current mean uncertainty and the effective
+      virtual-match count, while explicit per-metric observation variance is
+      supported and persisted. Deterministic tests cover prior weighting,
+      sequential updates, variance behavior, and invalid uncertainty inputs.
+- [x] **Null metrics and formations are ignored during updates.** Missing data no
+      longer creates evidence or increments the formation `other` bucket; this
+      behavior is covered by tests.
+- [x] **Tactical observation enrichment stage defined.**
+      `docs/MATCHWEEK_WORKFLOW.md` specifies field-level source preferences,
+      null handling, human review, source mapping, and the boundary between raw
+      fixture automation and tactical evidence.
+- [x] **Repeatable offline Python validation added.** Standard-library tests and
+      `pipeline/validate_data.py` cover the JSON Schema features used by the
+      repository, parse project JSON, and cross-check squad/profile identities.
+      Dashboard checks and a history-aware Gitleaks scan are included in CI.
+- [x] **Manager role projections remain presentation-layer analysis.** This is
+      now an explicit modeling boundary: the prose combines sourced player facts
+      with tactical interpretation, while the Bayesian state currently updates
+      team metrics and formation only. Moving the prose into posterior JSON now
+      would imply a computation that does not exist. Revisit only if a structured,
+      evidence-updating player-role model is implemented.
+- [x] **Reviewed observation and posterior pipeline implemented.** Added a
+      source-mapped observation schema, neutral matchweek workflow, explicit
+      calibrated observation variances, deterministic snapshot builder/checker,
+      and a synthetic end-to-end integration fixture that never enters production
+      data. The dashboard now renders posterior deltas and an evidence log rather
+      than dumping raw JSON.
+- [x] **Automation workflows prepared.** CI runs tests, schema/data validation,
+      posterior reproducibility, lint/build, and Gitleaks v3. A Monday fixture
+      refresh workflow commits only football-data.org response changes. A Pages
+      workflow validates and deploys the static Vite artifact. These remain
+      unactivated until the branch is reviewed/merged, Pages is configured for
+      Actions, and the rotated API key is stored as `FOOTBALL_DATA_API_KEY`.
+- [x] **Neutral project handoff documentation added.** Durable operating
+      instructions now live in `AGENTS.md`; implementation status and the
+      verification checklist live in `HANDOFF.md`.
+- [x] **Squad/profile display-name consistency corrected.** Vítězslav Jaroš's
+      squad entry used an unaccented/incompletely accented spelling while his
+      profile used the canonical spelling. The squad entry now matches the
+      profile; all FotMob IDs, names, and squad numbers cross-check.
+- [x] **Squad refreshed from current official/FotMob sources (2026-08-24).**
+      Added Ronald Araujo after Liverpool confirmed his season-long Barcelona
+      loan and No.33 shirt; added a sourced player profile using the official
+      Opta-derived factfile and FotMob career/current-season records. Confirmed
+      Alisson No.1, Jaroš No.56, and Jacquet No.5. Jacquet's profile now records
+      his competitive start at Newcastle, while Araujo's records his 20-minute
+      debut. Current coverage is 30 squad players and 30 profiles.
+- [ ] **Refresh the raw matchweek-one fixture through football-data.org.** The
+      Newcastle match finished 2-2 on 2026-08-23, confirmed by Liverpool FC and
+      multiple match-stat sources, but the committed raw API record still says
+      `TIMED` because no live credential was used during offline handover work.
+      Do not hand-edit an API response to resemble a fresh pull. Rotate/configure
+      the API key, run `pipeline/pull_fixtures.py`, then add the reviewed tactical
+      observation. Available corroborated inputs include Liverpool's official
+      result report and TNT's 58% possession/7 shots-on-target figures; PPDA,
+      accurate passes, and accurate crosses remain unavailable and must stay
+      null unless sourced.

@@ -8,14 +8,16 @@
     "as_of_matchweek": { "type": "integer" },
     "continuous_metrics": {
       "type": "object",
-      "description": "Same structure as the prior, but these are POSTERIOR values after folding in observed matches via Normal-Normal conjugate updates:  posterior_mean = (obs_var * prior_mean + prior_var * observed_value) / (obs_var + prior_var);  posterior_var shrinks with each update.",
+      "description": "Posterior values after folding in observed matches via Normal-Normal conjugate updates. Mean and variance are combined by precision (inverse variance). observation_variance records the single-match noise used so sequential updates remain consistent; effective_n records the equivalent sample count.",
       "patternProperties": {
         "^[a-z_]+$": {
           "type": "object",
+          "required": ["mean", "variance", "effective_n", "observation_variance"],
           "properties": {
             "mean": { "type": "number" },
             "variance": { "type": "number" },
-            "effective_n": { "type": "number", "description": "pseudo_n + matches observed so far -- grows every matchweek, which is what makes the prior's influence shrink automatically." }
+            "effective_n": { "type": "number", "description": "pseudo_n + observations incorporated for this metric." },
+            "observation_variance": { "type": "number", "description": "Single-match noise variance used for this metric's conjugate updates." }
           }
         }
       }
@@ -29,7 +31,7 @@
       "description": "One entry per matchweek update. This is the audit trail -- what changed and why -- that a recruiter could actually read.",
       "items": {
         "type": "object",
-        "required": ["matchweek", "date", "opponent", "result", "metrics_observed", "notable_shifts"],
+        "required": ["matchweek", "date", "opponent", "result", "metrics_observed", "sources", "notable_shifts"],
         "properties": {
           "matchweek": { "type": "integer" },
           "date": { "type": "string", "format": "date" },
@@ -38,6 +40,21 @@
           "metrics_observed": {
             "type": "object",
             "description": "Raw observed values that fed into this update, e.g. {'possession': 47.2, 'ppda': 8.1}"
+          },
+          "sources": {
+            "type": "array",
+            "description": "Source records copied from the reviewed match observation.",
+            "items": {
+              "type": "object",
+              "required": ["id", "name", "url", "accessed_at"],
+              "properties": {
+                "id": { "type": "string" },
+                "name": { "type": "string" },
+                "url": { "type": "string" },
+                "accessed_at": { "type": "string", "format": "date" },
+                "notes": { "type": "string" }
+              }
+            }
           },
           "notable_shifts": {
             "type": "array",
