@@ -119,4 +119,4 @@ gets lost across sessions.
 - [x] Offline tests, schema/data validation, and posterior reproducibility checks
 - [x] GitHub Actions CI, weekly fixture refresh, secret scan, and Pages workflows
 - [x] GitHub Pages deployment and first automated fixture/result refresh
-- [ ] First production match observation and posterior
+- [x] First production match observation and posterior

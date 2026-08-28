@@ -1,0 +1,91 @@
+{
+  "as_of_matchweek": 1,
+  "continuous_metrics": {
+    "possession_pct": {
+      "mean": 51.482,
+      "variance": 3.6364,
+      "effective_n": 11,
+      "observation_variance": 40.0
+    },
+    "ppda": {
+      "mean": 9.45,
+      "variance": 1.5,
+      "effective_n": 10,
+      "observation_variance": 15.0
+    },
+    "shots_on_target_per_match": {
+      "mean": 4.773,
+      "variance": 0.2727,
+      "effective_n": 11,
+      "observation_variance": 3.0
+    },
+    "goals_conceded_per_match": {
+      "mean": 1.382,
+      "variance": 0.0727,
+      "effective_n": 11,
+      "observation_variance": 0.8
+    },
+    "accurate_passes_per_match": {
+      "mean": 341.25,
+      "variance": 100.0,
+      "effective_n": 10,
+      "observation_variance": 1000.0
+    },
+    "accurate_crosses_per_match": {
+      "mean": 2.65,
+      "variance": 0.3,
+      "effective_n": 10,
+      "observation_variance": 3.0
+    }
+  },
+  "formation_prior": {
+    "alpha": {
+      "4-2-3-1": 30,
+      "4-1-4-1": 4,
+      "4-3-3": 1,
+      "other": 1
+    },
+    "notes": "4-2-3-1 was the clear base across all three Bournemouth seasons. Briefly experimented with 4-1-4-1 for the first two matches of 2025/26 before reverting. Alpha counts are illustrative pseudo-weights, not literal match counts -- calibrated so 4-2-3-1 dominates but isn't treated as absolute certainty."
+  },
+  "update_log": [
+    {
+      "matchweek": 1,
+      "date": "2026-08-23",
+      "opponent": "Newcastle United (A)",
+      "result": "D 2-2",
+      "metrics_observed": {
+        "possession_pct": 60.8,
+        "shots_on_target_per_match": 7,
+        "goals_conceded_per_match": 2
+      },
+      "sources": [
+        {
+          "id": "premier-league-match-stats",
+          "name": "Premier League — Newcastle United vs Liverpool match statistics",
+          "url": "https://www.premierleague.com/en/match/2645203/newcastle-united-vs-liverpool/stats",
+          "accessed_at": "2026-08-28",
+          "notes": "Official league page reports the 2-2 score, 60.8% Liverpool possession, seven Liverpool shots on target, and match metadata."
+        },
+        {
+          "id": "liverpool-match-report",
+          "name": "Liverpool FC — Szoboszlai scores late penalty to rescue point at Newcastle",
+          "url": "https://lfcbeta.liverpoolfc.com/it/notizia/szoboszlai-scores-late-penalty-rescue-point-liverpool-season-opener-newcastle",
+          "accessed_at": "2026-08-28",
+          "notes": "Official club report confirms the away fixture and 2-2 result."
+        },
+        {
+          "id": "tnt-match-stats-review",
+          "name": "TNT Sports — earlier conflicting possession listing (not used)",
+          "url": "https://www.tntsports.co.uk/football/premier-league/2026-2027/live-newcastle-united-liverpool_mtc21883335/live-stats.shtml",
+          "accessed_at": "2026-08-24",
+          "notes": "An earlier review recorded 58% Liverpool possession. The page was region-blocked on 2026-08-28 and the value disagrees with the official league page, so it is documented but not used."
+        }
+      ],
+      "notable_shifts": [
+        "possession_pct: 50.55 -> 51.48 (up 0.93, observed 60.8)",
+        "shots_on_target_per_match: 4.55 -> 4.77 (up 0.22, observed 7)",
+        "goals_conceded_per_match: 1.32 -> 1.38 (up 0.06, observed 2)"
+      ]
+    }
+  ]
+}
