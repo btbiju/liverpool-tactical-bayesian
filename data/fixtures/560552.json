@@ -21,11 +21,11 @@
   },
   "id": 560552,
   "utcDate": "2026-08-29T11:30:00Z",
-  "status": "TIMED",
+  "status": "IN_PLAY",
   "matchday": 2,
   "stage": "REGULAR_SEASON",
   "group": null,
-  "lastUpdated": "2026-08-28T10:20:37Z",
+  "lastUpdated": "2026-08-29T15:08:02Z",
   "homeTeam": {
     "id": 64,
     "name": "Liverpool FC",
@@ -41,19 +41,26 @@
     "crest": "https://crests.football-data.org/351.png"
   },
   "score": {
-    "winner": null,
+    "winner": "AWAY_TEAM",
     "duration": "REGULAR",
     "fullTime": {
-      "home": null,
-      "away": null
+      "home": 1,
+      "away": 2
     },
     "halfTime": {
-      "home": null,
-      "away": null
+      "home": 0,
+      "away": 1
     }
   },
   "odds": {
     "msg": "Activate Odds-Package in User-Panel to retrieve odds."
   },
-  "referees": []
+  "referees": [
+    {
+      "id": 213813,
+      "name": "Sam Barrott",
+      "type": "REFEREE",
+      "nationality": "England"
+    }
+  ]
 }

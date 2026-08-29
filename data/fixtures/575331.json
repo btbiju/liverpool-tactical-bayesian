@@ -1,0 +1,59 @@
+{
+  "area": {
+    "id": 2077,
+    "name": "Europe",
+    "code": "EUR",
+    "flag": "https://crests.football-data.org/EUR.svg"
+  },
+  "competition": {
+    "id": 2001,
+    "name": "UEFA Champions League",
+    "code": "CL",
+    "type": "CUP",
+    "emblem": "https://crests.football-data.org/CL.png"
+  },
+  "season": {
+    "id": 2557,
+    "startDate": "2026-09-08",
+    "endDate": "2027-01-27",
+    "currentMatchday": 1,
+    "winner": null
+  },
+  "id": 575331,
+  "utcDate": "2026-09-09T19:00:00Z",
+  "status": "TIMED",
+  "matchday": 1,
+  "stage": "LEAGUE_STAGE",
+  "group": null,
+  "lastUpdated": "2026-08-29T14:04:56Z",
+  "homeTeam": {
+    "id": 64,
+    "name": "Liverpool FC",
+    "shortName": "Liverpool",
+    "tla": "LIV",
+    "crest": "https://crests.football-data.org/64.png"
+  },
+  "awayTeam": {
+    "id": 78,
+    "name": "Club Atl\u00e9tico de Madrid",
+    "shortName": "Atleti",
+    "tla": "ATL",
+    "crest": "https://crests.football-data.org/78.png"
+  },
+  "score": {
+    "winner": null,
+    "duration": "REGULAR",
+    "fullTime": {
+      "home": null,
+      "away": null
+    },
+    "halfTime": {
+      "home": null,
+      "away": null
+    }
+  },
+  "odds": {
+    "msg": "Activate Odds-Package in User-Panel to retrieve odds."
+  },
+  "referees": []
+}

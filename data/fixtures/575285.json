@@ -1,0 +1,59 @@
+{
+  "area": {
+    "id": 2077,
+    "name": "Europe",
+    "code": "EUR",
+    "flag": "https://crests.football-data.org/EUR.svg"
+  },
+  "competition": {
+    "id": 2001,
+    "name": "UEFA Champions League",
+    "code": "CL",
+    "type": "CUP",
+    "emblem": "https://crests.football-data.org/CL.png"
+  },
+  "season": {
+    "id": 2557,
+    "startDate": "2026-09-08",
+    "endDate": "2027-01-27",
+    "currentMatchday": 1,
+    "winner": null
+  },
+  "id": 575285,
+  "utcDate": "2027-01-19T20:00:00Z",
+  "status": "TIMED",
+  "matchday": 7,
+  "stage": "LEAGUE_STAGE",
+  "group": null,
+  "lastUpdated": "2026-08-29T14:14:49Z",
+  "homeTeam": {
+    "id": 108,
+    "name": "FC Internazionale Milano",
+    "shortName": "Inter",
+    "tla": "INT",
+    "crest": "https://crests.football-data.org/108.png"
+  },
+  "awayTeam": {
+    "id": 64,
+    "name": "Liverpool FC",
+    "shortName": "Liverpool",
+    "tla": "LIV",
+    "crest": "https://crests.football-data.org/64.png"
+  },
+  "score": {
+    "winner": null,
+    "duration": "REGULAR",
+    "fullTime": {
+      "home": null,
+      "away": null
+    },
+    "halfTime": {
+      "home": null,
+      "away": null
+    }
+  },
+  "odds": {
+    "msg": "Activate Odds-Package in User-Panel to retrieve odds."
+  },
+  "referees": []
+}
