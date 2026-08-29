@@ -192,6 +192,51 @@ def validate_observations(files, require_fixture_match=False):
             )
 
 
+def validate_research_drafts(files):
+    schema_path = REPO_ROOT / "schema" / "research_draft.schema.json"
+    fixture_dir = REPO_ROOT / "data" / "fixtures"
+    for path in files:
+        validate_file(path, schema_path)
+        draft = _load_json(path)
+        fixture_path = fixture_dir / f"{draft['match_id']}.json"
+        if not fixture_path.exists():
+            raise ValidationError(f"{path.name}: no raw fixture for match ID")
+        fixture = _load_json(fixture_path)
+        if fixture.get("status") != "FINISHED":
+            raise ValidationError(f"{path.name}: research draft fixture is not FINISHED")
+        if fixture.get("matchday") != draft["matchweek"]:
+            raise ValidationError(f"{path.name}: matchweek disagrees with raw fixture")
+        if fixture.get("utcDate", "")[:10] != draft["date"]:
+            raise ValidationError(f"{path.name}: date disagrees with raw fixture")
+
+        source_ids = [source["id"] for source in draft["sources"]]
+        if len(source_ids) != len(set(source_ids)):
+            raise ValidationError(f"{path.name}: duplicate research source IDs")
+        declared = set(source_ids)
+        for metric, candidates in draft["candidates"].items():
+            for candidate in candidates:
+                if candidate["source_id"] not in declared:
+                    raise ValidationError(
+                        f"{path.name}: {metric} candidate cites unknown source "
+                        f"{candidate['source_id']}"
+                    )
+
+        if set(draft["resolutions"]) - set(draft["candidates"]):
+            raise ValidationError(f"{path.name}: resolution exists without candidates")
+        for metric, resolution in draft["resolutions"].items():
+            unknown = set(resolution["source_ids"]) - declared
+            if unknown:
+                raise ValidationError(
+                    f"{path.name}: {metric} resolution cites unknown sources {sorted(unknown)}"
+                )
+        if draft["status"] in {"ready_for_review", "resolved", "promoted"}:
+            missing = set(draft["candidates"]) - set(draft["resolutions"])
+            if missing:
+                raise ValidationError(
+                    f"{path.name}: reviewed-stage draft lacks resolutions for {sorted(missing)}"
+                )
+
+
 def tracked_json_files():
     output = subprocess.check_output(
         ["git", "ls-files", "--cached", "--others", "--exclude-standard", "*.json"],
@@ -219,6 +264,8 @@ def validate_all():
     )
     lineup_dir = REPO_ROOT / "data" / "lineup_projection"
     lineup_files = sorted(lineup_dir.glob("*.json")) if lineup_dir.exists() else []
+    research_dir = REPO_ROOT / "data" / "research_drafts"
+    research_files = sorted(research_dir.glob("*.json")) if research_dir.exists() else []
 
     for path in tracked_json_files():
         _load_json(path)
@@ -231,6 +278,7 @@ def validate_all():
     for path in lineup_files:
         validate_file(path, lineup_schema)
     validate_observations(observation_files, require_fixture_match=True)
+    validate_research_drafts(research_files)
 
     squad = _load_json(REPO_ROOT / "data" / "squad" / "liverpool_2026_27.json")["players"]
     profiles = [_load_json(path) for path in player_files]
@@ -287,6 +335,7 @@ def validate_all():
         "player_profiles": len(player_files),
         "posteriors": len(posterior_files),
         "lineup_projections": len(lineup_files),
+        "research_drafts": len(research_files),
         "observations": len(observation_files),
         "squad_players": len(squad),
     }
@@ -304,6 +353,7 @@ def main():
         f"{counts['observations']} observations, "
         f"{counts['posteriors']} posteriors schema-checked; "
         f"{counts['lineup_projections']} lineup projections schema-checked; "
+        f"{counts['research_drafts']} research drafts schema-checked; "
         f"{counts['squad_players']} squad identities cross-checked."
     )
 

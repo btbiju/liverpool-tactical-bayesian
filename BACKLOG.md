@@ -229,6 +229,13 @@ let items live only in chat history.
 
 ## Remaining work
 
+- [ ] **Observe the delayed-research automation across several matchweeks.**
+      The research-draft contract and deterministic resolver are implemented,
+      but source availability, provider disclosure, video transcript access,
+      and the usefulness of a second 48–72 hour pass must be evaluated using
+      real matches. Promotion into `data/observations/` remains a review step;
+      do not silently turn qualitative analysis into PPDA or other numbers.
+
 - [ ] **Manager positional-deployment overlay, data-model side** -- the
       dashboard's predicted-XI feature (above) implements a version of this
       at the presentation layer (JS-computed selection + hand-authored role
@@ -262,8 +269,14 @@ let items live only in chat history.
 ## Decisions made (for reference, not action items)
 
 - Update cadence: gated GitHub Actions checks around expected full time, plus a
-  weekly fallback. API calls occur only inside the match window; tactical sites
-  are not polled or scraped.
+  weekly fallback. API calls occur only inside the match window. A separate
+  delayed research task may use ordinary web search after 24–72 hours, but
+  tactical sites are not systematically polled or crawled.
+- Conflicting match statistics: compare only compatible definitions, collapse
+  repeated pages from the same measurement provider, use a strict independent-
+  provider majority where available, and otherwise retain a numeric arithmetic
+  mean only as a labeled derived consensus with its full input range. Never
+  average categorical claims.
 - Model rigor: real conjugate-prior Bayesian updating, not a hand-rolled weighted average
 - FotMob is source of truth for squad data over Wikipedia
 - Wikipedia demoted to last-resort cross-check only
@@ -377,3 +390,12 @@ let items live only in chat history.
       goals conceded, rebuilds posterior snapshots, validates, commits, and
       dispatches Pages deployment. Unsupported tactical fields remain null and
       existing human-reviewed observations are never overwritten.
+- [x] **Delayed post-match research stage implemented (2026-08-28).** Added a
+      source-mapped research-draft schema, offline validation, and deterministic
+      conflict resolver. The resolver counts disclosed measurement providers
+      rather than web pages, selects unanimity or a strict majority, and labels
+      compatible no-majority numeric averages with their full range. A
+      Newcastle evidence packet demonstrates the process without replacing the
+      official value already used by the production observation. The dashboard
+      now explains that scores can update immediately while tactical evidence
+      follows after a 24–72 hour collection and validation window.

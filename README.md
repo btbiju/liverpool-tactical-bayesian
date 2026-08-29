@@ -13,7 +13,8 @@ as a Bayesian inference problem instead of a dashboard problem:
   plus each player's individual career playstyle data -- weighted toward
   their most recent club/role, since a player's identity two clubs ago
   matters less than what they were doing right before signing.
-- **Evidence**: real 2026/27 match results, checked automatically around full time.
+- **Evidence**: real 2026/27 match results checked automatically around full
+  time, followed by delayed, source-mapped tactical research.
 - **Posterior**: the model's current belief, which shifts toward observed
   reality as the season accumulates evidence, automatically de-weighting
   the Bournemouth-derived prior over time -- no manual decay schedule.
@@ -76,10 +77,13 @@ Ranked by trust, used in this order when sources disagree:
 GitHub Actions checks around expected full time, with a weekly fallback and no
 always-on server. A finished result can create a source-mapped result-only
 observation and update goals conceded immediately. Tactical enrichment remains
-separate because the stable API does not supply those statistics. Possession,
-PPDA, shots, passing, crossing, and formation stay null unless compatible
-evidence exists; automation never invents them. The commit history remains the
-visible audit log of both the evidence and the model learning from it.
+separate because the stable API does not supply those statistics. A delayed
+research pass searches permitted sources after 24 hours and again by 72 hours,
+then prepares a cited evidence packet. Possession, PPDA, shots, passing,
+crossing, and formation stay null unless compatible evidence exists;
+automation never invents them. The dashboard explains why tactical posterior
+fields can lag behind the final score. The commit history remains the visible
+audit log of both the evidence and the model learning from it.
 
 ## Structure
 
@@ -90,6 +94,7 @@ data/squad/             Current Liverpool squad, FotMob as source of truth
 data/player_profiles/   Per-player career + playstyle data (all 30 players populated)
 data/fixtures/          Upcoming/played fixtures (38 league fixtures populated)
 data/observations/      Source-mapped result-only or reviewed tactical observations
+data/research_drafts/   Delayed web-research packets; not direct model inputs
 data/posteriors/        Weekly posterior snapshots (grows over the season)
 pipeline/               Fixture client, validation, update and posterior rebuild
 dashboard/              React (Vite) dashboard -- Fixtures / Squad & Stats / Game
@@ -122,3 +127,4 @@ gets lost across sessions.
       scan, and Pages workflows
 - [x] GitHub Pages deployment and first automated fixture/result refresh
 - [x] First production match observation and posterior
+- [x] Delayed research-draft schema, conflict resolver, and posterior timing explanation

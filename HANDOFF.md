@@ -17,7 +17,9 @@ Iraola seasons + player research
               -> committed prior/squad/profile JSON
 football-data.org
               -> committed raw fixture/result JSON
-separate tactical-stat enrichment
+delayed source-mapped web research
+              -> research draft and deterministic conflict resolution
+reviewed research draft
               -> match observation
 Python Bayesian update
               -> posterior snapshot JSON
@@ -27,7 +29,8 @@ React/Vite build
               -> static site
 ```
 
-The tactical-stat enrichment stage is not implemented. football-data.org can
+The delayed research stage prepares evidence packets but deliberately does not
+promote them into production observations without review. football-data.org can
 provide scores, opponents, dates, and statuses, but not the possession, PPDA,
 formation, or related tactical evidence expected by the update engine.
 
@@ -78,7 +81,11 @@ ignored rather than converted into evidence.
   League/Liverpool evidence for the Newcastle 2-2 draw and leaving unsupported
   metrics null.
 - Dashboard posterior summary, metric deltas, formation belief, evidence log,
-  and source links (replacing the raw JSON presentation).
+  source links, and a 24–72 hour update-timing explanation (replacing the raw
+  JSON presentation).
+- Source-mapped research-draft schema, deterministic independent-provider
+  conflict resolver, and a Newcastle example preserving possession/xG
+  disagreements without modifying the production posterior.
 - CI, gated post-match football-data.org refresh, automated result-only
   observations/posteriors, weekly fallback, history-aware secret scanning, and
   GitHub Pages deployment workflows.
@@ -90,8 +97,9 @@ ignored rather than converted into evidence.
 - Only one posterior snapshot exists; early-season conclusions must remain
   strongly qualified because the manager prior still carries ten virtual
   matches of weight.
-- No reliable automated source is defined for tactical match statistics. The
-  automated path can update only score-derived goals conceded.
+- Delayed web discovery can automate evidence collection, but production
+  promotion remains a review boundary. Exact PPDA, passes, and crosses may
+  remain unavailable even after the research window.
 - Most advanced player per-90 fields remain null because accessible sources are
   blocked, client-rendered, or subscription-gated.
 - Formation pseudo-counts are illustrative.
@@ -120,9 +128,8 @@ See `BACKLOG.md` for player-specific uncertainty and source disagreements.
 
 1. Rotate the exposed football-data.org key when the provider supplies a
    supported rotation path, then update the existing repository secret.
-2. Monitor the first automated post-match run. Human enrichment is optional,
-   but remains necessary for possession, shots, PPDA, passing, crossing, and
-   formation unless a licensed provider is connected.
+2. Monitor the first automated post-match and delayed research runs. Review a
+   generated evidence packet before promoting compatible tactical metrics.
 3. Continue reviewing transfer and injury changes through the window close.
 4. Replace provisional observation-variance hyperparameters only when a
    documented match-level calibration dataset is available.
@@ -135,6 +142,7 @@ See `BACKLOG.md` for player-specific uncertainty and source disagreements.
 - [ ] Manager prior validates against its schema.
 - [ ] All player profiles validate against their schema.
 - [ ] Posterior snapshots, when present, validate against their schema.
+- [ ] Research drafts validate against their schema and preserve provider independence.
 - [ ] Squad and profiles agree on FotMob ID, name, and squad number.
 - [ ] `python3 -m unittest discover -s tests -v` passes.
 - [ ] `python3 pipeline/validate_data.py` passes.

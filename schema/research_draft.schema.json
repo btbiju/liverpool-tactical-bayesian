@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Post-match research draft",
+  "description": "A provenance-preserving collection of candidate match facts. Draft resolutions are not production observations and cannot update the posterior until reviewed and promoted.",
+  "type": "object",
+  "required": [
+    "draft_version",
+    "status",
+    "match_id",
+    "matchweek",
+    "date",
+    "opponent",
+    "research_window",
+    "sources",
+    "candidates",
+    "resolutions",
+    "notes"
+  ],
+  "properties": {
+    "draft_version": { "type": "integer", "minimum": 1 },
+    "status": {
+      "type": "string",
+      "enum": ["collecting", "ready_for_review", "resolved", "promoted"]
+    },
+    "match_id": { "type": "integer" },
+    "matchweek": { "type": "integer", "minimum": 1, "maximum": 38 },
+    "date": { "type": "string", "format": "date" },
+    "opponent": { "type": "string" },
+    "research_window": {
+      "type": "object",
+      "required": ["not_before", "search_attempts", "last_searched_at"],
+      "properties": {
+        "not_before": { "type": "string", "format": "date-time" },
+        "search_attempts": { "type": "integer", "minimum": 0 },
+        "last_searched_at": { "type": ["string", "null"], "format": "date-time" },
+        "next_search_at": { "type": ["string", "null"], "format": "date-time" }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "url",
+          "accessed_at",
+          "source_tier",
+          "medium"
+        ],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "url": { "type": "string" },
+          "published_at": { "type": ["string", "null"], "format": "date" },
+          "accessed_at": { "type": "string", "format": "date" },
+          "source_tier": { "type": "integer", "minimum": 1, "maximum": 5 },
+          "medium": {
+            "type": "string",
+            "enum": ["official_stats", "structured_stats", "article", "video", "social"]
+          },
+          "notes": { "type": "string" }
+        }
+      }
+    },
+    "candidates": {
+      "type": "object",
+      "patternProperties": {
+        "^[a-z_]+$": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "value",
+              "source_id",
+              "measurement_provider",
+              "compatibility_group",
+              "evidence_location",
+              "eligible_for_consensus"
+            ],
+            "properties": {
+              "value": { "type": ["number", "string"] },
+              "source_id": { "type": "string" },
+              "measurement_provider": { "type": "string" },
+              "compatibility_group": { "type": "string" },
+              "evidence_location": { "type": "string" },
+              "eligible_for_consensus": { "type": "boolean" },
+              "notes": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "resolutions": {
+      "type": "object",
+      "patternProperties": {
+        "^[a-z_]+$": {
+          "type": "object",
+          "required": [
+            "status",
+            "value",
+            "method",
+            "source_ids",
+            "measurement_providers",
+            "compatibility_group",
+            "between_provider_variance",
+            "rationale"
+          ],
+          "properties": {
+            "status": { "type": "string", "enum": ["resolved", "unresolved"] },
+            "value": { "type": ["number", "string", "null"] },
+            "method": {
+              "type": "string",
+              "enum": ["unresolved", "unanimous", "majority", "mean_consensus"]
+            },
+            "source_ids": { "type": "array", "items": { "type": "string" } },
+            "measurement_providers": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "compatibility_group": { "type": ["string", "null"] },
+            "range": {
+              "type": ["object", "null"],
+              "properties": {
+                "minimum": { "type": "number" },
+                "maximum": { "type": "number" }
+              }
+            },
+            "between_provider_variance": { "type": ["number", "null"], "minimum": 0 },
+            "rationale": { "type": "string" }
+          }
+        }
+      }
+    },
+    "notes": { "type": "array", "items": { "type": "string" } }
+  }
+}
