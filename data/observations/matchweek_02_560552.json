@@ -1,0 +1,38 @@
+{
+  "observation_kind": "automated_result_only",
+  "match_id": 560552,
+  "matchweek": 2,
+  "date": "2026-08-29",
+  "opponent": "Nottingham Forest (H)",
+  "result": "D 2-2",
+  "metrics": {
+    "possession_pct": null,
+    "ppda": null,
+    "shots_on_target_per_match": null,
+    "goals_conceded_per_match": 2,
+    "accurate_passes_per_match": null,
+    "accurate_crosses_per_match": null
+  },
+  "formation": null,
+  "sources": [
+    {
+      "id": "football-data-result",
+      "name": "football-data.org — automated final result record",
+      "url": "https://api.football-data.org/v4/matches/560552",
+      "accessed_at": "2026-08-29",
+      "notes": "Authenticated API record committed verbatim in data/fixtures; used only for score-derived facts."
+    }
+  ],
+  "metric_sources": {
+    "goals_conceded_per_match": [
+      "football-data-result"
+    ]
+  },
+  "reviewed_at": "2026-08-29T15:28:50Z",
+  "notes": [
+    "Created automatically after the raw fixture reached FINISHED status.",
+    "Only goals conceded is updated because it follows exactly from the verified final score.",
+    "Possession, PPDA, shots on target, accurate passes, accurate crosses, and formation remain null; none are inferred from the result.",
+    "A later human tactical review may enrich this same observation without double-counting the matchweek."
+  ]
+}

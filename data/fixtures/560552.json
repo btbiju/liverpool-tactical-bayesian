@@ -21,11 +21,11 @@
   },
   "id": 560552,
   "utcDate": "2026-08-29T11:30:00Z",
-  "status": "IN_PLAY",
+  "status": "FINISHED",
   "matchday": 2,
   "stage": "REGULAR_SEASON",
   "group": null,
-  "lastUpdated": "2026-08-29T15:08:02Z",
+  "lastUpdated": "2026-08-29T15:28:50Z",
   "homeTeam": {
     "id": 64,
     "name": "Liverpool FC",
@@ -41,10 +41,10 @@
     "crest": "https://crests.football-data.org/351.png"
   },
   "score": {
-    "winner": "AWAY_TEAM",
+    "winner": "DRAW",
     "duration": "REGULAR",
     "fullTime": {
-      "home": 1,
+      "home": 2,
       "away": 2
     },
     "halfTime": {
