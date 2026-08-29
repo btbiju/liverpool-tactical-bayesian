@@ -1,4 +1,4 @@
-"""Deterministically rebuild posterior snapshots from reviewed observations."""
+"""Deterministically rebuild posterior snapshots from validated observations."""
 
 import argparse
 import json

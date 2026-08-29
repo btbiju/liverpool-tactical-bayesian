@@ -77,8 +77,9 @@ def extract_match_observation(match, matchweek):
     NOTE: football-data.org's free tier does NOT include possession%, PPDA,
     or formation -- those need a stats-capable source (FotMob, manually
     assisted) layered on top. This function only fills what's actually
-    available (score, opponent, date); metrics/formation must be added
-    separately before calling apply_matchweek(). Flagged in BACKLOG.md.
+    available (score, opponent, date). The automated result-only workflow may
+    safely use the final score for goals conceded, while metrics and formation
+    still require a separate tactical source. Flagged in BACKLOG.md.
     """
     home = match["homeTeam"]["name"]
     away = match["awayTeam"]["name"]

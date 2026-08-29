@@ -4,6 +4,7 @@
   "manager": "Andoni Iraola",
   "source": "fotmob.com/teams/8650/squad/liverpool; liverpoolfc.com official player and transfer pages",
   "source_fetched_at": "2026-08-24",
+  "availability_updated_at": "2026-08-28",
   "players": [
     { "name": "Alisson Becker", "fotmob_id": "319784", "squad_number": 1, "listed_positions": ["GK"], "nationality": "Brazil" },
     { "name": "Vítězslav Jaroš", "fotmob_id": "1068920", "squad_number": 56, "listed_positions": ["GK"], "nationality": "Czech Republic",
@@ -37,7 +38,8 @@
     { "name": "Dominik Szoboszlai", "fotmob_id": "846005", "squad_number": 8, "listed_positions": ["AM", "DM", "RW", "RB", "CM", "LW"], "nationality": "Hungary" },
     { "name": "Harvey Elliott", "fotmob_id": "963964", "squad_number": 19, "listed_positions": ["AM"], "nationality": "England" },
 
-    { "name": "Federico Chiesa", "fotmob_id": "784510", "squad_number": 14, "listed_positions": ["RW", "ST"], "nationality": "Italy" },
+    { "name": "Federico Chiesa", "fotmob_id": "784510", "squad_number": 14, "listed_positions": ["RW", "ST"], "nationality": "Italy",
+      "injury_status": { "description": "Small muscle injury sustained in Liverpool's pre-season game against Como, confirmed by Iraola on 27 August 2026.", "expected_return": "No return date stated as of 2026-08-27" } },
     { "name": "Florian Wirtz", "fotmob_id": "1152455", "squad_number": 7, "listed_positions": ["LW", "AM", "ST"], "nationality": "Germany" },
     { "name": "Cody Gakpo", "fotmob_id": "806552", "squad_number": 18, "listed_positions": ["LW", "ST", "LM"], "nationality": "Netherlands" },
     { "name": "Víctor Muñoz", "fotmob_id": "1553105", "squad_number": 23, "listed_positions": ["LW", "RW", "AM", "ST", "LM"], "nationality": "Spain" },

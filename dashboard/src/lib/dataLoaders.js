@@ -36,3 +36,8 @@ export async function loadFixtures() {
 export async function loadPosteriors() {
   return loadIndexedCollection('posteriors');
 }
+
+export async function loadLineupProjection() {
+  const projections = await loadIndexedCollection('lineup_projection');
+  return projections.at(-1) ?? null;
+}

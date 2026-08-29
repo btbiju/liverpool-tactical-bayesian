@@ -41,5 +41,6 @@ copyFile(join(dataRoot, "manager_priors", "iraola_2026.json"), "manager_prior.js
 copyDirWithIndex(join(dataRoot, "player_profiles"), "player_profiles");
 copyDirWithIndex(join(dataRoot, "fixtures"), "fixtures");
 copyDirWithIndex(join(dataRoot, "posteriors"), "posteriors");
+copyDirWithIndex(join(dataRoot, "lineup_projection"), "lineup_projection");
 
-console.log("[sync-data] copied squad, manager prior, player_profiles, fixtures, posteriors into public/data/");
+console.log("[sync-data] copied squad, manager prior, player_profiles, fixtures, posteriors, lineup_projection into public/data/");

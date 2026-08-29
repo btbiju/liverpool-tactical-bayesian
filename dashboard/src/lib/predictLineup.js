@@ -57,25 +57,40 @@ function scoreCandidate(player, slotCode) {
   return -1;
 }
 
-export function predictLineup(players) {
+export function predictLineup(players, selectionEvidence = null) {
   const pool = players.filter((p) => !p.injury_status);
   const used = new Set();
+  const evidenceSlots = selectionEvidence?.formation === SUPPORTED_FORMATION
+    ? selectionEvidence.projected_slots ?? {}
+    : {};
   const slots = SLOTS_4_2_3_1.map((slot) => {
+    const evidencePlayer = pool.find(
+      (player) => player.player_id === evidenceSlots[slot.id] && !used.has(player.player_id),
+    );
     const scored = pool
       .filter((p) => !used.has(p.player_id))
       .map((p) => ({ player: p, score: scoreCandidate(p, slot.code) }))
       .filter((x) => x.score >= 0)
       .sort((a, b) => b.score - a.score || (b.player.position_estimate?.confidence ?? 0) - (a.player.position_estimate?.confidence ?? 0));
 
-    const best = scored[0] ?? null;
+    const best = evidencePlayer
+      ? { player: evidencePlayer, score: scoreCandidate(evidencePlayer, slot.code), basis: 'recent-selection' }
+      : scored[0]
+        ? { ...scored[0], basis: 'position-fallback' }
+        : null;
     if (best) used.add(best.player.player_id);
 
     return {
       ...slot,
       player: best?.player ?? null,
       isNaturalFit: best ? best.score >= 1 : false,
+      selectionBasis: best?.basis ?? null,
     };
   });
 
-  return { formation: SUPPORTED_FORMATION, slots };
+  return {
+    formation: SUPPORTED_FORMATION,
+    slots,
+    evidenceApplied: slots.some((slot) => slot.selectionBasis === 'recent-selection'),
+  };
 }

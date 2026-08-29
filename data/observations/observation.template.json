@@ -1,4 +1,5 @@
 {
+  "observation_kind": "human_reviewed",
   "match_id": 0,
   "matchweek": 1,
   "date": "YYYY-MM-DD",

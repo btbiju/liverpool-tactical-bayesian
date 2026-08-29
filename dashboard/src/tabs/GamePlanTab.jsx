@@ -1,5 +1,10 @@
 import { useAsync } from '../hooks/useAsync.js';
-import { loadManagerPrior, loadPosteriors, loadPlayerProfiles } from '../lib/dataLoaders.js';
+import {
+  loadLineupProjection,
+  loadManagerPrior,
+  loadPosteriors,
+  loadPlayerProfiles,
+} from '../lib/dataLoaders.js';
 import { LoadingState, ErrorState, EmptyState } from '../components/StatusStates.jsx';
 import { StatTile } from '../components/StatTile.jsx';
 import { PredictedLineup } from './PredictedLineup.jsx';
@@ -150,6 +155,7 @@ export function GamePlanTab() {
   const { data: prior, error, loading } = useAsync(loadManagerPrior);
   const { data: posteriors } = useAsync(loadPosteriors);
   const { data: players, loading: playersLoading } = useAsync(loadPlayerProfiles);
+  const { data: lineupProjection } = useAsync(loadLineupProjection);
 
   if (loading) return <LoadingState label="Loading manager prior…" />;
   if (error) return <ErrorState error={error} />;
@@ -168,7 +174,11 @@ export function GamePlanTab() {
         {playersLoading || !players ? (
           <LoadingState label="Projecting lineup…" />
         ) : (
-          <PredictedLineup players={players} formationPrior={prior.formation_prior} />
+          <PredictedLineup
+            players={players}
+            formationPrior={prior.formation_prior}
+            lineupProjection={lineupProjection}
+          />
         )}
       </div>
 

@@ -2,9 +2,10 @@
 
 ## Purpose
 
-The Bayesian engine must receive reviewed tactical evidence, not an API record
-that happens to contain a score. Each production observation lives in
-`data/observations/` and must validate against
+The Bayesian engine may receive either human-reviewed tactical evidence or a
+strictly result-only observation generated from a finished API record. Each
+production observation lives in `data/observations/`, declares its
+`observation_kind`, cites every non-null field, and validates against
 `schema/match_observation.schema.json` before it can generate a posterior.
 
 The workflow deliberately separates collection from inference:
@@ -81,8 +82,14 @@ recorded in observation notes.
 
 ## Automation boundary
 
-The weekly automation may refresh raw fixtures and validate/redeploy committed
-data. It must not create tactical observations automatically from incomplete
-football-data.org responses. Posterior generation becomes automatic only after
-a reviewed observation is committed; rebuilding from those observations is
-deterministic and requires no network or secret.
+The scheduled workflow checks whether an unfinished fixture is near expected
+full time before calling football-data.org. Once the raw record reaches
+`FINISHED`, `pipeline/sync_result_observations.py` may create an
+`automated_result_only` observation and deterministically rebuild the posterior.
+That record may update only `goals_conceded_per_match`, which follows exactly
+from the final score. All tactical metrics and formation remain null.
+
+Automation never overwrites a `human_reviewed` observation. A later review may
+enrich the result-only file with compatible tactical evidence and change its
+kind to `human_reviewed`; the deterministic rebuild then replaces the snapshot
+without counting the match twice. No tactical website is polled or scraped.

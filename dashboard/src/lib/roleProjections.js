@@ -69,6 +69,14 @@ export const ROLE_PROJECTIONS = {
     outlook:
       "Likely the midfielder most trusted to break lines under his own steam when the double pivot is pressed, rather than just the safe out-ball.",
   },
+  szoboszlai_dominik: {
+    headline: 'The aggressive half of Iraola’s observed double pivot',
+    zone: 'Right side of the double pivot, pressing forward and arriving near the box rather than holding permanently beside the centre-backs.',
+    reasoning:
+      "This is now observed selection rather than a position-only guess: Szoboszlai started beside Gravenberch against Como and Newcastle. Iraola has also explicitly defended both midfielders carrying forward and arriving near the area, citing their combination in Isak’s goal against Monaco. That makes this a mobile, aggressive pairing whose cover depends on teammates recognizing when one midfielder has gone.",
+    outlook:
+      'The immediate question is defensive balance, not whether he has permission to advance. Newcastle showed the transition risk, while Iraola’s public response indicates he wants better collective cover rather than removing Szoboszlai’s forward movement.',
+  },
   macallister_alexis: {
     headline: 'The base the carrier plays in front of',
     zone: 'Deeper half of the double pivot, covering the space Gravenberch vacates when he carries forward.',
@@ -92,6 +100,14 @@ export const ROLE_PROJECTIONS = {
       "35 goals and 45 assists across 140 Bundesliga appearances at Leverkusen already mark him as a scorer-creator hybrid, not a pure playmaker. His in-season Liverpool data shows real growth into a more involved, more defensively engaged version of that: touches/90 rose from 63.9 to 81.9 and duel-win rate from 36.2% to 45.5% across the season. In a system built on direct, vertical buildup rather than patient wide combination, service into the box comes through central combination and late box-arrivals rather than cutbacks from crosses -- a #10 who already scores as often as he creates arguably fits that pattern better than a pure creator would.",
     outlook:
       "Worth watching whether his shot involvement climbs relative to his assist-heavy Leverkusen split, given this system feeds the box more directly than patient wide buildup ever would.",
+  },
+  ngumoha_rio: {
+    headline: 'The observed right-sided starter',
+    zone: 'Right wing in the starting shape, with permission to switch sides rather than behaving as a fixed touchline winger.',
+    reasoning:
+      "Iraola confirmed that Ngumoha played on the right against Wrexham and explained that he wants wingers capable of operating on both sides. More importantly, Ngumoha then started on the right in the final Como friendly and kept the place when Iraola named the same XI at Newcastle. That repeated senior selection is stronger evidence than the old projection that chose Chiesa only because RW was his primary profile position.",
+    outlook:
+      'He is the current evidence-led choice, not an established season-long lock. Liverpool are publicly seeking another winger, and two consecutive senior starts remain a small sample, so this projection should be revisited after the transfer window and each new lineup.',
   },
   chiesa_federico: {
     headline: 'The same system logic, on almost no evidence',

@@ -1,0 +1,69 @@
+{
+  "as_of": "2026-08-28",
+  "formation": "4-2-3-1",
+  "projected_slots": {
+    "GK": "becker_alisson",
+    "LB": "kerkez_milos",
+    "CB1": "vandijk_virgil",
+    "CB2": "jacquet_jeremy",
+    "RB": "frimpong_jeremie",
+    "DM1": "gravenberch_ryan",
+    "DM2": "szoboszlai_dominik",
+    "LW": "gakpo_cody",
+    "AM": "wirtz_florian",
+    "RW": "ngumoha_rio",
+    "ST": "isak_alexander"
+  },
+  "evidence": [
+    {
+      "date": "2026-08-16",
+      "opponent": "Como 1907",
+      "competition": "Pre-season friendly",
+      "source_ids": ["lfc-como-report", "lfc-ngumoha-role"],
+      "notes": "The final first-team pre-season friendly used this XI. The right-wing slot is an evidence-based positional inference from Iraola's separately confirmed use of Ngumoha on the right, not a formation label supplied by this team list."
+    },
+    {
+      "date": "2026-08-23",
+      "opponent": "Newcastle United",
+      "competition": "Premier League",
+      "source_ids": ["lfc-newcastle-lineup", "lfc-ngumoha-role"],
+      "notes": "Liverpool explicitly confirmed that Iraola selected the same XI that began the Como friendly. The projected slot mapping combines that fact with Iraola's confirmed use of Ngumoha on the right and the existing 4-2-3-1 formation prior."
+    }
+  ],
+  "sources": [
+    {
+      "id": "lfc-como-report",
+      "name": "Liverpool FC — Gakpo and Jacquet score as Liverpool close pre-season with Anfield win over Como",
+      "url": "https://www.liverpoolfc.com/news/gakpo-and-jacquet-score-liverpool-close-pre-season-anfield-win-over-como",
+      "accessed_at": "2026-08-28",
+      "notes": "Official match report and team list for the final first-team pre-season friendly."
+    },
+    {
+      "id": "lfc-newcastle-lineup",
+      "name": "Liverpool FC — Confirmed Liverpool line-up v Newcastle United",
+      "url": "https://www.liverpoolfc.com/news/confirmed-liverpool-line-v-newcastle-united-9",
+      "accessed_at": "2026-08-28",
+      "notes": "Official competitive lineup; the club states it was unchanged from the Como starting XI."
+    },
+    {
+      "id": "lfc-ngumoha-role",
+      "name": "Liverpool FC — Iraola on Ngumoha and winger versatility",
+      "url": "https://www.liverpoolfc.com/news/andoni-iraola-press-conference-chicago-benefits-ngumoha-and-wirtz-positions-transfers-and-more",
+      "accessed_at": "2026-08-28",
+      "notes": "Iraola confirms Ngumoha played on the right against Wrexham and explains that he wants wingers capable of playing both sides."
+    },
+    {
+      "id": "lfc-injury-list",
+      "name": "Liverpool FC — Injury list, suspensions and availability",
+      "url": "https://www.liverpoolfc.com/news/liverpools-injury-list-suspensions-and-availability",
+      "accessed_at": "2026-08-28",
+      "notes": "Official availability update states Chiesa is unavailable with a small muscle injury sustained against Como."
+    }
+  ],
+  "notes": [
+    "This is a selection projection, not confirmed team news for the next match.",
+    "Recent manager selections override the older position-confidence-only fallback while the named player remains available.",
+    "Ngumoha is preferred at right wing because Iraola explicitly used him there in pre-season and then retained him in the unchanged senior XI for the competitive opener; the opener's exact slot assignment is an inference rather than an official formation label.",
+    "Chiesa is not projected to start: he did not start either of the two strongest recent first-team selections and is unavailable as of 2026-08-27."
+  ]
+}

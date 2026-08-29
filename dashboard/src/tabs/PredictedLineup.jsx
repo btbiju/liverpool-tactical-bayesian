@@ -25,9 +25,9 @@ function PitchMarker({ slot, onOpen }) {
   );
 }
 
-export function PredictedLineup({ players, formationPrior }) {
+export function PredictedLineup({ players, formationPrior, lineupProjection }) {
   const [openSlot, setOpenSlot] = useState(null);
-  const { formation, slots } = predictLineup(players);
+  const { formation, slots, evidenceApplied } = predictLineup(players, lineupProjection);
 
   const alpha = formationPrior?.alpha ?? {};
   const total = Object.values(alpha).reduce((sum, v) => sum + v, 0) || 1;
@@ -47,10 +47,41 @@ export function PredictedLineup({ players, formationPrior }) {
         </h2>
       </div>
       <p className="lineup-disclaimer">
-        A model projection from current squad data — most-likely formation, each player's estimated position and
-        confidence, and who's currently injured. <strong>Not confirmed team news.</strong> Click any player for their
-        projected role. Dashed markers are out-of-position fallback picks forced by injuries elsewhere in the squad.
+        An evidence-led projection from Iraola's recent selections, current availability, and each player's estimated
+        position. <strong>Not confirmed team news.</strong> Click any player for their projected role. Dashed markers
+        are out-of-position fallback picks forced by injuries elsewhere in the squad.
       </p>
+
+      {evidenceApplied && lineupProjection && (
+        <div className="lineup-evidence card">
+          <div>
+            <strong>Selection evidence</strong>
+            <span>Updated {lineupProjection.as_of}</span>
+          </div>
+          <p>
+            Iraola used this same XI for the final first-team friendly against Como and the Premier League opener at
+            Newcastle. Combined with his confirmed preseason use of Ngumoha on the right, that selection evidence
+            replaces the older position-only projection of Federico Chiesa. The exact slot mapping remains a model
+            inference, not an official formation label.
+          </p>
+          <div className="lineup-evidence__matches">
+            {lineupProjection.evidence.map((item) => (
+              <span key={`${item.date}-${item.opponent}`}>
+                {item.date} · {item.opponent} · {item.competition}
+              </span>
+            ))}
+          </div>
+          <div className="lineup-evidence__sources">
+            Sources:{' '}
+            {lineupProjection.sources.map((source, index) => (
+              <span key={source.id}>
+                {index > 0 ? ', ' : ''}
+                <a href={source.url} target="_blank" rel="noreferrer">{source.name}</a>
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
 
       <div className="pitch">
         <div className="pitch__halfway-line" />

@@ -6,10 +6,10 @@
   "listed_positions": ["LW"],
   "position_estimate": {
     "primary": "LW",
-    "secondary": null,
+    "secondary": "RW",
     "basis": "liverpool_recent_minutes",
     "confidence": 0.5,
-    "last_updated": "2026-08-10"
+    "last_updated": "2026-08-28"
   },
   "has_liverpool_minutes": true,
   "career_stints": [
@@ -42,6 +42,7 @@
   },
   "injury_status": null,
   "notes": [
+    "POSITION UPDATE 2026-08-28: RW is now a sourced secondary estimate. Iraola confirmed Ngumoha played on the right against Wrexham, explained that he wants his wingers able to play both sides, and then selected Ngumoha in the same right-sided role for the final Como friendly and Premier League opener at Newcastle. This records observed usage without inventing a minutes split. Sources: https://www.liverpoolfc.com/news/andoni-iraola-press-conference-chicago-benefits-ngumoha-and-wirtz-positions-transfers-and-more, https://www.liverpoolfc.com/news/gakpo-and-jacquet-score-liverpool-close-pre-season-anfield-win-over-como, https://www.liverpoolfc.com/news/confirmed-liverpool-line-v-newcastle-united-9 (accessed 2026-08-28).",
     "All per-90 advanced metrics left null: no reliable per-90 figures were found for his actual senior 2025/26 Liverpool sample. Scouting reports (Total Football Analysis, ScoutingStats) describe him qualitatively as a high-volume, high-completion dribbler and explosive 1v1 threat, and one source gives 12.91 dribbles/90 at 64% completion -- but that figure is explicitly from England U16 level, not his Liverpool senior sample, so it was not used here to avoid misrepresenting an U16 stat as a current playstyle metric.",
     "career_stints[0].appearances is 0 by design (not a placeholder/guess) -- it records a true fact: he had zero senior Chelsea appearances despite six years in their academy. Included for transfer-chronology context per the project's convention of keeping career_stints honest even when sparse for young players.",
     "position_estimate.basis is 'liverpool_recent_minutes' since 952 minutes clears the roughly-900-minute threshold used elsewhere in this project, though confidence is kept moderate (0.5) given he is still a 17-year-old with under a full season of senior football and only became a regular starter from January 2026 onward.",

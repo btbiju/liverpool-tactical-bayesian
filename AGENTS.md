@@ -21,10 +21,14 @@ eventual posterior history.
    player-level inputs.
 3. `pipeline/fixtures_client.py` and `pipeline/pull_fixtures.py` retrieve
    fixture/result records from football-data.org.
-4. Tactical match observations must be enriched separately: football-data.org
-   does not provide possession, PPDA, formation, or xG.
-5. Reviewed observations in `data/observations/` must cite every non-null field
-   and validate against `schema/match_observation.schema.json`.
+4. A finished football-data.org result may automatically create a result-only
+   observation that updates goals conceded and leaves every tactical field
+   null. Possession, PPDA, formation, xG, and related evidence must still be
+   enriched separately.
+5. Every observation in `data/observations/` must declare whether it is
+   `automated_result_only` or `human_reviewed`, cite every non-null field, and
+   validate against `schema/match_observation.schema.json`. Automation must
+   never overwrite a human-reviewed observation.
 6. `pipeline/build_posteriors.py` deterministically rebuilds the snapshot series
    through `pipeline/bayesian_update.py`.
 7. `dashboard/scripts/sync-data.mjs` copies committed JSON into ignored
@@ -60,8 +64,9 @@ eventual posterior history.
   unless it gains a real data-flow or narrative connection to the Bayesian
   model. A focused portfolio story is more valuable than unrelated features.
 - Prefer small, auditable transformations over opaque model logic.
-- Avoid systematic scraping that conflicts with a source's terms. The intended
-  update cadence is weekly, not live polling.
+- Avoid systematic scraping that conflicts with a source's terms. The fixture
+  workflow may poll the authorized football-data.org API around expected full
+  time, but tactical websites must not be systematically scraped.
 - Do not commit generated dashboard data, build output, dependencies, caches,
   editor settings, OS metadata, or local credentials.
 
@@ -89,7 +94,8 @@ fixture/result source but is not a tactical-statistics provider.
 - `data/squad/`: current squad snapshot.
 - `data/player_profiles/`: one profile per squad player.
 - `data/fixtures/`: raw football-data.org fixtures/results.
-- `data/observations/`: reviewed, field-cited tactical evidence.
+- `data/observations/`: field-cited observations, either automated result-only
+  records or human-reviewed tactical evidence.
 - `data/posteriors/`: posterior snapshots, expected to grow during the season.
 - `pipeline/`: Python fixture client, pull command, and Bayesian update engine.
 - `dashboard/`: React/Vite static dashboard.
