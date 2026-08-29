@@ -50,8 +50,13 @@
     "touches_per90": null,
     "duels_won_pct": null
   },
-  "injury_status": null,
+  "injury_status": {
+    "description": "Small muscle injury sustained in Liverpool's pre-season game against Como, confirmed by Iraola on 27 August 2026.",
+    "expected_return": "No return date stated as of 2026-08-27"
+  },
   "notes": [
+    "AVAILABILITY UPDATE 2026-08-28: Liverpool's official injury list quotes Iraola confirming that Chiesa is unavailable after feeling a small muscle injury against Como. No return date was supplied, so none is inferred. Source: https://www.liverpoolfc.com/news/liverpools-injury-list-suspensions-and-availability (accessed 2026-08-28).",
+    "SELECTION UPDATE 2026-08-28: Chiesa did not start the final first-team Como friendly or the Premier League opener at Newcastle. Liverpool confirmed Iraola used the same XI in both, with Rio Ngumoha on the right. Chiesa therefore remains a squad player but is no longer the evidence-led projected starting right winger.",
     "IMPORTANT SQUAD-STATUS FLAG: as of 2026-08-09, Chiesa is reported in an active, unresolved transfer saga -- linked with a move away from Liverpool (Napoli, and earlier Juventus/Como interest), described as a 'Liverpool outcast' with no decision made as the transfer window nears its close. His inclusion in data/squad/liverpool_2026_27.json (fetched 2026-08-08) may already be stale. Worth re-checking squad status before relying on this profile for 2026/27 projections.",
     "2025/26 minutes (318) is a small, rotation-affected sample -- per-90 advanced metrics were not found from an accessible source and were left null rather than derived from this thin, uncertain base. A 2026-08-09 follow-up (theanalyst.com via web search) corroborated the small-sample picture with a slightly different split -- 26 apps, 315 minutes, 25 of those as a substitute, 2 goals/1 assist, last PL appearance May 15 vs Aston Villa (24 mins, 4-2 defeat) -- consistent with what's recorded here within normal source variance. Still no advanced per-90 numbers found; his Opta Analyst player page's stats sub-page was not accessible via fetch (subscription/full-page-load gated).",
     "Originally assumed to have 'no Liverpool history' per early project notes; corrected 2026-08-09 -- he actually joined Liverpool in summer 2024, so he already has two seasons of LFC data, not zero. See BACKLOG.md.",

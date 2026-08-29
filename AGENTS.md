@@ -21,15 +21,21 @@ eventual posterior history.
    player-level inputs.
 3. `pipeline/fixtures_client.py` and `pipeline/pull_fixtures.py` retrieve
    fixture/result records from football-data.org.
-4. Tactical match observations must be enriched separately: football-data.org
-   does not provide possession, PPDA, formation, or xG.
-5. Reviewed observations in `data/observations/` must cite every non-null field
-   and validate against `schema/match_observation.schema.json`.
-6. `pipeline/build_posteriors.py` deterministically rebuilds the snapshot series
+4. A finished football-data.org result may automatically create a result-only
+   observation that updates goals conceded and leaves every tactical field
+   null. Possession, PPDA, formation, xG, and related evidence must still be
+   enriched separately.
+5. Delayed web research may collect source-mapped candidates in
+   `data/research_drafts/`; these drafts never update the model directly.
+6. Every observation in `data/observations/` must declare whether it is
+   `automated_result_only` or `human_reviewed`, cite every non-null field, and
+   validate against `schema/match_observation.schema.json`. Automation must
+   never overwrite a human-reviewed observation.
+7. `pipeline/build_posteriors.py` deterministically rebuilds the snapshot series
    through `pipeline/bayesian_update.py`.
-7. `dashboard/scripts/sync-data.mjs` copies committed JSON into ignored
+8. `dashboard/scripts/sync-data.mjs` copies committed JSON into ignored
    `dashboard/public/data/` before development and builds.
-8. The React/Vite dashboard is intended for static GitHub Pages deployment.
+9. The React/Vite dashboard is intended for static GitHub Pages deployment.
 
 ## Bayesian methodology
 
@@ -56,12 +62,18 @@ eventual posterior history.
   contradictory.
 - Preserve provenance and uncertainty. When sources disagree, record the
   disagreement and why one value was selected.
+- Resolve conflicts only among compatible definitions and independent
+  measurement providers. Prefer unanimity or a strict majority. If compatible
+  numeric providers have no majority, an arithmetic mean may be retained only
+  as a labeled derived consensus with every input and the full range preserved;
+  categorical claims must never be averaged.
 - Do not reintroduce the archived historical analysis into the main product
   unless it gains a real data-flow or narrative connection to the Bayesian
   model. A focused portfolio story is more valuable than unrelated features.
 - Prefer small, auditable transformations over opaque model logic.
-- Avoid systematic scraping that conflicts with a source's terms. The intended
-  update cadence is weekly, not live polling.
+- Avoid systematic scraping that conflicts with a source's terms. The fixture
+  workflow may poll the authorized football-data.org API around expected full
+  time, but tactical websites must not be systematically scraped.
 - Do not commit generated dashboard data, build output, dependencies, caches,
   editor settings, OS metadata, or local credentials.
 
@@ -89,7 +101,10 @@ fixture/result source but is not a tactical-statistics provider.
 - `data/squad/`: current squad snapshot.
 - `data/player_profiles/`: one profile per squad player.
 - `data/fixtures/`: raw football-data.org fixtures/results.
-- `data/observations/`: reviewed, field-cited tactical evidence.
+- `data/observations/`: field-cited observations, either automated result-only
+  records or human-reviewed tactical evidence.
+- `data/research_drafts/`: delayed web-research evidence packets; never direct
+  posterior inputs.
 - `data/posteriors/`: posterior snapshots, expected to grow during the season.
 - `pipeline/`: Python fixture client, pull command, and Bayesian update engine.
 - `dashboard/`: React/Vite static dashboard.
@@ -109,6 +124,8 @@ Before handing off a material change, run checks proportionate to its scope:
 - The offline validator must parse committed JSON, apply the repository schemas,
   and check squad/profile identifiers, names, and squad numbers.
 - Add or run deterministic pipeline tests for any modeling change.
+- Validate research drafts and run their deterministic conflict resolver when
+  collection or consensus logic changes.
 - Confirm `git status --short` contains no generated `dist/`, `public/data/`,
   `node_modules/`, bytecode, secrets, or unrelated files.
 

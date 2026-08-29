@@ -239,6 +239,34 @@
   gap: 18px;
 }
 
+.posterior-explainer {
+  margin-bottom: 18px;
+  padding: 14px 16px;
+  border-left: 3px solid var(--series-1);
+}
+
+.posterior-explainer strong {
+  font-size: 0.84rem;
+}
+
+.posterior-explainer p {
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  margin: 5px 0 10px;
+}
+
+.posterior-explainer__flow {
+  align-items: center;
+  color: var(--text-muted);
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 0.72rem;
+  font-weight: 600;
+  gap: 7px;
+  text-transform: uppercase;
+}
+
 .posterior-panel__summary {
   display: flex;
   align-items: center;
@@ -882,6 +910,36 @@
   line-height: 1.5;
   margin: 0 0 16px;
   max-width: 68ch;
+}
+
+.lineup-evidence {
+  max-width: 760px;
+  margin: 0 auto 16px;
+  padding: 14px 16px;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.lineup-evidence > div:first-child {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--text-primary);
+}
+
+.lineup-evidence p {
+  margin: 8px 0;
+}
+
+.lineup-evidence__matches {
+  display: grid;
+  gap: 3px;
+  margin-bottom: 8px;
+}
+
+.lineup-evidence__sources a {
+  color: var(--accent);
 }
 
 .pitch {

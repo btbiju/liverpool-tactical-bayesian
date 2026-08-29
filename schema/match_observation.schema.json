@@ -1,10 +1,15 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Reviewed tactical match observation",
-  "description": "A sourced, human-reviewed match record that is safe to feed into the Bayesian update pipeline. Missing tactical values remain absent or null; they must never be guessed.",
+  "title": "Sourced match observation",
+  "description": "A source-mapped match record that is safe to feed into the Bayesian update pipeline. It is either human-reviewed tactical evidence or an automated result-only record. Missing tactical values remain absent or null; they must never be guessed.",
   "type": "object",
-  "required": ["match_id", "matchweek", "date", "opponent", "result", "metrics", "formation", "sources", "metric_sources", "reviewed_at"],
+  "required": ["observation_kind", "match_id", "matchweek", "date", "opponent", "result", "metrics", "formation", "sources", "metric_sources", "reviewed_at"],
   "properties": {
+    "observation_kind": {
+      "type": "string",
+      "enum": ["human_reviewed", "automated_result_only"],
+      "description": "Distinguishes reviewed tactical evidence from a machine-generated observation containing only score-derived facts."
+    },
     "match_id": { "type": "integer" },
     "matchweek": { "type": "integer", "minimum": 1, "maximum": 38 },
     "date": { "type": "string", "format": "date" },

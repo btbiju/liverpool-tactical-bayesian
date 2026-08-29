@@ -1,5 +1,10 @@
 import { useAsync } from '../hooks/useAsync.js';
-import { loadManagerPrior, loadPosteriors, loadPlayerProfiles } from '../lib/dataLoaders.js';
+import {
+  loadLineupProjection,
+  loadManagerPrior,
+  loadPosteriors,
+  loadPlayerProfiles,
+} from '../lib/dataLoaders.js';
 import { LoadingState, ErrorState, EmptyState } from '../components/StatusStates.jsx';
 import { StatTile } from '../components/StatTile.jsx';
 import { PredictedLineup } from './PredictedLineup.jsx';
@@ -75,7 +80,7 @@ function PosteriorPanel({ posteriors, prior }) {
           <span className="posterior-panel__eyebrow">Current model state</span>
           <strong>After matchweek {latest.as_of_matchweek}</strong>
         </div>
-        <span className="section-heading__meta">{updates.length} reviewed observation{updates.length === 1 ? '' : 's'}</span>
+        <span className="section-heading__meta">{updates.length} match observation{updates.length === 1 ? '' : 's'}</span>
       </div>
 
       <div className="stat-grid posterior-panel__metrics">
@@ -150,6 +155,7 @@ export function GamePlanTab() {
   const { data: prior, error, loading } = useAsync(loadManagerPrior);
   const { data: posteriors } = useAsync(loadPosteriors);
   const { data: players, loading: playersLoading } = useAsync(loadPlayerProfiles);
+  const { data: lineupProjection } = useAsync(loadLineupProjection);
 
   if (loading) return <LoadingState label="Loading manager prior…" />;
   if (error) return <ErrorState error={error} />;
@@ -168,7 +174,11 @@ export function GamePlanTab() {
         {playersLoading || !players ? (
           <LoadingState label="Projecting lineup…" />
         ) : (
-          <PredictedLineup players={players} formationPrior={prior.formation_prior} />
+          <PredictedLineup
+            players={players}
+            formationPrior={prior.formation_prior}
+            lineupProjection={lineupProjection}
+          />
         )}
       </div>
 
@@ -224,6 +234,19 @@ export function GamePlanTab() {
       <div style={{ marginTop: 28 }}>
         <div className="section-heading">
           <h2 style={{ fontSize: '0.95rem' }}>Posterior (updated from real 2026/27 results)</h2>
+        </div>
+        <div className="posterior-explainer card">
+          <strong>Why this does not update all at once</strong>
+          <p>
+            The final score can update shortly after full time. Tactical metrics follow after a 24–72 hour
+            evidence window while official statistics and trusted analysis are collected, compared, and
+            validated. Missing or incompatible measurements stay unchanged rather than being guessed.
+          </p>
+          <div className="posterior-explainer__flow" aria-label="Posterior update sequence">
+            <span>Final result</span><span aria-hidden="true">→</span>
+            <span>Evidence review</span><span aria-hidden="true">→</span>
+            <span>Validated posterior</span>
+          </div>
         </div>
         {posteriors && posteriors.length > 0 ? (
           <PosteriorPanel posteriors={posteriors} prior={prior} />

@@ -1,0 +1,250 @@
+{
+  "draft_version": 1,
+  "status": "ready_for_review",
+  "match_id": 560550,
+  "matchweek": 1,
+  "date": "2026-08-23",
+  "opponent": "Newcastle United (A)",
+  "research_window": {
+    "not_before": "2026-08-24T18:30:00Z",
+    "search_attempts": 1,
+    "last_searched_at": "2026-08-28T20:00:00Z",
+    "next_search_at": null
+  },
+  "sources": [
+    {
+      "id": "premier-league-match-stats",
+      "name": "Premier League — Newcastle United vs Liverpool match statistics",
+      "url": "https://www.premierleague.com/en/match/2645203/newcastle-united-vs-liverpool/stats",
+      "published_at": null,
+      "accessed_at": "2026-08-28",
+      "source_tier": 1,
+      "medium": "official_stats",
+      "notes": "Official league page used by the reviewed observation."
+    },
+    {
+      "id": "liverpool-opta-analysis",
+      "name": "Liverpool FC — Newcastle 2-2 Liverpool: Analyse the game with Opta stats",
+      "url": "https://www.liverpoolfc.com/news/newcastle-2-2-liverpool-analyse-game-opta-stats",
+      "published_at": "2026-08-23",
+      "accessed_at": "2026-08-28",
+      "source_tier": 1,
+      "medium": "official_stats",
+      "notes": "Official club page embeds an Opta presentation; retained for research provenance even though its embedded values were not extracted here."
+    },
+    {
+      "id": "opta-analyst-match-centre",
+      "name": "Opta Analyst — Newcastle 2-2 Liverpool stats",
+      "url": "https://theanalyst.com/articles/newcastle-vs-liverpool-stats-premier-league-08-2026",
+      "published_at": "2026-08-23",
+      "accessed_at": "2026-08-28",
+      "source_tier": 2,
+      "medium": "structured_stats",
+      "notes": "Opta match centre and tactical article; embedded tables were not treated as extracted claims in this packet."
+    },
+    {
+      "id": "coaches-voice-analysis",
+      "name": "Coaches' Voice — Newcastle United 2 Liverpool 2: tactical analysis",
+      "url": "https://learning.coachesvoice.com/cv/newcastle-liverpool-tactics-august-2026/",
+      "published_at": "2026-08-24",
+      "accessed_at": "2026-08-28",
+      "source_tier": 3,
+      "medium": "article",
+      "notes": "Detailed tactical analysis with an explicit starting formation and match-stat table."
+    },
+    {
+      "id": "statmuse-match-centre",
+      "name": "StatMuse — Newcastle 2-2 Liverpool",
+      "url": "https://www.statmuse.com/fc/match/8-23-2026-new-vs-liv-112771",
+      "published_at": "2026-08-23",
+      "accessed_at": "2026-08-28",
+      "source_tier": 3,
+      "medium": "structured_stats",
+      "notes": "Structured match centre with lineup, formation, team stats, and event data."
+    }
+  ],
+  "candidates": {
+    "possession_pct": [
+      {
+        "value": 60.8,
+        "source_id": "premier-league-match-stats",
+        "measurement_provider": "Premier League official statistics",
+        "compatibility_group": "liverpool_full_match_possession_pct",
+        "evidence_location": "Team statistics: possession",
+        "eligible_for_consensus": true,
+        "notes": "Exact official value already selected by the reviewed observation."
+      },
+      {
+        "value": 58,
+        "source_id": "coaches-voice-analysis",
+        "measurement_provider": "Coaches' Voice (underlying provider undisclosed)",
+        "compatibility_group": "liverpool_full_match_possession_pct",
+        "evidence_location": "Match stats table",
+        "eligible_for_consensus": true,
+        "notes": "Rounded whole-percentage value."
+      },
+      {
+        "value": 61,
+        "source_id": "statmuse-match-centre",
+        "measurement_provider": "StatMuse (underlying provider undisclosed)",
+        "compatibility_group": "liverpool_full_match_possession_pct",
+        "evidence_location": "Team Stats: Possession",
+        "eligible_for_consensus": true,
+        "notes": "Rounded whole-percentage value."
+      }
+    ],
+    "shots_on_target_per_match": [
+      {
+        "value": 7,
+        "source_id": "premier-league-match-stats",
+        "measurement_provider": "Premier League official statistics",
+        "compatibility_group": "liverpool_full_match_shots_on_target",
+        "evidence_location": "Team statistics: shots on target",
+        "eligible_for_consensus": true
+      },
+      {
+        "value": 7,
+        "source_id": "coaches-voice-analysis",
+        "measurement_provider": "Coaches' Voice (underlying provider undisclosed)",
+        "compatibility_group": "liverpool_full_match_shots_on_target",
+        "evidence_location": "Match stats table: shots / on target",
+        "eligible_for_consensus": true
+      },
+      {
+        "value": 7,
+        "source_id": "statmuse-match-centre",
+        "measurement_provider": "StatMuse (underlying provider undisclosed)",
+        "compatibility_group": "liverpool_full_match_shots_on_target",
+        "evidence_location": "Team Stats: Shots (On Target)",
+        "eligible_for_consensus": true
+      }
+    ],
+    "formation": [
+      {
+        "value": "4-2-3-1",
+        "source_id": "coaches-voice-analysis",
+        "measurement_provider": "Coaches' Voice (underlying provider undisclosed)",
+        "compatibility_group": "liverpool_nominal_starting_formation",
+        "evidence_location": "Starting line-ups",
+        "eligible_for_consensus": true
+      },
+      {
+        "value": "4-2-3-1",
+        "source_id": "statmuse-match-centre",
+        "measurement_provider": "StatMuse (underlying provider undisclosed)",
+        "compatibility_group": "liverpool_nominal_starting_formation",
+        "evidence_location": "Match lineup",
+        "eligible_for_consensus": true
+      }
+    ],
+    "xg": [
+      {
+        "value": 3.69,
+        "source_id": "coaches-voice-analysis",
+        "measurement_provider": "Coaches' Voice (underlying provider undisclosed)",
+        "compatibility_group": "liverpool_full_match_xg_provider_model",
+        "evidence_location": "Match stats table: expected goals",
+        "eligible_for_consensus": true,
+        "notes": "Provider-specific model output."
+      },
+      {
+        "value": 3.01,
+        "source_id": "statmuse-match-centre",
+        "measurement_provider": "StatMuse (underlying provider undisclosed)",
+        "compatibility_group": "liverpool_full_match_xg_provider_model",
+        "evidence_location": "Team Stats: xG",
+        "eligible_for_consensus": true,
+        "notes": "Provider-specific model output; contextual only because xG is not a current posterior metric."
+      }
+    ]
+  },
+  "resolutions": {
+    "formation": {
+      "status": "resolved",
+      "value": "4-2-3-1",
+      "method": "unanimous",
+      "source_ids": [
+        "coaches-voice-analysis",
+        "statmuse-match-centre"
+      ],
+      "measurement_providers": [
+        "Coaches' Voice (underlying provider undisclosed)",
+        "StatMuse (underlying provider undisclosed)"
+      ],
+      "compatibility_group": "liverpool_nominal_starting_formation",
+      "range": null,
+      "between_provider_variance": null,
+      "rationale": "Independent measurement providers report the same compatible value."
+    },
+    "possession_pct": {
+      "status": "resolved",
+      "value": 59.933,
+      "method": "mean_consensus",
+      "source_ids": [
+        "coaches-voice-analysis",
+        "premier-league-match-stats",
+        "statmuse-match-centre"
+      ],
+      "measurement_providers": [
+        "Coaches' Voice (underlying provider undisclosed)",
+        "Premier League official statistics",
+        "StatMuse (underlying provider undisclosed)"
+      ],
+      "compatibility_group": "liverpool_full_match_possession_pct",
+      "range": {
+        "minimum": 58,
+        "maximum": 61
+      },
+      "between_provider_variance": 1.8756,
+      "rationale": "No strict majority exists; this is the arithmetic mean of compatible independent provider values and must be labeled as derived when reviewed."
+    },
+    "shots_on_target_per_match": {
+      "status": "resolved",
+      "value": 7,
+      "method": "unanimous",
+      "source_ids": [
+        "coaches-voice-analysis",
+        "premier-league-match-stats",
+        "statmuse-match-centre"
+      ],
+      "measurement_providers": [
+        "Coaches' Voice (underlying provider undisclosed)",
+        "Premier League official statistics",
+        "StatMuse (underlying provider undisclosed)"
+      ],
+      "compatibility_group": "liverpool_full_match_shots_on_target",
+      "range": {
+        "minimum": 7,
+        "maximum": 7
+      },
+      "between_provider_variance": 0.0,
+      "rationale": "Independent measurement providers report the same compatible value."
+    },
+    "xg": {
+      "status": "resolved",
+      "value": 3.35,
+      "method": "mean_consensus",
+      "source_ids": [
+        "coaches-voice-analysis",
+        "statmuse-match-centre"
+      ],
+      "measurement_providers": [
+        "Coaches' Voice (underlying provider undisclosed)",
+        "StatMuse (underlying provider undisclosed)"
+      ],
+      "compatibility_group": "liverpool_full_match_xg_provider_model",
+      "range": {
+        "minimum": 3.01,
+        "maximum": 3.69
+      },
+      "between_provider_variance": 0.1156,
+      "rationale": "No strict majority exists; this is the arithmetic mean of compatible independent provider values and must be labeled as derived when reviewed."
+    }
+  },
+  "notes": [
+    "This packet demonstrates the delayed research stage against an already reviewed match; it does not replace the production observation.",
+    "Possession and xG disagreements are preserved rather than hidden.",
+    "PPDA, accurate passes, and accurate crosses remain absent because no compatible explicit values were found in this pass.",
+    "Underlying provider independence is not disclosed by every site and must be considered during review."
+  ]
+}

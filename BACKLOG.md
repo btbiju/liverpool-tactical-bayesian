@@ -39,7 +39,9 @@ let items live only in chat history.
       before the season starts. Per instruction, he stays listed as a
       current Liverpool player (with the transfer-saga flag already in his
       profile notes) until the window closes or a departure is confirmed --
-      re-check then, not before.
+      re-check then, not before. Availability was refreshed on 2026-08-28:
+      Liverpool's official injury list says he is currently unavailable with a
+      small muscle injury sustained against Como; no return date was supplied.
 - [ ] **Joseph Gomez's Liverpool future is also uncertain** -- found
       2026-08-10 during profile research: contract runs to 30 June 2027, but
       he's publicly said "anything can happen" re: a summer exit, with
@@ -156,26 +158,29 @@ let items live only in chat history.
       `base: '/liverpool-tactical-bayesian/'` for GitHub Pages on build.
       Deployed through GitHub Actions to
       `https://btbiju.github.io/liverpool-tactical-bayesian/` on 2026-08-28.
-- [x] **Game Plan tab: predicted starting XI** (2026-08-11)
-      -- `dashboard/src/lib/predictLineup.js` computes a most-likely 4-2-3-1
-      XI from real data: formation_prior's dominant formation, each
-      player's `position_estimate` (primary/secondary/confidence), and
-      current `injury_status` (injured players excluded from selection
-      entirely). Rendered as a clickable pitch graphic
+- [x] **Game Plan tab: predicted starting XI** (2026-08-11; evidence update
+      2026-08-28) -- `dashboard/src/lib/predictLineup.js` computes a
+      most-likely 4-2-3-1 XI from real data. Recent sourced manager selections
+      now take priority, with position estimates and confidence retained as
+      fallbacks and injured players excluded entirely. The current projection
+      is grounded in Iraola naming the same XI against Como and Newcastle:
+      Ngumoha at right wing and Szoboszlai beside Gravenberch, replacing the
+      original position-only picks of Chiesa and Mac Allister. The source-mapped
+      selection snapshot lives in `data/lineup_projection/`. Rendered as a
+      clickable pitch graphic
       (`PredictedLineup.jsx`); clicking a player opens the existing
       `PlayerDetail` modal extended with a new "Projected role under
       Iraola" section. This is genuinely the manager positional-deployment
       overlay item below, arrived at from the UI side rather than the data
       side -- worth reconciling if layer 3 gets built into the schema
       later.
-  - The algorithm surfaces a real, honest squad problem rather than
-        hiding it: with Gomez and Leoni both injured, the only fit
-        centre-back partner for Van Dijk is Jérémy Jacquet -- a
-        2026/27 debutant with zero senior Liverpool minutes and the
-        lowest confidence (55%) of any starter. Chiesa (50% confidence,
-        transfer-saga flagged) is similarly the RW pick only by
-        elimination. Both are called out explicitly in their role
-        projections rather than presented as confident picks.
+  - The original algorithm surfaced a real squad problem rather than hiding
+        it: with Gomez and Leoni injured, Jérémy Jacquet was the only fit
+        centre-back partner for Van Dijk, while Chiesa became the RW pick only
+        by elimination. Subsequent evidence validated Jacquet's selection but
+        disproved the Chiesa projection: Iraola used Ngumoha on the right and
+        repeated the same XI in the competitive opener. The projector now
+        allows actual selections to correct static position assumptions.
   - Role/specialization text for the 11 selected players is hand-authored
         (`dashboard/src/lib/roleProjections.js`), grounded in each
         player's real profile data and Iraola's real tactical prior
@@ -224,6 +229,13 @@ let items live only in chat history.
 
 ## Remaining work
 
+- [ ] **Observe the delayed-research automation across several matchweeks.**
+      The research-draft contract and deterministic resolver are implemented,
+      but source availability, provider disclosure, video transcript access,
+      and the usefulness of a second 48–72 hour pass must be evaluated using
+      real matches. Promotion into `data/observations/` remains a review step;
+      do not silently turn qualitative analysis into PPDA or other numbers.
+
 - [ ] **Manager positional-deployment overlay, data-model side** -- the
       dashboard's predicted-XI feature (above) implements a version of this
       at the presentation layer (JS-computed selection + hand-authored role
@@ -256,7 +268,15 @@ let items live only in chat history.
 
 ## Decisions made (for reference, not action items)
 
-- Update cadence: manual/weekly via GitHub Actions, not live polling (cost + ToS reasons)
+- Update cadence: gated GitHub Actions checks around expected full time, plus a
+  weekly fallback. API calls occur only inside the match window. A separate
+  delayed research task may use ordinary web search after 24–72 hours, but
+  tactical sites are not systematically polled or crawled.
+- Conflicting match statistics: compare only compatible definitions, collapse
+  repeated pages from the same measurement provider, use a strict independent-
+  provider majority where available, and otherwise retain a numeric arithmetic
+  mean only as a labeled derived consensus with its full input range. Never
+  average categorical claims.
 - Model rigor: real conjugate-prior Bayesian updating, not a hand-rolled weighted average
 - FotMob is source of truth for squad data over Wikipedia
 - Wikipedia demoted to last-resort cross-check only
@@ -354,3 +374,28 @@ let items live only in chat history.
       outcome, teams and crests, competition, matchweek, stage, duration,
       referee, match ID, and API update time. Missing fields are labeled `Not
       supplied`; no tactical statistic is inferred from the fixture feed.
+- [x] **First weekly availability and lineup review completed (2026-08-28).**
+      No new competitive observation was possible because matchweek two had not
+      yet been played. The review instead captured Chiesa's newly confirmed
+      muscle injury, added RW as a sourced secondary estimate for Ngumoha, and
+      replaced the position-only projected XI with a source-mapped selection
+      projection based on the final Como friendly and Newcastle opener. The
+      projection remains explicitly provisional because Liverpool are publicly
+      seeking another winger before the transfer deadline.
+- [x] **Post-match result analysis automated (2026-08-28).** The refresh
+      workflow now wakes twice per hour but gates external API use to the window
+      around expected full time, with Monday retained as a forced fallback.
+      When football-data.org marks a fixture `FINISHED`, a deterministic script
+      creates a source-mapped `automated_result_only` observation, updates only
+      goals conceded, rebuilds posterior snapshots, validates, commits, and
+      dispatches Pages deployment. Unsupported tactical fields remain null and
+      existing human-reviewed observations are never overwritten.
+- [x] **Delayed post-match research stage implemented (2026-08-28).** Added a
+      source-mapped research-draft schema, offline validation, and deterministic
+      conflict resolver. The resolver counts disclosed measurement providers
+      rather than web pages, selects unanimity or a strict majority, and labels
+      compatible no-majority numeric averages with their full range. A
+      Newcastle evidence packet demonstrates the process without replacing the
+      official value already used by the production observation. The dashboard
+      now explains that scores can update immediately while tactical evidence
+      follows after a 24–72 hour collection and validation window.

@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Evidence-led projected lineup",
+  "description": "A sourced, time-stamped selection projection. This records observed manager choices and is not confirmed future team news.",
+  "type": "object",
+  "required": ["as_of", "formation", "projected_slots", "evidence", "sources", "notes"],
+  "properties": {
+    "as_of": { "type": "string", "format": "date" },
+    "formation": { "type": "string" },
+    "projected_slots": {
+      "type": "object",
+      "patternProperties": {
+        "^[A-Z0-9]+$": { "type": "string" }
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["date", "opponent", "competition", "source_ids"],
+        "properties": {
+          "date": { "type": "string", "format": "date" },
+          "opponent": { "type": "string" },
+          "competition": { "type": "string" },
+          "source_ids": { "type": "array", "items": { "type": "string" } },
+          "notes": { "type": "string" }
+        }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "url", "accessed_at"],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "url": { "type": "string" },
+          "accessed_at": { "type": "string", "format": "date" },
+          "notes": { "type": "string" }
+        }
+      }
+    },
+    "notes": { "type": "array", "items": { "type": "string" } }
+  }
+}
