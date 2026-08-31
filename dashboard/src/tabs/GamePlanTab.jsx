@@ -7,7 +7,7 @@ import {
 } from '../lib/dataLoaders.js';
 import { LoadingState, ErrorState, EmptyState } from '../components/StatusStates.jsx';
 import { StatTile } from '../components/StatTile.jsx';
-import { PredictedLineup } from './PredictedLineup.jsx';
+import { GamePlanEvidence, PredictedLineup } from './PredictedLineup.jsx';
 
 const METRIC_DISPLAY = {
   possession_pct: { label: 'Possession', unit: '%', decimals: 1 },
@@ -166,8 +166,8 @@ export function GamePlanTab() {
   return (
     <section>
       <div className="section-heading">
-        <h2>Game Plan — {prior.manager}'s Tactical Prior</h2>
-        <span className="section-heading__meta">from {prior.source_seasons?.length ?? 0} Bournemouth seasons</span>
+        <h2>Game Plan — Next Opponent</h2>
+        <span className="section-heading__meta">{prior.manager}'s prior + live matchup evidence</span>
       </div>
 
       <div style={{ marginBottom: 32 }}>
@@ -238,9 +238,10 @@ export function GamePlanTab() {
         <div className="posterior-explainer card">
           <strong>Why this does not update all at once</strong>
           <p>
-            The final score can update shortly after full time. Tactical metrics follow after a 24–72 hour
-            evidence window while official statistics and trusted analysis are collected, compared, and
-            validated. Missing or incompatible measurements stay unchanged rather than being guessed.
+            The final score can update shortly after full time. Tactical metrics follow after an initial 24-hour
+            delay and may be researched daily until the next match while official statistics and trusted analysis
+            are collected, compared, and validated. Missing or incompatible measurements stay unchanged rather
+            than being guessed.
           </p>
           <div className="posterior-explainer__flow" aria-label="Posterior update sequence">
             <span>Final result</span><span aria-hidden="true">→</span>
@@ -257,6 +258,10 @@ export function GamePlanTab() {
             updated belief and its evidence log will appear here.
           </EmptyState>
         )}
+      </div>
+
+      <div style={{ marginTop: 32 }}>
+        <GamePlanEvidence lineupProjection={lineupProjection} />
       </div>
     </section>
   );

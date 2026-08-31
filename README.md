@@ -77,13 +77,14 @@ Ranked by trust, used in this order when sources disagree:
 GitHub Actions checks around expected full time, with a weekly fallback and no
 always-on server. A finished result can create a source-mapped result-only
 observation and update goals conceded immediately. Tactical enrichment remains
-separate because the stable API does not supply those statistics. A delayed
-research pass searches permitted sources after 24 hours and again by 72 hours,
-then prepares a cited evidence packet. Possession, PPDA, shots, passing,
-crossing, and formation stay null unless compatible evidence exists;
-automation never invents them. The dashboard explains why tactical posterior
-fields can lag behind the final score. The commit history remains the visible
-audit log of both the evidence and the model learning from it.
+separate because the stable API does not supply those statistics. Delayed
+research begins after 24 hours and can search permitted sources once per day
+until Liverpool's next match, preparing a cited evidence packet for review.
+Possession, PPDA, shots, passing, crossing, and formation stay null unless
+compatible evidence exists; automation never invents them. The dashboard
+explains why tactical posterior fields can lag behind the final score. The
+commit history remains the visible audit log of both the evidence and the model
+learning from it.
 
 ## Structure
 
@@ -128,3 +129,5 @@ gets lost across sessions.
 - [x] GitHub Pages deployment and first automated fixture/result refresh
 - [x] First production match observation and posterior
 - [x] Delayed research-draft schema, conflict resolver, and posterior timing explanation
+- [x] Reusable next-opponent Game Plan with a matchup-specific XI, predicted
+      score and scorers, tactical reasoning, and a bottom-of-page evidence register

@@ -1,0 +1,304 @@
+{
+  "draft_version": 1,
+  "status": "ready_for_review",
+  "match_id": 560552,
+  "matchweek": 2,
+  "date": "2026-08-29",
+  "opponent": "Nottingham Forest (H)",
+  "research_window": {
+    "not_before": "2026-08-30T14:30:00Z",
+    "search_attempts": 1,
+    "last_searched_at": "2026-08-30T15:00:22Z",
+    "next_search_at": "2026-09-01T14:30:00Z"
+  },
+  "sources": [
+    {
+      "id": "premier-league-match-stats",
+      "name": "Premier League — Liverpool vs Nottingham Forest match statistics",
+      "url": "https://www.premierleague.com/en/match/2645211/liverpool-vs-nottingham-forest/stats",
+      "published_at": null,
+      "accessed_at": "2026-08-30",
+      "source_tier": 1,
+      "medium": "official_stats",
+      "notes": "Official league match-stat page. The accessible page shell did not expose its statistic values during this pass, so no candidate is attributed to it."
+    },
+    {
+      "id": "liverpool-opta-analysis",
+      "name": "Liverpool FC — Liverpool 2-2 Nottingham Forest: Analyse the game with Opta stats",
+      "url": "https://www.liverpoolfc.com/news/liverpool-2-2-nottingham-forest-analyse-game-opta-stats",
+      "published_at": "2026-08-29",
+      "accessed_at": "2026-08-30",
+      "source_tier": 1,
+      "medium": "official_stats",
+      "notes": "Official club page identifies its embedded presentation as Opta data. The accessible text did not expose the embedded values, so it is retained for provenance without extracted candidates."
+    },
+    {
+      "id": "opta-analyst-match-centre",
+      "name": "Opta Analyst — Liverpool 2-2 Nottingham Forest stats",
+      "url": "https://theanalyst.com/articles/liverpool-vs-nottingham-forest-stats-premier-league-08-2026",
+      "published_at": "2026-08-29",
+      "accessed_at": "2026-08-30",
+      "source_tier": 2,
+      "medium": "structured_stats",
+      "notes": "Opta match centre and post-match facts. The accessible article confirms that the embedded match centre contains Opta team and player data, but its tables were not available as extractable claims in this pass."
+    },
+    {
+      "id": "sky-sports-match-stats",
+      "name": "Sky Sports — Liverpool vs Nottingham Forest match statistics",
+      "url": "https://www.skysports.com/football/liverpool-vs-nottingham-forest/stats/559460",
+      "published_at": null,
+      "accessed_at": "2026-08-30",
+      "source_tier": 3,
+      "medium": "structured_stats",
+      "notes": "Explicit full-match team-stat tables expose possession, shots on target, accurate passes, accurate crosses, and related totals. The underlying measurement provider is not disclosed."
+    },
+    {
+      "id": "tnt-sports-match-stats",
+      "name": "TNT Sports — Liverpool vs Nottingham Forest statistics",
+      "url": "https://www.tntsports.co.uk/football/premier-league/2026-2027/live-liverpool-nottingham-forest_mtc21883007/live-stats.shtml",
+      "published_at": null,
+      "accessed_at": "2026-08-30",
+      "source_tier": 3,
+      "medium": "structured_stats",
+      "notes": "Explicit full-match team-stat table exposes possession and shots on goal. It reports total passes and pass accuracy but not an explicit accurate-pass count; no accurate-pass value is inferred."
+    },
+    {
+      "id": "statmuse-match-centre",
+      "name": "StatMuse — Liverpool 2-2 Nottingham Forest",
+      "url": "https://www.statmuse.com/fc/match/-112774",
+      "published_at": "2026-08-29",
+      "accessed_at": "2026-08-30",
+      "source_tier": 3,
+      "medium": "structured_stats",
+      "notes": "Structured match centre with lineup, formation, team statistics, and event data. The underlying measurement provider is not disclosed."
+    },
+    {
+      "id": "squawka-post-match-analysis",
+      "name": "Squawka — Liverpool vs Nottingham Forest post-match analysis",
+      "url": "https://www.squawka.com/en/features/post-match-analysis-liverpool-vs-nottingham-forest-29-08-26/",
+      "published_at": "2026-08-29",
+      "accessed_at": "2026-08-30",
+      "source_tier": 3,
+      "medium": "article",
+      "notes": "Post-match analysis with explicit player-level attacking facts and qualitative discussion of Liverpool's defensive issues; retained as supporting tactical context rather than a source for the posterior metrics."
+    },
+    {
+      "id": "rfz-tactical-analysis",
+      "name": "RFZ Football — Liverpool 2-2 Forest analysis",
+      "url": "https://rfzfootball.com/liverpool-vs-forest-premierleague-26-27-analysisv1/",
+      "published_at": "2026-08-29",
+      "accessed_at": "2026-08-30",
+      "source_tier": 4,
+      "medium": "article",
+      "notes": "Qualitative phase-by-phase analysis describes Forest's 5-4-1 defensive block, Liverpool's slow first-half circulation, and second-half territorial pressure. Time-specific possession claims are not treated as full-match candidates."
+    }
+  ],
+  "candidates": {
+    "possession_pct": [
+      {
+        "value": 69.1,
+        "source_id": "sky-sports-match-stats",
+        "measurement_provider": "Sky Sports (underlying provider undisclosed)",
+        "compatibility_group": "liverpool_full_match_possession_pct",
+        "evidence_location": "Match Stats > Key Stats > Possession",
+        "eligible_for_consensus": true
+      },
+      {
+        "value": 70,
+        "source_id": "tnt-sports-match-stats",
+        "measurement_provider": "TNT Sports (underlying provider undisclosed)",
+        "compatibility_group": "liverpool_full_match_possession_pct",
+        "evidence_location": "General Statistics > Ball possession",
+        "eligible_for_consensus": true,
+        "notes": "Rounded whole-percentage value."
+      },
+      {
+        "value": 69,
+        "source_id": "statmuse-match-centre",
+        "measurement_provider": "StatMuse (underlying provider undisclosed)",
+        "compatibility_group": "liverpool_full_match_possession_pct",
+        "evidence_location": "Attacking Stats > Possession",
+        "eligible_for_consensus": true,
+        "notes": "Rounded whole-percentage value."
+      }
+    ],
+    "shots_on_target_per_match": [
+      {
+        "value": 4,
+        "source_id": "sky-sports-match-stats",
+        "measurement_provider": "Sky Sports (underlying provider undisclosed)",
+        "compatibility_group": "liverpool_full_match_shots_on_target",
+        "evidence_location": "Match Stats > Key Stats > Shots on target",
+        "eligible_for_consensus": true
+      },
+      {
+        "value": 6,
+        "source_id": "tnt-sports-match-stats",
+        "measurement_provider": "TNT Sports (underlying provider undisclosed)",
+        "compatibility_group": "liverpool_full_match_shots_on_target",
+        "evidence_location": "General Statistics > Shots on goal",
+        "eligible_for_consensus": true,
+        "notes": "Conflicts with Sky Sports and StatMuse despite the same apparent full-match team scope."
+      },
+      {
+        "value": 4,
+        "source_id": "statmuse-match-centre",
+        "measurement_provider": "StatMuse (underlying provider undisclosed)",
+        "compatibility_group": "liverpool_full_match_shots_on_target",
+        "evidence_location": "Attacking Stats > Shots on Target",
+        "eligible_for_consensus": true
+      }
+    ],
+    "accurate_passes_per_match": [
+      {
+        "value": 562,
+        "source_id": "sky-sports-match-stats",
+        "measurement_provider": "Sky Sports (underlying provider undisclosed)",
+        "compatibility_group": "liverpool_full_match_accurate_passes",
+        "evidence_location": "Match Stats > Passing > Accurate passes",
+        "eligible_for_consensus": true
+      },
+      {
+        "value": 566,
+        "source_id": "statmuse-match-centre",
+        "measurement_provider": "StatMuse (underlying provider undisclosed)",
+        "compatibility_group": "liverpool_full_match_accurate_passes",
+        "evidence_location": "Passing Stats > Passes: completed/attempted",
+        "eligible_for_consensus": true
+      }
+    ],
+    "accurate_crosses_per_match": [
+      {
+        "value": 5,
+        "source_id": "sky-sports-match-stats",
+        "measurement_provider": "Sky Sports (underlying provider undisclosed)",
+        "compatibility_group": "liverpool_full_match_accurate_crosses",
+        "evidence_location": "Match Stats > Passing > Accurate crosses",
+        "eligible_for_consensus": true
+      },
+      {
+        "value": 5,
+        "source_id": "statmuse-match-centre",
+        "measurement_provider": "StatMuse (underlying provider undisclosed)",
+        "compatibility_group": "liverpool_full_match_accurate_crosses",
+        "evidence_location": "Passing Stats > Crosses: completed/attempted",
+        "eligible_for_consensus": true
+      }
+    ],
+    "formation": [
+      {
+        "value": "4-2-3-1",
+        "source_id": "statmuse-match-centre",
+        "measurement_provider": "StatMuse (underlying provider undisclosed)",
+        "compatibility_group": "liverpool_nominal_starting_formation",
+        "evidence_location": "Match lineup",
+        "eligible_for_consensus": true
+      }
+    ]
+  },
+  "resolutions": {
+    "accurate_crosses_per_match": {
+      "status": "resolved",
+      "value": 5,
+      "method": "unanimous",
+      "source_ids": [
+        "sky-sports-match-stats",
+        "statmuse-match-centre"
+      ],
+      "measurement_providers": [
+        "Sky Sports (underlying provider undisclosed)",
+        "StatMuse (underlying provider undisclosed)"
+      ],
+      "compatibility_group": "liverpool_full_match_accurate_crosses",
+      "range": {
+        "minimum": 5,
+        "maximum": 5
+      },
+      "between_provider_variance": 0.0,
+      "rationale": "Independent measurement providers report the same compatible value."
+    },
+    "accurate_passes_per_match": {
+      "status": "resolved",
+      "value": 564.0,
+      "method": "mean_consensus",
+      "source_ids": [
+        "sky-sports-match-stats",
+        "statmuse-match-centre"
+      ],
+      "measurement_providers": [
+        "Sky Sports (underlying provider undisclosed)",
+        "StatMuse (underlying provider undisclosed)"
+      ],
+      "compatibility_group": "liverpool_full_match_accurate_passes",
+      "range": {
+        "minimum": 562,
+        "maximum": 566
+      },
+      "between_provider_variance": 4.0,
+      "rationale": "No strict majority exists; this is the arithmetic mean of compatible independent provider values and must be labeled as derived when reviewed."
+    },
+    "formation": {
+      "status": "unresolved",
+      "value": null,
+      "method": "unresolved",
+      "source_ids": [],
+      "measurement_providers": [],
+      "compatibility_group": "liverpool_nominal_starting_formation",
+      "range": null,
+      "between_provider_variance": null,
+      "rationale": "At least two independent measurement providers are required."
+    },
+    "possession_pct": {
+      "status": "resolved",
+      "value": 69.367,
+      "method": "mean_consensus",
+      "source_ids": [
+        "sky-sports-match-stats",
+        "statmuse-match-centre",
+        "tnt-sports-match-stats"
+      ],
+      "measurement_providers": [
+        "Sky Sports (underlying provider undisclosed)",
+        "StatMuse (underlying provider undisclosed)",
+        "TNT Sports (underlying provider undisclosed)"
+      ],
+      "compatibility_group": "liverpool_full_match_possession_pct",
+      "range": {
+        "minimum": 69,
+        "maximum": 70
+      },
+      "between_provider_variance": 0.2022,
+      "rationale": "No strict majority exists; this is the arithmetic mean of compatible independent provider values and must be labeled as derived when reviewed."
+    },
+    "shots_on_target_per_match": {
+      "status": "resolved",
+      "value": 4,
+      "method": "majority",
+      "source_ids": [
+        "sky-sports-match-stats",
+        "statmuse-match-centre"
+      ],
+      "measurement_providers": [
+        "Sky Sports (underlying provider undisclosed)",
+        "StatMuse (underlying provider undisclosed)"
+      ],
+      "compatibility_group": "liverpool_full_match_shots_on_target",
+      "range": {
+        "minimum": 4,
+        "maximum": 6
+      },
+      "between_provider_variance": 0.8889,
+      "rationale": "A strict majority of independent measurement providers report this value."
+    }
+  },
+  "notes": [
+    "This is a delayed research draft and cannot update the production observation or posterior without human review and promotion.",
+    "Sky Sports, TNT Sports, and StatMuse disagree on Liverpool's full-match possession: 69.1%, 70%, and 69%, respectively.",
+    "TNT Sports reports six shots on goal, while Sky Sports and StatMuse each report four shots on target; the resolver may select the strict majority, but the terminology conflict remains flagged for human review.",
+    "Sky Sports reports 562 accurate passes and StatMuse reports 566; TNT Sports exposes only total passes and rounded pass accuracy, so no completed-pass value is inferred from that source.",
+    "Sky Sports and StatMuse agree on five accurate crosses.",
+    "Only StatMuse exposes an explicit nominal starting formation in accessible text, so formation lacks independent corroboration.",
+    "No explicit compatible PPDA value was found. Qualitative descriptions of pressing, tempo, or territorial control are not converted into PPDA.",
+    "Underlying provider independence is not disclosed by the structured match centres and must be checked during human review."
+  ]
+}

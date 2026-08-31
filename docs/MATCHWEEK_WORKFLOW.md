@@ -49,8 +49,9 @@ and every non-null metric must reference at least one declared source ID.
    opponent, matchweek, result string, and goals-conceded value agree with the
    proposed observation. Production validation enforces the final four fields.
 3. At least 24 hours after full time, collect candidate tactical facts using
-   the hierarchy in `AGENTS.md`. Search again within 48–72 hours when useful
-   analysis has not appeared yet.
+   the hierarchy in `AGENTS.md`. If useful analysis has not appeared, repeat a
+   bounded search once per day until the next Liverpool match. Each pass must
+   add only newly verified evidence; an empty pass is a valid outcome.
 4. Record candidates in `data/research_drafts/`, including the exact page
    section or video timestamp, disclosed measurement provider, compatible
    metric definition, and whether the claim is eligible for consensus.
@@ -110,8 +111,9 @@ without counting the match twice. No tactical website is polled or scraped.
 
 A separate delayed research task may use web search to discover permitted
 official statistics, structured match centres, articles, and selected video
-analysis after 24 hours and again by 72 hours. It writes only a research draft.
-The research task does not crawl sites systematically, does not treat prose as
-a numeric metric, and does not directly update the posterior. The dashboard
-explains this delay so a score-only update is not mistaken for missing or
-broken model logic.
+analysis beginning 24 hours after full time and then once per day until the
+next Liverpool match. It writes only a research draft and records each search
+attempt, including passes that find no eligible evidence. The research task
+does not crawl sites systematically, does not treat prose as a numeric metric,
+and does not directly update the posterior. The dashboard explains this delay
+so a score-only update is not mistaken for missing or broken model logic.

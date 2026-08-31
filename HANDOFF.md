@@ -6,8 +6,9 @@ The repository contains a complete preseason manager prior, a 30-player squad,
 30 corresponding player profiles, and all 38 Liverpool Premier League fixtures
 for 2026/27. The React dashboard is implemented and reads committed JSON through
 a generated static-data directory. The observation contract and deterministic
-posterior builder are implemented. Matchweek one now has a reviewed production
-observation and deterministic posterior snapshot. CI, post-match result
+posterior builder are implemented. Matchweek one has a reviewed production
+observation; matchweek two has an automated result-only observation, and both
+have deterministic posterior snapshots. CI, post-match result
 automation, a weekly fallback refresh, and GitHub Pages deployment are active.
 
 ## Existing data flow
@@ -68,7 +69,10 @@ ignored rather than converted into evidence.
 - Player cards, player detail views, playing-style descriptions, and sourcing
   presentation.
 - Evidence-led projected 4-2-3-1 starting XI with recent manager selections,
-  injury exclusion, source links, positional fallback, and role analysis.
+  injury exclusion, source links, positional fallback, and role analysis. The
+  projection is refreshed for the next scheduled opponent and includes a
+  low-confidence score, possible scorers, explicit matchup logic, and a
+  bottom-of-page evidence register.
 - Responsive layout, dark/light styling, loading/error/empty states, and a
   GitHub Pages base-path configuration.
 - Deterministic standard-library Python tests for Bayesian weighting, variance,
@@ -81,8 +85,8 @@ ignored rather than converted into evidence.
   League/Liverpool evidence for the Newcastle 2-2 draw and leaving unsupported
   metrics null.
 - Dashboard posterior summary, metric deltas, formation belief, evidence log,
-  source links, and a 24–72 hour update-timing explanation (replacing the raw
-  JSON presentation).
+  source links, and an explanation of the daily post-match research window
+  (replacing the raw JSON presentation).
 - Source-mapped research-draft schema, deterministic independent-provider
   conflict resolver, and a Newcastle example preserving possession/xG
   disagreements without modifying the production posterior.
@@ -94,7 +98,8 @@ ignored rather than converted into evidence.
 
 ## Known gaps
 
-- Only one posterior snapshot exists; early-season conclusions must remain
+- Only two posterior snapshots exist, and matchweek two currently updates only
+  the score-derived goals-conceded field. Early-season conclusions must remain
   strongly qualified because the manager prior still carries ten virtual
   matches of weight.
 - Delayed web discovery can automate evidence collection, but production
@@ -109,10 +114,9 @@ ignored rather than converted into evidence.
   they are sourced editorial analysis, not Bayesian state. Moving them into
   model JSON would incorrectly imply that the current engine computes them.
 - Only the 4-2-3-1 pitch layout is supported.
-- The projected XI currently reflects the unchanged Como/Newcastle selection,
-  including Ngumoha at RW and Szoboszlai in the double pivot. It remains
-  provisional while Liverpool pursue another winger and should be refreshed
-  when new competitive lineups arrive.
+- The projected XI is an opponent-specific weekly artifact rather than a
+  season-long static lineup. It currently targets Ipswich away and must be
+  refreshed for the next scheduled fixture after that match.
 - Role projections and playing-style descriptions are hand-authored from
   sourced inputs; they are not generated posterior predictions.
 - Matchweek one is now a verified `FINISHED` API record. It can support the
@@ -128,8 +132,8 @@ See `BACKLOG.md` for player-specific uncertainty and source disagreements.
 
 1. Rotate the exposed football-data.org key when the provider supplies a
    supported rotation path, then update the existing repository secret.
-2. Monitor the first automated post-match and delayed research runs. Review a
-   generated evidence packet before promoting compatible tactical metrics.
+2. Continue the daily delayed-research passes until the next match. Review each
+   evidence packet before promoting compatible tactical metrics.
 3. Continue reviewing transfer and injury changes through the window close.
 4. Replace provisional observation-variance hyperparameters only when a
    documented match-level calibration dataset is available.

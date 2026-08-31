@@ -1,16 +1,92 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Evidence-led projected lineup",
-  "description": "A sourced, time-stamped selection projection. This records observed manager choices and is not confirmed future team news.",
+  "description": "A sourced, time-stamped, opponent-specific selection and score projection. This records observed manager choices and matchup reasoning and is not confirmed future team news.",
   "type": "object",
-  "required": ["as_of", "formation", "projected_slots", "evidence", "sources", "notes"],
+  "required": [
+    "as_of",
+    "upcoming_match",
+    "formation",
+    "projected_slots",
+    "opponent_analysis",
+    "selection_reasoning",
+    "prediction",
+    "evidence",
+    "sources",
+    "notes"
+  ],
   "properties": {
     "as_of": { "type": "string", "format": "date" },
+    "upcoming_match": {
+      "type": "object",
+      "required": ["fixture_id", "matchweek", "opponent", "home_away", "venue", "kickoff", "competition"],
+      "properties": {
+        "fixture_id": { "type": "integer" },
+        "matchweek": { "type": "integer", "minimum": 1 },
+        "opponent": { "type": "string" },
+        "opponent_manager": { "type": "string" },
+        "home_away": { "type": "string", "enum": ["H", "A", "N"] },
+        "venue": { "type": "string" },
+        "kickoff": { "type": "string", "format": "date-time" },
+        "competition": { "type": "string" }
+      }
+    },
     "formation": { "type": "string" },
     "projected_slots": {
       "type": "object",
       "patternProperties": {
         "^[A-Z0-9]+$": { "type": "string" }
+      }
+    },
+    "opponent_analysis": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["label", "finding", "matchup_implication", "source_ids"],
+        "properties": {
+          "label": { "type": "string" },
+          "finding": { "type": "string" },
+          "matchup_implication": { "type": "string" },
+          "source_ids": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "selection_reasoning": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["label", "player_ids", "reasoning", "source_ids"],
+        "properties": {
+          "label": { "type": "string" },
+          "player_ids": { "type": "array", "items": { "type": "string" } },
+          "reasoning": { "type": "string" },
+          "source_ids": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "prediction": {
+      "type": "object",
+      "required": ["display_score", "liverpool_goals", "opponent_goals", "confidence", "goal_scorers", "reasoning"],
+      "properties": {
+        "display_score": { "type": "string" },
+        "liverpool_goals": { "type": "integer", "minimum": 0 },
+        "opponent_goals": { "type": "integer", "minimum": 0 },
+        "confidence": { "type": "string", "enum": ["low", "medium", "high"] },
+        "goal_scorers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["team", "player_name", "goals", "reasoning"],
+            "properties": {
+              "team": { "type": "string" },
+              "player_id": { "type": ["string", "null"] },
+              "player_name": { "type": "string" },
+              "goals": { "type": "integer", "minimum": 1 },
+              "reasoning": { "type": "string" }
+            }
+          }
+        },
+        "reasoning": { "type": "array", "items": { "type": "string" } }
       }
     },
     "evidence": {
