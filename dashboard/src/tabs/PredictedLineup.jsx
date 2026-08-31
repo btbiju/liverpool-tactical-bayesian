@@ -25,9 +25,106 @@ function PitchMarker({ slot, onOpen }) {
   );
 }
 
+function MatchPreview({ projection }) {
+  const match = projection?.upcoming_match;
+  const prediction = projection?.prediction;
+  if (!match || !prediction) return null;
+
+  const kickoff = new Intl.DateTimeFormat('en-GB', {
+    weekday: 'short',
+    day: 'numeric',
+    month: 'short',
+    hour: '2-digit',
+    minute: '2-digit',
+    timeZoneName: 'short',
+  }).format(new Date(match.kickoff));
+
+  const scorerGroups = prediction.goal_scorers.reduce((groups, scorer) => {
+    if (!groups[scorer.team]) groups[scorer.team] = [];
+    groups[scorer.team].push(scorer);
+    return groups;
+  }, {});
+
+  return (
+    <div className="match-preview card">
+      <div className="match-preview__fixture">
+        <div>
+          <span className="posterior-panel__eyebrow">Next opponent · MW{match.matchweek}</span>
+          <strong>Liverpool {match.home_away === 'A' ? 'at' : 'vs'} {match.opponent}</strong>
+          <span>{kickoff} · {match.venue}</span>
+        </div>
+        <div className="match-preview__score">
+          <span>Predicted score</span>
+          <strong className="tabular-nums">{prediction.display_score}</strong>
+          <span>{prediction.confidence} confidence</span>
+        </div>
+      </div>
+
+      <div className="match-preview__body">
+        <div>
+          <h3>Predicted scorers</h3>
+          {Object.entries(scorerGroups).map(([team, scorers]) => (
+            <div className="match-preview__scorer-group" key={team}>
+              <strong>{team}</strong>
+              <ul>
+                {scorers.map((scorer) => (
+                  <li key={`${team}-${scorer.player_name}`}>
+                    <span>{scorer.player_name}{scorer.goals > 1 ? ` ×${scorer.goals}` : ''}</span>
+                    <small>{scorer.reasoning}</small>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+        <div>
+          <h3>Why this score</h3>
+          <ul className="match-preview__reasoning">
+            {prediction.reasoning.map((reason) => <li key={reason}>{reason}</li>)}
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function MatchupPlan({ projection }) {
+  const analysis = projection?.opponent_analysis ?? [];
+  const decisions = projection?.selection_reasoning ?? [];
+  if (analysis.length === 0 && decisions.length === 0) return null;
+
+  return (
+    <div className="matchup-plan">
+      <div>
+        <div className="section-heading"><h2 style={{ fontSize: '0.95rem' }}>How the opponent plays</h2></div>
+        <div className="matchup-plan__stack">
+          {analysis.map((item) => (
+            <article className="card matchup-plan__item" key={item.label}>
+              <h3>{item.label}</h3>
+              <p>{item.finding}</p>
+              <p><strong>Liverpool response:</strong> {item.matchup_implication}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+      <div>
+        <div className="section-heading"><h2 style={{ fontSize: '0.95rem' }}>Why this XI</h2></div>
+        <div className="matchup-plan__stack">
+          {decisions.map((item) => (
+            <article className="card matchup-plan__item" key={item.label}>
+              <h3>{item.label}</h3>
+              <p>{item.reasoning}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function PredictedLineup({ players, formationPrior, lineupProjection }) {
   const [openSlot, setOpenSlot] = useState(null);
-  const { formation, slots, evidenceApplied } = predictLineup(players, lineupProjection);
+  const { formation, slots } = predictLineup(players, lineupProjection);
 
   const alpha = formationPrior?.alpha ?? {};
   const total = Object.values(alpha).reduce((sum, v) => sum + v, 0) || 1;
@@ -42,46 +139,17 @@ export function PredictedLineup({ players, formationPrior, lineupProjection }) {
     <div>
       <div className="section-heading">
         <h2 style={{ fontSize: '0.95rem' }}>
-          Projected XI — {formation}{' '}
+          Projected XI{lineupProjection?.upcoming_match?.opponent ? ` vs ${lineupProjection.upcoming_match.opponent}` : ''} — {formation}{' '}
           <span className="modal-panel__muted" style={{ fontWeight: 400 }}>({likelihood}% likely formation)</span>
         </h2>
       </div>
       <p className="lineup-disclaimer">
-        An evidence-led projection from Iraola's recent selections, current availability, and each player's estimated
-        position. <strong>Not confirmed team news.</strong> Click any player for their projected role. Dashed markers
-        are out-of-position fallback picks forced by injuries elsewhere in the squad.
+        An opponent-specific projection from Iraola's recent selections, current availability, the next opponent's
+        structure, and each player's sourced profile. <strong>Not confirmed team news or betting advice.</strong> Click
+        any player for their projected role. Dashed markers are out-of-position fallback picks forced by injuries.
       </p>
 
-      {evidenceApplied && lineupProjection && (
-        <div className="lineup-evidence card">
-          <div>
-            <strong>Selection evidence</strong>
-            <span>Updated {lineupProjection.as_of}</span>
-          </div>
-          <p>
-            Iraola used this same XI for the final first-team friendly against Como and the Premier League opener at
-            Newcastle. Combined with his confirmed preseason use of Ngumoha on the right, that selection evidence
-            replaces the older position-only projection of Federico Chiesa. The exact slot mapping remains a model
-            inference, not an official formation label.
-          </p>
-          <div className="lineup-evidence__matches">
-            {lineupProjection.evidence.map((item) => (
-              <span key={`${item.date}-${item.opponent}`}>
-                {item.date} · {item.opponent} · {item.competition}
-              </span>
-            ))}
-          </div>
-          <div className="lineup-evidence__sources">
-            Sources:{' '}
-            {lineupProjection.sources.map((source, index) => (
-              <span key={source.id}>
-                {index > 0 ? ', ' : ''}
-                <a href={source.url} target="_blank" rel="noreferrer">{source.name}</a>
-              </span>
-            ))}
-          </div>
-        </div>
-      )}
+      <MatchPreview projection={lineupProjection} />
 
       <div className="pitch">
         <div className="pitch__halfway-line" />
@@ -93,6 +161,8 @@ export function PredictedLineup({ players, formationPrior, lineupProjection }) {
         ))}
       </div>
 
+      <MatchupPlan projection={lineupProjection} />
+
       {openSlot && selectedPlayer && (
         <PlayerDetail
           player={selectedPlayer}
@@ -101,6 +171,46 @@ export function PredictedLineup({ players, formationPrior, lineupProjection }) {
           onClose={() => setOpenSlot(null)}
         />
       )}
+    </div>
+  );
+}
+
+export function GamePlanEvidence({ lineupProjection }) {
+  if (!lineupProjection) return null;
+
+  const referencedSources = lineupProjection.sources ?? [];
+
+  return (
+    <div className="gameplan-evidence">
+      <div className="section-heading">
+        <h2 style={{ fontSize: '0.95rem' }}>Game-plan evidence and sources</h2>
+        <span className="section-heading__meta">Updated {lineupProjection.as_of}</span>
+      </div>
+      <div className="gameplan-columns">
+        <div className="card gameplan-evidence__panel">
+          <h3>Observed Liverpool selections</h3>
+          <ol>
+            {(lineupProjection.evidence ?? []).map((item) => (
+              <li key={`${item.date}-${item.opponent}`}>
+                <strong>{item.date} · {item.opponent}</strong>
+                <span>{item.competition}</span>
+                {item.notes && <p>{item.notes}</p>}
+              </li>
+            ))}
+          </ol>
+        </div>
+        <div className="card gameplan-evidence__panel">
+          <h3>Source register</h3>
+          <ul>
+            {referencedSources.map((source) => (
+              <li key={source.id}>
+                <a href={source.url} target="_blank" rel="noreferrer">{source.name}</a>
+                {source.notes && <p>{source.notes}</p>}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
     </div>
   );
 }

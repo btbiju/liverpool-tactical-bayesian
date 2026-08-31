@@ -7,8 +7,8 @@
   "opponent": "Newcastle United (A)",
   "research_window": {
     "not_before": "2026-08-24T18:30:00Z",
-    "search_attempts": 1,
-    "last_searched_at": "2026-08-28T20:00:00Z",
+    "search_attempts": 2,
+    "last_searched_at": "2026-08-29T15:01:28Z",
     "next_search_at": null
   },
   "sources": [
@@ -61,6 +61,26 @@
       "source_tier": 3,
       "medium": "structured_stats",
       "notes": "Structured match centre with lineup, formation, team stats, and event data."
+    },
+    {
+      "id": "sky-sports-match-stats",
+      "name": "Sky Sports — Newcastle United vs Liverpool match statistics",
+      "url": "https://www.skysports.com/football/newcastle-united-vs-liverpool/stats/559452",
+      "published_at": null,
+      "accessed_at": "2026-08-29",
+      "source_tier": 3,
+      "medium": "structured_stats",
+      "notes": "Explicit team-stat table reports 60.8% possession, seven shots on target, 370 accurate passes, and seven accurate crosses for Liverpool. The underlying measurement provider is not disclosed."
+    },
+    {
+      "id": "total-football-analysis-transition",
+      "name": "Total Football Analysis — Liverpool's midfield transition problem",
+      "url": "https://totalfootballanalysis.com/tactical-analysis/liverpool-midfield-transition-problem",
+      "published_at": "2026-08-27",
+      "accessed_at": "2026-08-29",
+      "source_tier": 3,
+      "medium": "article",
+      "notes": "Qualitative tactical analysis of Liverpool's double pivot, attacking structure, and defensive transitions. It supplies supporting context but no explicit compatible PPDA value."
     }
   ],
   "candidates": {
@@ -91,6 +111,15 @@
         "evidence_location": "Team Stats: Possession",
         "eligible_for_consensus": true,
         "notes": "Rounded whole-percentage value."
+      },
+      {
+        "value": 60.8,
+        "source_id": "sky-sports-match-stats",
+        "measurement_provider": "Premier League official statistics",
+        "compatibility_group": "liverpool_full_match_possession_pct",
+        "evidence_location": "Match stats table: Possession %",
+        "eligible_for_consensus": true,
+        "notes": "Exact match with the official league value; conservatively treated as the same provider vote because independent measurement is not disclosed."
       }
     ],
     "shots_on_target_per_match": [
@@ -117,6 +146,37 @@
         "compatibility_group": "liverpool_full_match_shots_on_target",
         "evidence_location": "Team Stats: Shots (On Target)",
         "eligible_for_consensus": true
+      },
+      {
+        "value": 7,
+        "source_id": "sky-sports-match-stats",
+        "measurement_provider": "Premier League official statistics",
+        "compatibility_group": "liverpool_full_match_shots_on_target",
+        "evidence_location": "Match stats table: Shots on target",
+        "eligible_for_consensus": true,
+        "notes": "Exact match with the official league value; conservatively treated as the same provider vote because independent measurement is not disclosed."
+      }
+    ],
+    "accurate_passes_per_match": [
+      {
+        "value": 370,
+        "source_id": "sky-sports-match-stats",
+        "measurement_provider": "Sky Sports (underlying provider undisclosed)",
+        "compatibility_group": "liverpool_full_match_accurate_passes",
+        "evidence_location": "Match stats table: Accurate Passes",
+        "eligible_for_consensus": true,
+        "notes": "Explicit Liverpool full-match team total."
+      }
+    ],
+    "accurate_crosses_per_match": [
+      {
+        "value": 7,
+        "source_id": "sky-sports-match-stats",
+        "measurement_provider": "Sky Sports (underlying provider undisclosed)",
+        "compatibility_group": "liverpool_full_match_accurate_crosses",
+        "evidence_location": "Match stats table: Accurate Crosses",
+        "eligible_for_consensus": true,
+        "notes": "Explicit Liverpool full-match team total."
       }
     ],
     "formation": [
@@ -159,6 +219,28 @@
     ]
   },
   "resolutions": {
+    "accurate_crosses_per_match": {
+      "status": "unresolved",
+      "value": null,
+      "method": "unresolved",
+      "source_ids": [],
+      "measurement_providers": [],
+      "compatibility_group": "liverpool_full_match_accurate_crosses",
+      "range": null,
+      "between_provider_variance": null,
+      "rationale": "At least two independent measurement providers are required."
+    },
+    "accurate_passes_per_match": {
+      "status": "unresolved",
+      "value": null,
+      "method": "unresolved",
+      "source_ids": [],
+      "measurement_providers": [],
+      "compatibility_group": "liverpool_full_match_accurate_passes",
+      "range": null,
+      "between_provider_variance": null,
+      "rationale": "At least two independent measurement providers are required."
+    },
     "formation": {
       "status": "resolved",
       "value": "4-2-3-1",
@@ -183,6 +265,7 @@
       "source_ids": [
         "coaches-voice-analysis",
         "premier-league-match-stats",
+        "sky-sports-match-stats",
         "statmuse-match-centre"
       ],
       "measurement_providers": [
@@ -205,6 +288,7 @@
       "source_ids": [
         "coaches-voice-analysis",
         "premier-league-match-stats",
+        "sky-sports-match-stats",
         "statmuse-match-centre"
       ],
       "measurement_providers": [
@@ -244,7 +328,9 @@
   "notes": [
     "This packet demonstrates the delayed research stage against an already reviewed match; it does not replace the production observation.",
     "Possession and xG disagreements are preserved rather than hidden.",
-    "PPDA, accurate passes, and accurate crosses remain absent because no compatible explicit values were found in this pass.",
-    "Underlying provider independence is not disclosed by every site and must be considered during review."
+    "The second pass found explicit Sky Sports values of 370 accurate passes and seven accurate crosses, but each remains unresolved because only one independence-qualified provider is available.",
+    "PPDA remains absent because no compatible explicit value was found in either pass.",
+    "The Total Football Analysis article adds qualitative transition and midfield context but no compatible PPDA value or other new consensus candidate.",
+    "Underlying provider independence is not disclosed by every site and must be considered during review; Sky's exact matches with official possession and shots-on-target values are counted as the official provider's vote rather than independent corroboration."
   ]
 }

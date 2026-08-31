@@ -912,6 +912,172 @@
   max-width: 68ch;
 }
 
+.match-preview {
+  margin: 0 0 22px;
+  overflow: hidden;
+}
+
+.match-preview__fixture {
+  align-items: center;
+  background: color-mix(in srgb, var(--series-1) 8%, var(--surface-1));
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  padding: 18px 20px;
+}
+
+.match-preview__fixture > div:first-child strong,
+.match-preview__fixture > div:first-child span:last-child {
+  display: block;
+}
+
+.match-preview__fixture > div:first-child strong {
+  font-size: 1.15rem;
+  margin: 3px 0;
+}
+
+.match-preview__fixture > div:first-child span:last-child {
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+}
+
+.match-preview__score {
+  text-align: right;
+}
+
+.match-preview__score span {
+  color: var(--text-muted);
+  display: block;
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.match-preview__score strong {
+  display: block;
+  font-size: 1.4rem;
+  margin: 2px 0;
+}
+
+.match-preview__body {
+  display: grid;
+  gap: 28px;
+  grid-template-columns: 1.05fr 0.95fr;
+  padding: 18px 20px 20px;
+}
+
+.match-preview__body h3,
+.matchup-plan__item h3,
+.gameplan-evidence__panel h3 {
+  font-size: 0.82rem;
+  margin: 0 0 10px;
+}
+
+.match-preview__scorer-group + .match-preview__scorer-group {
+  margin-top: 12px;
+}
+
+.match-preview__scorer-group > strong {
+  color: var(--text-muted);
+  display: block;
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+}
+
+.match-preview__scorer-group ul,
+.match-preview__reasoning,
+.gameplan-evidence__panel ol,
+.gameplan-evidence__panel ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.match-preview__scorer-group li,
+.match-preview__reasoning li {
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  line-height: 1.45;
+  margin-bottom: 7px;
+}
+
+.match-preview__scorer-group li span,
+.match-preview__scorer-group li small {
+  display: block;
+}
+
+.match-preview__scorer-group li span {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.match-preview__scorer-group li small {
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  margin-top: 1px;
+}
+
+.matchup-plan {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 28px;
+}
+
+.matchup-plan__stack {
+  display: grid;
+  gap: 10px;
+}
+
+.matchup-plan__item {
+  padding: 13px 15px;
+}
+
+.matchup-plan__item p {
+  color: var(--text-secondary);
+  font-size: 0.76rem;
+  line-height: 1.48;
+  margin: 0;
+}
+
+.matchup-plan__item p + p {
+  border-top: 1px solid var(--gridline);
+  margin-top: 8px;
+  padding-top: 8px;
+}
+
+.gameplan-evidence__panel {
+  padding: 16px 18px;
+}
+
+.gameplan-evidence__panel li {
+  color: var(--text-secondary);
+  font-size: 0.76rem;
+  line-height: 1.45;
+  margin-bottom: 10px;
+}
+
+.gameplan-evidence__panel li strong,
+.gameplan-evidence__panel li span {
+  display: block;
+}
+
+.gameplan-evidence__panel li span {
+  color: var(--text-muted);
+  font-size: 0.7rem;
+}
+
+.gameplan-evidence__panel li p {
+  margin: 3px 0 0;
+}
+
+.gameplan-evidence__panel a {
+  color: var(--series-1);
+  font-weight: 600;
+}
+
 .lineup-evidence {
   max-width: 760px;
   margin: 0 auto 16px;
@@ -1071,6 +1237,20 @@
   }
 
   .gameplan-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .match-preview__fixture {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .match-preview__score {
+    text-align: left;
+  }
+
+  .match-preview__body,
+  .matchup-plan {
     grid-template-columns: 1fr;
   }
 }

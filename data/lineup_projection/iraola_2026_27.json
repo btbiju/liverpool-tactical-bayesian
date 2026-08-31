@@ -1,5 +1,15 @@
 {
-  "as_of": "2026-08-28",
+  "as_of": "2026-08-31",
+  "upcoming_match": {
+    "fixture_id": 560566,
+    "matchweek": 3,
+    "opponent": "Ipswich Town",
+    "opponent_manager": "Gary O'Neil",
+    "home_away": "A",
+    "venue": "Portman Road",
+    "kickoff": "2026-09-04T19:00:00Z",
+    "competition": "Premier League"
+  },
   "formation": "4-2-3-1",
   "projected_slots": {
     "GK": "becker_alisson",
@@ -11,8 +21,114 @@
     "DM2": "szoboszlai_dominik",
     "LW": "gakpo_cody",
     "AM": "wirtz_florian",
-    "RW": "ngumoha_rio",
+    "RW": "munoz_victor",
     "ST": "isak_alexander"
+  },
+  "opponent_analysis": [
+    {
+      "label": "Base shape",
+      "finding": "Ipswich have started their league matches in a 4-2-3-1 and defend in a 4-4-2, with the No.10 joining the striker to trigger pressure.",
+      "matchup_implication": "Liverpool need two press-resistant midfielders and a reliable outlet beyond Ipswich's first line rather than slow circulation in front of it.",
+      "source_ids": ["blue-monday-ipswich-tactics", "fotmob-ipswich-liverpool-preview"]
+    },
+    {
+      "label": "High-turnover threat",
+      "finding": "Ipswich's preseason model emphasized high turnovers, a target striker, and a nearby second attacker competing for knockdowns and second balls.",
+      "matchup_implication": "Rest defence must stay compact around Van Dijk and Jacquet; losing both full-backs high at once would expose the transition problem seen in Liverpool's opening draws.",
+      "source_ids": ["blue-monday-ipswich-tactics"]
+    },
+    {
+      "label": "Aggressive full-back rotations",
+      "finding": "Gary O'Neil has alternated the aggressive full-back: Leif Davis can advance or move inside on the left while the opposite side protects a back three.",
+      "matchup_implication": "Muñoz is selected on Liverpool's right to attack the space Davis leaves, while Frimpong's forward runs should be staggered rather than simultaneous.",
+      "source_ids": ["blue-monday-ipswich-tactics"]
+    },
+    {
+      "label": "Space behind the press",
+      "finding": "Ipswich's aggressive pressing structure was already identified as vulnerable behind, and Manchester United then generated a 5-2 win after Ipswich took the lead at Old Trafford.",
+      "matchup_implication": "Liverpool should invite the first press, break it with carries or one-touch combinations, and release Gakpo, Muñoz, and Isak quickly into the vacated channels.",
+      "source_ids": ["blue-monday-ipswich-tactics", "opta-man-utd-ipswich"]
+    },
+    {
+      "label": "Counterattacking danger",
+      "finding": "Ipswich still scored twice at Old Trafford: Fatawu created Leif Davis's opener from the wing and Chuba Akpom added a late goal.",
+      "matchup_implication": "A Liverpool win is projected, but not a clean sheet; wide transition coverage and protection of the far post remain the major risks.",
+      "source_ids": ["tnt-man-utd-ipswich", "opta-man-utd-ipswich"]
+    }
+  ],
+  "selection_reasoning": [
+    {
+      "label": "Gravenberch for the first press",
+      "player_ids": ["gravenberch_ryan", "szoboszlai_dominik"],
+      "reasoning": "Gravenberch returns beside Szoboszlai because his recent Liverpool profile supplies the strongest accessible ball-carrying and touch-volume evidence in the midfield pool. That is a better matchup response to Ipswich's 4-4-2 pressure than selecting only for continuity from the Forest XI.",
+      "source_ids": ["blue-monday-ipswich-tactics", "player-profile-gravenberch"]
+    },
+    {
+      "label": "Muñoz attacks Ipswich's left",
+      "player_ids": ["munoz_victor", "frimpong_jeremie"],
+      "reasoning": "Muñoz keeps the right-wing place after starting and scoring against Forest. His direct running is aimed at the space behind Davis, while Frimpong is asked to choose his overlaps so Liverpool retain transition cover.",
+      "source_ids": ["lfc-forest-lineup", "lfc-forest-report", "blue-monday-ipswich-tactics"]
+    },
+    {
+      "label": "Wirtz between the lines",
+      "player_ids": ["wirtz_florian", "isak_alexander"],
+      "reasoning": "Wirtz remains the central connector after creating Muñoz's equaliser against Forest. If Liverpool escape the first press, he should receive behind Ipswich's advancing midfield and release Isak before the back line resets.",
+      "source_ids": ["lfc-forest-report", "blue-monday-ipswich-tactics"]
+    },
+    {
+      "label": "Continuity in the back four",
+      "player_ids": ["kerkez_milos", "vandijk_virgil", "jacquet_jeremy", "frimpong_jeremie"],
+      "reasoning": "The same available back four has started both league matches. The recommendation is tactical restraint rather than an unsupported personnel change: one full-back advances while the other helps preserve a three-player rest-defence line.",
+      "source_ids": ["lfc-newcastle-lineup", "lfc-forest-lineup", "fotmob-ipswich-liverpool-preview"]
+    }
+  ],
+  "prediction": {
+    "display_score": "Ipswich Town 2–3 Liverpool",
+    "liverpool_goals": 3,
+    "opponent_goals": 2,
+    "confidence": "low",
+    "goal_scorers": [
+      {
+        "team": "Liverpool",
+        "player_id": "isak_alexander",
+        "player_name": "Alexander Isak",
+        "goals": 1,
+        "reasoning": "The central striker scored against Forest and should receive the clearest chances when Ipswich's press is broken."
+      },
+      {
+        "team": "Liverpool",
+        "player_id": "gakpo_cody",
+        "player_name": "Cody Gakpo",
+        "goals": 1,
+        "reasoning": "His profile has the highest sourced shots-per-90 figure among Liverpool's projected front line, and he can attack the weak side when Ipswich compress toward the ball."
+      },
+      {
+        "team": "Liverpool",
+        "player_id": "munoz_victor",
+        "player_name": "Víctor Muñoz",
+        "goals": 1,
+        "reasoning": "He scored on his first league start and is the matchup pick to run into the space behind Ipswich's aggressive left side."
+      },
+      {
+        "team": "Ipswich Town",
+        "player_id": null,
+        "player_name": "Emersonn",
+        "goals": 1,
+        "reasoning": "Ipswich's target striker is the focal point for direct play, knockdowns, and second-ball attacks."
+      },
+      {
+        "team": "Ipswich Town",
+        "player_id": null,
+        "player_name": "Abdul Fatawu",
+        "goals": 1,
+        "reasoning": "His pace and one-versus-one threat created Ipswich's opening goal at Old Trafford and directly tests Liverpool's vulnerable wide transition defence."
+      }
+    ],
+    "reasoning": [
+      "Liverpool have enough central creativity and running power to exploit the space behind Ipswich's press, especially after Ipswich conceded five at Manchester United.",
+      "A clean sheet is not projected because Liverpool conceded twice in each of their opening league matches and Ipswich have scored in both of theirs.",
+      "The exact score and scorer calls are low-confidence editorial model outputs, not betting advice or reported team information."
+    ]
   },
   "evidence": [
     {
@@ -20,17 +136,31 @@
       "opponent": "Como 1907",
       "competition": "Pre-season friendly",
       "source_ids": ["lfc-como-report", "lfc-ngumoha-role"],
-      "notes": "The final first-team pre-season friendly used this XI. The right-wing slot is an evidence-based positional inference from Iraola's separately confirmed use of Ngumoha on the right, not a formation label supplied by this team list."
+      "notes": "The final first-team pre-season friendly established the initial senior selection baseline."
     },
     {
       "date": "2026-08-23",
       "opponent": "Newcastle United",
       "competition": "Premier League",
       "source_ids": ["lfc-newcastle-lineup", "lfc-ngumoha-role"],
-      "notes": "Liverpool explicitly confirmed that Iraola selected the same XI that began the Como friendly. The projected slot mapping combines that fact with Iraola's confirmed use of Ngumoha on the right and the existing 4-2-3-1 formation prior."
+      "notes": "Liverpool confirmed an unchanged XI from Como, including Ngumoha and Gravenberch."
+    },
+    {
+      "date": "2026-08-29",
+      "opponent": "Nottingham Forest",
+      "competition": "Premier League",
+      "source_ids": ["lfc-forest-lineup", "lfc-forest-report"],
+      "notes": "Iraola made two changes: Muñoz and Mac Allister started for Ngumoha and Gravenberch. Muñoz scored and Wirtz assisted the second equaliser."
     }
   ],
   "sources": [
+    {
+      "id": "football-data-ipswich-fixture",
+      "name": "football-data.org — Ipswich Town v Liverpool fixture record",
+      "url": "https://api.football-data.org/v4/matches/560566",
+      "accessed_at": "2026-08-31",
+      "notes": "Committed fixture record supplies matchweek, venue orientation, and kickoff time."
+    },
     {
       "id": "lfc-como-report",
       "name": "Liverpool FC — Gakpo and Jacquet score as Liverpool close pre-season with Anfield win over Como",
@@ -46,24 +176,74 @@
       "notes": "Official competitive lineup; the club states it was unchanged from the Como starting XI."
     },
     {
+      "id": "lfc-forest-lineup",
+      "name": "Liverpool FC — Confirmed Liverpool line-up v Nottingham Forest",
+      "url": "https://www.liverpoolfc.com/news/confirmed-liverpool-line-v-nottingham-forest-8",
+      "accessed_at": "2026-08-31",
+      "notes": "Official lineup identifies Muñoz and Mac Allister as the two changes from Newcastle."
+    },
+    {
+      "id": "lfc-forest-report",
+      "name": "Liverpool FC — Isak and Muñoz score as Liverpool draw with Nottingham Forest",
+      "url": "https://www.liverpoolfc.com/news/isak-and-munoz-score-liverpool-draw-nottingham-forest/",
+      "accessed_at": "2026-08-31",
+      "notes": "Official report confirms the lineup, goals, substitutions, and Wirtz's assist for Muñoz."
+    },
+    {
       "id": "lfc-ngumoha-role",
       "name": "Liverpool FC — Iraola on Ngumoha and winger versatility",
       "url": "https://www.liverpoolfc.com/news/andoni-iraola-press-conference-chicago-benefits-ngumoha-and-wirtz-positions-transfers-and-more",
       "accessed_at": "2026-08-28",
-      "notes": "Iraola confirms Ngumoha played on the right against Wrexham and explains that he wants wingers capable of playing both sides."
+      "notes": "Iraola confirms Ngumoha played on the right in preseason and explains that he wants wingers capable of playing both sides."
     },
     {
-      "id": "lfc-injury-list",
-      "name": "Liverpool FC — Injury list, suspensions and availability",
-      "url": "https://www.liverpoolfc.com/news/liverpools-injury-list-suspensions-and-availability",
-      "accessed_at": "2026-08-28",
-      "notes": "Official availability update states Chiesa is unavailable with a small muscle injury sustained against Como."
+      "id": "ipswich-oneil-appointment",
+      "name": "Ipswich Town — Welcome, Gary O'Neil",
+      "url": "https://www.itfc.co.uk/news/2026/june/23/gary-oneil-appointed-ipswich-town-manager/",
+      "accessed_at": "2026-08-31",
+      "notes": "Official confirmation of Ipswich's current manager."
+    },
+    {
+      "id": "blue-monday-ipswich-tactics",
+      "name": "Blue Monday — Tactics 2027 by Adam Wilkin",
+      "url": "https://bluemondaypodcast.wordpress.com/2026/08/20/tactics-2027-by-adam-wilkin/",
+      "accessed_at": "2026-08-31",
+      "notes": "Detailed Ipswich-focused analysis of O'Neil's preseason 4-2-3-1/4-4-2 structures, pressing, full-back asymmetry, and space behind the press."
+    },
+    {
+      "id": "opta-man-utd-ipswich",
+      "name": "Opta Analyst — Manchester United 5-2 Ipswich statistics",
+      "url": "https://theanalyst.com/articles/man-utd-5-2-ipswich-stats-bruno-fernandes-hat-trick",
+      "accessed_at": "2026-08-31",
+      "notes": "Opta match facts and match centre for Ipswich's second league match."
+    },
+    {
+      "id": "tnt-man-utd-ipswich",
+      "name": "TNT Sports — Manchester United 5-2 Ipswich match report",
+      "url": "https://www.tntsports.co.uk/football/premier-league/2026-2027/live-manchester-united-ipswich-town_mtc21883039/live-commentary.shtml",
+      "accessed_at": "2026-08-31",
+      "notes": "Match report supplies Ipswich's scorers and Fatawu's role in the opening goal."
+    },
+    {
+      "id": "fotmob-ipswich-liverpool-preview",
+      "name": "FotMob — Ipswich Town v Liverpool preview",
+      "url": "https://www.fotmob.com/matches/liverpool-vs-ipswich-town/2ugv0q",
+      "accessed_at": "2026-08-31",
+      "notes": "Current fixture, recent starting shapes, team form, and availability snapshot; used as a single reviewed page, not systematically scraped."
+    },
+    {
+      "id": "player-profile-gravenberch",
+      "name": "Project player profile — Ryan Gravenberch",
+      "url": "https://theanalyst.com/articles/ryan-gravenberch-liverpool-form",
+      "accessed_at": "2026-08-31",
+      "notes": "Committed profile records Opta-sourced 2025/26 touches and carries context; the project profile remains the auditable local input."
     }
   ],
   "notes": [
-    "This is a selection projection, not confirmed team news for the next match.",
-    "Recent manager selections override the older position-confidence-only fallback while the named player remains available.",
-    "Ngumoha is preferred at right wing because Iraola explicitly used him there in pre-season and then retained him in the unchanged senior XI for the competitive opener; the opener's exact slot assignment is an inference rather than an official formation label.",
-    "Chiesa is not projected to start: he did not start either of the two strongest recent first-team selections and is unavailable as of 2026-08-27."
+    "This is an opponent-specific selection projection for the next scheduled Liverpool fixture, not confirmed team news.",
+    "The predicted score and scorers are low-confidence model/editorial outputs intended to make the tactical thesis testable after the match; they are not betting advice.",
+    "Recent manager selections establish the candidate pool, but opponent-specific matchup reasoning can recommend a change when supported by player-profile evidence.",
+    "Unavailable players are excluded. Availability must be refreshed again before kickoff because injury reporting is time-sensitive.",
+    "No missing player statistic, opponent statistic, formation, or availability detail has been invented to complete the preview."
   ]
 }

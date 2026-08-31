@@ -232,9 +232,26 @@ let items live only in chat history.
 - [ ] **Observe the delayed-research automation across several matchweeks.**
       The research-draft contract and deterministic resolver are implemented,
       but source availability, provider disclosure, video transcript access,
-      and the usefulness of a second 48–72 hour pass must be evaluated using
-      real matches. Promotion into `data/observations/` remains a review step;
-      do not silently turn qualitative analysis into PPDA or other numbers.
+      and the usefulness of daily follow-up passes must be evaluated using real
+      matches. Research begins after 24 hours and repeats at most once daily
+      until Liverpool's next kickoff. Promotion into `data/observations/`
+      remains a review step; do not silently turn qualitative analysis into
+      PPDA or other numbers.
+
+- [ ] **Promote reviewed matchweek evidence deliberately.** Matchweek-one and
+      matchweek-two research packets are committed as reviewable evidence, not
+      direct model inputs. Keep the stronger official matchweek-one possession
+      value, consider its independently corroborated formation, and wait for
+      the remaining Nottingham Forest research passes before deciding which
+      compatible metrics merit promotion and any between-provider variance
+      override.
+
+- [ ] **Refresh the next-opponent Game Plan before every match.** The Game Plan
+      data model now records the upcoming fixture, opponent structure, matchup
+      implications, opponent-specific XI, low-confidence score/scorer calls,
+      and evidence. Ipswich is the first instance. Replace it with the next
+      scheduled opponent after each match rather than letting the tab become a
+      static season-long XI.
 
 - [ ] **Manager positional-deployment overlay, data-model side** -- the
       dashboard's predicted-XI feature (above) implements a version of this
@@ -270,8 +287,9 @@ let items live only in chat history.
 
 - Update cadence: gated GitHub Actions checks around expected full time, plus a
   weekly fallback. API calls occur only inside the match window. A separate
-  delayed research task may use ordinary web search after 24–72 hours, but
-  tactical sites are not systematically polled or crawled.
+  delayed research task may use ordinary web search beginning 24 hours after
+  full time and then once per day until the next Liverpool match, but tactical
+  sites are not systematically polled or crawled.
 - Conflicting match statistics: compare only compatible definitions, collapse
   repeated pages from the same measurement provider, use a strict independent-
   provider majority where available, and otherwise retain a numeric arithmetic
@@ -398,4 +416,5 @@ let items live only in chat history.
       Newcastle evidence packet demonstrates the process without replacing the
       official value already used by the production observation. The dashboard
       now explains that scores can update immediately while tactical evidence
-      follows after a 24–72 hour collection and validation window.
+      follows after an initial 24-hour delay and daily review until the next
+      match.
