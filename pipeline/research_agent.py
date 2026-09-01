@@ -227,24 +227,25 @@ def discard_ungrounded_evidence(packet, allowed_source_urls):
         for source in packet.get("sources", [])
         if source.get("url") not in allowed_source_urls
     }
-    if not ungrounded_ids:
-        return {"sources": 0, "claims": 0, "recommendations": 0}
-
     packet["sources"] = [
         source for source in packet["sources"] if source["id"] not in ungrounded_ids
     ]
+    declared_ids = {source["id"] for source in packet["sources"]}
     removed = {"sources": len(ungrounded_ids)}
     for collection in ("claims", "recommendations"):
         before = len(packet[collection])
         packet[collection] = [
             item
             for item in packet[collection]
-            if not (set(item["source_ids"]) & ungrounded_ids)
+            if not (set(item["source_ids"]) - declared_ids)
         ]
         removed[collection] = before - len(packet[collection])
 
+    if not any(removed.values()):
+        return removed
+
     packet["uncertainties"].append(
-        "The automated provenance guard discarded "
+        "The automated provenance guard discarded ungrounded or undeclared evidence: "
         f"{removed['sources']} ungrounded source(s), "
         f"{removed['claims']} dependent claim(s), and "
         f"{removed['recommendations']} dependent recommendation(s)."
@@ -317,9 +318,9 @@ def main():
     packet["generated_at"] = iso_utc(now)
     allowed_source_urls = extract_web_source_urls(response)
     removed = discard_ungrounded_evidence(packet, allowed_source_urls)
-    if removed["sources"]:
+    if any(removed.values()):
         print(
-            "Discarded ungrounded AI evidence before validation: "
+            "Discarded ungrounded or undeclared AI evidence before validation: "
             f"{removed['sources']} source(s), {removed['claims']} claim(s), "
             f"{removed['recommendations']} recommendation(s)"
         )

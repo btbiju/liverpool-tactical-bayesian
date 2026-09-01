@@ -154,18 +154,46 @@ class ResearchAgentPacketTests(unittest.TestCase):
                 "confidence": "low",
             }
         )
+        packet["recommendations"].append(
+            {
+                "fixture_id": 2,
+                "category": "shape",
+                "summary": "Recommendation with an undeclared source reference",
+                "reasoning": "Depends on a source that is absent from the source list.",
+                "source_ids": ["never_declared"],
+                "confidence": "low",
+            }
+        )
 
         removed = discard_ungrounded_evidence(
             packet, {"https://example.com/preview"}
         )
 
         self.assertEqual(
-            removed, {"sources": 1, "claims": 1, "recommendations": 1}
+            removed, {"sources": 1, "claims": 1, "recommendations": 2}
         )
         self.assertEqual([source["id"] for source in packet["sources"]], ["official_1"])
         self.assertEqual(packet["claims"], [])
         self.assertEqual(len(packet["recommendations"]), 1)
-        self.assertIn("discarded 1 ungrounded source", packet["uncertainties"][-1])
+        self.assertIn("1 ungrounded source", packet["uncertainties"][-1])
+        validate_packet(
+            packet,
+            packet["tasks"],
+            allowed_source_urls={"https://example.com/preview"},
+        )
+
+    def test_undeclared_reference_is_discarded_when_sources_are_grounded(self):
+        packet = self.packet()
+        packet["recommendations"][0]["source_ids"] = ["never_declared"]
+
+        removed = discard_ungrounded_evidence(
+            packet, {"https://example.com/preview"}
+        )
+
+        self.assertEqual(
+            removed, {"sources": 0, "claims": 0, "recommendations": 1}
+        )
+        self.assertEqual(packet["recommendations"], [])
         validate_packet(
             packet,
             packet["tasks"],
