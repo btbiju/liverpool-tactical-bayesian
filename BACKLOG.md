@@ -229,6 +229,13 @@ let items live only in chat history.
 
 ## Remaining work
 
+- [ ] **Evaluate repository research-agent packets across real matchweeks.**
+      The schedule, prompt, schema, due-window planner, tests, and read-only
+      GitHub Actions workflow are version-controlled. Add `OPENAI_API_KEY`, run
+      due packets through human review, monitor cost and source quality, and
+      refine the contract before considering tighter integration. Generated
+      packets must remain non-production artifacts.
+
 - [ ] **Observe the delayed-research automation across several matchweeks.**
       The research-draft contract and deterministic resolver are implemented,
       but source availability, provider disclosure, video transcript access,
@@ -418,3 +425,10 @@ let items live only in chat history.
       now explains that scores can update immediately while tactical evidence
       follows after an initial 24-hour delay and daily review until the next
       match.
+- [x] **Research-agent orchestration moved into the repository (2026-08-31).**
+      Added a deterministic post-match/pre-match due planner, version-controlled
+      research prompt, strict source-mapped output schema, offline tests, and a
+      daily read-only GitHub Actions workflow. The agent is independent of any
+      local assistant session and can produce only a temporary review artifact;
+      it cannot write observations, posteriors, lineup projections, commits, or
+      deployments.

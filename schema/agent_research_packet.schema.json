@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AI research-agent review packet",
+  "description": "A review-only, source-mapped research packet. It cannot update production observations, posteriors, or lineup projections directly.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "packet_version",
+    "generated_at",
+    "tasks",
+    "sources",
+    "claims",
+    "recommendations",
+    "uncertainties",
+    "human_review"
+  ],
+  "properties": {
+    "packet_version": { "type": "integer", "enum": [1] },
+    "generated_at": { "type": "string", "format": "date-time" },
+    "tasks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["type", "fixture_id", "matchweek", "opponent", "kickoff", "rationale"],
+        "properties": {
+          "type": { "type": "string", "enum": ["post_match", "pre_match"] },
+          "fixture_id": { "type": "integer" },
+          "matchweek": { "type": ["integer", "null"] },
+          "opponent": { "type": "string" },
+          "kickoff": { "type": "string", "format": "date-time" },
+          "rationale": { "type": "string" }
+        }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "title",
+          "url",
+          "published_at",
+          "accessed_at",
+          "source_tier",
+          "medium",
+          "measurement_provider",
+          "evidence_location"
+        ],
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "url": { "type": "string" },
+          "published_at": { "type": ["string", "null"], "format": "date" },
+          "accessed_at": { "type": "string", "format": "date" },
+          "source_tier": { "type": "integer", "minimum": 1, "maximum": 5 },
+          "medium": {
+            "type": "string",
+            "enum": ["official_stats", "structured_stats", "article", "video", "social"]
+          },
+          "measurement_provider": { "type": ["string", "null"] },
+          "evidence_location": { "type": "string" }
+        }
+      }
+    },
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "fixture_id",
+          "category",
+          "claim",
+          "value",
+          "unit",
+          "source_ids",
+          "compatibility_group",
+          "confidence",
+          "consensus_eligible"
+        ],
+        "properties": {
+          "fixture_id": { "type": "integer" },
+          "category": { "type": "string" },
+          "claim": { "type": "string" },
+          "value": { "type": ["number", "string", "boolean", "null"] },
+          "unit": { "type": ["string", "null"] },
+          "source_ids": { "type": "array", "items": { "type": "string" } },
+          "compatibility_group": { "type": ["string", "null"] },
+          "confidence": { "type": "string", "enum": ["low", "medium", "high"] },
+          "consensus_eligible": { "type": "boolean" }
+        }
+      }
+    },
+    "recommendations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["fixture_id", "category", "summary", "reasoning", "source_ids", "confidence"],
+        "properties": {
+          "fixture_id": { "type": "integer" },
+          "category": { "type": "string" },
+          "summary": { "type": "string" },
+          "reasoning": { "type": "string" },
+          "source_ids": { "type": "array", "items": { "type": "string" } },
+          "confidence": { "type": "string", "enum": ["low", "medium", "high"] }
+        }
+      }
+    },
+    "uncertainties": { "type": "array", "items": { "type": "string" } },
+    "human_review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required", "prohibited_direct_writes", "review_notes"],
+      "properties": {
+        "required": { "type": "boolean", "enum": [true] },
+        "prohibited_direct_writes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["observations", "posteriors", "manager_prior", "lineup_projection", "deployment"]
+          }
+        },
+        "review_notes": { "type": "string" }
+      }
+    }
+  }
+}

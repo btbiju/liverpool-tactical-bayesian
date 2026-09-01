@@ -117,3 +117,9 @@ attempt, including passes that find no eligible evidence. The research task
 does not crawl sites systematically, does not treat prose as a numeric metric,
 and does not directly update the posterior. The dashboard explains this delay
 so a score-only update is not mistaken for missing or broken model logic.
+
+The optional repository research agent may prepare a schema-validated GitHub
+Actions artifact for a due post-match pass or a 48-to-72-hour pre-match review.
+That artifact is untrusted input to this procedure, not a research draft or
+model observation. Follow `docs/RESEARCH_AGENT.md` and manually verify every
+claim before transferring any evidence into committed project data.
