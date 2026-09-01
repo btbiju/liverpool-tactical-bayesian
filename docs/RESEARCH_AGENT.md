@@ -36,8 +36,9 @@ Game Plan change. Existing validators and tests then apply normally.
 
 Every declared URL is compared with the API's web-search source record. An
 ungrounded source is discarded together with every dependent claim or
-recommendation, the discarded counts are recorded as an uncertainty, and all
-remaining grounded evidence must still pass strict validation.
+recommendation. Claims and recommendations that cite an undeclared source ID
+are discarded as well. The discarded counts are recorded as an uncertainty,
+and all remaining grounded evidence must still pass strict validation.
 
 ## Configuration
 
