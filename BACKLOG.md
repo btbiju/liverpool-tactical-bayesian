@@ -431,4 +431,6 @@ let items live only in chat history.
       daily read-only GitHub Actions workflow. The agent is independent of any
       local assistant session and can produce only a temporary review artifact;
       it cannot write observations, posteriors, lineup projections, commits, or
-      deployments.
+      deployments. Its provenance guard discards any model-proposed URL absent
+      from the API web-search record along with every dependent claim or
+      recommendation, allowing grounded evidence from the same run to survive.
