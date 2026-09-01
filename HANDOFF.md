@@ -93,6 +93,10 @@ ignored rather than converted into evidence.
 - CI, gated post-match football-data.org refresh, automated result-only
   observations/posteriors, weekly fallback, history-aware secret scanning, and
   GitHub Pages deployment workflows.
+- Repository-owned AI research-agent planning, prompt, output schema, offline
+  tests, and a daily GitHub Actions workflow. Due runs produce temporary
+  review artifacts only; the workflow has read-only repository permissions and
+  no local-assistant dependency.
 - Historical StatsBomb/Understat experiment separated into an ignored archive
   because it does not support the current model's data flow or portfolio story.
 

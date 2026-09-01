@@ -27,6 +27,9 @@ eventual posterior history.
    enriched separately.
 5. Delayed web research may collect source-mapped candidates in
    `data/research_drafts/`; these drafts never update the model directly.
+   The optional repository research agent may propose evidence in a temporary
+   GitHub Actions artifact, but it has read-only repository permissions and
+   cannot promote or deploy its output.
 6. Every observation in `data/observations/` must declare whether it is
    `automated_result_only` or `human_reviewed`, cite every non-null field, and
    validate against `schema/match_observation.schema.json`. Automation must
@@ -107,6 +110,8 @@ fixture/result source but is not a tactical-statistics provider.
   posterior inputs.
 - `data/posteriors/`: posterior snapshots, expected to grow during the season.
 - `pipeline/`: Python fixture client, pull command, and Bayesian update engine.
+- `prompts/`: version-controlled instructions for the optional review-only
+  repository research agent.
 - `dashboard/`: React/Vite static dashboard.
 - `archive/`: ignored historical reference work with no current production
   data flow; do not modify or ship it casually.
@@ -136,6 +141,10 @@ real credential or external writes.
 
 - Never hardcode credentials. Read `FOOTBALL_DATA_API_KEY` from the environment
   locally and use a GitHub Actions secret for automation.
+- The optional research agent reads `OPENAI_API_KEY` only on a due GitHub
+  Actions run. Its output is an untrusted review artifact, never a direct
+  production input. The project must not depend on a local assistant task or
+  desktop schedule for normal operation.
 - Do not commit `.env` files, local agent/editor permissions, access tokens, or
   API responses that contain private account data.
 - If a credential is found in any local file, redact it in reports, remove the

@@ -1,0 +1,65 @@
+name: AI research agent
+
+on:
+  schedule:
+    # The deterministic planner exits before touching the API when no post-match
+    # research or 48-to-72-hour pre-match review is due.
+    - cron: "12 15 * * *"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Create a review packet outside the normal timing windows"
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ai-research-agent
+  cancel-in-progress: false
+
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+      - name: Determine whether research is due
+        id: plan
+        env:
+          FORCE_RESEARCH: ${{ inputs.force || false }}
+        run: |
+          if test "$FORCE_RESEARCH" = "true"; then
+            python3 pipeline/research_agent.py --plan --force --github-output "$GITHUB_OUTPUT"
+          else
+            python3 pipeline/research_agent.py --plan --github-output "$GITHUB_OUTPUT"
+          fi
+      - name: Require the OpenAI API secret
+        if: steps.plan.outputs.due == 'true'
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: test -n "$OPENAI_API_KEY"
+      - name: Generate a source-mapped review packet
+        if: steps.plan.outputs.due == 'true'
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_RESEARCH_MODEL: ${{ vars.OPENAI_RESEARCH_MODEL || 'gpt-5.6-luna' }}
+          FORCE_RESEARCH: ${{ inputs.force || false }}
+        run: |
+          if test "$FORCE_RESEARCH" = "true"; then
+            python3 pipeline/research_agent.py --force --output-dir "$RUNNER_TEMP/research-agent"
+          else
+            python3 pipeline/research_agent.py --output-dir "$RUNNER_TEMP/research-agent"
+          fi
+      - name: Upload the review packet
+        if: steps.plan.outputs.due == 'true'
+        uses: actions/upload-artifact@v6
+        with:
+          name: research-agent-packet-${{ github.run_id }}
+          path: ${{ runner.temp }}/research-agent/*.json
+          if-no-files-found: error
+          retention-days: 30

@@ -86,6 +86,11 @@ explains why tactical posterior fields can lag behind the final score. The
 commit history remains the visible audit log of both the evidence and the model
 learning from it.
 
+The optional AI research step is repository-owned rather than tied to a local
+assistant session: GitHub Actions runs a version-controlled planner and prompt,
+validates the source-mapped result, and exposes it only as a temporary review
+artifact. See `docs/RESEARCH_AGENT.md` for setup and safety boundaries.
+
 ## Structure
 
 ```
@@ -98,6 +103,7 @@ data/observations/      Source-mapped result-only or reviewed tactical observati
 data/research_drafts/   Delayed web-research packets; not direct model inputs
 data/posteriors/        Weekly posterior snapshots (grows over the season)
 pipeline/               Fixture client, validation, update and posterior rebuild
+prompts/                Version-controlled review-agent instructions
 dashboard/              React (Vite) dashboard -- Fixtures / Squad & Stats / Game
                          Plan tabs, reads the data/ JSON files directly (see
                          dashboard/scripts/sync-data.mjs). Deploys to GitHub
@@ -131,3 +137,5 @@ gets lost across sessions.
 - [x] Delayed research-draft schema, conflict resolver, and posterior timing explanation
 - [x] Reusable next-opponent Game Plan with a matchup-specific XI, predicted
       score and scorers, tactical reasoning, and a bottom-of-page evidence register
+- [x] Repository-owned, review-only AI research planner, prompt, schema, tests,
+      and scheduled workflow with no local-assistant dependency
