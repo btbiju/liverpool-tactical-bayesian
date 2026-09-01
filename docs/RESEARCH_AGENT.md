@@ -34,6 +34,11 @@ A reviewer must verify the cited pages, definitions, provider independence,
 and uncertainty before transferring approved evidence into a research draft or
 Game Plan change. Existing validators and tests then apply normally.
 
+Every declared URL is compared with the API's web-search source record. An
+ungrounded source is discarded together with every dependent claim or
+recommendation, the discarded counts are recorded as an uncertainty, and all
+remaining grounded evidence must still pass strict validation.
+
 ## Configuration
 
 Add an Actions repository secret named `OPENAI_API_KEY`. Optionally add a

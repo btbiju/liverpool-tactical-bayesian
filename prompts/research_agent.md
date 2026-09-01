@@ -20,6 +20,9 @@ schema.
   exact timestamp or post URL.
 - Record an exact evidence location for every source and link every claim or
   recommendation to declared source IDs.
+- Copy source URLs exactly from pages returned by the web-search tool. Never
+  construct, guess, canonicalize, or alter a URL. Omit evidence when the exact
+  returned URL is unavailable.
 - Record the disclosed measurement provider. Pages repeating one underlying
   provider are one independent vote.
 - Do not combine different metric definitions or match scopes. Do not turn

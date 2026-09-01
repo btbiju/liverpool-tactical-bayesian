@@ -4,7 +4,11 @@ import unittest
 from datetime import datetime, timezone
 from pathlib import Path
 
-from pipeline.research_agent import plan_tasks, validate_packet
+from pipeline.research_agent import (
+    discard_ungrounded_evidence,
+    plan_tasks,
+    validate_packet,
+)
 from pipeline.validate_data import ValidationError
 
 
@@ -117,6 +121,56 @@ class ResearchAgentPacketTests(unittest.TestCase):
         packet = self.packet()
         with self.assertRaises(ValidationError):
             validate_packet(packet, packet["tasks"], allowed_source_urls=set())
+
+    def test_ungrounded_sources_and_dependent_items_are_discarded(self):
+        packet = self.packet()
+        packet["sources"].append(
+            {
+                **packet["sources"][0],
+                "id": "ungrounded_1",
+                "url": "https://example.com/unverified",
+            }
+        )
+        packet["claims"].append(
+            {
+                "fixture_id": 2,
+                "category": "availability",
+                "claim": "Unsupported availability claim",
+                "value": True,
+                "unit": None,
+                "source_ids": ["ungrounded_1"],
+                "compatibility_group": None,
+                "confidence": "low",
+                "consensus_eligible": False,
+            }
+        )
+        packet["recommendations"].append(
+            {
+                "fixture_id": 2,
+                "category": "score",
+                "summary": "Unsupported score recommendation",
+                "reasoning": "Depends on an ungrounded source.",
+                "source_ids": ["official_1", "ungrounded_1"],
+                "confidence": "low",
+            }
+        )
+
+        removed = discard_ungrounded_evidence(
+            packet, {"https://example.com/preview"}
+        )
+
+        self.assertEqual(
+            removed, {"sources": 1, "claims": 1, "recommendations": 1}
+        )
+        self.assertEqual([source["id"] for source in packet["sources"]], ["official_1"])
+        self.assertEqual(packet["claims"], [])
+        self.assertEqual(len(packet["recommendations"]), 1)
+        self.assertIn("discarded 1 ungrounded source", packet["uncertainties"][-1])
+        validate_packet(
+            packet,
+            packet["tasks"],
+            allowed_source_urls={"https://example.com/preview"},
+        )
 
 
 if __name__ == "__main__":

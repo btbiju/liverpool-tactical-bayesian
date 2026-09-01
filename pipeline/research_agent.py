@@ -215,6 +215,43 @@ def extract_web_source_urls(response):
     return urls
 
 
+def discard_ungrounded_evidence(packet, allowed_source_urls):
+    """Remove sources absent from the API's web-search provenance record.
+
+    Model output is untrusted even when it conforms to the JSON schema. A bad
+    source must not invalidate grounded evidence from the same run, but every
+    dependent claim or recommendation must be removed with it.
+    """
+    ungrounded_ids = {
+        source["id"]
+        for source in packet.get("sources", [])
+        if source.get("url") not in allowed_source_urls
+    }
+    if not ungrounded_ids:
+        return {"sources": 0, "claims": 0, "recommendations": 0}
+
+    packet["sources"] = [
+        source for source in packet["sources"] if source["id"] not in ungrounded_ids
+    ]
+    removed = {"sources": len(ungrounded_ids)}
+    for collection in ("claims", "recommendations"):
+        before = len(packet[collection])
+        packet[collection] = [
+            item
+            for item in packet[collection]
+            if not (set(item["source_ids"]) & ungrounded_ids)
+        ]
+        removed[collection] = before - len(packet[collection])
+
+    packet["uncertainties"].append(
+        "The automated provenance guard discarded "
+        f"{removed['sources']} ungrounded source(s), "
+        f"{removed['claims']} dependent claim(s), and "
+        f"{removed['recommendations']} dependent recommendation(s)."
+    )
+    return removed
+
+
 def validate_packet(packet, tasks, allowed_source_urls=None):
     schema = load_json(PACKET_SCHEMA_PATH)
     errors = validate_schema(packet, schema)
@@ -278,7 +315,15 @@ def main():
     response = call_responses_api(api_payload(tasks, model), api_key)
     packet = json.loads(extract_output_text(response))
     packet["generated_at"] = iso_utc(now)
-    validate_packet(packet, tasks, allowed_source_urls=extract_web_source_urls(response))
+    allowed_source_urls = extract_web_source_urls(response)
+    removed = discard_ungrounded_evidence(packet, allowed_source_urls)
+    if removed["sources"]:
+        print(
+            "Discarded ungrounded AI evidence before validation: "
+            f"{removed['sources']} source(s), {removed['claims']} claim(s), "
+            f"{removed['recommendations']} recommendation(s)"
+        )
+    validate_packet(packet, tasks, allowed_source_urls=allowed_source_urls)
 
     args.output_dir.mkdir(parents=True, exist_ok=True)
     stamp = now.strftime("%Y%m%dT%H%M%SZ")
