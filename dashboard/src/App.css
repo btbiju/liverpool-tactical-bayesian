@@ -1217,6 +1217,54 @@
 
 /* Game Plan tab */
 
+.reviewed-research__panel {
+  display: grid;
+  gap: 20px;
+  padding: 22px;
+  border-left: 3px solid var(--accent);
+}
+
+.reviewed-research__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.reviewed-research__header strong,
+.reviewed-research__header span {
+  display: block;
+}
+
+.reviewed-research__header > span,
+.reviewed-research__recommendations article > span {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+}
+
+.reviewed-research__panel h3 {
+  margin: 0 0 10px;
+  font-size: 0.82rem;
+}
+
+.reviewed-research__recommendations {
+  display: grid;
+  gap: 10px;
+}
+
+.reviewed-research__recommendations article {
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface-1);
+}
+
+.reviewed-research__recommendations p {
+  margin: 6px 0;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
 .gameplan-columns {
   display: grid;
   grid-template-columns: 1fr 1fr;

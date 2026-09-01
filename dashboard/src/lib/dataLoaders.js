@@ -41,3 +41,7 @@ export async function loadLineupProjection() {
   const projections = await loadIndexedCollection('lineup_projection');
   return projections.at(-1) ?? null;
 }
+
+export async function loadReviewedPackets() {
+  return loadIndexedCollection('reviewed_packets');
+}

@@ -251,6 +251,7 @@ def validate_all():
     player_schema = REPO_ROOT / "schema" / "player_profile.schema.json"
     posterior_schema = REPO_ROOT / "schema" / "posterior_state.schema.json"
     lineup_schema = REPO_ROOT / "schema" / "lineup_projection.schema.json"
+    agent_packet_schema = REPO_ROOT / "schema" / "agent_research_packet.schema.json"
 
     manager_files = sorted((REPO_ROOT / "data" / "manager_priors").glob("*.json"))
     player_files = sorted((REPO_ROOT / "data" / "player_profiles").glob("*.json"))
@@ -261,6 +262,12 @@ def validate_all():
         path
         for path in observation_dir.glob("*.json")
         if not path.name.endswith(".template.json")
+    )
+    reviewed_packet_dir = REPO_ROOT / "data" / "reviewed_packets"
+    reviewed_packet_files = (
+        sorted(reviewed_packet_dir.glob("*.json"))
+        if reviewed_packet_dir.exists()
+        else []
     )
     lineup_dir = REPO_ROOT / "data" / "lineup_projection"
     lineup_files = sorted(lineup_dir.glob("*.json")) if lineup_dir.exists() else []
@@ -277,6 +284,8 @@ def validate_all():
         validate_file(path, posterior_schema)
     for path in lineup_files:
         validate_file(path, lineup_schema)
+    for path in reviewed_packet_files:
+        validate_file(path, agent_packet_schema)
     validate_observations(observation_files, require_fixture_match=True)
     validate_research_drafts(research_files)
 
@@ -337,6 +346,7 @@ def validate_all():
         "lineup_projections": len(lineup_files),
         "research_drafts": len(research_files),
         "observations": len(observation_files),
+        "reviewed_packets": len(reviewed_packet_files),
         "squad_players": len(squad),
     }
 
@@ -354,6 +364,7 @@ def main():
         f"{counts['posteriors']} posteriors schema-checked; "
         f"{counts['lineup_projections']} lineup projections schema-checked; "
         f"{counts['research_drafts']} research drafts schema-checked; "
+        f"{counts['reviewed_packets']} reviewed research packets schema-checked; "
         f"{counts['squad_players']} squad identities cross-checked."
     )
 

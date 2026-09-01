@@ -63,3 +63,19 @@ jobs:
           path: ${{ runner.temp }}/research-agent/*.json
           if-no-files-found: error
           retention-days: 30
+      - name: Send packet to the private review console
+        if: steps.plan.outputs.due == 'true'
+        env:
+          REVIEW_CONSOLE_URL: ${{ vars.REVIEW_CONSOLE_URL }}
+          REVIEW_INGEST_SECRET: ${{ secrets.REVIEW_INGEST_SECRET }}
+        run: |
+          if test -z "$REVIEW_CONSOLE_URL" || test -z "$REVIEW_INGEST_SECRET"; then
+            echo "Review console is not configured; the GitHub artifact remains available."
+            exit 0
+          fi
+          packet=$(find "$RUNNER_TEMP/research-agent" -name '*.json' -type f -print -quit)
+          python3 pipeline/send_review_packet.py \
+            "$packet" \
+            --console-url "$REVIEW_CONSOLE_URL" \
+            --secret "$REVIEW_INGEST_SECRET" \
+            --github-run-id "$GITHUB_RUN_ID"

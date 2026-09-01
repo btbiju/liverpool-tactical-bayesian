@@ -435,3 +435,8 @@ let items live only in chat history.
       from the API web-search record along with every dependent claim or
       recommendation. Items citing undeclared source IDs are also discarded,
       allowing grounded evidence from the same run to survive.
+## Review console
+
+- [ ] Complete the private review-console rollout: configure the deployed console's owner allowlist, ingestion/export secrets, and restricted GitHub App; then add the corresponding repository Actions variables and secrets.
+- [x] Build a separate private review console with source-mapped evidence, unresolved-field warnings, immutable packet digests, and a protected publish endpoint. Approval dispatches a fully validated publication pull request; merging remains an explicit repository-owner action.
+- [x] Keep the existing GitHub artifact as a safe fallback when review-console delivery is not configured.

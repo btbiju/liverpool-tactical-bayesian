@@ -42,5 +42,6 @@ copyDirWithIndex(join(dataRoot, "player_profiles"), "player_profiles");
 copyDirWithIndex(join(dataRoot, "fixtures"), "fixtures");
 copyDirWithIndex(join(dataRoot, "posteriors"), "posteriors");
 copyDirWithIndex(join(dataRoot, "lineup_projection"), "lineup_projection");
+copyDirWithIndex(join(dataRoot, "reviewed_packets"), "reviewed_packets");
 
-console.log("[sync-data] copied squad, manager prior, player_profiles, fixtures, posteriors, lineup_projection into public/data/");
+console.log("[sync-data] copied squad, manager prior, player_profiles, fixtures, posteriors, lineup_projection, reviewed_packets into public/data/");
