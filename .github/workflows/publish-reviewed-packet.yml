@@ -1,0 +1,85 @@
+name: Publish reviewed research packet
+
+on:
+  workflow_dispatch:
+    inputs:
+      packet_id:
+        description: Immutable review-console packet ID
+        required: true
+        type: string
+      packet_digest:
+        description: Approved packet SHA-256 digest
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: publish-reviewed-packet
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      REVIEW_CONSOLE_URL: ${{ vars.REVIEW_CONSOLE_URL }}
+      REVIEW_EXPORT_SECRET: ${{ secrets.REVIEW_EXPORT_SECRET }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: dashboard/package-lock.json
+      - name: Validate configured review-console access
+        run: |
+          test -n "$REVIEW_CONSOLE_URL"
+          test -n "$REVIEW_EXPORT_SECRET"
+          case "${{ inputs.packet_id }}" in packet_[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f]) ;; *) exit 1 ;; esac
+          test "${#PACKET_DIGEST}" -eq 64
+        env:
+          PACKET_DIGEST: ${{ inputs.packet_digest }}
+      - name: Fetch the exact approved packet
+        run: |
+          curl --fail --silent --show-error \
+            -H "Authorization: Bearer $REVIEW_EXPORT_SECRET" \
+            "$REVIEW_CONSOLE_URL/api/packets/${{ inputs.packet_id }}/export" \
+            --output "$RUNNER_TEMP/review-export.json"
+          python3 pipeline/publish_reviewed_packet.py \
+            "$RUNNER_TEMP/review-export.json" \
+            --expected-id "${{ inputs.packet_id }}" \
+            --expected-digest "${{ inputs.packet_digest }}"
+      - name: Validate repository data and model state
+        run: |
+          python3 -m unittest discover -s tests -v
+          python3 pipeline/validate_data.py
+          python3 pipeline/build_posteriors.py --check
+          python3 -m compileall -q pipeline
+      - name: Validate dashboard
+        working-directory: dashboard
+        run: |
+          npm ci
+          npm run lint
+          npm run build
+      - name: Open the validated publication pull request
+        run: |
+          branch="automation/review-${{ inputs.packet_id }}"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$branch"
+          git add "data/reviewed_packets/${{ inputs.packet_id }}.json"
+          git commit -m "Publish reviewed research ${{ inputs.packet_id }}"
+          git push --set-upstream origin "$branch"
+          gh pr create \
+            --base main \
+            --head "$branch" \
+            --title "Publish reviewed research ${{ inputs.packet_id }}" \
+            --body "Owner-approved research packet. The immutable digest was verified before the full test, data-validation, and dashboard-build suite ran. Review and merge this pull request to publish the packet."
