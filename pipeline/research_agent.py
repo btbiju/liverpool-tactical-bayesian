@@ -300,6 +300,8 @@ def validate_packet(packet, tasks, allowed_source_urls=None):
             )
         if not item["source_ids"]:
             raise ValidationError("Every AI packet claim and recommendation must cite a source")
+        if len(item["source_ids"]) != len(set(item["source_ids"])):
+            raise ValidationError("AI packet items must not cite the same source more than once")
         unknown = set(item["source_ids"]) - declared
         if unknown:
             raise ValidationError(f"AI packet cites undeclared sources: {sorted(unknown)}")
