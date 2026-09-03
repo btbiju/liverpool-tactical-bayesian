@@ -63,7 +63,7 @@ jobs:
           path: ${{ runner.temp }}/research-agent/*.json
           if-no-files-found: error
           retention-days: 30
-      - name: Send packet to the private review console
+      - name: Send packet to the protected review console
         if: steps.plan.outputs.due == 'true'
         env:
           REVIEW_CONSOLE_URL: ${{ vars.REVIEW_CONSOLE_URL }}

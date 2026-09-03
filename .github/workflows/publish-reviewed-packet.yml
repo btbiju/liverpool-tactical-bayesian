@@ -50,6 +50,7 @@ jobs:
       - name: Fetch the exact approved packet
         run: |
           curl --fail --silent --show-error \
+            --user-agent "Mozilla/5.0 (compatible; LiverpoolTacticalResearchBot/1.0; +https://github.com/btbiju/liverpool-tactical-bayesian)" \
             -H "Authorization: Bearer $REVIEW_EXPORT_SECRET" \
             "$REVIEW_CONSOLE_URL/api/packets/${{ inputs.packet_id }}/export" \
             --output "$RUNNER_TEMP/review-export.json"
