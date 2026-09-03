@@ -155,67 +155,94 @@ function PosteriorPanel({ posteriors, prior }) {
 function ReviewedResearch({ packets }) {
   if (!packets?.length) return null;
   const latest = [...packets].sort((a, b) => b.generated_at.localeCompare(a.generated_at))[0];
-  const task = latest.tasks?.[0];
   const sourceById = Object.fromEntries((latest.sources ?? []).map((source) => [source.id, source]));
+  const tasks = [...(latest.tasks ?? [])].sort((a, b) => {
+    if (a.type === b.type) return 0;
+    return a.type === 'pre_match' ? -1 : 1;
+  });
+
   return (
     <div className="reviewed-research">
       <div className="section-heading">
         <h2 style={{ fontSize: '0.95rem' }}>Owner-reviewed research</h2>
         <span className="section-heading__meta">Published after evidence review</span>
       </div>
-      <div className="card reviewed-research__panel">
-        <div className="reviewed-research__header">
-          <div>
-            <span className="posterior-panel__eyebrow">{task?.type === 'pre_match' ? 'Pre-match review' : 'Post-match review'}</span>
-            <strong>{task?.opponent ?? 'Liverpool research packet'}</strong>
-          </div>
-          <span>{new Date(latest.generated_at).toLocaleDateString('en-GB')}</span>
-        </div>
-        {(latest.claims ?? []).length > 0 && (
-          <div>
-            <h3>Verified claims</h3>
-            <ul className="notes-list">
-              {latest.claims.map((claim, index) => (
-                <li key={`${claim.category}-${index}`}>
-                  <strong>{claim.claim}</strong>
-                  {claim.value != null ? ` — ${claim.value}${claim.unit ? ` ${claim.unit}` : ''}` : ''}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-        {(latest.recommendations ?? []).length > 0 && (
-          <div>
-            <h3>Reviewed recommendations</h3>
-            <div className="reviewed-research__recommendations">
-              {latest.recommendations.map((item, index) => (
-                <article key={`${item.category}-${index}`}>
-                  <strong>{item.summary}</strong>
-                  <p>{item.reasoning}</p>
-                  <span>{item.confidence} confidence · model recommendation, not confirmed team news</span>
-                </article>
-              ))}
+      {tasks.map((task) => {
+        const claims = (latest.claims ?? []).filter((item) => item.fixture_id === task.fixture_id);
+        const recommendations = (latest.recommendations ?? []).filter(
+          (item) => item.fixture_id === task.fixture_id,
+        );
+        const referencedIds = new Set(
+          [...claims, ...recommendations].flatMap((item) => item.source_ids ?? []),
+        );
+        const sources = [...referencedIds].map((id) => sourceById[id]).filter(Boolean);
+        const hasMissingSource = [...claims, ...recommendations].some(
+          (item) => item.source_ids?.some((id) => !sourceById[id]),
+        );
+
+        return (
+          <div className="card reviewed-research__panel" key={`${task.type}-${task.fixture_id}`}>
+            <div className="reviewed-research__header">
+              <div>
+                <span className="posterior-panel__eyebrow">
+                  {task.type === 'pre_match' ? 'Pre-match review' : 'Post-match review'}
+                </span>
+                <strong>{task.opponent}</strong>
+              </div>
+              <span>{new Date(latest.generated_at).toLocaleDateString('en-GB')}</span>
             </div>
+            <p className="modal-panel__muted">{task.rationale}</p>
+            {claims.length > 0 && (
+              <div>
+                <h3>Reviewed claims</h3>
+                <ul className="notes-list">
+                  {claims.map((claim, index) => (
+                    <li key={`${claim.category}-${index}`}>
+                      <strong>{claim.claim}</strong>
+                      {claim.value != null ? ` — ${claim.value}${claim.unit ? ` ${claim.unit}` : ''}` : ''}
+                      <span className="modal-panel__muted"> · {claim.confidence} confidence</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {recommendations.length > 0 && (
+              <div>
+                <h3>Reviewed recommendations</h3>
+                <div className="reviewed-research__recommendations">
+                  {recommendations.map((item, index) => (
+                    <article key={`${item.category}-${index}`}>
+                      <strong>{item.summary}</strong>
+                      <p>{item.reasoning}</p>
+                      <span>{item.confidence} confidence · model recommendation, not confirmed team news</span>
+                    </article>
+                  ))}
+                </div>
+              </div>
+            )}
+            {sources.length > 0 && (
+              <div className="posterior-log__sources">
+                Sources:{' '}
+                {sources.map((source, index) => (
+                  <span key={source.id}>
+                    {index > 0 ? ', ' : ''}
+                    <a href={source.url} target="_blank" rel="noreferrer">{source.title}</a>
+                  </span>
+                ))}
+              </div>
+            )}
+            {hasMissingSource ? (
+              <p className="modal-panel__muted">A source mapping is unavailable; this packet should be revalidated.</p>
+            ) : null}
           </div>
-        )}
-        {(latest.uncertainties ?? []).length > 0 && (
-          <div>
-            <h3>Still uncertain</h3>
-            <ul className="notes-list">{latest.uncertainties.map((item) => <li key={item}>{item}</li>)}</ul>
-          </div>
-        )}
-        {(latest.sources ?? []).length > 0 && (
-          <div className="posterior-log__sources">
-            Sources:{' '}
-            {(latest.sources ?? []).map((source, index) => (
-              <span key={source.id}>{index > 0 ? ', ' : ''}<a href={source.url} target="_blank" rel="noreferrer">{source.title}</a></span>
-            ))}
-          </div>
-        )}
-        {latest.claims?.some((claim) => claim.source_ids?.some((id) => !sourceById[id])) ? (
-          <p className="modal-panel__muted">A source mapping is unavailable; this packet should be revalidated.</p>
-        ) : null}
-      </div>
+        );
+      })}
+      {(latest.uncertainties ?? []).length > 0 && (
+        <div className="card reviewed-research__panel">
+          <h3>Packet uncertainties</h3>
+          <ul className="notes-list">{latest.uncertainties.map((item) => <li key={item}>{item}</li>)}</ul>
+        </div>
+      )}
     </div>
   );
 }
