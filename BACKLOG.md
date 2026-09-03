@@ -439,4 +439,5 @@ let items live only in chat history.
 
 - [ ] Complete the private review-console rollout: configure the deployed console's owner allowlist, ingestion/export secrets, and restricted GitHub App; then add the corresponding repository Actions variables and secrets.
 - [x] Build a separate private review console with source-mapped evidence, unresolved-field warnings, immutable packet digests, and a protected publish endpoint. Approval dispatches a fully validated publication pull request; merging remains an explicit repository-owner action.
+- [x] Identify GitHub Actions requests to the review console with a stable, repository-specific HTTP user agent. The ingestion helper and publication export request retain their existing HMAC and bearer-token authentication; the user agent only prevents hosting-layer rejection and is not an authorization mechanism.
 - [x] Keep the existing GitHub artifact as a safe fallback when review-console delivery is not configured.

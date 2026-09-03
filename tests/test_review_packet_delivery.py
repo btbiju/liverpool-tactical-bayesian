@@ -3,7 +3,12 @@ import hmac
 import json
 import unittest
 
-from pipeline.send_review_packet import canonical_envelope, signature
+from pipeline.send_review_packet import (
+    REVIEW_CONSOLE_USER_AGENT,
+    build_request,
+    canonical_envelope,
+    signature,
+)
 
 
 class ReviewPacketDeliveryTests(unittest.TestCase):
@@ -19,6 +24,21 @@ class ReviewPacketDeliveryTests(unittest.TestCase):
         body = json.dumps({"packet": {"packet_version": 1}}).encode()
         expected = hmac.new(b"secret", body, hashlib.sha256).hexdigest()
         self.assertEqual(signature("secret", body), expected)
+
+    def test_request_identifies_the_repository_client_without_exposing_secret(self):
+        body = b'{"packet":{"packet_version":1}}'
+        request = build_request("https://review.example/", "test-secret", body)
+
+        self.assertEqual(request.full_url, "https://review.example/api/packets")
+        self.assertEqual(request.get_method(), "POST")
+        self.assertEqual(request.data, body)
+        self.assertEqual(request.get_header("User-agent"), REVIEW_CONSOLE_USER_AGENT)
+        self.assertEqual(request.get_header("Content-type"), "application/json")
+        self.assertEqual(
+            request.get_header("X-review-signature"),
+            signature("test-secret", body),
+        )
+        self.assertNotIn("test-secret", repr(request.header_items()))
 
 
 if __name__ == "__main__":

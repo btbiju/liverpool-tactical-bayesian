@@ -1,4 +1,4 @@
-"""Send a validated research packet to the private review console.
+"""Send a validated research packet to the protected review console.
 
 The packet is signed with HMAC-SHA256. This helper never reads repository data
 other than the explicit packet path and does not print credentials.
@@ -13,6 +13,12 @@ import urllib.request
 from pathlib import Path
 
 
+REVIEW_CONSOLE_USER_AGENT = (
+    "Mozilla/5.0 (compatible; LiverpoolTacticalResearchBot/1.0; "
+    "+https://github.com/btbiju/liverpool-tactical-bayesian)"
+)
+
+
 def canonical_envelope(packet, github_run_id=None):
     payload = {"packet": packet}
     if github_run_id:
@@ -24,19 +30,24 @@ def signature(secret, body):
     return hmac.new(secret.encode("utf-8"), body, hashlib.sha256).hexdigest()
 
 
-def send_packet(packet_path, console_url, secret, github_run_id=None, timeout=30):
-    with packet_path.open(encoding="utf-8") as handle:
-        packet = json.load(handle)
-    body = canonical_envelope(packet, github_run_id)
-    request = urllib.request.Request(
+def build_request(console_url, secret, body):
+    return urllib.request.Request(
         f"{console_url.rstrip('/')}/api/packets",
         data=body,
         method="POST",
         headers={
             "Content-Type": "application/json",
+            "User-Agent": REVIEW_CONSOLE_USER_AGENT,
             "X-Review-Signature": signature(secret, body),
         },
     )
+
+
+def send_packet(packet_path, console_url, secret, github_run_id=None, timeout=30):
+    with packet_path.open(encoding="utf-8") as handle:
+        packet = json.load(handle)
+    body = canonical_envelope(packet, github_run_id)
+    request = build_request(console_url, secret, body)
     try:
         with urllib.request.urlopen(request, timeout=timeout) as response:
             result = json.load(response)
