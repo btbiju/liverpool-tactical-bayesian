@@ -5,7 +5,9 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from pipeline.research_agent import (
+    PACKET_SCHEMA_PATH,
     discard_ungrounded_evidence,
+    load_json,
     plan_tasks,
     validate_packet,
 )
@@ -148,6 +150,16 @@ class ResearchAgentPacketTests(unittest.TestCase):
         packet["claims"][0]["source_ids"] = []
         with self.assertRaises(ValidationError):
             validate_packet(packet, packet["tasks"])
+
+    def test_duplicate_source_reference_is_rejected(self):
+        packet = self.packet()
+        packet["claims"][0]["source_ids"] = ["official_1", "official_1"]
+        with self.assertRaisesRegex(ValidationError, "same source more than once"):
+            validate_packet(packet, packet["tasks"])
+
+    def test_response_schema_avoids_unsupported_unique_items_keyword(self):
+        schema_text = json.dumps(load_json(PACKET_SCHEMA_PATH))
+        self.assertNotIn("uniqueItems", schema_text)
 
     def test_item_for_unplanned_fixture_is_rejected(self):
         packet = self.packet()
