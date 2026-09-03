@@ -36,6 +36,12 @@ class ResearchAgentPlanningTests(unittest.TestCase):
         fixtures = [fixture(2, "2026-09-05T20:00:00Z", "TIMED", 3)]
         self.assertEqual(plan_tasks(fixtures, now=self.now), [])
 
+    def test_forced_pre_match_task_reports_actual_timing(self):
+        fixtures = [fixture(2, "2026-09-02T15:00:00Z", "TIMED", 3)]
+        tasks = plan_tasks(fixtures, now=self.now, force=True)
+        self.assertIn("27.0 hours until kickoff", tasks[0]["rationale"])
+        self.assertIn("outside the normal timing gate", tasks[0]["rationale"])
+
     def test_only_latest_finished_match_gets_post_match_task(self):
         fixtures = [
             fixture(1, "2026-08-20T20:00:00Z", "FINISHED", 1, "Old FC"),
@@ -88,12 +94,32 @@ class ResearchAgentPacketTests(unittest.TestCase):
                     "evidence_location": "Team news section",
                 }
             ],
-            "claims": [],
+            "claims": [
+                {
+                    "fixture_id": 2,
+                    "category": "projected_lineup",
+                    "claim": "Low-confidence projected Liverpool XI",
+                    "value": "Eleven named players",
+                    "unit": None,
+                    "source_ids": ["official_1"],
+                    "compatibility_group": None,
+                    "confidence": "low",
+                    "consensus_eligible": False,
+                }
+            ],
             "recommendations": [
                 {
                     "fixture_id": 2,
-                    "category": "lineup",
-                    "summary": "Low-confidence selection recommendation",
+                    "category": "prediction",
+                    "summary": "Liverpool 2-1 Opponent FC",
+                    "reasoning": "Based on the official availability update.",
+                    "source_ids": ["official_1"],
+                    "confidence": "low",
+                },
+                {
+                    "fixture_id": 2,
+                    "category": "goalscorer_prediction",
+                    "summary": "Low-confidence Liverpool scorer prediction",
                     "reasoning": "Based on the official availability update.",
                     "source_ids": ["official_1"],
                     "confidence": "low",
@@ -115,6 +141,24 @@ class ResearchAgentPacketTests(unittest.TestCase):
         packet = self.packet()
         packet["recommendations"][0]["source_ids"] = ["missing"]
         with self.assertRaises(ValidationError):
+            validate_packet(packet, packet["tasks"])
+
+    def test_empty_source_reference_is_rejected(self):
+        packet = self.packet()
+        packet["claims"][0]["source_ids"] = []
+        with self.assertRaises(ValidationError):
+            validate_packet(packet, packet["tasks"])
+
+    def test_item_for_unplanned_fixture_is_rejected(self):
+        packet = self.packet()
+        packet["claims"][0]["fixture_id"] = 99
+        with self.assertRaises(ValidationError):
+            validate_packet(packet, packet["tasks"])
+
+    def test_incomplete_pre_match_projection_is_rejected(self):
+        packet = self.packet()
+        packet["recommendations"] = []
+        with self.assertRaisesRegex(ValidationError, "prediction recommendation"):
             validate_packet(packet, packet["tasks"])
 
     def test_url_absent_from_web_search_record_is_rejected(self):
@@ -173,8 +217,8 @@ class ResearchAgentPacketTests(unittest.TestCase):
             removed, {"sources": 1, "claims": 1, "recommendations": 2}
         )
         self.assertEqual([source["id"] for source in packet["sources"]], ["official_1"])
-        self.assertEqual(packet["claims"], [])
-        self.assertEqual(len(packet["recommendations"]), 1)
+        self.assertEqual(len(packet["claims"]), 1)
+        self.assertEqual(len(packet["recommendations"]), 2)
         self.assertIn("1 ungrounded source", packet["uncertainties"][-1])
         validate_packet(
             packet,
@@ -184,7 +228,16 @@ class ResearchAgentPacketTests(unittest.TestCase):
 
     def test_undeclared_reference_is_discarded_when_sources_are_grounded(self):
         packet = self.packet()
-        packet["recommendations"][0]["source_ids"] = ["never_declared"]
+        packet["recommendations"].append(
+            {
+                "fixture_id": 2,
+                "category": "shape",
+                "summary": "Recommendation with an undeclared source reference",
+                "reasoning": "Depends on a source that is absent from the source list.",
+                "source_ids": ["never_declared"],
+                "confidence": "low",
+            }
+        )
 
         removed = discard_ungrounded_evidence(
             packet, {"https://example.com/preview"}
@@ -193,7 +246,7 @@ class ResearchAgentPacketTests(unittest.TestCase):
         self.assertEqual(
             removed, {"sources": 0, "claims": 0, "recommendations": 1}
         )
-        self.assertEqual(packet["recommendations"], [])
+        self.assertEqual(len(packet["recommendations"]), 2)
         validate_packet(
             packet,
             packet["tasks"],

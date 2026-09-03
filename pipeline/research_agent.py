@@ -25,6 +25,7 @@ RESEARCH_DIR = REPO_ROOT / "data" / "research_drafts"
 PROJECTION_PATH = REPO_ROOT / "data" / "lineup_projection" / "iraola_2026_27.json"
 PRIOR_PATH = REPO_ROOT / "data" / "manager_priors" / "iraola_2026.json"
 SQUAD_PATH = REPO_ROOT / "data" / "squad" / "liverpool_2026_27.json"
+PLAYER_PROFILES_DIR = REPO_ROOT / "data" / "player_profiles"
 PROMPT_PATH = REPO_ROOT / "prompts" / "research_agent.md"
 PACKET_SCHEMA_PATH = REPO_ROOT / "schema" / "agent_research_packet.schema.json"
 DEFAULT_OUTPUT_DIR = REPO_ROOT / "artifacts" / "research_agent"
@@ -108,22 +109,33 @@ def plan_tasks(fixtures, now=None, research_dir=RESEARCH_DIR, force=False):
     if latest_finished and (
         force or _post_match_due(latest_finished, now, next_fixture, research_dir)
     ):
+        post_match_rationale = (
+            "A forced review run requested the latest finished match outside the normal due-window gate."
+            if force
+            else "The latest finished match is inside its review window and a research pass is due."
+        )
         tasks.append(
             task_from_fixture(
                 "post_match",
                 latest_finished,
-                "The latest finished match is inside its review window and a research pass is due.",
+                post_match_rationale,
             )
         )
 
     if next_fixture:
         hours_until = (parse_utc(next_fixture["utcDate"]) - now).total_seconds() / 3600
         if force or 48 <= hours_until <= 72:
+            pre_match_rationale = (
+                f"A forced review run requested the next fixture with {hours_until:.1f} hours until kickoff, "
+                "outside the normal timing gate."
+                if force and not 48 <= hours_until <= 72
+                else "The next Liverpool fixture is inside the 48-to-72-hour Game Plan window."
+            )
             tasks.append(
                 task_from_fixture(
                     "pre_match",
                     next_fixture,
-                    "The next Liverpool fixture is inside the 48-to-72-hour Game Plan window.",
+                    pre_match_rationale,
                 )
             )
     return tasks
@@ -147,6 +159,9 @@ def build_context(tasks):
         "current_lineup_projection": load_json(PROJECTION_PATH),
         "manager_prior": load_json(PRIOR_PATH),
         "squad": load_json(SQUAD_PATH),
+        "player_profiles": [
+            load_json(path) for path in sorted(PLAYER_PROFILES_DIR.glob("*.json"))
+        ],
         "existing_research_drafts": drafts,
     }
 
@@ -277,10 +292,41 @@ def validate_packet(packet, tasks, allowed_source_urls=None):
                 "AI packet contains URLs absent from the web-search tool record: "
                 f"{sorted(ungrounded)}"
             )
+    task_fixture_ids = {task["fixture_id"] for task in packet["tasks"]}
     for item in [*packet["claims"], *packet["recommendations"]]:
+        if item["fixture_id"] not in task_fixture_ids:
+            raise ValidationError(
+                f"AI packet item references fixture {item['fixture_id']} without a matching task"
+            )
+        if not item["source_ids"]:
+            raise ValidationError("Every AI packet claim and recommendation must cite a source")
         unknown = set(item["source_ids"]) - declared
         if unknown:
             raise ValidationError(f"AI packet cites undeclared sources: {sorted(unknown)}")
+
+    for task in packet["tasks"]:
+        if task["type"] != "pre_match":
+            continue
+        fixture_id = task["fixture_id"]
+        claim_categories = {
+            item["category"] for item in packet["claims"] if item["fixture_id"] == fixture_id
+        }
+        recommendation_categories = {
+            item["category"]
+            for item in packet["recommendations"]
+            if item["fixture_id"] == fixture_id
+        }
+        missing = []
+        if "projected_lineup" not in claim_categories:
+            missing.append("projected_lineup claim")
+        if "prediction" not in recommendation_categories:
+            missing.append("prediction recommendation")
+        if "goalscorer_prediction" not in recommendation_categories:
+            missing.append("goalscorer_prediction recommendation")
+        if missing:
+            raise ValidationError(
+                f"Pre-match fixture {fixture_id} is incomplete; missing {', '.join(missing)}"
+            )
     if not packet["human_review"]["required"]:
         raise ValidationError("AI research packets must require human review")
 

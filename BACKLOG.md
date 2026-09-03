@@ -230,11 +230,16 @@ let items live only in chat history.
 ## Remaining work
 
 - [ ] **Evaluate repository research-agent packets across real matchweeks.**
-      The schedule, prompt, schema, due-window planner, tests, and read-only
-      GitHub Actions workflow are version-controlled. Add `OPENAI_API_KEY`, run
-      due packets through human review, monitor cost and source quality, and
-      refine the contract before considering tighter integration. Generated
-      packets must remain non-production artifacts.
+      The schedule, prompt, schema, due-window planner, tests, read-only GitHub
+      Actions workflow, API key, and owner review console are operational. The
+      first end-to-end packet was deliberately rejected: it mixed two fixtures
+      in one display, retained an uncited claim, misstated a forced run's timing,
+      and supplied a weak/incomplete pre-match projection. The contract now
+      requires grounded source IDs for every item, truthful forced-run timing,
+      player-profile context, and a complete opponent-specific XI, score, and
+      goalscorer projection. Continue monitoring cost and source quality across
+      real matchweeks before considering tighter integration. Generated packets
+      remain non-production until owner review and a normal publication PR.
 
 - [ ] **Observe the delayed-research automation across several matchweeks.**
       The research-draft contract and deterministic resolver are implemented,
@@ -437,7 +442,15 @@ let items live only in chat history.
       allowing grounded evidence from the same run to survive.
 ## Review console
 
-- [ ] Complete the private review-console rollout: configure the deployed console's owner allowlist, ingestion/export secrets, and restricted GitHub App; then add the corresponding repository Actions variables and secrets.
+- [x] Complete the private review-console rollout: the replacement Site has its
+      owner allowlist, ingestion/export secrets, restricted GitHub App, D1
+      binding, and matching repository Actions configuration. Browser access is
+      sign-in protected while authenticated machine ingress uses the dedicated
+      HMAC/bearer boundaries. The first successful end-to-end delivery was
+      confirmed on 2026-09-03.
 - [x] Build a separate private review console with source-mapped evidence, unresolved-field warnings, immutable packet digests, and a protected publish endpoint. Approval dispatches a fully validated publication pull request; merging remains an explicit repository-owner action.
 - [x] Identify GitHub Actions requests to the review console with a stable, repository-specific HTTP user agent. The ingestion helper and publication export request retain their existing HMAC and bearer-token authentication; the user agent only prevents hosting-layer rejection and is not an authorization mechanism.
+- [x] Group published packet content by fixture in the dashboard, show pre-match
+      work first, label claims as reviewed rather than universally verified,
+      display confidence, and show only the sources referenced by each task.
 - [x] Keep the existing GitHub artifact as a safe fallback when review-console delivery is not configured.

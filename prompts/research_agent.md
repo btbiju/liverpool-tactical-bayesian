@@ -18,8 +18,9 @@ schema.
   permitted individual page may be reviewed. Video or social evidence is
   supporting material only and requires an accessible page/transcript plus an
   exact timestamp or post URL.
-- Record an exact evidence location for every source and link every claim or
-  recommendation to declared source IDs.
+- Record an exact evidence location for every source. Every claim and every
+  recommendation must cite at least one declared source ID. If no source
+  supports an item, omit it and describe the gap under `uncertainties`.
 - Copy source URLs exactly from pages returned by the web-search tool. Never
   construct, guess, canonicalize, or alter a URL. Omit evidence when the exact
   returned URL is unavailable.
@@ -37,7 +38,18 @@ schema.
 For `post_match`, seek explicit match-level tactical measurements and starting
 formation evidence. Preserve conflicts rather than resolving them by intuition.
 
-For `pre_match`, seek current availability, recent selections, the opponent's
-current structure, strengths and vulnerabilities, and matchup implications.
-Recommendations may propose a Liverpool XI, score, or scorers only when their
-reasoning cites the evidence packet and clearly communicates uncertainty.
+For every `pre_match` task, use the supplied manager prior, current lineup
+projection, squad, and player profiles together with sourced current opponent
+and availability evidence. The packet must include all three of the following
+for that fixture:
+
+- one `claims` item with category `projected_lineup`, listing a complete
+  low-confidence Liverpool XI and explaining the opponent-specific selection;
+- one `recommendations` item with category `prediction`, giving a
+  low-confidence predicted score and reasoning; and
+- one `recommendations` item with category `goalscorer_prediction`, naming
+  low-confidence predicted goalscorer(s) and reasoning.
+
+These are editorial model projections, not sourced facts. Their cited sources
+must support the availability, recent-selection, opponent, or player premises
+used in the reasoning; do not imply that a source published the prediction.

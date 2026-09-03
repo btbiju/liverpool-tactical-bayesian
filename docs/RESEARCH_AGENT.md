@@ -18,6 +18,11 @@ making an API request. When work is due, the model may use web search to create
 a source-mapped JSON packet that validates against
 `schema/agent_research_packet.schema.json`.
 
+A forced run bypasses the schedule only for testing or an intentional manual
+refresh. Its task rationale records the actual hours to kickoff and states when
+the normal timing gate was bypassed; it must not describe an out-of-window run
+as an ordinary scheduled run.
+
 ## Deliberate safety boundary
 
 The generated packet is a GitHub Actions artifact retained for 30 days. It is
@@ -39,6 +44,15 @@ ungrounded source is discarded together with every dependent claim or
 recommendation. Claims and recommendations that cite an undeclared source ID
 are discarded as well. The discarded counts are recorded as an uncertainty,
 and all remaining grounded evidence must still pass strict validation.
+
+Every retained claim and recommendation must cite at least one grounded source.
+For each pre-match task, validation also requires a complete projected XI, a
+predicted score, and predicted goalscorer recommendation. These predictions are
+low-confidence editorial outputs; their citations support the availability,
+recent-selection, opponent, or player premises rather than the prediction
+itself. The model receives the current player profiles as well as the squad,
+manager prior, and existing lineup projection so matchup reasoning can use the
+project's player evidence.
 
 ## Configuration
 
@@ -83,7 +97,10 @@ Never paste the key into source, shell history, screenshots, or issue text.
    is ambiguous.
 4. Treat repeated pages from one provider as one vote.
 5. Keep missing evidence null and preserve conflicts.
-6. Transfer approved post-match evidence into `data/research_drafts/`, then run
+6. Confirm that pre-match packets contain an opponent-specific XI, score, and
+   goalscorer projection and that their reasoning uses current player and
+   opponent evidence.
+7. Transfer approved post-match evidence into `data/research_drafts/`, then run
    the deterministic resolver. Transfer approved pre-match recommendations into
    the lineup projection only through a normal reviewed pull request.
-7. Run the full validation checklist before merging.
+8. Run the full validation checklist before merging.
