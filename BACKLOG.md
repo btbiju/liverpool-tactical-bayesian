@@ -237,9 +237,13 @@ let items live only in chat history.
       and supplied a weak/incomplete pre-match projection. The contract now
       requires grounded source IDs for every item, truthful forced-run timing,
       player-profile context, and a complete opponent-specific XI, score, and
-      goalscorer projection. Continue monitoring cost and source quality across
-      real matchweeks before considering tighter integration. Generated packets
-      remain non-production until owner review and a normal publication PR.
+      goalscorer projection. A subsequent forced run exposed harmless tracking-
+      parameter differences between model-proposed and API-recorded source URLs;
+      conservative one-to-one URL reconciliation and credential-free failure
+      diagnostics now cover that case without weakening the fail-closed guard.
+      Continue monitoring cost and source quality across real matchweeks before
+      considering tighter integration. Generated packets remain non-production
+      until owner review and a normal publication PR.
 
 - [ ] **Observe the delayed-research automation across several matchweeks.**
       The research-draft contract and deterministic resolver are implemented,

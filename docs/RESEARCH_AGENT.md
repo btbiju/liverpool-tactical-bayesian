@@ -45,6 +45,19 @@ recommendation. Claims and recommendations that cite an undeclared source ID
 are discarded as well. The discarded counts are recorded as an uncertainty,
 and all remaining grounded evidence must still pass strict validation.
 
+Before discarding a URL, the provenance guard reconciles only harmless URL
+presentation differences: host casing, default ports, fragments, a trailing
+slash, and recognized marketing parameters. A normalized value is accepted
+only when it maps to exactly one API-recorded URL, which then replaces the
+model-proposed value. Schemes, paths, and meaningful query parameters remain
+significant. Ambiguous matches fail closed.
+
+If packet validation fails after the API response, the workflow uploads a
+credential-free diagnostics JSON artifact containing the proposed source URLs,
+the API provenance URLs, reconciliation decisions, tasks, and validation error.
+It does not contain the API key or bypass validation, and no failed packet is
+sent to the review console.
+
 Every retained claim and recommendation must cite at least one grounded source.
 For each pre-match task, validation also requires a complete projected XI, a
 predicted score, and predicted goalscorer recommendation. These predictions are

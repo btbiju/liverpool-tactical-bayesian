@@ -10,6 +10,7 @@ import argparse
 import json
 import os
 import urllib.error
+import urllib.parse
 import urllib.request
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -30,6 +31,7 @@ PROMPT_PATH = REPO_ROOT / "prompts" / "research_agent.md"
 PACKET_SCHEMA_PATH = REPO_ROOT / "schema" / "agent_research_packet.schema.json"
 DEFAULT_OUTPUT_DIR = REPO_ROOT / "artifacts" / "research_agent"
 TERMINAL_STATUSES = {"FINISHED", "AWARDED", "CANCELLED"}
+TRACKING_QUERY_KEYS = {"fbclid", "gclid", "mc_cid", "mc_eid", "msclkid"}
 
 
 def parse_utc(value):
@@ -230,6 +232,77 @@ def extract_web_source_urls(response):
     return urls
 
 
+def canonical_source_url(url):
+    """Return a conservative comparison key for a web provenance URL.
+
+    Fragments never reach an HTTP server. Default ports, a final slash, and
+    recognized marketing parameters likewise do not identify different source
+    evidence. Everything else, including scheme, host, path, and non-tracking
+    query parameters, remains significant.
+    """
+    try:
+        parsed = urllib.parse.urlsplit(url.strip())
+        port = parsed.port
+    except (AttributeError, TypeError, ValueError):
+        return None
+    if parsed.scheme.lower() not in {"http", "https"} or not parsed.hostname:
+        return None
+    if parsed.username or parsed.password:
+        return None
+
+    scheme = parsed.scheme.lower()
+    hostname = parsed.hostname.lower()
+    default_port = (scheme == "http" and port == 80) or (scheme == "https" and port == 443)
+    netloc = hostname if port is None or default_port else f"{hostname}:{port}"
+    path = parsed.path or "/"
+    if path != "/":
+        path = path.rstrip("/")
+    query_pairs = [
+        (key, value)
+        for key, value in urllib.parse.parse_qsl(parsed.query, keep_blank_values=True)
+        if not key.lower().startswith("utm_") and key.lower() not in TRACKING_QUERY_KEYS
+    ]
+    query = urllib.parse.urlencode(query_pairs, doseq=True)
+    return urllib.parse.urlunsplit((scheme, netloc, path, query, ""))
+
+
+def reconcile_source_urls(packet, allowed_source_urls):
+    """Replace harmless URL variants with one exact API-recorded URL.
+
+    A normalized value is accepted only when it maps to exactly one provenance
+    URL. Ambiguous or unrelated values remain untouched and are subsequently
+    removed by the fail-closed evidence guard.
+    """
+    canonical_allowed = {}
+    for url in allowed_source_urls:
+        key = canonical_source_url(url)
+        if key is not None:
+            canonical_allowed.setdefault(key, set()).add(url)
+
+    result = {"exact": 0, "reconciled": [], "unmatched": []}
+    for source in packet.get("sources", []):
+        proposed = source.get("url")
+        if proposed in allowed_source_urls:
+            result["exact"] += 1
+            continue
+        candidates = canonical_allowed.get(canonical_source_url(proposed), set())
+        if len(candidates) == 1:
+            recorded = next(iter(candidates))
+            source["url"] = recorded
+            result["reconciled"].append(
+                {"source_id": source.get("id"), "proposed_url": proposed, "recorded_url": recorded}
+            )
+        else:
+            result["unmatched"].append(
+                {
+                    "source_id": source.get("id"),
+                    "proposed_url": proposed,
+                    "candidate_count": len(candidates),
+                }
+            )
+    return result
+
+
 def discard_ungrounded_evidence(packet, allowed_source_urls):
     """Remove sources absent from the API's web-search provenance record.
 
@@ -333,6 +406,20 @@ def validate_packet(packet, tasks, allowed_source_urls=None):
         raise ValidationError("AI research packets must require human review")
 
 
+def write_failure_diagnostics(path, *, now, tasks, proposed_sources, allowed_urls, reconciliation, error):
+    """Write credential-free provenance diagnostics for a failed review run."""
+    diagnostics = {
+        "diagnostic_version": 1,
+        "generated_at": iso_utc(now),
+        "tasks": tasks,
+        "validation_error": str(error),
+        "proposed_sources": proposed_sources,
+        "web_search_provenance_urls": sorted(allowed_urls),
+        "reconciliation": reconciliation,
+    }
+    path.write_text(json.dumps(diagnostics, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+
+
 def write_github_output(path, tasks):
     if not path:
         return
@@ -361,10 +448,22 @@ def main():
     if not api_key:
         raise SystemExit("OPENAI_API_KEY is required when research tasks are due")
     model = os.environ.get("OPENAI_RESEARCH_MODEL", "gpt-5.6-luna")
+    args.output_dir.mkdir(parents=True, exist_ok=True)
+    stamp = now.strftime("%Y%m%dT%H%M%SZ")
     response = call_responses_api(api_payload(tasks, model), api_key)
     packet = json.loads(extract_output_text(response))
     packet["generated_at"] = iso_utc(now)
     allowed_source_urls = extract_web_source_urls(response)
+    proposed_sources = [
+        {"id": source.get("id"), "url": source.get("url")}
+        for source in packet.get("sources", [])
+    ]
+    reconciliation = reconcile_source_urls(packet, allowed_source_urls)
+    if reconciliation["reconciled"]:
+        print(
+            "Reconciled harmless URL differences for "
+            f"{len(reconciliation['reconciled'])} source(s) using API-recorded values"
+        )
     removed = discard_ungrounded_evidence(packet, allowed_source_urls)
     if any(removed.values()):
         print(
@@ -372,10 +471,22 @@ def main():
             f"{removed['sources']} source(s), {removed['claims']} claim(s), "
             f"{removed['recommendations']} recommendation(s)"
         )
-    validate_packet(packet, tasks, allowed_source_urls=allowed_source_urls)
+    try:
+        validate_packet(packet, tasks, allowed_source_urls=allowed_source_urls)
+    except ValidationError as error:
+        diagnostic_path = args.output_dir / f"research_diagnostics_{stamp}.json"
+        write_failure_diagnostics(
+            diagnostic_path,
+            now=now,
+            tasks=tasks,
+            proposed_sources=proposed_sources,
+            allowed_urls=allowed_source_urls,
+            reconciliation=reconciliation,
+            error=error,
+        )
+        print(f"Wrote failed-run diagnostics: {diagnostic_path}")
+        raise
 
-    args.output_dir.mkdir(parents=True, exist_ok=True)
-    stamp = now.strftime("%Y%m%dT%H%M%SZ")
     path = args.output_dir / f"research_packet_{stamp}.json"
     path.write_text(json.dumps(packet, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     validate_file(path, PACKET_SCHEMA_PATH)
