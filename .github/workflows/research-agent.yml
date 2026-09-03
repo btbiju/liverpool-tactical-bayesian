@@ -56,12 +56,12 @@ jobs:
             python3 pipeline/research_agent.py --output-dir "$RUNNER_TEMP/research-agent"
           fi
       - name: Upload the review packet
-        if: steps.plan.outputs.due == 'true'
+        if: always() && steps.plan.outputs.due == 'true'
         uses: actions/upload-artifact@v6
         with:
           name: research-agent-packet-${{ github.run_id }}
           path: ${{ runner.temp }}/research-agent/*.json
-          if-no-files-found: error
+          if-no-files-found: warn
           retention-days: 30
       - name: Send packet to the protected review console
         if: steps.plan.outputs.due == 'true'
@@ -73,7 +73,7 @@ jobs:
             echo "Review console is not configured; the GitHub artifact remains available."
             exit 0
           fi
-          packet=$(find "$RUNNER_TEMP/research-agent" -name '*.json' -type f -print -quit)
+          packet=$(find "$RUNNER_TEMP/research-agent" -name 'research_packet_*.json' -type f -print -quit)
           python3 pipeline/send_review_packet.py \
             "$packet" \
             --console-url "$REVIEW_CONSOLE_URL" \
