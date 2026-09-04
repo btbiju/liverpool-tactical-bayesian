@@ -1,15 +1,15 @@
 {
   "observation_kind": "automated_result_only",
-  "match_id": 560552,
-  "matchweek": 2,
-  "date": "2026-08-29",
-  "opponent": "Nottingham Forest (H)",
-  "result": "D 2-2",
+  "match_id": 560566,
+  "matchweek": 3,
+  "date": "2026-09-04",
+  "opponent": "Ipswich Town (A)",
+  "result": "W 2-0",
   "metrics": {
     "possession_pct": null,
     "ppda": null,
     "shots_on_target_per_match": null,
-    "goals_conceded_per_match": 2,
+    "goals_conceded_per_match": 0,
     "accurate_passes_per_match": null,
     "accurate_crosses_per_match": null
   },
@@ -18,7 +18,7 @@
     {
       "id": "football-data-result",
       "name": "football-data.org — automated final result record",
-      "url": "https://api.football-data.org/v4/matches/560552",
+      "url": "https://api.football-data.org/v4/matches/560566",
       "accessed_at": "2026-09-04",
       "notes": "Authenticated API record committed verbatim in data/fixtures; used only for score-derived facts."
     }
@@ -28,7 +28,7 @@
       "football-data-result"
     ]
   },
-  "reviewed_at": "2026-09-04T15:20:40Z",
+  "reviewed_at": "2026-09-04T22:54:53Z",
   "notes": [
     "Created automatically after the raw fixture reached FINISHED status.",
     "Only goals conceded is updated because it follows exactly from the verified final score.",

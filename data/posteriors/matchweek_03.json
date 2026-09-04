@@ -1,5 +1,5 @@
 {
-  "as_of_matchweek": 2,
+  "as_of_matchweek": 3,
   "continuous_metrics": {
     "possession_pct": {
       "mean": 51.482,
@@ -20,9 +20,9 @@
       "observation_variance": 3.0
     },
     "goals_conceded_per_match": {
-      "mean": 1.433,
-      "variance": 0.0666,
-      "effective_n": 12,
+      "mean": 1.323,
+      "variance": 0.0615,
+      "effective_n": 13,
       "observation_variance": 0.8
     },
     "accurate_passes_per_match": {
@@ -106,6 +106,27 @@
       ],
       "notable_shifts": [
         "goals_conceded_per_match: 1.38 -> 1.43 (up 0.05, observed 2)"
+      ]
+    },
+    {
+      "matchweek": 3,
+      "date": "2026-09-04",
+      "opponent": "Ipswich Town (A)",
+      "result": "W 2-0",
+      "metrics_observed": {
+        "goals_conceded_per_match": 0
+      },
+      "sources": [
+        {
+          "id": "football-data-result",
+          "name": "football-data.org — automated final result record",
+          "url": "https://api.football-data.org/v4/matches/560566",
+          "accessed_at": "2026-09-04",
+          "notes": "Authenticated API record committed verbatim in data/fixtures; used only for score-derived facts."
+        }
+      ],
+      "notable_shifts": [
+        "goals_conceded_per_match: 1.43 -> 1.32 (down 0.11, observed 0)"
       ]
     }
   ]
