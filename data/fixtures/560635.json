@@ -16,7 +16,7 @@
     "id": 2502,
     "startDate": "2026-08-21",
     "endDate": "2027-05-30",
-    "currentMatchday": 3,
+    "currentMatchday": 4,
     "winner": null
   },
   "id": 560635,
@@ -25,7 +25,7 @@
   "matchday": 10,
   "stage": "REGULAR_SEASON",
   "group": null,
-  "lastUpdated": "2026-09-07T15:20:46Z",
+  "lastUpdated": "2026-09-09T20:20:28Z",
   "homeTeam": {
     "id": 354,
     "name": "Crystal Palace FC",

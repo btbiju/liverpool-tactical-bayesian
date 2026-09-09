@@ -100,7 +100,7 @@
           "id": "football-data-result",
           "name": "football-data.org — automated final result record",
           "url": "https://api.football-data.org/v4/matches/560552",
-          "accessed_at": "2026-09-07",
+          "accessed_at": "2026-09-09",
           "notes": "Authenticated API record committed verbatim in data/fixtures; used only for score-derived facts."
         }
       ],
